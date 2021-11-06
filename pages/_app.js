@@ -1,7 +1,13 @@
 import 'tailwindcss/tailwind.css';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+import MainLayout from 'components/layouts/main';
+
+function MyApp({ Component, pageProps, router }) {
+  return (
+    <MainLayout router={router}>
+      <Component {...pageProps} />
+    </MainLayout>
+  );
 }
 
 export default MyApp;
