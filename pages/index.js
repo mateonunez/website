@@ -1,19 +1,11 @@
-import { createRef, useEffect } from 'react';
-
-import { animateSplitText } from 'core/animations/text';
+import Welcome from 'components/home/Welcome';
 
 export default function Home() {
-  let textRef = createRef();
-
-  useEffect(() => {
-    animateSplitText(textRef);
-  }, []);
-
   return (
     <>
-      <span className="text-9xl font-bold" ref={textRef}>
-        Mateo Nunez
-      </span>
+      <div className="min-h-screen min-w-screen flex justify-center items-center overflow-hidden">
+        <Welcome />
+      </div>
     </>
   );
 }

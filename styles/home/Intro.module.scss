@@ -1,0 +1,17 @@
+.intro-body {
+  display: block;
+  overflow: hidden;
+}
+
+.dot {
+  width: 1px;
+  height: 1px;
+  position: relative;
+  border-radius: 50%;
+  text-align: center;
+  color: #333;
+
+  &-white {
+    background-color: #fff;
+  }
+}
