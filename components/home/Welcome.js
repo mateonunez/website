@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import gsap from 'gsap';
 import styles from 'styles/home/Intro.module.scss';
 
-export default function Welcome() {
+export default function Welcome({ setCompleted = () => {} }) {
   const introBoxRef = useRef();
   const dotRef = useRef();
 
@@ -43,10 +43,15 @@ export default function Welcome() {
       .to(dotRef.current, {
         y: 0
       })
-      .to(dotRef.current, {
-        width: '100vw',
-        height: '100vh',
-        duration: 3
+      .to(introBoxRef.current, {
+        opacity: 0,
+        duration: 1
+      })
+      .then(() => {
+        gsap.set(introBoxRef.current, {
+          display: 'none'
+        });
+        setCompleted(true);
       });
   }, []);
 
