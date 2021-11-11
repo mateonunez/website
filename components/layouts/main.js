@@ -1,8 +1,6 @@
 import Head from 'next/head';
 
-export default function MainLayout({ children, router }) {
-  console.log(router); // temporary
-
+export default function MainLayout({ children }) {
   return (
     <>
       <Head>
