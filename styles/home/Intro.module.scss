@@ -1,8 +1,8 @@
 .intro-body {
   display: block;
   overflow: hidden;
-  height: 100%;
-  width: 100%;
+  height: calc(100vh);
+  width: calc(100vw);
 }
 
 .dot {
@@ -10,8 +10,8 @@
   height: 1px;
   position: relative;
   border-radius: 50%;
+  border: 1px solid;
   text-align: center;
-  color: #333;
 
   &-white {
     background-color: #fff;
