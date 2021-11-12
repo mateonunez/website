@@ -1,15 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import clsx from 'clsx';
 import gsap from 'gsap';
 import styles from 'styles/home/Intro.module.scss';
 import { useWindowSize } from 'react-use';
 
-export default function Welcome({ setCompleted = () => {} }) {
+export default function Welcome() {
+  const [dotAnimationCompleted, setDotAnimationCompleted] = useState(false);
   const { width, height } = useWindowSize();
 
   const introBoxRef = useRef();
   const dotRef = useRef();
+  const messageRef = useRef();
 
   const timeline = gsap.timeline();
 
@@ -38,14 +40,39 @@ export default function Welcome({ setCompleted = () => {} }) {
       .to(introBoxRef.current, { opacity: 0, duration: 1 })
       .then(() => {
         gsap.set(introBoxRef.current, { display: 'none' });
-        setCompleted(true);
+        setDotAnimationCompleted(true);
       });
   }, []);
+
+  useEffect(() => {
+    if (dotAnimationCompleted) {
+      timeline.fromTo(
+        messageRef.current,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 2,
+          display: 'block'
+        }
+      );
+
+      timeline.to(messageRef.current, {
+        y: -500,
+        duration: 0.7,
+        stagger: 2,
+        ease: 'bounce'
+      });
+    }
+  }, [dotAnimationCompleted]);
 
   return (
     <>
       <div className={styles['intro-box']} ref={introBoxRef}>
         <div className={clsx(styles['dot'], styles['dot-white'])} ref={dotRef} />
+      </div>
+
+      <div className="hidden" ref={messageRef}>
+        Welcome
       </div>
     </>
   );
