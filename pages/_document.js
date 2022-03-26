@@ -5,7 +5,7 @@ export default class Document extends NextDocument {
     return (
       <Html lang="en">
         <Head />
-        <body className="antialiased text-gray-400 bg-gray-900">
+        <body className="antialiased">
           <Main />
           <NextScript />
           {/* Insert Google Tag Manager */}

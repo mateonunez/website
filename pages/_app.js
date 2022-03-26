@@ -1,39 +1,21 @@
-import 'tailwindcss/tailwind.css';
-import 'assets/styles/global.css';
+import 'styles/global.css';
 
-import { useEffect } from 'react';
-import Router from 'next/router';
+import Head from 'components/common/Head';
+import { UIProvider } from 'components/ui/UIContext';
+import MainLayout from 'components/layouts/MainLayout';
 
-import MainLayout from 'components/layouts/main';
-import nProgress from 'nprogress';
-
-let timeout;
-
-export default function App({ Component, pageProps, router }) {
-  const start = () => {
-    timeout = setTimeout(nProgress.start, 500);
-  };
-
-  const done = () => {
-    clearTimeout(timeout);
-    nProgress.done();
-  };
-
-  useEffect(() => {
-    Router.events.on('routeChangeStart', start);
-    Router.events.on('routeChangeComplete', done);
-    Router.events.on('routeChangeError', done);
-
-    return () => {
-      Router.events.off('routeChangeStart', start);
-      Router.events.off('routeChangeComplete', done);
-      Router.events.off('routeChangeError', done);
-    };
-  }, []);
+export default function App({ Component, pageProps }) {
+  // Retrieves the layout
+  const Layout = Component.Layout || (({ children }) => <MainLayout>{children}</MainLayout>);
 
   return (
-    <MainLayout router={router}>
-      <Component {...pageProps} />
-    </MainLayout>
+    <>
+      <Head />
+      <UIProvider>
+        <Layout pageProps={pageProps}>
+          <Component {...pageProps} />
+        </Layout>
+      </UIProvider>
+    </>
   );
 }
