@@ -1,13 +1,21 @@
-import 'tailwindcss/tailwind.css';
+import 'styles/global.css';
 
-import MainLayout from 'components/layouts/main';
+import Head from 'components/common/Head';
+import { UIProvider } from 'components/ui/UIContext';
+import MainLayout from 'components/layouts/MainLayout';
 
-function MyApp({ Component, pageProps, router }) {
+export default function App({ Component, pageProps }) {
+  // Retrieves the layout
+  const Layout = Component.Layout || (({ children }) => <MainLayout>{children}</MainLayout>);
+
   return (
-    <MainLayout router={router}>
-      <Component {...pageProps} />
-    </MainLayout>
+    <>
+      <Head />
+      <UIProvider>
+        <Layout pageProps={pageProps}>
+          <Component {...pageProps} />
+        </Layout>
+      </UIProvider>
+    </>
   );
 }
-
-export default MyApp;

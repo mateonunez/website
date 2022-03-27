@@ -1,0 +1,26 @@
+{
+  "title": "Mateo Nunez | Tech Lead Developer",
+  "titleTemplate": "%s - Mateo Nunez",
+  "description": "Mateo Nunez | Tech Lead Developer - https://mateonunez.dev",
+  "openGraph": {
+    "title": "Mateo Nunez | Tech Lead Developer",
+    "description": "Mateo Nunez | Tech Lead Developer - https://mateonunez.dev",
+    "type": "website",
+    "locale": "it_IT",
+    "url": "https://mateonunez.dev",
+    "site_name": "Mateo Nunez",
+    "images": [
+      {
+        "url": "/card.png",
+        "width": 800,
+        "height": 600,
+        "alt": "Mateo Nunez"
+      }
+    ]
+  },
+  "twitter": {
+    "handle": "@handle",
+    "site": "@site",
+    "cardType": "summary_large_image"
+  }
+}

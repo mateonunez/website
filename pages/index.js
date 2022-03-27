@@ -1,11 +1,12 @@
-import Welcome from 'components/home/Welcome';
+import Header from 'components/header';
+import Hero from 'components/hero';
 
 export default function Home() {
   return (
     <>
-      <div className="min-h-screen min-w-screen flex justify-center items-center">
-        <Welcome />
-      </div>
+      <Header />
+
+      <Hero />
     </>
   );
 }
