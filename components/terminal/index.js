@@ -69,7 +69,7 @@ const Terminal = () => {
           {lineCount >= 4 && renderLine("I don't know.")}
           {lineCount >= 5 && renderLine('Do you want me to indroduce myself?')}
           {lineCount >= 6 && renderLine("I'm sorry. I can't help you.")}
-          {lineCount >= 7 && renderLine("💡You could scroll down and shut up. I'm so tired.")}
+          {lineCount >= 7 && renderLine("💡 You could scroll down and shut up. I'm so tired.")}
           {lineCount >= 8 && (
             <>
               <p className={s.green}>

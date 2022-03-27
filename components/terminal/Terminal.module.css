@@ -81,9 +81,9 @@
 
 @media (max-width: 600px) {
   .root {
-    height: 230px;
-    width: 100%;
-    min-width: 80vw;
+    height: 250px;
+    min-width: 100%;
+    max-width: 80vw;
   }
 
   .header {
