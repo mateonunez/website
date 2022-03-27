@@ -2,7 +2,7 @@ import 'styles/global.css';
 
 import Head from 'components/common/Head';
 import { UIProvider } from 'components/ui/UIContext';
-import MainLayout from 'components/layouts/MainLayout';
+import MainLayout from 'components/layouts/main';
 
 export default function App({ Component, pageProps }) {
   // Retrieves the layout

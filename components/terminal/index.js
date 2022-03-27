@@ -1,5 +1,5 @@
 // https://github.com/vercel/hyper-site/
-import s from './Terminal.module.css';
+import s from './terminal.module.css';
 
 import { Keyframes, Frame } from './react-keyframes.ts';
 import { useState } from 'react';

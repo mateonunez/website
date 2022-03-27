@@ -1,4 +1,4 @@
-import s from './Header.module.css';
+import s from './header.module.css';
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';

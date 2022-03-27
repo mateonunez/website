@@ -1,0 +1,30 @@
+.root {
+  margin: 3rem 0 4rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.title {
+  @apply font-extrabold text-transparent text-8xl bg-clip-text;
+  @apply bg-gradient-to-r from-orange-500 to-amber-500 via-pink-500 animate-gradient-x;
+  margin: auto;
+}
+
+.terminal {
+  margin: 3rem auto;
+}
+
+@media (max-width: 600px) {
+  .root {
+    margin: 1rem 0 4rem;
+  }
+
+  .title {
+    @apply text-5xl;
+  }
+
+  .terminal {
+    margin: 2rem auto;
+  }
+}

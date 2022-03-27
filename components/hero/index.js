@@ -1,7 +1,6 @@
-import s from './Hero.module.css';
+import s from './hero.module.css';
 
 import Terminal from 'components/terminal';
-import { ChevronDown } from 'components/icons';
 
 export default function Hero() {
   return (
@@ -14,13 +13,6 @@ export default function Hero() {
         {/* Terminal  */}
         <div className={s.terminal}>
           <Terminal />
-        </div>
-
-        {/* Init the f**king world  */}
-        <div className={s.start}>
-          <button className={s.startButton}>
-            <ChevronDown className={s.startIcon} />
-          </button>
         </div>
       </div>
     </>

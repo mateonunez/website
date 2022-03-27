@@ -1,4 +1,4 @@
-import s from './SocialLinks.module.css';
+import s from './social-links.module.css';
 
 import Link from 'next/link';
 import { Github, LinkedIn, Instagram, Spotify } from 'components/icons';
