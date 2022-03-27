@@ -1,7 +1,7 @@
 // https://github.com/vercel/hyper-site/
+import s from './Terminal.module.css';
 
 import { Keyframes, Frame } from './react-keyframes.ts';
-import s from './terminal.module.css';
 import { useState } from 'react';
 
 const sleepDuration = 700;
