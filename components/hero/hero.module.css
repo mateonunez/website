@@ -1,8 +1,14 @@
 .root {
-  margin: 3rem 0 4rem;
+  margin: auto 0 4rem;
   display: flex;
   flex-direction: column;
   font-size: 14px;
+  min-height: calc(100vh - 85px);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
@@ -33,8 +39,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: auto;
-  margin-bottom: 1rem;
+  margin: auto 0 4rem;
 }
 
 .startButton {
