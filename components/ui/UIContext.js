@@ -16,7 +16,10 @@ export const initialState = {
   navbarView: '',
 
   // Terminal
-  isTerminalCompleted: false
+  isTerminalCompleted: false,
+
+  // BigBang
+  bigBang: false
 };
 
 export const types = {
@@ -38,7 +41,10 @@ export const types = {
   SET_NAVBAR_VIEW: 'SET_NAVBAR_VIEW',
 
   // Terminal
-  COMPLETE_TERMINAL: 'COMPLETE_TERMINAL'
+  COMPLETE_TERMINAL: 'COMPLETE_TERMINAL',
+
+  // BigBang
+  SET_BIG_BANG: 'SET_BIG_BANG'
 };
 
 export const reducer = (state, action) => {
@@ -119,6 +125,14 @@ export const reducer = (state, action) => {
       };
     }
 
+    // BigBang
+    case types.SET_BIG_BANG: {
+      return {
+        ...state,
+        bigBang: action.payload
+      };
+    }
+
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -167,6 +181,12 @@ export const UIProvider = props => {
     [dispatch]
   );
 
+  // BigBang
+  const setBigBang = useCallback(
+    payload => dispatch({ type: types.SET_BIG_BANG, payload }),
+    [dispatch]
+  );
+
   const value = useMemo(
     () => ({
       ...state,
@@ -180,7 +200,8 @@ export const UIProvider = props => {
       openNavbar,
       closeNavbar,
       setNavbarView,
-      completeTerminal
+      completeTerminal,
+      setBigBang
     }),
     [state]
   );

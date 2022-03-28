@@ -5,7 +5,7 @@ import { Keyframes, Frame } from './react-keyframes.ts';
 import { useEffect, useMemo, useState } from 'react';
 import { useUI } from 'components/ui/UIContext';
 
-const sleepDuration = 700;
+const sleepDuration = 300;
 const getTypingDuration = () => 80 + 80 * (Math.random() - 0.5);
 
 const Line = ({ text, noPrompt = false, noCaret = false }) => (
@@ -23,12 +23,12 @@ const Line = ({ text, noPrompt = false, noCaret = false }) => (
 
 const paragraphs = [
   '😱 Hello... I wasn’t expecting you here.',
-  '🤔 You actually put me in trouble. What do you expect me to do?',
-  '...',
-  'I don’t know.',
-  'Do you want me to introduce myself?',
-  'I’m sorry. I can’t help you.',
-  '💡 You could scroll down and shut up. I’m so tired.',
+  // '🤔 You actually put me in trouble. What do you expect me to do?',
+  // '...',
+  // 'I don’t know.',
+  // 'Do you want me to introduce myself?',
+  // 'I’m sorry. I can’t help you.',
+  // '💡 You could scroll down and shut up. I’m so tired.',
   'Welcome to my world!'
 ];
 

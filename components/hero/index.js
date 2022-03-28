@@ -1,8 +1,13 @@
 import s from './hero.module.css';
 
+import cn from 'classnames';
 import Terminal from 'components/terminal';
+import { ChevronDown } from 'components/icons';
+import { useUI } from 'components/ui/UIContext';
 
 export default function Hero() {
+  const { isTerminalCompleted, setBigBang } = useUI();
+
   return (
     <>
       {/* Hero  */}
@@ -13,6 +18,18 @@ export default function Hero() {
         {/* Terminal  */}
         <div className={s.terminal}>
           <Terminal />
+        </div>
+
+        {/* Start the BigBang */}
+        <div
+          className={cn(
+            s.start,
+            'transition ease-in-out duration-1000',
+            isTerminalCompleted ? 'opacity-100' : 'opacity-0'
+          )}>
+          <button className={s.startButton} onClick={() => setBigBang(true)}>
+            <ChevronDown className={s.startIcon} />
+          </button>
         </div>
       </div>
     </>
