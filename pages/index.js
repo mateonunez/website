@@ -5,6 +5,7 @@ import cn from 'classnames';
 
 import Header from 'components/header';
 import Hero from 'components/hero';
+import Universe from 'components/universe';
 
 export default function Home() {
   const { bigBang } = useUI();
@@ -25,9 +26,9 @@ export default function Home() {
           className={cn(
             s.universe,
             'transition ease-in-out duration-1000',
-            bigBang ? 'opacity-100' : 'opacity-0 h-0'
+            bigBang ? 'opacity-100 h-full w-full' : 'opacity-0 h-0 w-0'
           )}>
-          BigBang
+          {bigBang && <Universe />}
         </div>
       </div>
     </>

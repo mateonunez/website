@@ -34,9 +34,10 @@ export default function Header() {
           aria-label="Home"
           onClick={() => {
             setBigBang(false);
-          }}>
+          }}
+          className={s.logo}>
           <Link href="/" passHref>
-            <a className={s.logo} aria-label="Mateo Nunez">
+            <a aria-label="Mateo Nunez">
               <MN />
             </a>
           </Link>
