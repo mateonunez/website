@@ -5,14 +5,9 @@ import cn from 'classnames';
 
 import Header from 'components/header';
 import Hero from 'components/hero';
-import { useEffect } from 'react';
 
 export default function Home() {
   const { bigBang } = useUI();
-
-  useEffect(() => {
-    console.log(bigBang);
-  }, [bigBang]);
 
   return (
     <>
@@ -21,12 +16,19 @@ export default function Home() {
       <div className={s.root}>
         <Hero
           className={cn(
-            'flex flex-col transition ease-in-out duration-300',
+            'transition ease-in-out duration-1000',
             bigBang ? 'opacity-0 h-0' : 'opacity-100 h-full'
           )}
         />
 
-        {bigBang && <div className={s.universe}>BigBang</div>}
+        <div
+          className={cn(
+            s.universe,
+            'transition ease-in-out duration-1000',
+            bigBang ? 'opacity-100' : 'opacity-0 h-0'
+          )}>
+          BigBang
+        </div>
       </div>
     </>
   );

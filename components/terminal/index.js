@@ -22,21 +22,20 @@ const Line = ({ text, noPrompt = false, noCaret = false }) => (
 );
 
 const paragraphs = [
-  '😱 Hello... I wasn’t expecting you here.',
+  '😱 Hello... I wasn’t expecting you here.'
   // '🤔 You actually put me in trouble. What do you expect me to do?',
   // '...',
   // 'I don’t know.',
   // 'Do you want me to introduce myself?',
   // 'I’m sorry. I can’t help you.',
   // '💡 You could scroll down and shut up. I’m so tired.',
-  'Welcome to my world!'
 ];
 
 const Terminal = () => {
   const [renderedLines, setRenderedLines] = useState([]);
   const [lineCount, setLineCount] = useState(0);
 
-  const { completeTerminal } = useUI();
+  const { isTerminalCompleted, completeTerminal } = useUI();
 
   const renderLine = (text, newRender = false) => {
     const frames = [];
@@ -81,7 +80,7 @@ const Terminal = () => {
     return keyFrames;
   };
 
-  const isLastParagraph = useMemo(() => lineCount === paragraphs.length - 1, [lineCount]);
+  const isLastParagraph = useMemo(() => lineCount === paragraphs.length, [lineCount]);
 
   useEffect(() => {
     if (isLastParagraph) {
@@ -89,6 +88,13 @@ const Terminal = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLastParagraph]);
+
+  useEffect(() => {
+    if (isTerminalCompleted) {
+      setRenderedLines(paragraphs);
+      setLineCount(paragraphs.length);
+    }
+  }, [isTerminalCompleted]);
 
   return (
     <div className={s.root}>
@@ -98,6 +104,7 @@ const Terminal = () => {
           <span className={s.icon} />
           <span className={s.icon} />
         </div>
+
         <div className={s.body}>
           {/* Rendered Lines  */}
           {renderedLines.length > 0 &&
@@ -110,7 +117,9 @@ const Terminal = () => {
           {/* New paragraphs */}
           {paragraphs.map((text, index) => (
             <div key={index}>
-              {lineCount === index && !isLastParagraph && <>{renderLine(text, true)}</>}
+              {lineCount === index && !isLastParagraph && !isTerminalCompleted && (
+                <>{renderLine(text, true)}</>
+              )}
             </div>
           ))}
 
@@ -118,7 +127,7 @@ const Terminal = () => {
           {isLastParagraph && (
             <>
               <p className="text-amber-500">
-                <Line text={paragraphs[paragraphs.length - 1]} noPrompt noCaret />
+                <Line text="Welcome to my Universe" noPrompt noCaret />
               </p>
               <p>
                 <Line />

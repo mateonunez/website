@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { MN, Menu } from 'components/icons';
 import cn from 'classnames';
 import SocialLinks from 'components/common/SocialLinks';
+import { useUI } from 'components/ui/UIContext';
 
 // eslint-disable-next-line no-unused-vars
 const ActiveLink = ({ href, children }) => {
@@ -20,6 +21,7 @@ const ActiveLink = ({ href, children }) => {
 };
 
 export default function Header() {
+  const { setBigBang } = useUI();
   const [mobileNavShown, setMobileNavShown] = useState(false);
 
   const toggle = () => setMobileNavShown(!mobileNavShown);
@@ -28,11 +30,17 @@ export default function Header() {
     <>
       <header className={s.header}>
         {/* Logo  */}
-        <Link href="/" passHref>
-          <a className={s.logo} aria-label="Mateo Nunez">
-            <MN />
-          </a>
-        </Link>
+        <button
+          aria-label="Home"
+          onClick={() => {
+            setBigBang(false);
+          }}>
+          <Link href="/" passHref>
+            <a className={s.logo} aria-label="Mateo Nunez">
+              <MN />
+            </a>
+          </Link>
+        </button>
 
         {/* Navigation */}
         <nav className={s.desktopNav}>{/* <ActiveLink href="/works">Works</ActiveLink> */}</nav>
