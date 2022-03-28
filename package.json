@@ -33,6 +33,7 @@
   "devDependencies": {
     "@commitlint/cli": "^14.1.0",
     "@commitlint/config-conventional": "^14.1.0",
+    "@types/react": "^17.0.43",
     "autoprefixer": "^10.4.4",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.1.0",
