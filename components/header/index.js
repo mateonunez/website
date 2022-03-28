@@ -3,10 +3,11 @@ import s from './header.module.css';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { MN, ChevronDown, ChevronUp } from 'components/icons';
+import { MN, Menu } from 'components/icons';
 import cn from 'classnames';
 import SocialLinks from 'components/common/SocialLinks';
 
+// eslint-disable-next-line no-unused-vars
 const ActiveLink = ({ href, children }) => {
   const { pathname } = useRouter();
   return (
@@ -34,26 +35,28 @@ export default function Header() {
         </Link>
 
         {/* Navigation */}
-        <nav className={s.desktopNav}>
-          <ActiveLink href="/works">Works</ActiveLink>
-        </nav>
+        <nav className={s.desktopNav}>{/* <ActiveLink href="/works">Works</ActiveLink> */}</nav>
 
         {/* Right Nav  */}
         <div className={s.rightNav}>
           <SocialLinks />
         </div>
 
-        <button className={s.toggle} onClick={toggle}>
-          {mobileNavShown ? <ChevronUp /> : <ChevronDown />}
+        <button
+          className={cn(
+            s.toggle,
+            'transform ease-linear duration-500',
+            mobileNavShown && 'rotate-90'
+          )}
+          onClick={toggle}>
+          <Menu />
         </button>
       </header>
 
       <nav className={cn(s.mobileNav, mobileNavShown && s.active)}>
-        <>
-          <Link href="/works">
-            <a>Works</a>
-          </Link>
-        </>
+        {/* <Link href="/works">
+          <a>Works</a>
+        </Link> */}
       </nav>
     </>
   );

@@ -5,3 +5,4 @@ export { default as Instagram } from './Instagram';
 export { default as Spotify } from './Spotify';
 export { default as ChevronDown } from './ChevronDown';
 export { default as ChevronUp } from './ChevronUp';
+export { Menu } from './Menu';

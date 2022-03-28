@@ -10,7 +10,12 @@ const getTypingDuration = () => 80 + 80 * (Math.random() - 0.5);
 
 const Line = ({ text, noPrompt = false, noCaret = false }) => (
   <>
-    {!noPrompt && <span>MN &gt; </span>}
+    {!noPrompt && (
+      <>
+        <span className="font-black text-amber-500">MN </span>
+        <span>&gt; </span>
+      </>
+    )}
     {text}
     {!noCaret && <span className={s.caret} />}
   </>
@@ -87,7 +92,7 @@ const Terminal = () => {
 
   return (
     <div className={s.root}>
-      <div className={`${s.inner}${lineCount >= 8 ? ' ' + s.rose : ''}`}>
+      <div className={`${s.inner}${lineCount >= 8 ? ' ' + s.amber : ''}`}>
         <div className={s.header}>
           <span className={s.icon} />
           <span className={s.icon} />
@@ -112,7 +117,7 @@ const Terminal = () => {
           {/* Last paragraph */}
           {isLastParagraph && (
             <>
-              <p className={s.green}>
+              <p className="text-amber-500">
                 <Line text={paragraphs[paragraphs.length - 1]} noPrompt noCaret />
               </p>
               <p>

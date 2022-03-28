@@ -14,6 +14,7 @@
   --bg: #000;
   --fg: #fff;
   --pink: #f81ce5;
+  --amber: #f59e0b;
   --green: #50e3c2;
   --bright-green: #3afacf;
   --gray: #999;
@@ -50,7 +51,7 @@ button {
 }
 
 ::selection {
-  background-color: var(--pink);
+  background-color: var(--amber);
   color: var(--fg);
 }
 
