@@ -13,7 +13,7 @@
 
 .title {
   @apply font-extrabold text-transparent text-8xl bg-clip-text;
-  @apply bg-gradient-to-r from-amber-500 to-purple-500 via-rose-500 animate-gradient-x;
+  @apply bg-gradient-to-r from-amber-500 to-blue-500 via-rose-500 animate-gradient-x;
   margin: auto;
 }
 
