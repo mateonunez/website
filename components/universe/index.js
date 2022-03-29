@@ -4,23 +4,19 @@ import * as THREE from 'three';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import s from './universe.module.css';
 
-const emptyArray = [...new Array(3)];
-
 export default function Universe() {
   const refContainer = useRef();
 
+  const [camera, setCamera] = useState();
+  const [scene, setScene] = useState();
   const [renderer, setRenderer] = useState();
 
-  const randomParticles = count => {
-    console.log(count);
-    const array = new Float32Array(count * 3);
+  const [sphereGeometry, setSphereGeometry] = useState();
+  const [sphereMaterial, setSphereMaterial] = useState();
+  const [sphere, setSphere] = useState();
 
-    for (let i = 0; i < count; i++) {
-      array[i] = (Math.random() - 0.5) * 10;
-    }
-
-    return array;
-  };
+  const [zoom, setZoom] = useState(1.0);
+  const [zoomAceleration, setZoomAceleration] = useState(-0.01);
 
   const handleWindowResize = useCallback(() => {
     const { current: container } = refContainer;
@@ -28,6 +24,8 @@ export default function Universe() {
       const containerWidth = container.clientWidth;
       const containerHeight = container.clientHeight;
 
+      camera.aspect = containerWidth / containerHeight;
+      camera.updateProjectionMatrix();
       renderer.setSize(containerWidth, containerHeight);
     }
   }, [renderer]);
@@ -43,8 +41,13 @@ export default function Universe() {
       const containerHeight = container.clientHeight; // 100px for header
 
       // Camera
-      const camera = new THREE.PerspectiveCamera(75, containerWidth / containerHeight, 1, 1000);
-      camera.position.z = 1;
+      const camera = new THREE.PerspectiveCamera(45, containerWidth / containerHeight, 0.1, 1000);
+
+      console.log(camera.fov);
+
+      camera.position.z = 10;
+      camera.lookAt(new THREE.Vector3(0, 0, 0));
+      setCamera(camera);
 
       // Renderer
       const renderer = new THREE.WebGLRenderer();
@@ -52,59 +55,39 @@ export default function Universe() {
       container.appendChild(renderer.domElement);
       setRenderer(renderer);
 
-      const geometries = emptyArray.map(() => new THREE.BufferGeometry());
-      geometries.map((geometry, index) => {
-        geometry.setAttribute(
-          'position',
-          new THREE.BufferAttribute(randomParticles(Math.floor(Math.random() + 1) * 100 + 333), 3)
-        );
-      });
+      // Sphere
+      const sphereGeometry = new THREE.SphereGeometry(0.5, 50, 50);
+      const sphereMaterial = new THREE.MeshNormalMaterial();
+      const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 
-      // Sprite
-      const sprite = new THREE.TextureLoader().load('/images/dot.png');
-
-      const materials = emptyArray.map(
-        (_, index) =>
-          new THREE.PointsMaterial({
-            // color: 0xaaaaaa,
-            size: 0.005 + index * 0.0001,
-            map: sprite,
-            transparent: true
-          })
-      );
-
-      // Stars
-      const stars = emptyArray.map(
-        (_, index) => new THREE.Points(geometries[index], materials[index])
-      );
-
-      // Adding velocity and acceleration here
-      // stars.map(star => {
-      //   star.velocity = new THREE.Vector3(0, 0, 0);
-      //   star.acceleration = new THREE.Vector3(0, 0, 0);
-      // });
-
-      stars.map(star => scene.add(star));
+      // Scene
+      scene.add(sphere);
+      setScene(scene);
 
       // Animate
       let req = null;
       const animate = () => {
-        stars.forEach(star => {
-          star.position.x += 0.001;
-          star.position.y -= -0.001;
-        });
-
         req = requestAnimationFrame(animate);
+
+        camera.fov *= zoom;
+        camera.updateMatrixWorld();
+
+        const zoomAccelerated = zoom + zoomAceleration;
+        setZoom(zoomAccelerated);
+
+        if (zoomAccelerated <= 0.2 || zoomAccelerated >= 0.9) {
+          setZoomAceleration(-zoomAceleration);
+        }
+
         renderer.render(scene, camera);
       };
-      // requestAnimationFrame(animate);
 
       animate();
 
       return () => {
         console.log('unmount');
-        cancelAnimationFrame(req);
-        renderer.dispose();
+        // cancelAnimationFrame(req);
+        // renderer.dispose();
       };
     }
   }, []);
