@@ -44,11 +44,14 @@ export default function Header() {
         </button>
 
         {/* Navigation */}
-        <nav className={s.desktopNav}>{/* <ActiveLink href="/works">Works</ActiveLink> */}</nav>
+        <nav className={s.desktopNav}>
+          <SocialLinks />
+        </nav>
 
         {/* Right Nav  */}
         <div className={s.rightNav}>
-          <SocialLinks />
+          {/* <SocialLinks /> */}
+          <ActiveLink href="/blog">Blog</ActiveLink>
         </div>
 
         <button
@@ -63,9 +66,9 @@ export default function Header() {
       </header>
 
       <nav className={cn(s.mobileNav, mobileNavShown && s.active)}>
-        {/* <Link href="/works">
-          <a>Works</a>
-        </Link> */}
+        <Link href="/blog">
+          <a>Blog</a>
+        </Link>
       </nav>
     </>
   );
