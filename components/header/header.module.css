@@ -11,10 +11,6 @@
   margin: auto auto auto 0;
 }
 
-.desktopNav {
-  margin: auto;
-}
-
 .link {
   font-size: 14px;
   color: var(--gray);
@@ -30,13 +26,17 @@
   margin-right: 24px;
 }
 
+.desktopNav,
 .rightNav {
-  margin: auto 0 auto auto;
+  margin: auto;
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
-
+.rightNav {
+  margin: auto 0 auto auto;
+}
 
 .mobileNav {
   composes: container from global;
@@ -49,10 +49,10 @@
 
 @media (max-width: 768px) {
   .header {
-    grid: auto-flow / repeat(2, 1fr);
+    grid: auto-flow / repeat(3, 1fr);
   }
 
-  .desktopNav,
+  /* .desktopNav, */
   .rightNav {
     display: none;
   }

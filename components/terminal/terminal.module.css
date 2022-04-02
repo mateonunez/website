@@ -19,18 +19,14 @@
   word-break: break-all;
 }
 
-.inner.rose {
+.inner.amber {
   background: #191724;
-  color: #e0def4;
+  color: var(--amber);
   border-color: #000;
 }
 
-.inner.rose .caret {
-  background: #e0def4;
-}
-
-.green {
-  color: #1dc121;
+.inner.amber .caret {
+  background: var(--amber);
 }
 
 .header {
@@ -70,7 +66,7 @@
 }
 
 .caret {
-  background: rgba(248, 28, 229, 0.8);
+  background: var(--amber);
   display: inline-block;
   width: 7px;
   height: 15px;

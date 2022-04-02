@@ -3,14 +3,23 @@ import React, { useCallback, useMemo, useContext, useReducer } from 'react';
 export const initialState = {
   isLoading: false,
   // Sidebar
+
   showSidebar: false,
   // Modal
+
   showModal: false,
   modalView: '',
   // Navbar
+
   showNavbar: false,
   minimalNavbar: false,
-  navbarView: ''
+  navbarView: '',
+
+  // Terminal
+  isTerminalCompleted: false,
+
+  // BigBang
+  bigBang: false
 };
 
 export const types = {
@@ -29,7 +38,13 @@ export const types = {
   // Navbar
   OPEN_NAVBAR: 'OPEN_NAVBAR',
   CLOSE_NAVBAR: 'CLOSE_NAVBAR',
-  SET_NAVBAR_VIEW: 'SET_NAVBAR_VIEW'
+  SET_NAVBAR_VIEW: 'SET_NAVBAR_VIEW',
+
+  // Terminal
+  COMPLETE_TERMINAL: 'COMPLETE_TERMINAL',
+
+  // BigBang
+  SET_BIG_BANG: 'SET_BIG_BANG'
 };
 
 export const reducer = (state, action) => {
@@ -40,6 +55,7 @@ export const reducer = (state, action) => {
         isLoading: action.payload
       };
     }
+
     // Sidebar
     case types.OPEN_SIDEBAR: {
       return {
@@ -59,6 +75,7 @@ export const reducer = (state, action) => {
         sidebarView: action.payload
       };
     }
+
     // Modal
     case types.OPEN_MODAL: {
       return {
@@ -79,6 +96,7 @@ export const reducer = (state, action) => {
         modalView: action.payload
       };
     }
+
     // Navbar
     case types.OPEN_NAVBAR: {
       return {
@@ -98,6 +116,23 @@ export const reducer = (state, action) => {
         navbarView: action.payload
       };
     }
+
+    // Terminal
+    case types.COMPLETE_TERMINAL: {
+      return {
+        ...state,
+        isTerminalCompleted: true
+      };
+    }
+
+    // BigBang
+    case types.SET_BIG_BANG: {
+      return {
+        ...state,
+        bigBang: action.payload
+      };
+    }
+
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -140,6 +175,18 @@ export const UIProvider = props => {
     [dispatch]
   );
 
+  // Terminal
+  const completeTerminal = useCallback(
+    () => dispatch({ type: types.COMPLETE_TERMINAL }),
+    [dispatch]
+  );
+
+  // BigBang
+  const setBigBang = useCallback(
+    payload => dispatch({ type: types.SET_BIG_BANG, payload }),
+    [dispatch]
+  );
+
   const value = useMemo(
     () => ({
       ...state,
@@ -152,7 +199,9 @@ export const UIProvider = props => {
       setModalView,
       openNavbar,
       closeNavbar,
-      setNavbarView
+      setNavbarView,
+      completeTerminal,
+      setBigBang
     }),
     [state]
   );

@@ -1,33 +1,13 @@
 .root {
   display: flex;
   flex-direction: column;
-  height: 90vh;
+  height: calc(100vh - 100px);
 }
 
-.start {
+.universe {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: auto;
-  margin-bottom: 1rem;
-}
-
-.startButton {
-  @apply animate-bounce;
-}
-
-.startIcon {
-  @apply w-8 h-8 transition duration-500 transform hover:scale-110;
-}
-
-.start > .other {
-  margin-top: 1rem;
-  color: white;
-  transition: border 200ms ease-in-out;
-  border-bottom: 1px solid transparent;
-}
-
-.start > .other:hover {
-  color: white;
-  border-color: white;
+  justify-content: center;
 }

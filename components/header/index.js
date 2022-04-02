@@ -3,10 +3,12 @@ import s from './header.module.css';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { MN, ChevronDown, ChevronUp } from 'components/icons';
+import { MN, Menu } from 'components/icons';
 import cn from 'classnames';
 import SocialLinks from 'components/common/SocialLinks';
+import { useUI } from 'components/ui/UIContext';
 
+// eslint-disable-next-line no-unused-vars
 const ActiveLink = ({ href, children }) => {
   const { pathname } = useRouter();
   return (
@@ -19,6 +21,7 @@ const ActiveLink = ({ href, children }) => {
 };
 
 export default function Header() {
+  const { setBigBang } = useUI();
   const [mobileNavShown, setMobileNavShown] = useState(false);
 
   const toggle = () => setMobileNavShown(!mobileNavShown);
@@ -27,33 +30,45 @@ export default function Header() {
     <>
       <header className={s.header}>
         {/* Logo  */}
-        <Link href="/" passHref>
-          <a className={s.logo} aria-label="Mateo Nunez">
-            <MN />
-          </a>
-        </Link>
+        <button
+          aria-label="Home"
+          onClick={() => {
+            setBigBang(false);
+          }}
+          className={s.logo}>
+          <Link href="/" passHref>
+            <a aria-label="Mateo Nunez">
+              <MN />
+            </a>
+          </Link>
+        </button>
 
         {/* Navigation */}
         <nav className={s.desktopNav}>
-          <ActiveLink href="/works">Works</ActiveLink>
+          <SocialLinks />
         </nav>
 
         {/* Right Nav  */}
         <div className={s.rightNav}>
-          <SocialLinks />
+          {/* <SocialLinks /> */}
+          <ActiveLink href="/blog">Blog</ActiveLink>
         </div>
 
-        <button className={s.toggle} onClick={toggle}>
-          {mobileNavShown ? <ChevronUp /> : <ChevronDown />}
+        <button
+          className={cn(
+            s.toggle,
+            'transform ease-linear duration-500',
+            mobileNavShown && 'rotate-90'
+          )}
+          onClick={toggle}>
+          <Menu />
         </button>
       </header>
 
       <nav className={cn(s.mobileNav, mobileNavShown && s.active)}>
-        <>
-          <Link href="/works">
-            <a>Works</a>
-          </Link>
-        </>
+        <Link href="/blog">
+          <a>Blog</a>
+        </Link>
       </nav>
     </>
   );
