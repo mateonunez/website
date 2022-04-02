@@ -1,13 +1,14 @@
 /* eslint-disable no-unused-vars */
 import * as THREE from 'three';
+import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import s from './universe.module.css';
 
 const particleParameters = {
   radius: 1,
-  widthSegments: 12,
-  heightSegments: 12
+  widthSegments: 64,
+  heightSegments: 64
 };
 
 export default function Universe() {
@@ -36,6 +37,9 @@ export default function Universe() {
     if (container && !renderer) {
       const particles = [];
 
+      // Helper
+      scene.add(new THREE.AxesHelper(5));
+
       // Sizes
       const containerWidth = container.clientWidth;
       const containerHeight = container.clientHeight; // 100px for header
@@ -48,12 +52,30 @@ export default function Universe() {
       setRenderer(renderer);
 
       // Camera
-      const camera = new THREE.PerspectiveCamera(40, containerWidth / containerHeight, 0.1, 1000);
-      camera.position.set(0, 50, 0);
-      camera.up.set(0, 0, 1);
-      camera.lookAt(0, 0, 0);
+      const camera = new THREE.PerspectiveCamera(75, containerWidth / containerHeight, 0.1, 1000);
+      camera.position.set(0, 0, -30);
+      // camera.lookAt(0, 0, 0);
 
       setCamera(camera);
+
+      // Controls
+      const controls = new TrackballControls(camera, renderer.domElement);
+      controls.update();
+      controls.addEventListener('change', () => console.log('Controls Change'));
+      controls.addEventListener('start', () => console.log('Controls Start Event'));
+      controls.addEventListener('end', () => console.log('Controls End Event'));
+      controls.enabled = false;
+      controls.rotateSpeed = 1.0;
+      controls.zoomSpeed = 1.2;
+      controls.panSpeed = 0.8;
+      controls.keys = ['KeyA', 'KeyS', 'KeyD'];
+      controls.noPan = true; //default false
+      controls.noRotate = true; //default false
+      controls.noZoom = true; //default false
+      controls.staticMoving = true; //default false
+      controls.dynamicDampingFactor = 0.1;
+      controls.maxDistance = 4;
+      controls.minDistance = 2;
 
       // Light
       const light = new THREE.PointLight({
@@ -130,19 +152,21 @@ export default function Universe() {
 
         particles.forEach(particle => {
           particle.rotation.setFromVector3(new THREE.Vector3(0, time, 0));
+          particle.position.set(time, 0, 0);
         });
 
-        renderer.render(scene, camera);
         requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
       };
 
       animate();
 
-      return () => {
-        console.log('unmount');
-        cancelAnimationFrame(req);
-        renderer.dispose();
-      };
+      // return () => {
+      //   console.log('unmount');
+      //   cancelAnimationFrame(req);
+      //   renderer.dispose();
+      // };
     }
   }, []);
 
