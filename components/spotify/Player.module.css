@@ -45,6 +45,12 @@
   @apply rounded-full bg-gray-200 dark:bg-gray-700;
 }
 
+.animation {
+  display: flex;
+  flex-direction: row;
+  margin: 0.5rem 0.1rem 0 auto;
+}
+
 .listened {
   @apply bg-[#1ED760] h-1.5 rounded-full;
 }

@@ -1,9 +1,15 @@
 import s from './Player.module.css';
 
 import Link from 'next/link';
+import Lottie from 'react-lottie-player';
+import PlayerJson from '/components/animations/player.json';
 
 import { ChevronUp, Spotify } from 'components/icons';
 import { useUI } from 'components/ui/UIContext';
+
+const PlayerAnimation = () => {
+  return <Lottie loop animationData={PlayerJson} play style={{ width: '1rem', height: '1rem' }} />;
+};
 
 export default function Listening() {
   const { listening } = useUI();
@@ -46,13 +52,18 @@ export default function Listening() {
                   }}>
                   <ChevronUp className="w-4 h-4 rotate-90" />
                 </button>
-                {/* <ChevronUp className="w-4 h-4 rotate-90" /> */}
               </div>
             </div>
             {listening?.isPlaying && (
-              <div className={s.progress}>
-                <div className={s.listened} style={{ width: `${progress}%` }} />
-              </div>
+              <>
+                <div className={s.progress}>
+                  <div className={s.listened} style={{ width: `${progress}%` }} />
+                </div>
+
+                <div className={s.animation}>
+                  <PlayerAnimation />
+                </div>
+              </>
             )}
           </div>
         </div>

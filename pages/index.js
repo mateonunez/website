@@ -10,7 +10,9 @@ import { useUI } from 'components/ui/UIContext';
 export default function Home() {
   const { setSpotifyListening } = useUI();
   const fetcher = url => fetch(url).then(response => response.json());
-  const { data: listening } = useSWR('/api/spotify/listening', fetcher);
+  const { data: listening } = useSWR('/api/spotify/listening', fetcher, {
+    refreshInterval: 10 * 1000
+  });
 
   useEffect(() => {
     setSpotifyListening(listening);
