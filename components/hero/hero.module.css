@@ -14,15 +14,15 @@
 .title {
   @apply font-extrabold text-transparent text-8xl bg-clip-text;
   @apply bg-gradient-to-r from-amber-500 to-blue-500 via-rose-500 animate-gradient-x;
-  margin: auto;
+  margin: 3rem auto 0 auto;
 }
 
 .terminal {
-  margin: auto;
+  margin: 2rem auto auto auto;
 }
 
 .listening {
-  margin: 0.5rem auto 0.5rem;
+  margin: 2rem auto 0 auto;
 }
 
 @media (max-width: 600px) {
