@@ -1,34 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Spotify Preparation
 
-## Getting Started
+## Authenticate Account
 
-First, run the development server:
+> https://accounts.spotify.com/authorize?client_id=CLIENT_ID_HERE&response_type=code&redirect_uri=http
+%3A%2F%2Flocalhost:3000&scope=user-read-currently-playing
 
-```bash
-npm run dev
-# or
-yarn dev
+Get the &code from the uri
+
+> AQAUkKKx9Zo0PgWmri9kfnxeCx3n6eNgXhS6t4_kjfFM_vrQm0WRKVJi2xtCp35Glcc9JlP6FTuAOpX9B9FWbOBBZ5bKBcHHgg3z6n66hmApnAeambhKeQ_vxg6kHvqsH6Aa3hxYoNVgzZeVgxbjVFQn7O6wPzFXtEt7VyDkzmUAuYn9bGMtpL--5KCrWG-OfcTN0hHd
+
+Encrypt your client_id:client_secret in base64
+
+> ODYwNzYzZDYxZDJlNGQ3NDg4NmE4YjM4YmQ0YWI1MWU6MDJlYzZmMTBlYzJlNDI1ZGI4Mzg4YmU0YzJjMTAzM2E=
+
+Call with `curl` the authorization API
+
+```shell
+curl -H "Authorization: Basic ODYwNzYzZDYxZDJlNGQ3NDg4NmE4YjM4YmQ0YWI1MWU6MDJlYzZmMTBlYzJlNDI1ZGI4Mzg4YmU0YzJjMTAzM2E=" -d grant_type=authorization_code -d code=AQAUkKKx9Zo0PgWmri9kfnxeCx3n6eNgXhS6t4_kjfFM_vrQm0WRKVJi2xtCp35Glcc9JlP6FTuAOpX9B9FWbOBBZ5bKBcHHgg3z6n66hmApnAeambhKeQ_vxg6kHvqsH6Aa3hxYoNVgzZeVgxbjVFQn7O6wPzFXtEt7VyDkzmUAuYn9bGMtpL--5KCrWG-OfcTN0hHd -d redirect_uri=http%3A%2F%2Flocalhost:3000 https://accounts.spotify.com/api/token
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> Response
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```json
+{"access_token":"BQD3iE9H0PBHKC5l6oAKVho_dpiQyLCTnnVc7dcAqJ3MclZVYS7vpb565Fxy197FJIMCxEnsVeiW8FTdR_QVyxzK4sp0vK2u2gWWvIV7fNqfJwDMCbTiP5sC1oyITS72twFzWg9r8lYgz4x5dbBdEIcOPqwtFHxuEEUG-B83xEc","token_type":"Bearer","expires_in":3600,"refresh_token":"AQBwCTgmAl8CxW2tFwtHFziurbTcxx_gOVP3Jq5kCFQbIkI-Gue18yGQrn3muiTriEDNmYwUFeqXyvJgegNRLwdGuiSj7h8NWN1X2rrcsAug3TTzUP0nUK0wUwSFQXVxMd4","scope":"user-read-currently-playing"}
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+curl -X "GET" "https://api.spotify.com/v1/me/player/currently-playing" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer BQD3iE9H0PBHKC5l6oAKVho_dpiQyLCTnnVc7dcAqJ3MclZVYS7vpb565Fxy197FJIMCxEnsVeiW8FTdR_QVyxzK4sp0vK2u2gWWvIV7fNqfJwDMCbTiP5sC1oyITS72twFzWg9r8lYgz4x5dbBdEIcOPqwtFHxuEEUG-B83xEc"
