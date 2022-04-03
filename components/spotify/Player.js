@@ -31,7 +31,7 @@ export default function Listening() {
                 // eslint-disable-next-line @next/next/no-img-element
                 <img className="w-24 shadow-sm" src={listening?.thumbnail} alt={listening?.album} />
               ) : (
-                <Spotify size={'24'} color={'#1ED760'} />
+                <Spotify className="w-20 h-20" color={'#1ED760'} />
               )}
             </a>
           </Link>
