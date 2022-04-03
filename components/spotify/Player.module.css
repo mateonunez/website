@@ -48,3 +48,10 @@
 .listened {
   @apply bg-[#1ED760] h-1.5 rounded-full;
 }
+
+@media (max-width: 600px) {
+  .root {
+    min-width: 100%;
+    max-width: 80vw;
+  }
+}
