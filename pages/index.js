@@ -1,35 +1,28 @@
 import s from 'styles/pages/home.module.css';
 
-import { useUI } from 'components/ui/UIContext';
-import cn from 'classnames';
+import useSWR from 'swr';
 
 import Header from 'components/header';
 import Hero from 'components/hero';
-import Universe from 'components/universe';
+import { useEffect } from 'react';
+import { useUI } from 'components/ui/UIContext';
 
 export default function Home() {
-  const { bigBang } = useUI();
+  const { setSpotifyListening } = useUI();
+  const fetcher = url => fetch(url).then(response => response.json());
+  const { data: listening } = useSWR('/api/spotify/listening', fetcher);
+
+  useEffect(() => {
+    setSpotifyListening(listening);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [listening]);
 
   return (
     <>
       <Header />
 
       <div className={s.root}>
-        <Hero
-          className={cn(
-            'transition ease-in-out duration-1000',
-            bigBang ? 'opacity-0 h-0' : 'opacity-100 h-full'
-          )}
-        />
-
-        <div
-          className={cn(
-            s.universe,
-            'transition ease-in-out duration-1000',
-            bigBang ? 'opacity-100 h-full w-full' : 'opacity-0 h-0 w-0'
-          )}>
-          {bigBang && <Universe />}
-        </div>
+        <Hero className="h-full transition duration-1000 ease-in-out" />
       </div>
     </>
   );

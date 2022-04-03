@@ -4,6 +4,7 @@ import cn from 'classnames';
 import Terminal from 'components/terminal';
 import { ChevronDown } from 'components/icons';
 import { useUI } from 'components/ui/UIContext';
+import { Player } from 'components/spotify';
 
 export default function Hero({ ...props }) {
   const { isTerminalCompleted, setBigBang } = useUI();
@@ -15,6 +16,11 @@ export default function Hero({ ...props }) {
         <div className={s.root}>
           {/* Title  */}
           <h1 className={s.title}>Mateo Nunez</h1>
+
+          {/* Listening */}
+          <div className={s.listening}>
+            <Player />
+          </div>
 
           {/* Terminal  */}
           <div className={s.terminal}>
