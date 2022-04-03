@@ -1,7 +1,7 @@
 import { getNowPlaying } from 'lib/spotify';
-import { normalizeSpotify } from 'lib/utils/normalizer';
+import { normalizeListening } from 'lib/utils/normalizer';
 
-export default async function SpotifyApi(_, res) {
+export default async function getListening(req, res) {
   const response = await getNowPlaying();
 
   if (!response) {
@@ -16,5 +16,5 @@ export default async function SpotifyApi(_, res) {
 
   const data = await response.json();
 
-  return res.status(200).json(normalizeSpotify(data));
+  return res.status(200).json(normalizeListening(data));
 }
