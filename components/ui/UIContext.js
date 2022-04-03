@@ -19,7 +19,10 @@ export const initialState = {
   isTerminalCompleted: false,
 
   // BigBang
-  bigBang: false
+  bigBang: false,
+
+  // Spotify
+  listening: {}
 };
 
 export const types = {
@@ -44,7 +47,9 @@ export const types = {
   COMPLETE_TERMINAL: 'COMPLETE_TERMINAL',
 
   // BigBang
-  SET_BIG_BANG: 'SET_BIG_BANG'
+  SET_BIG_BANG: 'SET_BIG_BANG',
+
+  SET_SPOTIFY_LISTENING: 'SET_SPOTIFY_LISTENING'
 };
 
 export const reducer = (state, action) => {
@@ -133,6 +138,14 @@ export const reducer = (state, action) => {
       };
     }
 
+    // Spotify
+    case types.SET_SPOTIFY_LISTENING: {
+      return {
+        ...state,
+        listening: action.payload
+      };
+    }
+
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -187,6 +200,12 @@ export const UIProvider = props => {
     [dispatch]
   );
 
+  // Spotify
+  const setSpotifyListening = useCallback(
+    payload => dispatch({ type: types.SET_SPOTIFY_LISTENING, payload }),
+    [dispatch]
+  );
+
   const value = useMemo(
     () => ({
       ...state,
@@ -201,7 +220,8 @@ export const UIProvider = props => {
       closeNavbar,
       setNavbarView,
       completeTerminal,
-      setBigBang
+      setBigBang,
+      setSpotifyListening
     }),
     [state]
   );

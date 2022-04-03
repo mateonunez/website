@@ -1,0 +1,50 @@
+.root {
+  width: 500px;
+}
+
+.inner {
+  position: relative;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  border-radius: 5px;
+  border: 1px solid rgb(51, 51, 51);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.5;
+  font-size: 14px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  width: 100%;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.artist {
+  font-size: 0.75rem;
+  font-weight: 300;
+  line-height: 1rem;
+}
+
+.progress {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  @apply rounded-full bg-gray-200 dark:bg-gray-700;
+}
+
+.listened {
+  @apply bg-[#1ED760] h-1.5 rounded-full;
+}
