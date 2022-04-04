@@ -4,6 +4,8 @@ import useSWR from 'swr';
 
 import Header from 'components/header';
 import Hero from 'components/hero';
+import About from 'components/about';
+
 import { useEffect } from 'react';
 import { useUI } from 'components/ui/UIContext';
 
@@ -25,6 +27,8 @@ export default function Home() {
 
       <div className={s.root}>
         <Hero className="h-full transition duration-1000 ease-in-out" />
+
+        <About className="h-full transition duration-1000 ease-in-out" />
       </div>
     </>
   );

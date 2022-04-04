@@ -1,0 +1,13 @@
+.root {
+  margin: auto 0 4rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  min-height: calc(100vh);
+}
+
+.title {
+  margin: auto;
+  @apply font-extrabold text-transparent text-8xl bg-clip-text;
+  @apply bg-gradient-to-l from-amber-500 to-blue-500 via-rose-500 animate-gradient-x;
+}
