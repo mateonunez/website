@@ -11,11 +11,7 @@
   flex-direction: column;
 }
 
-.title {
-  @apply font-extrabold text-transparent text-8xl bg-clip-text;
-  @apply bg-gradient-to-r from-amber-500 to-blue-500 via-rose-500 animate-gradient-x;
-  margin: 3rem auto 0 auto;
-}
+
 
 .terminal {
   margin: 2rem auto auto auto;
@@ -32,6 +28,7 @@
 
   .title {
     @apply text-5xl;
+    line-height: 1.5;
   }
 
   .terminal {

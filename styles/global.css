@@ -10,6 +10,13 @@
     format('woff2');
 }
 
+@font-face {
+  font-family: 'Incompleeta';
+  font-weight: 'normal';
+  font-display: block;
+  src: url('~/assets/fonts/IncompleetaRegular.woff2') format('woff2');
+}
+
 :root {
   --bg: #000;
   --fg: #fff;
@@ -61,6 +68,13 @@ button {
   margin-right: auto;
 }
 
+.title {
+  @apply text-transparent text-7xl bg-clip-text font-incompleeta leading-none font-extrabold;
+  @apply bg-gradient-to-r from-amber-500 to-blue-500 via-rose-500 animate-gradient-x;
+  margin: 0 auto 0 auto;
+  line-height: 1.5;
+}
+
 @media (max-width: 900px) {
   .container {
     padding-left: 40px;
@@ -80,4 +94,11 @@ button {
   width: 100%;
   height: 2px;
   background: var(--fg);
+}
+
+@media (max-width: 600px) {
+  .title {
+    @apply text-5xl;
+    line-height: 1.5;
+  }
 }

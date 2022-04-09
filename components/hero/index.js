@@ -10,7 +10,7 @@ export default function Hero({ ...props }) {
         {/* Hero  */}
         <div className={s.root}>
           {/* Title  */}
-          <h1 className={s.title}>Mateo Nunez</h1>
+          <h1 className="title">Mateo Nunez</h1>
 
           {/* Listening */}
           <div className={s.listening}>

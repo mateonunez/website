@@ -7,7 +7,7 @@ export default function About({ ...props }) {
         {/* About  */}
         <div className={s.root}>
           {/* Title  */}
-          <h1 className={s.title}>
+          <h1 className="title">
             <span className={s['about-gradient']}>About</span>{' '}
             <span className={s['me-gradient']}>Me</span>
           </h1>
