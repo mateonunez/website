@@ -7,8 +7,78 @@
 }
 
 .title {
-  margin: auto;
-  @apply font-light text-transparent text-7xl bg-clip-text font-incompleeta;
+  @apply font-light text-transparent bg-clip-text font-incompleeta;
   @apply bg-gradient-to-l from-amber-500 to-blue-500 via-rose-500 animate-gradient-x;
+  font-size: 10rem;
   line-height: 1.5;
+}
+
+.intro {
+  margin: 2rem auto 0 auto;
+  width: 100%;
+}
+
+.introInner {
+  margin: auto;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 0.5rem;
+  width: 500px;
+  background: var(--bg-secondary);
+  text-align: center;
+  color: var(--text-secondary);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.profileContainer {
+  width: 80%;
+  margin: 3rem auto;
+  @apply rounded-lg shadow-lg;
+}
+
+.profileInner {
+  margin: auto;
+  display: flex;
+}
+
+.profileImage {
+  margin: 0 auto 1rem auto;
+  padding: 1rem 0 3rem 0;
+  overflow: hidden;
+  @apply w-20 h-20 rounded-full shadow-lg;
+}
+
+.profileQuote {
+  @apply h-3 text-3xl leading-tight text-amber-500;
+}
+
+.profileText {
+  @apply px-5 text-sm text-center;
+}
+
+@media (max-width: 600px) {
+  .title {
+    margin: auto;
+    @apply text-7xl;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 600px) {
+  .introInner {
+    min-width: 100%;
+    max-width: 80vw;
+  }
+
+  .profileContainer {
+    width: 90%;
+  }
+}
+
+@media (max-width: 320px) {
+  .introInner {
+    height: 200px;
+    width: 300px;
+  }
 }

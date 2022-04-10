@@ -19,6 +19,9 @@
 
 :root {
   --bg: #000;
+  --bg-secondary: #202023;
+  --text: #fff;
+  --text-secondary: #bdbdbe;
   --fg: #fff;
   --pink: #f81ce5;
   --amber: #f59e0b;
