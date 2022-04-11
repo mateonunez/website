@@ -33,7 +33,7 @@
 
 .profileContainer {
   width: 80%;
-  margin: 3rem auto;
+  margin: 1rem auto 1rem auto;
   @apply rounded-lg shadow-lg;
 }
 
@@ -59,7 +59,7 @@
 
 @media (max-width: 600px) {
   .title {
-    margin: auto;
+    margin: 1rem auto 1rem auto;
     @apply text-7xl;
     line-height: 1.5;
   }
