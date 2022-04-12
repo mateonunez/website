@@ -101,6 +101,7 @@
 .bioYear {
   font-weight: 800;
   margin-right: 1rem;
+  width: 5px;
   @apply leading-tight;
 }
 

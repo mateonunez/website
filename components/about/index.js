@@ -3,6 +3,7 @@ import s from './about.module.css';
 import Image from 'next/image';
 
 import cn from 'classnames';
+import Link from 'next/link';
 
 export default function About({ ...props }) {
   return (
@@ -32,7 +33,7 @@ export default function About({ ...props }) {
                   <div className={s.profileQuoteContainer}>
                     <div className={cn(s.profileQuote, 'text-left')}>“</div>
                     <p className={s.profileText}>
-                      If you don&apos;t fix a different bug every day means you aren&apos;t learning
+                      If you don&apos;t fix a different bug every day you aren&apos;t learning
                       enough.
                     </p>
                     <div className={cn(s.profileQuote, 'text-right')}>”</div>
@@ -42,6 +43,7 @@ export default function About({ ...props }) {
                   </div>
                 </div>
                 <div className={s.sections}>
+                  {/* Bio */}
                   <article className="w-fit">
                     <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
                       Bio 📓
@@ -54,28 +56,54 @@ export default function About({ ...props }) {
                     </div>
                     <div className={s.bio}>
                       <span className={s.bioYear}>2009</span>
-                      Moved to Milan, Italy. <br />I started a new life. Known new friends. Learned
+                      Move to Milan, Italy. <br />I started a new life. Known new friends. Learned
                       how to cook.
                     </div>
                     <div className={s.bio}>
-                      <span className={s.bioYear}>2009</span>
-                      <span className={s.bioText}>Moved to Milan, Italy</span>
+                      <span className={s.bioYear}>2015</span>
+                      <span className={s.bioText}>
+                        Start working as a Telecommunication Technician. I learned different
+                        exchanges such as <i>UT</i>, <i>1240</i>, <i>MSAN</i> and others telephony
+                        protocols.
+                      </span>
+                    </div>
+                    <div className={s.bio}>
+                      <span className={s.bioYear}>2017 to date</span>
+                      <span className={s.bioText}>
+                        Works on{' '}
+                        <Link href="https://sabicom.com" passHref>
+                          <a
+                            href="http://sabicom.com"
+                            alt="Sabicom SRL"
+                            target="_blank"
+                            rel="noreferrer">
+                            Sabicom SRL
+                          </a>
+                        </Link>{' '}
+                        as a Developer. In these years I learned how to work with different
+                        technologies. I&apos;m currently the <i>Tech Lead</i>.
+                      </span>
                     </div>
                   </article>
-                  <div className="w-fit">
-                    <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>Works</h3>
-                    <span className={s.bio}></span>
-                  </div>
-                  <div className="w-fit">
+                  {/* Works */}
+                  <article className="w-fit">
+                    <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
+                      Works 💻
+                    </h3>
+                    <span className={s.worksText}></span>
+                  </article>
+                  {/* You should know */}
+                  <article className="w-fit">
                     <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
                       You should know
                     </h3>
-                  </div>
-                  <div className="w-fit">
+                  </article>
+                  {/* You shouldn't */}
+                  <article className="w-fit">
                     <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
                       You shouldn&apos;t
                     </h3>
-                  </div>
+                  </article>
                   <div className="w-fit">
                     <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>Goals</h3>
                   </div>
