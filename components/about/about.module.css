@@ -42,6 +42,11 @@
   display: flex;
 }
 
+.profileQuoteContainer {
+  margin: auto;
+  width: 500px;
+}
+
 .profileImage {
   margin: 0 auto 1rem auto;
   padding: 1rem 0 3rem 0;
@@ -50,11 +55,57 @@
 }
 
 .profileQuote {
-  @apply h-3 text-3xl leading-tight text-amber-500;
+  @apply text-3xl leading-tight text-amber-500;
+  line-height: 0.3;
 }
 
 .profileText {
+  width: 100%;
   @apply px-5 text-sm text-center;
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto 0 auto;
+}
+
+.profileSectionTitle {
+  font-size: 2.5rem;
+  font-weight: 600;
+  border-bottom-width: 0;
+  background-image: linear-gradient(transparent, transparent), linear-gradient(#fff, #fff);
+  background-size: 0% 2.5rem;
+  background-position: 100% 50%;
+  background-repeat: no-repeat;
+  transition: background-size 1s ease-in-out;
+}
+
+.profileSectionTitleBlack {
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(var(--amber), var(--amber));
+}
+
+.profileSectionTitle:hover {
+  background-size: 100% 2.5rem;
+  background-position: 0% 50%;
+}
+
+.bio {
+  display: block;
+  margin: 0.3rem 0 0.3rem 0;
+  padding-left: 5rem;
+  text-indent: -3.3rem;
+}
+
+.bioYear {
+  font-weight: 800;
+  margin-right: 1rem;
+  @apply leading-tight;
+}
+
+.bioText {
+  text-align: right;
 }
 
 @media (max-width: 600px) {
@@ -66,19 +117,29 @@
 }
 
 @media (max-width: 600px) {
-  .introInner {
+  .introInner,
+  .profileQuoteContainer {
     min-width: 100%;
     max-width: 80vw;
   }
 
   .profileContainer {
-    width: 90%;
+    width: 100%;
+  }
+
+  .profileSectionTitle {
+    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 320px) {
   .introInner {
     height: 200px;
+    width: 300px;
+  }
+
+  .profileQuoteContainer {
+    margin: auto;
     width: 300px;
   }
 }
