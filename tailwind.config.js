@@ -7,6 +7,9 @@ module.exports = {
         'gradient-y': 'gradient-y 10s ease infinite',
         'gradient-xy': 'gradient-xy 10s ease infinite'
       },
+      fontFamily: {
+        incompleeta: ['Incompleeta', 'sans-serif']
+      },
       keyframes: {
         'gradient-y': {
           '0%, 100%': {

@@ -1,4 +1,4 @@
-import s from './Player.module.css';
+import s from './player.module.css';
 
 import Link from 'next/link';
 import Lottie from 'react-lottie-player';

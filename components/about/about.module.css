@@ -1,0 +1,150 @@
+.root {
+  margin: auto 0 4rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  min-height: calc(100vh);
+}
+
+.title {
+  @apply font-light text-transparent bg-clip-text font-incompleeta;
+  @apply bg-gradient-to-l from-amber-500 to-blue-500 via-rose-500 animate-gradient-x;
+  font-size: 10rem;
+  line-height: 1.5;
+}
+
+.intro {
+  margin: 2rem auto 0 auto;
+  width: 100%;
+}
+
+.introInner {
+  margin: auto;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 0.5rem;
+  width: 500px;
+  background: var(--bg-secondary);
+  text-align: center;
+  color: var(--text-secondary);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.profileContainer {
+  width: 80%;
+  margin: 1rem auto 1rem auto;
+  @apply rounded-lg shadow-lg;
+}
+
+.profileInner {
+  margin: auto;
+  display: flex;
+}
+
+.profileQuoteContainer {
+  margin: auto;
+  width: 500px;
+}
+
+.profileImage {
+  margin: 0 auto 1rem auto;
+  padding: 1rem 0 3rem 0;
+  overflow: hidden;
+  @apply w-20 h-20 rounded-full shadow-lg;
+}
+
+.profileQuote {
+  @apply text-3xl leading-tight text-amber-500;
+  line-height: 0.3;
+}
+
+.profileText {
+  width: 100%;
+  @apply px-5 text-sm text-center;
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto 0 auto;
+}
+
+.profileSectionTitle {
+  width: fit-content;
+  font-size: 2.5rem;
+  font-weight: 600;
+  @apply text-transparent bg-clip-text leading-none font-bold;
+  @apply bg-gradient-to-b from-pink-500 to-blue-500 via-amber-500 animate-gradient-y;
+}
+
+.bio {
+  display: block;
+  margin: 0.3rem 0 0.3rem 0;
+  padding-left: 5rem;
+  text-indent: -3.3rem;
+}
+
+.bioYear {
+  font-weight: 800;
+  margin-right: 1rem;
+  width: 5px;
+  @apply leading-tight;
+}
+
+.bioText {
+  text-align: right;
+}
+
+.paragraph {
+  padding: 0 1rem 0 1rem;
+  text-indent: 1rem;
+}
+
+.goalsList {
+  padding: 0 1rem 0 1rem;
+}
+
+.goal {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 800px) {
+  .title {
+    margin: 1rem auto 1rem auto;
+    @apply text-7xl;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 600px) {
+  .introInner,
+  .profileQuoteContainer {
+    min-width: 100%;
+    max-width: 80vw;
+  }
+
+  .profileContainer {
+    width: 100%;
+  }
+
+  .profileSectionTitle {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .introInner {
+    height: 200px;
+    width: 300px;
+  }
+
+  .profileQuoteContainer {
+    margin: auto;
+    width: 300px;
+  }
+}
