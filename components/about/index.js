@@ -45,6 +45,7 @@ export default function About({ ...props }) {
                 <div className={s.profileImage}>
                   <Image width={150} height={150} src="/images/profile.jpeg" alt="" />
                 </div>
+
                 <div className="w-full">
                   <div className={s.profileQuoteContainer}>
                     <div className={cn(s.profileQuote, 'text-left')}>“</div>
@@ -58,6 +59,7 @@ export default function About({ ...props }) {
                     <p className="font-bold text-center text-amber-500 text-md">@mateonunez</p>
                   </div>
                 </div>
+
                 <div className={s.sections}>
                   {/* Bio */}
                   <article className="my-1">
@@ -101,7 +103,7 @@ export default function About({ ...props }) {
                   </article>
 
                   {/* You should know */}
-                  <article className="my-1">
+                  <article className="my-3">
                     <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
                       You should know
                     </h3>
@@ -112,7 +114,7 @@ export default function About({ ...props }) {
                   </article>
 
                   {/* You shouldn't */}
-                  <article className="my-1">
+                  <article className="my-3">
                     <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
                       You shouldn&apos;t
                     </h3>
@@ -123,7 +125,7 @@ export default function About({ ...props }) {
                   </article>
 
                   {/* Goals  */}
-                  <article className="my-1">
+                  <article className="my-3">
                     <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>Goals</h3>
                     <div className="w-full">
                       <ul className={s.goalsList}>

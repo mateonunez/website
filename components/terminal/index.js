@@ -22,8 +22,11 @@ const Line = ({ text, noPrompt = false, noCaret = false }) => (
 );
 
 const paragraphs = [
-  '😱 Hello... I wasn’t expecting you here.'
-  // '🤔 You actually put me in trouble. What do you expect me to do?',
+  'Hey.. Nice to met you. 😳',
+  'What are you doing here? Are you lost? 😱',
+  '',
+  'Anyway, Now you are here and you will stay here forever (with me 😉).',
+  ''
   // '...',
   // 'I don’t know.',
   // 'Do you want me to introduce myself?',
@@ -127,7 +130,7 @@ const Terminal = () => {
           {isLastParagraph && (
             <>
               <p className="text-amber-500">
-                <Line text="Welcome to my Universe" noPrompt noCaret />
+                <Line text="Muahahahaha" noPrompt noCaret />
               </p>
               <p>
                 <Line />
