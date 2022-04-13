@@ -3,6 +3,7 @@ import s from 'styles/pages/home.module.css';
 import useSWR from 'swr';
 
 import Header from 'components/header';
+import Footer from 'components/common/Footer';
 import Hero from 'components/hero';
 import About from 'components/about';
 
@@ -30,6 +31,8 @@ export default function Home() {
 
         <About className="h-full transition duration-1000 ease-in-out" />
       </div>
+
+      <Footer />
     </>
   );
 }
