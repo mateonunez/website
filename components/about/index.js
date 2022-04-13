@@ -4,6 +4,22 @@ import Image from 'next/image';
 
 import cn from 'classnames';
 import Link from 'next/link';
+import CircularProgress from 'components/common/CircularProgress';
+
+const goals = [
+  {
+    title: 'Become a Solution Architect',
+    progress: 70
+  },
+  {
+    title: 'Learn Rust as I know JavaScript',
+    progress: 30
+  },
+  {
+    title: "Learn Solidity as I'll know Rust",
+    progress: 20
+  }
+];
 
 export default function About({ ...props }) {
   return (
@@ -44,10 +60,8 @@ export default function About({ ...props }) {
                 </div>
                 <div className={s.sections}>
                   {/* Bio */}
-                  <article className="w-fit">
-                    <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
-                      Bio 📓
-                    </h3>
+                  <article className="my-1">
+                    <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>Bio</h3>
                     <div className={s.bio}>
                       <span className={s.bioYear}>1995</span>
                       Born in Palmira, Colombia. <br />
@@ -85,28 +99,42 @@ export default function About({ ...props }) {
                       </span>
                     </div>
                   </article>
-                  {/* Works */}
-                  <article className="w-fit">
-                    <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
-                      Works 💻
-                    </h3>
-                    <span className={s.worksText}></span>
-                  </article>
+
                   {/* You should know */}
-                  <article className="w-fit">
+                  <article className="my-1">
                     <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
                       You should know
                     </h3>
+                    <p className={s.paragraph}>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                      incididunt ut labore et dolore magna aliqua.
+                    </p>
                   </article>
+
                   {/* You shouldn't */}
-                  <article className="w-fit">
+                  <article className="my-1">
                     <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
                       You shouldn&apos;t
                     </h3>
+                    <p className={s.paragraph}>
+                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                      aliquip ex ea commodo consequat.
+                    </p>
                   </article>
-                  <div className="w-fit">
+
+                  {/* Goals  */}
+                  <article className="my-1">
                     <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>Goals</h3>
-                  </div>
+                    <div className="w-full">
+                      <ul className={s.goalsList}>
+                        {goals.map(goal => (
+                          <li key={goal.title} className={s.goal}>
+                            {goal.title} <CircularProgress progress={goal.progress} />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </article>
                 </div>
               </div>
             </div>

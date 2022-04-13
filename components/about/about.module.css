@@ -71,24 +71,11 @@
 }
 
 .profileSectionTitle {
+  width: fit-content;
   font-size: 2.5rem;
   font-weight: 600;
-  border-bottom-width: 0;
-  background-image: linear-gradient(transparent, transparent), linear-gradient(#fff, #fff);
-  background-size: 0% 2.5rem;
-  background-position: 100% 50%;
-  background-repeat: no-repeat;
-  transition: background-size 1s ease-in-out;
-}
-
-.profileSectionTitleBlack {
-  background-image: linear-gradient(transparent, transparent),
-    linear-gradient(var(--amber), var(--amber));
-}
-
-.profileSectionTitle:hover {
-  background-size: 100% 2.5rem;
-  background-position: 0% 50%;
+  @apply text-transparent bg-clip-text leading-none font-bold;
+  @apply bg-gradient-to-b from-pink-500 to-blue-500 via-amber-500 animate-gradient-y;
 }
 
 .bio {
@@ -109,7 +96,24 @@
   text-align: right;
 }
 
-@media (max-width: 600px) {
+.paragraph {
+  padding: 0 1rem 0 1rem;
+  text-indent: 1rem;
+}
+
+.goalsList {
+  padding: 0 1rem 0 1rem;
+}
+
+.goal {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 800px) {
   .title {
     margin: 1rem auto 1rem auto;
     @apply text-7xl;
