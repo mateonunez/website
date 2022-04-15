@@ -73,7 +73,7 @@ button {
 
 .title {
   @apply text-transparent text-7xl bg-clip-text font-incompleeta leading-none font-extrabold;
-  @apply bg-gradient-to-r from-amber-500 to-blue-500 via-rose-500 animate-gradient-x;
+  @apply bg-gradient-to-r from-amber-500 to-blue-500 via-rose-500 animate-gradient-xy;
   margin: 0 auto 0 auto;
   line-height: 1.5;
 }

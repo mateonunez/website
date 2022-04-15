@@ -27,11 +27,6 @@ const paragraphs = [
   '',
   'Anyway, Now you are here and you will stay here forever (with me 😉).',
   ''
-  // '...',
-  // 'I don’t know.',
-  // 'Do you want me to introduce myself?',
-  // 'I’m sorry. I can’t help you.',
-  // '💡 You could scroll down and shut up. I’m so tired.',
 ];
 
 const Terminal = () => {
@@ -130,10 +125,7 @@ const Terminal = () => {
           {isLastParagraph && (
             <>
               <p className="text-amber-500">
-                <Line text="Muahahahaha" noPrompt noCaret />
-              </p>
-              <p>
-                <Line />
+                <Line text="See you." noPrompt noCaret />
               </p>
             </>
           )}

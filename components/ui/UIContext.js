@@ -223,6 +223,7 @@ export const UIProvider = props => {
       setBigBang,
       setSpotifyListening
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [state]
   );
 

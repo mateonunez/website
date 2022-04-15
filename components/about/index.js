@@ -1,7 +1,5 @@
 import s from './about.module.css';
 
-import Image from 'next/image';
-
 import cn from 'classnames';
 import Link from 'next/link';
 import CircularProgress from 'components/common/CircularProgress';
@@ -38,12 +36,13 @@ export default function About({ ...props }) {
             <div className={s.intro}>
               {/* Intro  */}
               <div className={s.introInner}>
-                <span>Hello, I&apos;m a Developer based in Milan 🤌</span>
+                <span>I&apos;m a Fullstack Developer based in Milan 🤌</span>
               </div>
               {/* Profile */}
               <div className={s.profileContainer}>
                 <div className={s.profileImage}>
-                  <Image width={150} height={150} src="/images/profile.jpeg" alt="" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img width={150} height={150} src="/images/profile.jpeg" alt="Mateo Nunez" />
                 </div>
 
                 <div className="w-full">
@@ -63,7 +62,7 @@ export default function About({ ...props }) {
                 <div className={s.sections}>
                   {/* Bio */}
                   <article className="my-1">
-                    <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>Bio</h3>
+                    <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>Bio</h2>
                     <div className={s.bio}>
                       <span className={s.bioYear}>1995</span>
                       Born in Palmira, Colombia. <br />
@@ -104,29 +103,27 @@ export default function About({ ...props }) {
 
                   {/* You should know */}
                   <article className="my-3">
-                    <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
+                    <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
                       You should know
-                    </h3>
+                    </h2>
                     <p className={s.paragraph}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                      incididunt ut labore et dolore magna aliqua.
+                      Everything I learned, I learned on my own. I like challenges and every single
+                      goal for me means putting myself on the line, banging my head, falling down
+                      and getting back up.
                     </p>
                   </article>
 
                   {/* You shouldn't */}
                   <article className="my-3">
-                    <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
+                    <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
                       You shouldn&apos;t
-                    </h3>
-                    <p className={s.paragraph}>
-                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                      aliquip ex ea commodo consequat.
-                    </p>
+                    </h2>
+                    <p className={s.paragraph}>I&apos;m touchy.</p>
                   </article>
 
                   {/* Goals  */}
                   <article className="my-3">
-                    <h3 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>Goals</h3>
+                    <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>Goals</h2>
                     <div className="w-full">
                       <ul className={s.goalsList}>
                         {goals.map(goal => (

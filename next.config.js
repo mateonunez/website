@@ -1,3 +1,7 @@
 module.exports = {
-  reactStrictMode: true
+  reactStrictMode: true,
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    domains: ['i.scdn.co']
+  }
 };

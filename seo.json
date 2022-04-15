@@ -12,15 +12,22 @@
     "images": [
       {
         "url": "/card.png",
-        "width": 800,
-        "height": 600,
+        "width": 512,
+        "height": 512,
         "alt": "Mateo Nunez"
       }
     ]
   },
   "twitter": {
-    "handle": "@handle",
-    "site": "@site",
+    "handle": "@mateonunez95",
+    "site": "https://mateonunez.dev",
     "cardType": "summary_large_image"
-  }
+  },
+  "additionalLinkTags": [
+    {
+      "rel": "apple-touch-icon",
+      "href": "https://mateonunez.dev/apple-touch-icon.png",
+      "sizes": "76x76"
+    }
+  ]
 }

@@ -30,6 +30,7 @@ export default function Universe() {
 
       renderer.setSize(containerWidth, containerHeight);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [renderer]);
 
   useEffect(() => {
@@ -168,6 +169,7 @@ export default function Universe() {
       //   renderer.dispose();
       // };
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

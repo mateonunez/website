@@ -29,7 +29,7 @@ export default function Listening() {
             <a target="_blank" rel="noopener noreferer noreferrer" href={url}>
               {listening?.isPlaying ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img className="w-24 shadow-sm" src={listening?.thumbnail} alt={listening?.album} />
+                <img width="96" height="96" src={listening?.thumbnail} alt={listening?.album} />
               ) : (
                 <Spotify className="w-20 h-20" color={'#1ED760'} />
               )}
@@ -46,6 +46,7 @@ export default function Listening() {
               </div>
               <div className="flex flex-row">
                 <button
+                  aria-label="Request next song"
                   aria-disabled={true}
                   onClick={() => {
                     console.log('requested to change song');

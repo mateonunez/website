@@ -60,7 +60,8 @@ export default function Header() {
             'transform ease-linear duration-500',
             mobileNavShown && 'rotate-90'
           )}
-          onClick={toggle}>
+          onClick={toggle}
+          aria-label="Toggle Menu">
           <Menu />
         </button>
       </header>

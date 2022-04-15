@@ -10,6 +10,14 @@ import About from 'components/about';
 import { useEffect } from 'react';
 import { useUI } from 'components/ui/UIContext';
 
+export async function getServerSideProps({ res }) {
+  res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
+
+  return {
+    props: {}
+  };
+}
+
 export default function Home() {
   const { setSpotifyListening } = useUI();
   const fetcher = url => fetch(url).then(response => response.json());
