@@ -70,8 +70,8 @@ export default function Header() {
       </header>
 
       <nav className={cn(s.mobileNav, mobileNavShown && s.active)}>
-        <Link href="/blog" as="/blog">
-          <a href="/blog" rel="canonical" title="Blog">
+        <Link href="/blog" passHref>
+          <a rel="canonical" title="Blog">
             Blog
           </a>
         </Link>

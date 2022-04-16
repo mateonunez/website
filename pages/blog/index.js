@@ -1,4 +1,4 @@
-import s from 'styles/pages/blog.module.css';
+import s from 'styles/pages/blog/index.module.css';
 
 import Footer from 'components/common/Footer';
 import Header from 'components/header';
