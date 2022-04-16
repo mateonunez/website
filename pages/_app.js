@@ -1,4 +1,5 @@
 import 'styles/global.css';
+import 'styles/nprogress.css';
 
 import Head from 'components/common/Head';
 import MainLayout from 'components/layouts/main';
