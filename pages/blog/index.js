@@ -18,8 +18,6 @@ export async function getServerSideProps() {
 }
 
 export default function Blog({ articles }) {
-  console.log(articles);
-
   return (
     <>
       <NextSeo
