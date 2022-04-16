@@ -5,7 +5,6 @@ import ArticleTitle from './title';
 import ArticleContent from './content';
 
 export default function Article({ frontMatter, source }) {
-  console.log({ ...source });
   const { title, date, author, tags, readingTime } = frontMatter;
 
   return (

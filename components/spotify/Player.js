@@ -26,7 +26,11 @@ export default function Listening() {
       <div className={s.root}>
         <div className={s.inner}>
           <Link href={url} passHref>
-            <a target="_blank" rel="noopener noreferer noreferrer" href={url}>
+            <a
+              target="_blank"
+              aria-label="Mateo Nunez on Spotify"
+              rel="noopener noreferer noreferrer"
+              href={url}>
               {listening?.isPlaying ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img width="96" height="96" src={listening?.thumbnail} alt={listening?.album} />

@@ -9,8 +9,7 @@ export default function MainLayout({ children }) {
   const router = useRouter();
 
   useEffect(() => {
-    const handleStart = url => {
-      console.log(`Loading: ${url}`);
+    const handleStart = () => {
       nProgress.start();
       setLoading(true);
     };
@@ -28,6 +27,7 @@ export default function MainLayout({ children }) {
       router.events.off('routeChangeComplete', handleStop);
       router.events.off('routeChangeError', handleStop);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   return (

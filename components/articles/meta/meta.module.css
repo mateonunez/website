@@ -22,7 +22,7 @@
 }
 
 .tag {
-  @apply text-slate-500 font-mono;
+  @apply text-slate-400 font-mono;
 }
 
 .author {
