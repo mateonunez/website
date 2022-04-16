@@ -3,14 +3,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 800px;
+  width: 600px;
 }
 
 .heading {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  margin-bottom: 2rem;
 }
 
 .body {
@@ -70,6 +69,14 @@
   .root {
     max-width: 80vw;
     margin: 1rem auto 1rem auto;
+  }
+
+  .heading {
+    margin-bottom: 2rem;
+  }
+
+  .imagePreview {
+    width: 4rem;
   }
 
   .title {

@@ -1,0 +1,45 @@
+.root {
+  margin: 0;
+  display: inline-flex;
+  flex-wrap: wrap;
+  fontsize: 0.8rem;
+  line-height: 2;
+  letter-spacing: 0.03rem;
+  color: var(--text-secondary);
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 1.5rem;
+  white-space: nowrap;
+}
+
+.tagList {
+  margin-left: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.tag {
+  @apply text-slate-500 font-mono;
+}
+
+.author {
+  margin-left: 0.5rem;
+  @apply text-amber-500 font-bold;
+}
+
+.title {
+  @apply text-transparent text-5xl bg-clip-text font-incompleeta leading-none font-extrabold;
+  @apply bg-gradient-to-r from-amber-500 to-blue-500 via-rose-500 animate-gradient-xy;
+  margin: 0 auto 0 auto;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .title {
+    @apply text-3xl;
+    line-height: 1.5;
+  }
+}
