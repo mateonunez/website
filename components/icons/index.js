@@ -6,3 +6,6 @@ export { default as Spotify } from './Spotify';
 export { default as ChevronDown } from './ChevronDown';
 export { default as ChevronUp } from './ChevronUp';
 export { Menu } from './Menu';
+export { default as Clock } from './Clock';
+export { default as Tag } from './Tag';
+export { default as User } from './User';
