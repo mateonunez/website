@@ -1,1 +1,1 @@
-export { default as a } from './MDXLink';
+export { default as Image } from './MDXImage';
