@@ -3,7 +3,17 @@ import s from './mdx-image.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const MDXImage = ({ src, width, height, alt, layout, quality, priority, href, ...rest }) => {
+export default function MDXImage({
+  src,
+  width,
+  height,
+  alt,
+  layout,
+  quality,
+  priority,
+  href,
+  ...rest
+}) {
   const ImageWrapper = (
     <Image
       src={src}
@@ -31,6 +41,4 @@ const MDXImage = ({ src, width, height, alt, layout, quality, priority, href, ..
       )}
     </div>
   );
-};
-
-export default MDXImage;
+}
