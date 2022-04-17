@@ -1,5 +1,5 @@
 .root {
-  margin: auto 1rem auto 1rem;
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
