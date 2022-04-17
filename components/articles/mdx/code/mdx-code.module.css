@@ -1,7 +1,15 @@
-.root {
+.block {
   margin: auto;
   padding: 1rem;
   position: relative;
   width: 100%;
   border-radius: 10px;
+}
+
+.inline {
+  padding: 0.3rem;
+  page-break-inside: avoid;
+  border: 1px solid var(--amber);
+  border-radius: 5px;
+  font-size: 0.7rem;
 }

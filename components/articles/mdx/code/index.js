@@ -1,13 +1,21 @@
 import s from './mdx-code.module.css';
 
-export default function MDXCode({ children, ...rest }) {
+import { useEffect, useState } from 'react';
+
+import cn from 'classnames';
+
+export default function MDXCode({ className, children, ...rest }) {
+  console.log(children);
+  const [prismInjected, setPrismInjected] = useState(false);
+
+  useEffect(() => {
+    const isInjected = className?.split(' ')?.includes('code-highlight');
+    setPrismInjected(isInjected);
+  }, [className]);
+
   return (
-    <>
-      <div className={s.root}>
-        <div className={s.code} {...rest}>
-          {children}
-        </div>
-      </div>
-    </>
+    <code className={cn(prismInjected ? s.block : s.inline)} {...rest}>
+      {children}
+    </code>
   );
 }
