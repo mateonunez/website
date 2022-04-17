@@ -1,8 +1,8 @@
 .root {
+  @apply prose prose-invert;
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   max-width: 800px;
-  @apply prose prose-invert;
 }
