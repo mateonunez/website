@@ -9,7 +9,6 @@ import Link from 'next/link';
 
 export default function ArticlePreview({
   author,
-  authorImage,
   date,
   title,
   description,
@@ -25,8 +24,8 @@ export default function ArticlePreview({
         <div className={s.heading}>
           {/* Author image  */}
           <Image
-            src={authorImage}
-            alt={author}
+            src={author.image}
+            alt={author.name}
             width={32}
             height={32}
             layout="fixed"
@@ -34,7 +33,7 @@ export default function ArticlePreview({
           />
           {/* Author Name */}
           <span className={s.simpleText}>Written by: </span>
-          <span className={s.authorName}>{author}</span>
+          <span className={s.authorName}>{author.name}</span>
           {/* Separator */}
           <span className={s.simpleText}>at</span>
           {/* Date */}

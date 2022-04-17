@@ -33,9 +33,9 @@ export default function Listening() {
               href={url}>
               {listening?.isPlaying ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img width="96" height="96" src={listening?.thumbnail} alt={listening?.album} />
+                <img width="40" height="40" src={listening?.thumbnail} alt={listening?.album} />
               ) : (
-                <Spotify className="w-20 h-20" color={'#1ED760'} />
+                <Spotify className="w-10 h-10" color={'#1ED760'} />
               )}
             </a>
           </Link>
@@ -61,12 +61,14 @@ export default function Listening() {
             </div>
             {listening?.isPlaying && (
               <>
-                <div className={s.progress}>
-                  <div className={s.listened} style={{ width: `${progress}%` }} />
-                </div>
+                <div className={s.playingContainer}>
+                  <div className={s.progress}>
+                    <div className={s.listened} style={{ width: `${progress}%` }} />
+                  </div>
 
-                <div className={s.animation}>
-                  <PlayerAnimation />
+                  <div className={s.animation}>
+                    <PlayerAnimation />
+                  </div>
                 </div>
               </>
             )}

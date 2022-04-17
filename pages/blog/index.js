@@ -35,8 +35,7 @@ export default function Blog({ articles }) {
           {articles.map(article => (
             <ArticlePreview
               key={article.slug}
-              author={article.author.name}
-              authorImage={article.author.image}
+              author={article.author}
               date={article.date}
               title={article.title}
               description={article.description}
