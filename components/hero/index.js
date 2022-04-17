@@ -13,17 +13,14 @@ export default function Hero({ article, ...props }) {
         <div className={s.root}>
           {/* Title  */}
           <h1 className="title">Mateo Nunez</h1>
-
           {/* Terminal  */}
           <div className={s.terminal}>
             <Terminal />
           </div>
-
           {/* Listening */}
           <div className={s.listening}>
             <Player />
           </div>
-
           {/* Last Article */}
           <div className={s.lastArticle}>
             <h2 className="mx-auto subtitle">
@@ -35,7 +32,6 @@ export default function Hero({ article, ...props }) {
             </h2>
             <ArticlePreview {...article} />
           </div>
-
           {/* Start the BigBang */}
           {/* <div
             className={cn(

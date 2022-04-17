@@ -16,8 +16,6 @@ export async function getServerSideProps({ res }) {
 
   const article = getLastArticle();
 
-  console.log(article);
-
   return {
     props: {
       article
