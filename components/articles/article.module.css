@@ -6,3 +6,13 @@
   justify-content: center;
   max-width: 800px;
 }
+@media (max-width: 600px) {
+  .root {
+    max-width: 90vw;
+  }
+}
+@media (max-width: 320px) {
+  .root {
+    height: 200px;
+  }
+}

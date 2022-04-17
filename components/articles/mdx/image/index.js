@@ -15,17 +15,19 @@ export default function MDXImage({
   ...rest
 }) {
   const ImageWrapper = (
-    <Image
-      src={src}
-      width={width}
-      height={height}
-      alt={alt}
-      aria-label={alt}
-      layout={layout}
-      quality={quality}
-      priority={priority}
-      {...rest}
-    />
+    <div className="w-full h-full">
+      <Image
+        src={src}
+        width={width}
+        height={height}
+        alt={alt}
+        aria-label={alt}
+        layout={layout}
+        quality={quality}
+        priority={priority}
+        {...rest}
+      />
+    </div>
   );
 
   return (
