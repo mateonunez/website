@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
-/* eslint-disable @next/next/no-img-element */
-
 import s from './preview.module.css';
 
 import Image from 'next/image';

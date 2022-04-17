@@ -24,7 +24,7 @@ export default function Blog({ articles }) {
         title="Blog"
         description="Articles written with ❤️ by Mateo Nunez."
         openGraph={{
-          title: 'Blog'
+          title: "Mateo's Blog"
         }}
       />
 
