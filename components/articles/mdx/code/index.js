@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import cn from 'classnames';
 
 export default function MDXCode({ className, children, ...rest }) {
-  console.log(children);
   const [prismInjected, setPrismInjected] = useState(false);
 
   useEffect(() => {
