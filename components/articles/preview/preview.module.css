@@ -18,6 +18,7 @@
   justify-content: space-between;
   align-items: center;
   transition: 0.5s;
+  margin-top: 0.3rem;
 }
 
 .body:hover {
@@ -31,9 +32,8 @@
 }
 
 .imagePreview {
-  width: 7rem;
-  height: 100%;
-  object-fit: cover;
+  width: 15rem;
+  margin-right: 1rem;
 }
 
 .authorImage {
@@ -61,7 +61,7 @@
 }
 
 .title {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 900;
 }
 
@@ -75,8 +75,14 @@
     margin-bottom: 2rem;
   }
 
+  .body {
+    display: flex;
+    flex-direction: column;
+  }
+
   .imagePreview {
-    width: 4rem;
+    width: 20rem;
+    margin-bottom: 1rem;
   }
 
   .title {

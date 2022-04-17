@@ -5,6 +5,8 @@ import Header from 'components/header';
 import { getArticle, getArticleSlugs } from 'lib/articles/parser';
 import { ArticleJsonLd, NextSeo } from 'next-seo';
 import Article from 'components/articles';
+import urlJoin from 'url-join';
+import config from 'lib/config';
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
@@ -49,7 +51,7 @@ export default function BlogArticle({ frontMatter, source }) {
           },
           images: [
             {
-              url: frontMatter.image,
+              url: urlJoin(config.baseUrl, frontMatter.image),
               alt: frontMatter.title
             }
           ]
@@ -64,7 +66,7 @@ export default function BlogArticle({ frontMatter, source }) {
         description={frontMatter.description}
         datePublished={frontMatter.date}
         dateModified={frontMatter.date}
-        images={[frontMatter.image]}
+        images={[urlJoin(config.baseUrl, frontMatter.image)]}
         url={frontMatter.permalink}
         authorName={frontMatter.author.name}
         publisherName={frontMatter.author.name}

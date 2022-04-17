@@ -44,22 +44,22 @@ export default function ArticlePreview({
         <Link href="/blog/[slug]" as={`/blog/${slug}`}>
           <a rel="canonical" href={`/blog/${slug}`} title={title}>
             <div className={s.body}>
-              {/* Title and Description */}
-              <div className={s.textPreview}>
-                <h2 className={s.title}>{title}</h2>
-                <p className={s.description}>{description}</p>
-              </div>
-
               {/* Image */}
               <div className={s.imagePreview}>
                 <Image
                   src={image}
                   alt={title}
-                  width={512}
-                  height={512}
+                  width={1280}
+                  height={720}
                   layout="responsive"
                   className={s.image}
                 />
+              </div>
+
+              {/* Title and Description */}
+              <div className={s.textPreview}>
+                <h2 className={s.title}>{title}</h2>
+                <p className={s.description}>{description}</p>
               </div>
             </div>
           </a>
