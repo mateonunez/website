@@ -4,4 +4,5 @@
   flex-direction: column;
   justify-content: center;
   max-width: 800px;
+  @apply prose prose-invert;
 }
