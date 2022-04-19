@@ -1,6 +1,6 @@
 ---
 title: 'How I made my Blog with Next.js and MDX'
-date: 2022-04-18T10:54:18.459Z
+date: 2022-04-17T10:54:18.459Z
 description: 'Hello stranger! In this article I will show you how I made my blog serverless with Next.js and MDX.'
 tags:
   - Next.JS
@@ -21,7 +21,7 @@ author:
   href="/blog/hello-blog"
 />
 
-I've been thinking about creating a blog with **Next.js** and **MDX** for a while now. I've read a lot of articles about it, but honestly I haven't found any good ones. So I decided to create my own blog and write an article about it.
+I've been thinking about creating a blog with **Next.js** and **MDX** for a while. I've read a lot of articles about it, but honestly I haven't found any good ones. So I decided to create my own blog and write an article about it.
 
 ## 👨‍🍳️ Ingredients
 
@@ -49,11 +49,11 @@ I don't want to explain how to create a new app using Next.js so I'll assume you
 
 What about `next-mdx-remote`?
 
-This packages allows you load MDX files from anywhere, in this case I'll retrieve the data from the server using Node.
+This packages allows you load MDX files from anywhere, in this case I'll retrieve the data using `Node.js`.
 
 ## ⚙️ The Parser
 
-In this project I created a module called `parser` to fetch, resolve, sort and compile all the MDX files. With the parser I'll prepare all the _frontmatter_ with the data.
+This module will _fetch_, _resolve_, _sort_ and _compile_ all the MDX files.
 
 ### Getting the slugs
 
@@ -104,7 +104,7 @@ export const getArticleData = ({ slug }) => {
 
 The `getArticleData` looks for the article with the slug and it's read from the filesystem.
 The `matter` method will parse the _front-matter_ from the article and it's content, it will return the **data** (that contains the "header" part) and the **content** (that will contain the MDX content).
-Finally we prepare our final object with the data, composing other elements useful for the frontend such as the **reading-time**, the **permalink**, the **date**, etc.
+Finally I prepare the object, composing others elements and properties useful for the frontend such as the **reading-time**, the **permalink**, the **date**, etc.
 
 ### Put it all together
 
@@ -163,7 +163,7 @@ export async function getServerSideProps() {
 }
 ```
 
-Ok so we are just asking to my server for all the articles and we will return them to the client.
+Just asking to the server for looking the articles.
 
 _**pages/blog/index.js**_
 
@@ -308,7 +308,7 @@ export default function Article({ frontMatter, source }) {
 }
 ```
 
-I ❤️ clean (and clear) components. Or at least I think so.
+I ❤️ clean (and clear) components or at least I think so.
 
 The `Header` and the `Title` components are pretty simple. So I show you just the `<ArticleContent />` component.
 
