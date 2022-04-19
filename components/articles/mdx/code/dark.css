@@ -31,6 +31,7 @@ pre {
 }
 
 .highlight-line {
+  min-width: fit-content;
   margin-left: -16px;
   margin-right: -16px;
   background-color: rgba(55, 65, 81, 0.5); /* Set highlight bg color */

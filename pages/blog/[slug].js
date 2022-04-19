@@ -10,7 +10,6 @@ import config from 'lib/config';
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
-
   const { frontMatter, source } = await getArticle({ slug });
 
   return {

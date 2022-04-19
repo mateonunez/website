@@ -14,7 +14,7 @@ export default function Article({ frontMatter, source }) {
 
         <ArticleTitle title={title} />
 
-        <ArticleContent {...source} />
+        <ArticleContent source={source} />
       </div>
     </>
   );
