@@ -28,6 +28,20 @@
       "version": "detect"
     }
   },
+  "overrides": [
+    {
+      "files": [
+        "*.md",
+        "*.mdx"
+      ],
+      "extends": [
+        "plugin:mdx/recommended"
+      ],
+      "rules": {
+        "react/jsx-no-undef": "off"
+      }
+    }
+  ],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "jsx-a11y/anchor-is-valid": [

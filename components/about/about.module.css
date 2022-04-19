@@ -23,7 +23,7 @@
   padding: 1rem;
   background: #fff;
   border-radius: 0.5rem;
-  width: 500px;
+  width: 600px;
   background: var(--bg-secondary);
   text-align: center;
   color: var(--text-secondary);
@@ -44,7 +44,7 @@
 
 .profileQuoteContainer {
   margin: auto;
-  width: 500px;
+  width: 600px;
 }
 
 .profileImage {

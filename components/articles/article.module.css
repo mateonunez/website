@@ -1,0 +1,18 @@
+.root {
+  @apply prose prose-invert prose-code:before:hidden prose-code:after:hidden;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 800px;
+}
+@media (max-width: 600px) {
+  .root {
+    max-width: 90vw;
+  }
+}
+@media (max-width: 320px) {
+  .root {
+    height: 200px;
+  }
+}

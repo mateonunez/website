@@ -4,38 +4,31 @@ import { useEffect } from 'react';
 
 import nProgress from 'nprogress';
 
-let timeout;
-
 export default function MainLayout({ children }) {
-  const router = useRouter();
   const { loading, setLoading } = useUI();
+  const router = useRouter();
 
-  const startNProgress = () => {
-    timeout = setTimeout(nProgress.start, 500);
-    setLoading(true);
-  };
-
-  const doneNProgress = () => {
-    setLoading(false);
-    clearTimeout(timeout);
-    nProgress.done();
-  };
-
-  // Router
   useEffect(() => {
-    // Changing route
-    router.events.on('routeChangeStart', startNProgress);
-    router.events.on('routeChangeComplete', doneNProgress);
-    router.events.on('routeChangeError', doneNProgress);
+    const handleStart = () => {
+      nProgress.start();
+      setLoading(true);
+    };
+    const handleStop = () => {
+      nProgress.done();
+      setLoading(false);
+    };
+
+    router.events.on('routeChangeStart', handleStart);
+    router.events.on('routeChangeComplete', handleStop);
+    router.events.on('routeChangeError', handleStop);
 
     return () => {
-      // Changing route
-      router.events.off('routeChangeStart', startNProgress);
-      router.events.off('routeChangeComplete', doneNProgress);
-      router.events.off('routeChangeError', doneNProgress);
+      router.events.off('routeChangeStart', handleStart);
+      router.events.off('routeChangeComplete', handleStop);
+      router.events.off('routeChangeError', handleStop);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.events]);
+  }, [router]);
 
   return (
     <>

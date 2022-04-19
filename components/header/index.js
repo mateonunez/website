@@ -12,8 +12,11 @@ import { useUI } from 'components/ui/UIContext';
 const ActiveLink = ({ href, children }) => {
   const { pathname } = useRouter();
   return (
-    <Link href={href}>
-      <a className={`${s.link} ${pathname.split('/')[1] === href.split('/')[1] ? s.active : ''}`}>
+    <Link href={href} as={href}>
+      <a
+        className={`${s.link} ${pathname.split('/')[1] === href.split('/')[1] ? s.active : ''}`}
+        rel="canonical"
+        title={children}>
         {children}
       </a>
     </Link>
@@ -67,8 +70,10 @@ export default function Header() {
       </header>
 
       <nav className={cn(s.mobileNav, mobileNavShown && s.active)}>
-        <Link href="/blog">
-          <a>Blog</a>
+        <Link href="/blog" passHref>
+          <a rel="canonical" title="Blog">
+            Blog
+          </a>
         </Link>
       </nav>
     </>

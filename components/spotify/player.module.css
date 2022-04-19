@@ -1,5 +1,5 @@
 .root {
-  width: 500px;
+  width: 600px;
 }
 
 .inner {
@@ -37,22 +37,28 @@
 }
 
 .progress {
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 1rem;
   @apply rounded-full bg-gray-200 dark:bg-gray-700;
 }
 
 .animation {
   display: flex;
   flex-direction: row;
-  margin: 0.5rem 0.1rem 0 auto;
+  margin-left: 1rem;
 }
 
 .listened {
-  @apply bg-[#1ED760] h-1.5 rounded-full;
+  @apply bg-[#1ED760] h-1 rounded-full;
+}
+
+.playingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 600px) {

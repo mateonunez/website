@@ -9,16 +9,21 @@ import About from 'components/about';
 
 import { useEffect } from 'react';
 import { useUI } from 'components/ui/UIContext';
+import { getLastArticle } from 'lib/articles/parser';
 
 export async function getServerSideProps({ res }) {
   res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
 
+  const article = getLastArticle();
+
   return {
-    props: {}
+    props: {
+      article
+    }
   };
 }
 
-export default function Home() {
+export default function Home({ article }) {
   const { setSpotifyListening } = useUI();
   const fetcher = url => fetch(url).then(response => response.json());
   const { data: listening } = useSWR('/api/spotify/listening', fetcher, {
@@ -35,7 +40,7 @@ export default function Home() {
       <Header />
 
       <div className={s.root}>
-        <Hero className="h-full transition duration-1000 ease-in-out" />
+        <Hero className="h-full transition duration-1000 ease-in-out" article={article} />
 
         <About className="h-full transition duration-1000 ease-in-out" />
       </div>
