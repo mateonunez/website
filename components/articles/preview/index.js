@@ -50,6 +50,7 @@ export default function ArticlePreview({
                   height={720}
                   layout="responsive"
                   className={s.image}
+                  priority
                 />
               </div>
 
