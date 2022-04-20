@@ -51,6 +51,7 @@
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "gray-matter": "^4.0.3",
+    "gsap": "^3.10.3",
     "husky": "^7.0.4",
     "moment": "^2.29.2",
     "next-mdx-remote": "^4.0.1",
