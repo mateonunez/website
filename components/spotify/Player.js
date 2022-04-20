@@ -6,12 +6,13 @@ import PlayerJson from '/components/animations/player.json';
 
 import { ChevronUp, Spotify } from 'components/icons';
 import { useUI } from 'components/ui/UIContext';
+import { memo } from 'react';
 
 const PlayerAnimation = () => {
   return <Lottie loop animationData={PlayerJson} play style={{ width: '1rem', height: '1rem' }} />;
 };
 
-export default function Listening() {
+const Player = () => {
   const { listening } = useUI();
 
   const url =
@@ -77,4 +78,6 @@ export default function Listening() {
       </div>
     </>
   );
-}
+};
+
+export default memo(Player);

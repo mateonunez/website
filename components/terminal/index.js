@@ -5,7 +5,7 @@ import { Keyframes, Frame } from './react-keyframes.ts';
 import { useEffect, useMemo, useState } from 'react';
 import { useUI } from 'components/ui/UIContext';
 
-const sleepDuration = 300;
+const sleepDuration = 3000;
 const getTypingDuration = () => 80 + 80 * (Math.random() - 0.5);
 
 const Line = ({ text, noPrompt = false, noCaret = false }) => (
@@ -46,8 +46,9 @@ const Terminal = () => {
 
     // typing out the line
     for (let i = 0; i < text.length; i++) {
-      const isLastLetter = i === text.length - 1;
-      const duration = isLastLetter ? sleepDuration : getTypingDuration();
+      const duration =
+        frames.length > 0 || renderedLines.length > 0 ? getTypingDuration() : sleepDuration;
+
       frames.push(
         <Frame duration={duration} key={`${text}-${i}`}>
           <Line text={text.slice(0, i + 1)} />
