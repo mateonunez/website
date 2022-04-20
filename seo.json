@@ -4,7 +4,7 @@
   "description": "Mateo Nunez | Tech Lead Developer - https://mateonunez.dev",
   "openGraph": {
     "title": "Mateo Nunez | Tech Lead Developer",
-    "description": "Mateo Nunez | Tech Lead Developer - https://mateonunez.dev",
+    "description": "Hi There! I'm Mateo Nunez, I'm a Fullstack Developer based in Milan, Italy. Born in Colombia. Self-taught developer, I ❤️ the music, the food, the challenges and the continous improvement.",
     "type": "website",
     "locale": "it_IT",
     "url": "https://mateonunez.dev",
@@ -25,9 +25,23 @@
   },
   "additionalLinkTags": [
     {
+      "rel": "icon",
+      "href": "/favicon.ico",
+      "type": "image/x-icon"
+    },
+    {
+      "rel": "icon",
+      "href": "/favicon-16x16.png",
+      "type": "image/png"
+    },
+    {
       "rel": "apple-touch-icon",
-      "href": "https://mateonunez.dev/apple-touch-icon.png",
+      "href": "/apple-touch-icon.png",
       "sizes": "76x76"
+    },
+    {
+      "rel": "manifest",
+      "href": "/site.webmanifest"
     }
   ]
 }
