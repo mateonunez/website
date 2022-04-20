@@ -34,8 +34,6 @@ export default function Home({ article }) {
     refreshInterval: 10 * 1000
   });
 
-  console.log('here');
-
   return (
     <>
       <Header />
