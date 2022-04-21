@@ -2,6 +2,8 @@ import 'styles/global.css';
 import 'styles/nprogress.css';
 import 'components/articles/mdx/code/dark.css';
 
+import React from 'react';
+
 import Head from 'components/common/Head';
 import MainLayout from 'components/layouts/main';
 
@@ -16,14 +18,16 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <GTMProvider state={gtmParams}>
-        <Head />
-        <UIProvider>
-          <Layout pageProps={pageProps}>
-            <Component {...pageProps} />
-          </Layout>
-        </UIProvider>
-      </GTMProvider>
+      <React.StrictMode>
+        <GTMProvider state={gtmParams}>
+          <Head />
+          <UIProvider>
+            <Layout pageProps={pageProps}>
+              <Component {...pageProps} />
+            </Layout>
+          </UIProvider>
+        </GTMProvider>
+      </React.StrictMode>
     </>
   );
 }
