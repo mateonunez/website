@@ -2,7 +2,7 @@ import s from './player.module.css';
 
 import Link from 'next/link';
 import Lottie from 'react-lottie-player';
-import PlayerJson from '/components/animations/player.json';
+import PlayerJson from 'lib/lottie-files/player.json';
 
 import { ChevronUp, Spotify } from 'components/icons';
 import { useUI } from 'components/ui/UIContext';
