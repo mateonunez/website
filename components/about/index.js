@@ -1,8 +1,12 @@
 import s from './about.module.css';
 
-import cn from 'classnames';
+import { useRef } from 'react';
+
 import Link from 'next/link';
 import CircularProgress from 'components/common/CircularProgress';
+import Fade from 'components/animations/Fade';
+
+import cn from 'classnames';
 
 const goals = [
   {
@@ -20,16 +24,26 @@ const goals = [
 ];
 
 export default function About({ ...props }) {
+  const rootRef = useRef(null);
+
+  const fadeOptions = {
+    scrollTrigger: {
+      trigger: rootRef.current
+    }
+  };
+
   return (
     <>
-      <div {...props}>
+      <div {...props} ref={rootRef}>
         {/* About  */}
         <div className={s.root}>
           {/* Title  */}
-          <h1 className={s.title}>
-            <span className={s['about-gradient']}>About</span>{' '}
-            <span className={s['me-gradient']}>Me</span>
-          </h1>
+          <Fade className="m-0" scrollTrigger={fadeOptions.scrollTrigger}>
+            <h1 className={s.title}>
+              <span className={s['about-gradient']}>About</span>{' '}
+              <span className={s['me-gradient']}>Me</span>
+            </h1>
+          </Fade>
 
           {/* Container  */}
           <div className="container">

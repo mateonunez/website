@@ -1,6 +1,8 @@
 import { useRef, useEffect } from 'react';
 
 import { gsap } from 'gsap';
+import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Fade({
   children,
@@ -8,6 +10,7 @@ export default function Fade({
   distance = 50,
   delay = 0,
   duration = 1.3,
+  scrollTrigger = null,
   ...rest
 }) {
   const ref = useRef();
@@ -17,7 +20,8 @@ export default function Fade({
       defaults: {
         duration: 1,
         ease: 'power2.inOut'
-      }
+      },
+      ...(scrollTrigger && { scrollTrigger })
     });
 
     const fadeDirection =
@@ -47,6 +51,7 @@ export default function Fade({
     );
 
     return () => timeline.kill();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
