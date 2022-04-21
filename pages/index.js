@@ -39,9 +39,9 @@ export default function Home({ article }) {
       <Header />
 
       <div className={s.root}>
-        <Hero className="h-full transition duration-1000 ease-in-out" article={article} />
+        <Hero className="h-full" article={article} />
 
-        <About className="h-full transition duration-1000 ease-in-out" />
+        <About className="h-full" />
       </div>
 
       <Footer />
