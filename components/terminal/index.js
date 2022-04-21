@@ -5,7 +5,7 @@ import { Keyframes, Frame } from './react-keyframes.ts';
 import { useEffect, useMemo, useState } from 'react';
 import { useUI } from 'components/ui/UIContext';
 
-const sleepDuration = 3000;
+const sleepDuration = 1500;
 const getTypingDuration = () => 80 + 80 * (Math.random() - 0.5);
 
 const Line = ({ text, noPrompt = false, noCaret = false }) => (
