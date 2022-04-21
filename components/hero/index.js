@@ -4,15 +4,9 @@ import Terminal from 'components/terminal';
 import { Player } from 'components/spotify';
 import ArticlePreview from 'components/articles/preview';
 import Link from 'next/link';
-import { useRef } from 'react';
 import Fade from 'components/animations/Fade';
 
 export default function Hero({ article, ...props }) {
-  const titleRef = useRef(null);
-  const terminalRef = useRef(null);
-  const playerRef = useRef(null);
-  const lastArticleRef = useRef(null);
-
   return (
     <>
       <div {...props}>
@@ -20,24 +14,22 @@ export default function Hero({ article, ...props }) {
         <div className={s.root}>
           {/* Title  */}
           <Fade>
-            <h1 className="title" ref={titleRef}>
-              Mateo Nunez
-            </h1>
+            <h1 className="title">Mateo Nunez</h1>
           </Fade>
           {/* Terminal  */}
           <Fade direction="left">
-            <div className={s.terminal} ref={terminalRef}>
+            <div className={s.terminal}>
               <Terminal />
             </div>
           </Fade>
           {/* Listening */}
           <Fade direction="right">
-            <div className={s.listening} ref={playerRef}>
+            <div className={s.listening}>
               <Player />
             </div>
           </Fade>
           {/* Last Article */}
-          <div className={s.lastArticle} ref={lastArticleRef}>
+          <div className={s.lastArticle}>
             <Fade>
               <h2 className="text-center subtitle">
                 <Link href="/blog">
