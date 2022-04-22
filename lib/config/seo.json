@@ -11,7 +11,7 @@
     "site_name": "Mateo Nunez",
     "images": [
       {
-        "url": "/card.png",
+        "url": "https://mateonunez.dev/card.png",
         "width": 512,
         "height": 512,
         "alt": "Mateo Nunez"
