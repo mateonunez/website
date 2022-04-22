@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap --config next-sitemap.js",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc.json",
@@ -55,6 +56,7 @@
     "moment": "^2.29.2",
     "next-mdx-remote": "^4.0.1",
     "next-seo": "^5.2.0",
+    "next-sitemap": "^2.5.20",
     "nprogress": "^0.2.0",
     "postcss": "^8.4.12",
     "prettier": "^2.4.1",
