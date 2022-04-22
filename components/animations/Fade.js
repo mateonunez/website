@@ -10,7 +10,7 @@ export default function Fade({
   distance = 50,
   delay = 0,
   duration = 1.3,
-  scrollTrigger = null,
+  trigger,
   ...rest
 }) {
   const ref = useRef();
@@ -21,7 +21,7 @@ export default function Fade({
         duration: 1,
         ease: 'power2.inOut'
       },
-      ...(scrollTrigger && { scrollTrigger })
+      ...(trigger?.current && { scrollTrigger: { trigger: trigger.current } })
     });
 
     const fadeDirection =
