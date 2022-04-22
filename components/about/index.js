@@ -81,7 +81,7 @@ export default function About({ ...props }) {
                     className="m-0"
                     direction="left"
                     distance={150}
-                    delay={1.2}
+                    delay={0.9}
                     trigger={sectionsRef}>
                     <article className="my-1">
                       <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>Bio</h2>
@@ -129,7 +129,7 @@ export default function About({ ...props }) {
                     className="m-0"
                     direction="left"
                     distance={150}
-                    delay={1.5}
+                    delay={1.2}
                     trigger={sectionsRef}>
                     <article className="my-3">
                       <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
@@ -148,7 +148,7 @@ export default function About({ ...props }) {
                     className="m-0"
                     direction="left"
                     distance={150}
-                    delay={1.8}
+                    delay={1.5}
                     trigger={sectionsRef}>
                     <article className="my-3">
                       <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
@@ -163,7 +163,7 @@ export default function About({ ...props }) {
                     className="m-0"
                     direction="left"
                     distance={150}
-                    delay={2.0}
+                    delay={1.8}
                     trigger={sectionsRef}>
                     <article className="my-3">
                       <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
