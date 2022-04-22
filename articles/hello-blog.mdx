@@ -1,6 +1,6 @@
 ---
 title: 'How I made my Blog with Next.js and MDX'
-date: 2022-04-17T10:54:18.459Z
+date: 2022-04-19T10:54:18.459Z
 description: 'Hello stranger! In this article I will show you how I made my blog serverless with Next.js and MDX.'
 tags:
   - Next.JS
@@ -41,7 +41,7 @@ I've been thinking about creating a blog with **Next.js** and **MDX** for a whil
 
 At first you should know that it's not a simple task to create a blog with **Next.js** and **MDX**. (I struggle with it, and I'm sure you will too 😘).
 
-I don't want to explain how to create a new app using Next.js so I'll assume you already know how to do that.
+I'll don't explain to you how to create a new app using Next.js so I'll assume you already know how to do that.
 
 ## [MDX](https://mdxjs.com/)
 
@@ -49,11 +49,11 @@ I don't want to explain how to create a new app using Next.js so I'll assume you
 
 What about `next-mdx-remote`?
 
-This packages allows you load MDX files from anywhere, in this case I'll retrieve the data using `Node.js`.
+This package allows you to load MDX files from anywhere, in this case I'll retrieve the data using `Node.js`.
 
 ## ⚙️ The Parser
 
-This module will _fetch_, _resolve_, _sort_ and _compile_ all the MDX files.
+Used to _fetch_, _resolve_, _sort_ and _compile_ MDX files.
 
 ### Getting the slugs
 
@@ -70,7 +70,7 @@ export const getArticleSlugs = () =>
     .map(file => file.replace(/\.mdx?$/, ''));
 ```
 
-The `getArticleSlugs` function returns an array with all the slugs of the articles reading from the filesystem and looking for MDX files inside the `./articles` path.
+The `getArticleSlugs` function returns an array with all the slugs of the articles, it reads from the filesystem and looks for MDX files inside the `./articles` path.
 
 ### Retrieve single article data
 
@@ -103,8 +103,8 @@ export const getArticleData = ({ slug }) => {
 ```
 
 The `getArticleData` looks for the article with the slug and it's read from the filesystem.
-The `matter` method will parse the _front-matter_ from the article and it's content, it will return the **data** (that contains the "header" part) and the **content** (that will contain the MDX content).
-Finally I prepare the object, composing others elements and properties useful for the frontend such as the **reading-time**, the **permalink**, the **date**, etc.
+The `matter` method will parse the _front-matter_ from the article and its content, it will return the **data** (that contains the "header" part) and the **content** (that will contain the MDX content).
+Finally, I prepare the object, composing other elements and properties useful for the frontend such as the **reading-time**, the **permalink**, the **date**, etc.
 
 ### Put it all together
 
@@ -143,7 +143,7 @@ I used two plugins: `remark-gfm` and `rehype-prism-plus`.
 - **remarkGfm** supports the [GMF](https://github.github.com/gfm/) specs.
 - **rehypePrism** is a rehype plugin to highlight code blocks in HTML. This plugin is a fork of [mapbox/rehype-prism](https://github.com/mapbox/rehype-prism) and allows to show the number of lines and the line highlighting.
 
-The `serialize` method consumes a string of _MDX_. It will return an object that will contains the compiled source that will be passed to the `<MDXRemote>` component.
+The `serialize` method consumes the _MDX_ string. It will return an object that will contains the compiled source that will be passed to the `<MDXRemote>` component.
 
 ### Creating the _/blog/_ page
 
@@ -202,7 +202,7 @@ export default function Blog({ articles }) {
 }
 ```
 
-As you can see having all the data inside my props I can simply map the articles data into a `Preview` component.
+As you can see having all the data inside the props it's very simply to map the articles data into a `Preview` component.
 
 _**components/articles/preview/index.js**_
 
@@ -331,7 +331,7 @@ export default function ArticleContent({ compiledSource }) {
 }
 ```
 
-Ok ok ok... What the hell is **MDXRemote**? It's a component that consumes the _serialized_ compiled source and use the _components_ you passed to it. Each component will render only in your **MDX** source. In my case I prefer create specific components for each case.
+Ok ok ok... What the hell is **MDXRemote**? It's a component that consumes the _serialized_ compiled source and uses the _components_ you passed to it. Each component will render only in your **MDX** source. In my case, I prefer to create specific components for each case.
 
 How my `mdx-components` looks like?
 
@@ -349,7 +349,7 @@ So each time the _MDXRemote_ will render a native HTML element like `<h1>`, `<h2
 
 Oh yes, **Tailwind**.
 
-I advise you to use the typography plugin. It helps you to create a good typography and layout for your posts.
+I advise you to use the typography plugin. It helps you to create good typography and layout for your posts.
 
 _**components/articles/article.module.css**_
 
