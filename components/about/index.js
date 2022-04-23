@@ -47,14 +47,14 @@ export default function About({ ...props }) {
           <div className="container">
             <div className={s.intro}>
               {/* Intro  */}
-              <Fade direction="left" distance={150} delay={0.6} trigger={introRef}>
+              <Fade direction="left" distance={150} delay={0.5} trigger={introRef}>
                 <div className={s.introInner} ref={introRef}>
                   <span>I&apos;m a Fullstack Developer based in Milan 🤌</span>
                 </div>
               </Fade>
               {/* Profile */}
               <div className={s.profileContainer}>
-                <Fade distance={150} delay={0.9} trigger={profileRef}>
+                <Fade distance={150} delay={0.5} trigger={profileRef}>
                   <div className={s.profileImage}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img width={150} height={150} src="/images/profile.jpeg" alt="Mateo Nunez" />
@@ -81,7 +81,7 @@ export default function About({ ...props }) {
                     className="m-0"
                     direction="left"
                     distance={150}
-                    delay={0.9}
+                    delay={0.5}
                     trigger={sectionsRef}>
                     <article className="my-1">
                       <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>Bio</h2>
@@ -129,7 +129,7 @@ export default function About({ ...props }) {
                     className="m-0"
                     direction="left"
                     distance={150}
-                    delay={1.2}
+                    delay={0.5}
                     trigger={sectionsRef}>
                     <article className="my-3">
                       <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
@@ -148,7 +148,7 @@ export default function About({ ...props }) {
                     className="m-0"
                     direction="left"
                     distance={150}
-                    delay={1.5}
+                    delay={1.2}
                     trigger={sectionsRef}>
                     <article className="my-3">
                       <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
