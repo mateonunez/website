@@ -118,7 +118,7 @@ export default function About({ ...props }) {
                             </a>
                           </Link>{' '}
                           as a Developer. In these years I learned how to work with different
-                          technologies. I&apos;m currently the <i>Tech Lead</i>.
+                          technologies. I&apos;m currently the <i>Team Leader</i>.
                         </span>
                       </div>
                     </article>
