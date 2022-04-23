@@ -13,6 +13,7 @@
     "next",
     "next/core-web-vitals"
   ],
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
