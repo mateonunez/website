@@ -31,8 +31,6 @@ const About = ({ ...props }) => {
   const profileRef = useRef(null);
   const sectionsRef = useRef(null);
 
-  console.log('rendered');
-
   return (
     <>
       <div {...props} ref={rootRef}>
