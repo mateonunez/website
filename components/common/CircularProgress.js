@@ -1,4 +1,6 @@
-export default function CircularProgress({ progress = 50, ...props }) {
+import React from 'react';
+
+const CircularProgress = ({ progress = 50, ...props }) => {
   const width = 10;
   const circunference = width * 2 * Math.PI;
 
@@ -31,4 +33,6 @@ export default function CircularProgress({ progress = 50, ...props }) {
       </svg>
     </div>
   );
-}
+};
+
+export default React.memo(CircularProgress);

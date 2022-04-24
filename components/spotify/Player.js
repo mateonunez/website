@@ -1,12 +1,13 @@
 import s from './player.module.css';
 
+import React, { useMemo } from 'react';
+
 import Link from 'next/link';
 import Lottie from 'react-lottie-player';
 import PlayerJson from 'lib/lottie-files/player.json';
 
 import { ChevronUp, Spotify } from 'components/icons';
 import { useUI } from 'components/ui/UIContext';
-import { memo } from 'react';
 
 const PlayerAnimation = () => {
   return <Lottie loop animationData={PlayerJson} play style={{ width: '1rem', height: '1rem' }} />;
@@ -20,7 +21,10 @@ const Player = () => {
       ? listening.url
       : 'https://open.spotify.com/user/ltstcqtg2k6q3a17xzdbmcd8q';
 
-  const progress = listening && (listening.progress / listening.duration) * 100;
+  const progress = useMemo(
+    () => listening && (listening.progress / listening.duration) * 100,
+    [listening]
+  );
 
   return (
     <>
@@ -31,10 +35,13 @@ const Player = () => {
               target="_blank"
               aria-label="Mateo Nunez on Spotify"
               rel="noopener noreferer noreferrer"
+              title="Mateo Nunez on Spotify"
               href={url}>
               {listening?.isPlaying ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img width="40" height="40" src={listening?.thumbnail} alt={listening?.album} />
+                <div className="w-auto h-auto">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img width="40" height="40" src={listening?.thumbnail} alt={listening?.album} />
+                </div>
               ) : (
                 <Spotify className="w-10 h-10" color={'#1ED760'} />
               )}
@@ -50,14 +57,16 @@ const Player = () => {
                 <p className={s.artist}>{listening?.isPlaying ? listening.artist : 'Spotify'}</p>
               </div>
               <div className="flex flex-row">
-                <button
-                  aria-label="Request next song"
-                  aria-disabled={true}
-                  onClick={() => {
-                    console.log('requested to change song');
-                  }}>
-                  <ChevronUp className="w-4 h-4 rotate-90" />
-                </button>
+                <Link href={url} passHref>
+                  <a
+                    target="_blank"
+                    aria-label="Mateo Nunez on Spotify"
+                    rel="noopener noreferer noreferrer"
+                    title="Mateo Nunez on Spotify"
+                    href={url}>
+                    <ChevronUp className="w-4 h-4 rotate-90" />
+                  </a>
+                </Link>
               </div>
             </div>
             {listening?.isPlaying && (
@@ -80,4 +89,4 @@ const Player = () => {
   );
 };
 
-export default memo(Player);
+export default React.memo(Player);

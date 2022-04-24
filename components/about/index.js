@@ -1,10 +1,11 @@
 import s from './about.module.css';
 
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 
 import Link from 'next/link';
-import CircularProgress from 'components/common/CircularProgress';
+import Image from 'next/image';
 import Fade from 'components/animations/Fade';
+import CircularProgress from 'components/common/CircularProgress';
 
 import cn from 'classnames';
 
@@ -23,12 +24,14 @@ const goals = [
   }
 ];
 
-export default function About({ ...props }) {
+const About = ({ ...props }) => {
   const rootRef = useRef(null);
   const titleRef = useRef(null);
   const introRef = useRef(null);
   const profileRef = useRef(null);
   const sectionsRef = useRef(null);
+
+  console.log('rendered');
 
   return (
     <>
@@ -37,10 +40,10 @@ export default function About({ ...props }) {
         <div className={s.root}>
           {/* Title  */}
           <Fade className="m-0" delay={0.3} trigger={titleRef}>
-            <h1 className={s.title} ref={titleRef}>
+            <h2 className={s.title} ref={titleRef}>
               <span className={s['about-gradient']}>About</span>{' '}
               <span className={s['me-gradient']}>Me</span>
-            </h1>
+            </h2>
           </Fade>
 
           {/* Container  */}
@@ -56,8 +59,13 @@ export default function About({ ...props }) {
               <div className={s.profileContainer}>
                 <Fade distance={150} delay={0.5} trigger={profileRef}>
                   <div className={s.profileImage}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img width={150} height={150} src="/images/profile.jpeg" alt="Mateo Nunez" />
+                    <Image
+                      width={150}
+                      height={150}
+                      src="/images/profile.jpeg"
+                      alt="Mateo Nunez's face"
+                      layout="responsive"
+                    />
                   </div>
 
                   <div className="w-full" ref={profileRef}>
@@ -188,4 +196,6 @@ export default function About({ ...props }) {
       </div>
     </>
   );
-}
+};
+
+export default React.memo(About);
