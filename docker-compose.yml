@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  mateonunez_frontend_nextjs:
+    container_name: mateonunez_frontend_nextjs
+    build:
+      context: .
+      dockerfile: ./.docker/Dockerfile
+    working_dir: /usr/src/mateonunez/frontend-nextjs
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/mateonunez/frontend-nextjs
+      - /usr/src/mateonunez/frontend-nextjs/node_modules
+      - /usr/src/mateonunez/frontend-nextjs/.next
+    env_file:
+      - .env.local
+    networks:
+      - mun_network
+
+networks:
+  mun_network:
+    driver: bridge
