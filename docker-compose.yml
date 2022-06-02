@@ -14,8 +14,6 @@ services:
       - .:/usr/src/mateonunez/website
       - /usr/src/mateonunez/website/node_modules
       - /usr/src/mateonunez/website/.next
-    env_file:
-      - .env.local
     networks:
       - mun_network
 
