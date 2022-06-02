@@ -8,6 +8,7 @@ import PlayerJson from 'lib/lottie-files/player.json';
 
 import { ChevronUp, Spotify } from 'components/icons';
 import { useUI } from 'components/ui/ui-context';
+import config from 'lib/config';
 
 const PlayerAnimation = () => {
   return <Lottie loop animationData={PlayerJson} play style={{ width: '1rem', height: '1rem' }} />;
@@ -16,10 +17,7 @@ const PlayerAnimation = () => {
 const Player = () => {
   const { listening } = useUI();
 
-  const url =
-    listening && listening.isPlaying
-      ? listening.url
-      : 'https://open.spotify.com/user/ltstcqtg2k6q3a17xzdbmcd8q';
+  const url = listening && listening.isPlaying ? listening.url : `${config.baseUrl}/spotify`;
 
   const progress = useMemo(
     () => listening && (listening.progress / listening.duration) * 100,
@@ -32,7 +30,7 @@ const Player = () => {
         <div className={s.inner}>
           <Link href={url} passHref>
             <a
-              target="_blank"
+              target={listening?.isPlaying ? '_blank' : '_self'}
               aria-label="Mateo Nunez on Spotify"
               rel="noopener noreferer noreferrer"
               title="Mateo Nunez on Spotify"
@@ -57,13 +55,12 @@ const Player = () => {
                 <p className={s.artist}>{listening?.isPlaying ? listening.artist : 'Spotify'}</p>
               </div>
               <div className="flex flex-row">
-                <Link href={url} passHref>
+                <Link href="/spotify" passHref>
                   <a
-                    target="_blank"
+                    target={listening?.isPlaying ? '_blank' : '_self'}
                     aria-label="Mateo Nunez on Spotify"
                     rel="noopener noreferer noreferrer"
-                    title="Mateo Nunez on Spotify"
-                    href={url}>
+                    title="Mateo Nunez on Spotify">
                     <ChevronUp className="w-4 h-4 rotate-90" />
                   </a>
                 </Link>

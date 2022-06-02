@@ -27,7 +27,7 @@ export default function HomePage({ article }) {
       .then(response => response.json())
       .then(setSpotifyListening);
 
-  useSWR('/api/spotify/listening', fetcher, {
+  useSWR('/api/spotify/currently-listening', fetcher, {
     refreshInterval: 10 * 1000
   });
 
