@@ -4,8 +4,7 @@ import React, { useRef } from 'react';
 
 import Link from 'next/link';
 import Image from 'next/image';
-import Fade from 'components/animations/Fade';
-import CircularProgress from 'components/common/circular-progress/circular-progress';
+import { Fade, CircularProgress } from 'components';
 
 import cn from 'classnames';
 

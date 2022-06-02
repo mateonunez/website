@@ -1,10 +1,9 @@
 import s from './hero.module.css';
 
-import Terminal from 'components/terminal/terminal';
-import { Player } from 'components/spotify';
+import { Fade, Terminal, Player } from 'components';
+
 import ArticlePreview from 'components/articles/preview';
 import Link from 'next/link';
-import Fade from 'components/animations/Fade';
 
 export default function Hero({ article, ...props }) {
   return (
