@@ -9,14 +9,15 @@ import SocialLinks from 'components/common/social-links/social-links';
 import { useUI } from 'components/ui/ui-context';
 
 // eslint-disable-next-line no-unused-vars
-const ActiveLink = ({ href, children }) => {
+const ActiveLink = ({ href, children, title }) => {
   const { pathname } = useRouter();
+
   return (
     <Link href={href} as={href}>
       <a
         className={`${s.link} ${pathname.split('/')[1] === href.split('/')[1] ? s.active : ''}`}
         rel="canonical"
-        title={children}>
+        title={title}>
         {children}
       </a>
     </Link>
@@ -54,7 +55,12 @@ export default function Header() {
         {/* Right Nav  */}
         <div className={s.rightNav}>
           {/* <SocialLinks /> */}
-          <ActiveLink href="/blog">Blog</ActiveLink>
+          <ActiveLink href="/blog" title="Blog">
+            📝 Blog
+          </ActiveLink>
+          <ActiveLink href="/spotify" title="Spotify">
+            🎧 Spotify
+          </ActiveLink>
         </div>
 
         <button
@@ -72,7 +78,13 @@ export default function Header() {
       <nav className={cn(s.mobileNav, mobileNavShown && s.active)}>
         <Link href="/blog" passHref>
           <a rel="canonical" title="Blog">
-            Blog
+            📝 Blog
+          </a>
+        </Link>
+
+        <Link href="/spotify" passHref>
+          <a rel="canonical" title="Blog">
+            🎧 Spotify
           </a>
         </Link>
       </nav>

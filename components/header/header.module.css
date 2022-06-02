@@ -15,6 +15,7 @@
   font-size: 14px;
   color: var(--gray);
   transition: color 0.2s ease;
+  padding-left: 1rem;
 }
 
 .link.active,

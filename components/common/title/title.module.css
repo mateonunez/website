@@ -4,3 +4,10 @@
   margin: 0 auto 0 auto;
   line-height: 1.5;
 }
+
+@media (max-width: 768px) {
+  .root {
+    line-height: 1;
+    text-align: center;
+  }
+}
