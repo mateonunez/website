@@ -1,4 +1,4 @@
-import { useUI } from 'components/ui/UIContext';
+import { useUI } from 'components/ui/ui-context';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 

@@ -1,7 +1,7 @@
 import s from 'styles/pages/blog/[slug].module.css';
 
-import Footer from 'components/common/Footer';
-import Header from 'components/header';
+import Footer from 'components/common/footer/Footer';
+import Header from 'components/header/header';
 import { getArticle, getArticleSlugs } from 'lib/articles/parser';
 import { ArticleJsonLd, NextSeo } from 'next-seo';
 import Article from 'components/articles';

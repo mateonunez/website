@@ -4,10 +4,10 @@ import 'components/articles/mdx/code/dark.css';
 
 import React from 'react';
 
-import Head from 'components/common/Head';
-import MainLayout from 'components/layouts/main';
+import Head from 'components/common/head/Head';
+import MainLayout from 'components/layouts/main/main';
 
-import { UIProvider } from 'components/ui/UIContext';
+import { UIProvider } from 'components/ui/ui-context';
 import { GTMProvider } from '@elgorditosalsero/react-gtm-hook';
 
 export default function App({ Component, pageProps }) {

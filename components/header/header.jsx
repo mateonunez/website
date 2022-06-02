@@ -5,8 +5,8 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { MN, Menu } from 'components/icons';
 import cn from 'classnames';
-import SocialLinks from 'components/common/SocialLinks';
-import { useUI } from 'components/ui/UIContext';
+import SocialLinks from 'components/common/social-links/social-links';
+import { useUI } from 'components/ui/ui-context';
 
 // eslint-disable-next-line no-unused-vars
 const ActiveLink = ({ href, children }) => {

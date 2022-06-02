@@ -7,7 +7,7 @@ import Lottie from 'react-lottie-player';
 import PlayerJson from 'lib/lottie-files/player.json';
 
 import { ChevronUp, Spotify } from 'components/icons';
-import { useUI } from 'components/ui/UIContext';
+import { useUI } from 'components/ui/ui-context';
 
 const PlayerAnimation = () => {
   return <Lottie loop animationData={PlayerJson} play style={{ width: '1rem', height: '1rem' }} />;

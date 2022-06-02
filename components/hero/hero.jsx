@@ -1,6 +1,6 @@
 import s from './hero.module.css';
 
-import Terminal from 'components/terminal';
+import Terminal from 'components/terminal/terminal';
 import { Player } from 'components/spotify';
 import ArticlePreview from 'components/articles/preview';
 import Link from 'next/link';

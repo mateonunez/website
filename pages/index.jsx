@@ -2,12 +2,12 @@ import s from 'styles/pages/home.module.css';
 
 import useSWR from 'swr';
 
-import Header from 'components/header';
-import Footer from 'components/common/Footer';
-import Hero from 'components/hero';
-import About from 'components/about';
+import Header from 'components/header/header';
+import Footer from 'components/common/footer/Footer';
+import Hero from 'components/hero/hero';
+import About from 'components/about/about';
 
-import { useUI } from 'components/ui/UIContext';
+import { useUI } from 'components/ui/ui-context';
 import { getLastArticle } from 'lib/articles/parser';
 
 export async function getServerSideProps({ res }) {

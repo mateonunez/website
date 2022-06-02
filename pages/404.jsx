@@ -1,7 +1,7 @@
 import s from 'styles/pages/404.module.css';
 
-import Footer from 'components/common/Footer';
-import Header from 'components/header';
+import Footer from 'components/common/footer/Footer';
+import Header from 'components/header/header';
 
 export default function Eror404() {
   return (
