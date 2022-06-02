@@ -22,7 +22,7 @@ export default function SpotifyPage({ recentlyPlayed }) {
 
       <Fade>
         <Container>
-          <Title>What I listen</Title>
+          <Title className="text-center">What I listen</Title>
         </Container>
       </Fade>
     </>

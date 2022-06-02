@@ -1,8 +1,8 @@
 import cn from 'classnames';
-import s from './Title.module.css';
+import s from './title.module.css';
 
-const Title = ({ className, children, element = 'h1' }) => {
-  const classNames = cn(s.root, className);
+const Title = ({ className, children, element = 'h2', variant = 'title' }) => {
+  const classNames = cn(s[variant], className);
 
   const Component = element;
 

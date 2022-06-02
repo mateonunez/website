@@ -1,13 +1,25 @@
-.root {
+.title {
   @apply text-transparent text-7xl bg-clip-text font-incompleeta leading-none font-extrabold;
   @apply bg-gradient-to-r from-amber-500 to-blue-500 via-rose-500 animate-gradient-xy;
   margin: 0 auto 0 auto;
   line-height: 1.5;
 }
 
-@media (max-width: 768px) {
-  .root {
-    line-height: 1;
-    text-align: center;
+.subtitle {
+  @apply text-transparent bg-clip-text font-incompleeta leading-none font-bold;
+  @apply bg-gradient-to-r from-amber-500 to-blue-500 via-rose-500 animate-gradient-x;
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+@media (max-width: 600px) {
+  .title {
+    @apply text-4xl;
+    line-height: 1.5;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
   }
 }
