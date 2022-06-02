@@ -6,14 +6,14 @@ services:
     build:
       context: .
       dockerfile: ./.docker/Dockerfile
-    working_dir: /usr/src/mateonunez/frontend-nextjs
+    working_dir: /usr/src/mateonunez/website
     restart: always
     ports:
       - 3000:3000
     volumes:
-      - .:/usr/src/mateonunez/frontend-nextjs
-      - /usr/src/mateonunez/frontend-nextjs/node_modules
-      - /usr/src/mateonunez/frontend-nextjs/.next
+      - .:/usr/src/mateonunez/website
+      - /usr/src/mateonunez/website/node_modules
+      - /usr/src/mateonunez/website/.next
     env_file:
       - .env.local
     networks:
