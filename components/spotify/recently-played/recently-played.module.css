@@ -1,0 +1,24 @@
+.root {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.track-container {
+  @apply scroll-smooth;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 2rem 0 2rem 0;
+}
+
+@media (max-width: 768px) {
+  .root {
+    width: 92vw;
+  }
+}
