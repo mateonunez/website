@@ -14,8 +14,6 @@ export async function getServerSideProps({ res }) {
 }
 
 export default function SpotifyPage({ recentlyPlayed }) {
-  console.log(recentlyPlayed);
-
   return (
     <>
       <Header />

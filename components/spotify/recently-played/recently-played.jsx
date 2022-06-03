@@ -12,8 +12,6 @@ export default function RecentlyPlayed({ items }) {
       const { current } = trackContainerRef;
 
       if (current) {
-        console.log('here', direction);
-
         current.scroll({
           left:
             direction === 'left'
