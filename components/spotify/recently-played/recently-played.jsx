@@ -21,6 +21,7 @@ export default function RecentlyPlayed({ items }) {
         });
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [trackContainerRef.current]
   );
 
@@ -36,7 +37,8 @@ export default function RecentlyPlayed({ items }) {
             className="mr-4"
             onClick={() => {
               scrollTrackContainer('left');
-            }}>
+            }}
+            aria-label="Less Tracks">
             <ChevronUp className="w-6 h-6 font-black transition duration-500 transform -rotate-90" />
           </button>
 
@@ -52,7 +54,8 @@ export default function RecentlyPlayed({ items }) {
             className="ml-4"
             onClick={() => {
               scrollTrackContainer('right');
-            }}>
+            }}
+            aria-label="More Tracks">
             <ChevronUp className="w-6 h-6 transition duration-500 transform rotate-90 hover:scale-110" />
           </button>
         </div>
