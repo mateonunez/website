@@ -2,6 +2,7 @@ import { useRef, useEffect } from 'react';
 
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+import cn from 'classnames';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,8 +13,14 @@ export default function Fade({
   delay = 0,
   duration = 1.3,
   trigger,
+  className = '',
+  clean = false,
   ...rest
 }) {
+  const classNames = cn(className, {
+    'block mx-auto': !clean
+  });
+
   const ref = useRef();
 
   useEffect(() => {
@@ -56,7 +63,7 @@ export default function Fade({
   }, []);
 
   return (
-    <div className="block mx-auto" ref={ref} {...rest}>
+    <div className={classNames} ref={ref} {...rest}>
       {children}
     </div>
   );
