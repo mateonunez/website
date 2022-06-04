@@ -34,8 +34,11 @@ export default function RecentlyPlayed({ items }) {
 
         <div className={s.root}>
           <button
-            className="mr-4"
+            className="mr-4 sm:hidden xs:hidden"
             onClick={() => {
+              scrollTrackContainer('left');
+            }}
+            onTouchStart={() => {
               scrollTrackContainer('left');
             }}
             aria-label="Less Tracks">
@@ -51,8 +54,11 @@ export default function RecentlyPlayed({ items }) {
           </div>
 
           <button
-            className="ml-4"
+            className="ml-4 sm:hidden xs:hidden"
             onClick={() => {
+              scrollTrackContainer('right');
+            }}
+            onTouchStart={() => {
               scrollTrackContainer('right');
             }}
             aria-label="More Tracks">

@@ -21,4 +21,8 @@
   .root {
     width: 92vw;
   }
+
+  .track-container {
+    overflow-x: scroll;
+  }
 }
