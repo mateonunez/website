@@ -1,4 +1,5 @@
 import { Footer, Header, RecentlyPlayed } from 'components';
+import { NextSeo } from 'next-seo';
 import { recentlyPlayedFetcher } from 'pages/api/spotify/recently-played';
 
 export async function getServerSideProps({ res }) {
@@ -16,6 +17,13 @@ export async function getServerSideProps({ res }) {
 export default function SpotifyPage({ recentlyPlayed }) {
   return (
     <>
+      <NextSeo
+        title="Spotify"
+        description="I ❤️ the music and you should know it."
+        openGraph={{
+          title: "Mateo's activity on Spotify"
+        }}
+      />
       <Header />
 
       {/* Recently Played Component  */}
