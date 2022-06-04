@@ -1,10 +1,10 @@
 import s from 'styles/pages/blog/[slug].module.css';
 
-import Footer from 'components/common/footer/Footer';
-import Header from 'components/header/header';
+import { Footer, Header } from 'components';
+
+import Article from 'components/articles';
 import { getArticle, getArticleSlugs } from 'lib/articles/parser';
 import { ArticleJsonLd, NextSeo } from 'next-seo';
-import Article from 'components/articles';
 import urlJoin from 'url-join';
 import config from 'lib/config';
 

@@ -1,7 +1,7 @@
 import s from 'styles/pages/blog/index.module.css';
 
-import Footer from 'components/common/footer/Footer';
-import Header from 'components/header/header';
+import { Footer, Header } from 'components';
+
 import ArticlePreview from 'components/articles/preview';
 
 import { getAllArticles } from 'lib/articles/parser';

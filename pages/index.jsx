@@ -2,10 +2,7 @@ import s from 'styles/pages/home.module.css';
 
 import useSWR from 'swr';
 
-import Header from 'components/header/header';
-import Footer from 'components/common/footer/Footer';
-import Hero from 'components/hero/hero';
-import About from 'components/about/about';
+import { Header, Footer, Hero, About } from 'components';
 
 import { useUI } from 'components/ui/ui-context';
 import { getLastArticle } from 'lib/articles/parser';
@@ -22,7 +19,7 @@ export async function getServerSideProps({ res }) {
   };
 }
 
-export default function Home({ article }) {
+export default function HomePage({ article }) {
   const { setSpotifyListening } = useUI();
 
   const fetcher = url =>
@@ -30,7 +27,7 @@ export default function Home({ article }) {
       .then(response => response.json())
       .then(setSpotifyListening);
 
-  useSWR('/api/spotify/listening', fetcher, {
+  useSWR('/api/spotify/currently-listening', fetcher, {
     refreshInterval: 10 * 1000
   });
 

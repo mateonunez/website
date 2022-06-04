@@ -1,0 +1,66 @@
+.root {
+  margin: 2rem;
+  width: 16rem;
+  height: 22rem;
+  cursor: pointer;
+}
+
+.image {
+  @apply shadow-md opacity-40 hover:opacity-100;
+  position: aboslute;
+  inset: 0px;
+  box-sizing: border-box;
+  padding: 0px;
+  border: 1px solid;
+  border-radius: 1rem;
+  display: block;
+  object-fit: cover;
+}
+
+.title-container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inset: 0px;
+  text-align: center;
+  width: 50%;
+  height: 0;
+  margin: auto;
+}
+
+.title {
+  color: white;
+  white-space: pre-wrap;
+  font-size: 1rem;
+}
+
+.artist-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.artist {
+  @apply font-mono;
+  color: white;
+  white-space: pre-wrap;
+  font-size: 0.8rem;
+}
+
+.played-at {
+  @apply font-mono;
+  color: white;
+  white-space: pre-wrap;
+  font-size: 0.6rem;
+}
+
+@media (max-width: 768px) {
+  .root {
+    width: 10rem;
+    height: 14rem;
+  }
+}

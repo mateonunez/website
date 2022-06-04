@@ -1,7 +1,6 @@
 import s from 'styles/pages/404.module.css';
 
-import Footer from 'components/common/footer/Footer';
-import Header from 'components/header/header';
+import { Header, Footer } from 'components';
 
 export default function Eror500() {
   return (

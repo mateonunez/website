@@ -1,1 +1,3 @@
-export { default as Player } from './Player';
+export * from './player';
+export * from './recently-played';
+export * from './cards';

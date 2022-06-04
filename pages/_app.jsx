@@ -4,8 +4,7 @@ import 'components/articles/mdx/code/dark.css';
 
 import React from 'react';
 
-import Head from 'components/common/head/Head';
-import MainLayout from 'components/layouts/main/main';
+import { Head, MainLayout } from 'components';
 
 import { UIProvider } from 'components/ui/ui-context';
 import { GTMProvider } from '@elgorditosalsero/react-gtm-hook';
