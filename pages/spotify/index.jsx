@@ -1,4 +1,4 @@
-import { Header, RecentlyPlayed } from 'components';
+import { Footer, Header, RecentlyPlayed } from 'components';
 import { recentlyPlayedFetcher } from 'pages/api/spotify/recently-played';
 
 export async function getServerSideProps({ res }) {
@@ -20,6 +20,8 @@ export default function SpotifyPage({ recentlyPlayed }) {
 
       {/* Recently Played Component  */}
       {recentlyPlayed?.length > 0 && <RecentlyPlayed items={recentlyPlayed} />}
+
+      <Footer />
     </>
   );
 }

@@ -23,7 +23,6 @@ const TrackCard = ({ item, delay = 0 }, ref) => {
             <div
               onMouseEnter={() => {
                 setPlayedAtIsVisible(true);
-                console.log('here');
               }}
               onMouseLeave={() => {
                 setPlayedAtIsVisible(false);
