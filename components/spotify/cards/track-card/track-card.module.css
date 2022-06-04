@@ -1,7 +1,7 @@
 .root {
   margin: 2rem;
   width: 16rem;
-  height: 20rem;
+  height: 22rem;
   cursor: pointer;
 }
 
@@ -32,8 +32,30 @@
 .title {
   color: white;
   white-space: pre-wrap;
-
   font-size: 1rem;
+}
+
+.artist-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.artist {
+  @apply font-mono;
+  color: white;
+  white-space: pre-wrap;
+  font-size: 0.8rem;
+}
+
+.played-at {
+  @apply font-mono;
+  color: white;
+  white-space: pre-wrap;
+  font-size: 0.6rem;
 }
 
 @media (max-width: 768px) {
