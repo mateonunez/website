@@ -17,6 +17,11 @@
   margin: 0 2rem 0 2rem 0;
 }
 
+.navigator {
+  margin: auto;
+  padding: 0 0.7rem 0 0.7rem;
+}
+
 @media (max-width: 768px) {
   .root {
     width: 92vw;
@@ -24,5 +29,9 @@
 
   .track-container {
     overflow-x: scroll;
+  }
+
+  .navigator {
+    display: none;
   }
 }

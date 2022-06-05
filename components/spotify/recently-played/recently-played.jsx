@@ -34,7 +34,7 @@ export default function RecentlyPlayed({ items }) {
 
         <div className={s.root}>
           <button
-            className="mr-4 sm:hidden xs:hidden"
+            className={s.navigator}
             onClick={() => {
               scrollTrackContainer('left');
             }}
@@ -54,7 +54,7 @@ export default function RecentlyPlayed({ items }) {
           </div>
 
           <button
-            className="ml-4 sm:hidden xs:hidden"
+            className={s.navigator}
             onClick={() => {
               scrollTrackContainer('right');
             }}
