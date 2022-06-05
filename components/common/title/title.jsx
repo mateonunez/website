@@ -1,7 +1,9 @@
-import cn from 'classnames';
 import s from './title.module.css';
 
-const Title = ({ className, children, element = 'h2', variant = 'title' }) => {
+import cn from 'classnames';
+import { forwardRef } from 'react';
+
+const Title = ({ className, children, element = 'h2', variant = 'title' }, ref) => {
   const classNames = cn(s[variant], className);
 
   const Component = element;
@@ -13,4 +15,4 @@ const Title = ({ className, children, element = 'h2', variant = 'title' }) => {
   );
 };
 
-export default Title;
+export default forwardRef(Title);

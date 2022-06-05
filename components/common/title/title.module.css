@@ -15,6 +15,7 @@
 
 .naked {
   @apply text-transparent bg-clip-text  leading-none font-bold;
+  color: #fff;
   font-weight: 400;
   line-height: 1.3;
 }
