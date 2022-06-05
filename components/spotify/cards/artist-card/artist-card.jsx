@@ -14,8 +14,8 @@ export default function ArtistCard({ item, delay = 0 }) {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            title={`${item.title} by: ${item.artist}`}
-            aria-label={`${item.title} by: ${item.artist}`}>
+            title={`${item.name} [${item.genres}]`}
+            aria-label={`${item.name} [${item.genres}]`}>
             <div className="absolute inset-0 gradient blend-darken" />
 
             <Image
