@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { dateFromNowForHumans } from 'lib/helpers/date';
 
 // eslint-disable-next-line no-unused-vars
-const TrackCard = ({ item, delay = 0 }, ref) => {
+const TrackCard = ({ item, delay = 0, variant = 'default' }, ref) => {
   const [playedAtIsVisible, setPlayedAtIsVisible] = useState(false);
 
   return (
@@ -53,7 +53,7 @@ const TrackCard = ({ item, delay = 0 }, ref) => {
           delay={delay + config.munber / 33}>
           <div className={s.artist}>{item.artist}</div>
 
-          {playedAtIsVisible && (
+          {playedAtIsVisible && variant.default && (
             <Fade className="mt-1" delay={0} duration={config.munber / 100} direction="top">
               <div className={s['played-at']}>{dateFromNowForHumans(item.playedAt)}</div>
             </Fade>
