@@ -59,8 +59,13 @@
 }
 
 @media (max-width: 768px) {
-  .root {
-    width: 10rem;
-    height: 14rem;
+  .root_default {
+    width: 20rem;
+    height: 28rem;
+  }
+
+  .root_full {
+    width: 100%;
+    height: 100%;
   }
 }

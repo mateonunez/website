@@ -1,19 +1,27 @@
 import s from './track-card.module.css';
 
 import Image from 'next/image';
-import { useState, forwardRef } from 'react';
-import { Fade, Title } from 'components';
-import config from 'lib/config';
 import Link from 'next/link';
+
+import config from 'lib/config';
+import cn from 'classnames';
+
+import { Fade, Title } from 'components';
+import { useState, forwardRef } from 'react';
 import { dateFromNowForHumans } from 'lib/helpers/date';
 
 // eslint-disable-next-line no-unused-vars
 const TrackCard = ({ item, delay = 0, variant = 'default' }, ref) => {
   const [playedAtIsVisible, setPlayedAtIsVisible] = useState(false);
 
+  const classNames = cn(s.root, {
+    [s.root_default]: variant === 'default',
+    [s.root_full]: variant === 'full'
+  });
+
   return (
     <>
-      <div className={s.root}>
+      <div className={classNames}>
         <Link href={item.url} passHref>
           <a
             target="_blank"

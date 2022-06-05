@@ -37,7 +37,7 @@
 
 @media (max-width: 768px) {
   .root {
-    width: 10rem;
-    height: 14rem;
+    width: 100%;
+    height: 100%;
   }
 }

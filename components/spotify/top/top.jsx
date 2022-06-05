@@ -5,6 +5,7 @@ import config from 'lib/config';
 import { useRef } from 'react';
 
 export default function Top({ artists, tracks }) {
+  const sectionTitleRef = useRef(null);
   const artistTitleRef = useRef(null);
   const artistsRef = useRef(null);
 
@@ -14,8 +15,8 @@ export default function Top({ artists, tracks }) {
   return (
     <>
       <Container className="min-h-screen" clean>
-        <div className="py-8">
-          <Fade delay={config.munber / 10}>
+        <div className="py-8" ref={sectionTitleRef}>
+          <Fade trigger={sectionTitleRef}>
             <Title>Top of this month</Title>
           </Fade>
         </div>
@@ -69,7 +70,7 @@ export default function Top({ artists, tracks }) {
                       delay={key - config.munber / 100}
                       clean
                       trigger={tracksRef}>
-                      <TrackCard item={track} delay={key + config.munber / 100} variant="top" />
+                      <TrackCard item={track} delay={key + config.munber / 100} variant="full" />
                     </Fade>
                   </>
                 ))}
