@@ -17,7 +17,7 @@
   object-fit: cover;
 }
 
-.title-container {
+.name-container {
   position: absolute;
   display: flex;
   align-items: center;
@@ -29,42 +29,14 @@
   margin: auto;
 }
 
-.title {
+.name {
   color: white;
   white-space: pre-wrap;
   font-size: 1rem;
 }
 
-.artist-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin: 1rem auto;
-  text-align: center;
-}
-
-.artist {
-  @apply font-mono;
-  color: white;
-  white-space: pre-wrap;
-  font-size: 0.8rem;
-}
-
-.played-at {
-  @apply font-mono;
-  color: white;
-  white-space: pre-wrap;
-  font-size: 0.6rem;
-}
-
 @media (max-width: 768px) {
-  .root_default {
-    width: 20rem;
-    height: 28rem;
-  }
-
-  .root_full {
+  .root {
     width: 100%;
     height: 100%;
   }

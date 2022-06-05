@@ -47,7 +47,7 @@ export default function RecentlyPlayed({ items }) {
 
           <div className={s['track-container']} ref={trackContainerRef}>
             {items.map((item, key) => (
-              <Fade key={key} delay={key + config.munber / 100} clean>
+              <Fade key={`${item.id}-${key}`} delay={key + config.munber / 100} clean>
                 <TrackCard item={item} delay={key + config.munber / 100} />
               </Fade>
             ))}
