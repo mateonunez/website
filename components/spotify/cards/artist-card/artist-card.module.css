@@ -1,0 +1,43 @@
+.root {
+  margin: 2rem;
+  width: 16rem;
+  height: 22rem;
+  cursor: pointer;
+}
+
+.image {
+  @apply shadow-md opacity-40 hover:opacity-100;
+  position: aboslute;
+  inset: 0px;
+  box-sizing: border-box;
+  padding: 0px;
+  border: 1px solid;
+  border-radius: 1rem;
+  display: block;
+  object-fit: cover;
+}
+
+.name-container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inset: 0px;
+  text-align: center;
+  width: 50%;
+  height: 0;
+  margin: auto;
+}
+
+.name {
+  color: white;
+  white-space: pre-wrap;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .root {
+    width: 10rem;
+    height: 14rem;
+  }
+}
