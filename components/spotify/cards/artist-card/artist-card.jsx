@@ -25,6 +25,7 @@ export default function ArtistCard({ item, delay = 0 }) {
               height="320"
               width="260"
               layout="responsive"
+              quality={60}
             />
 
             <Fade className={s['name-container']} delay={delay + config.munber / 100}>

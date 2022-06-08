@@ -44,6 +44,7 @@ const TrackCard = ({ item, delay = 0, variant = 'default' }, ref) => {
                 height="320"
                 width="260"
                 layout="responsive"
+                quality={60}
               />
 
               <Fade className={s['title-container']} delay={delay + config.munber / 100}>
