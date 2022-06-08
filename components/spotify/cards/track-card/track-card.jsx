@@ -41,8 +41,8 @@ const TrackCard = ({ item, delay = 0, variant = 'default' }, ref) => {
                 className={s.image}
                 src={item.thumbnail}
                 alt={item.title}
-                height="320"
-                width="260"
+                height={320}
+                width={260}
                 layout="responsive"
                 quality={60}
               />
