@@ -1,7 +1,8 @@
 import s from './top.module.css';
 
-import { ArtistCard, TrackCard, Container, Fade, Title } from 'components';
 import config from 'lib/config';
+
+import { ArtistCard, Container, Fade, Title, TrackCard } from 'components';
 import { useRef } from 'react';
 
 export default function Top({ artists, tracks }) {
@@ -37,7 +38,7 @@ export default function Top({ artists, tracks }) {
               <div className={s['artists-container']} ref={artistsRef}>
                 {artists.map((artist, key) => (
                   <Fade
-                    key={`${artist.id}-${new Date().getTime()}`}
+                    key={`${artist.id}-${new Date().getTime()}-${key}`}
                     className={s.artist}
                     delay={key - config.munber / 100}
                     trigger={artistsRef}
@@ -54,7 +55,7 @@ export default function Top({ artists, tracks }) {
             <>
               <div ref={tracksTitleRef}>
                 <Fade delay={config.munber / 100} direction="right" trigger={tracksTitleRef}>
-                  <Title className="text-2xl" variant="naked" element="h4">
+                  <Title className="text-4xl" variant="subtitle" element="h2">
                     Tracks
                   </Title>
                 </Fade>
@@ -63,16 +64,14 @@ export default function Top({ artists, tracks }) {
               <div className={s['tracks-container']} ref={tracksRef}>
                 {/* Tracks Container  */}
                 {tracks.map((track, key) => (
-                  <>
-                    <Fade
-                      key={`${track.id}-${new Date().getTime()}`}
-                      className={s.track}
-                      delay={key - config.munber / 100}
-                      clean
-                      trigger={tracksRef}>
-                      <TrackCard item={track} delay={key + config.munber / 100} variant="full" />
-                    </Fade>
-                  </>
+                  <Fade
+                    key={`${track.id}-${new Date().getTime()}-${key}`}
+                    className={s.track}
+                    delay={key - config.munber / 100}
+                    clean
+                    trigger={tracksRef}>
+                    <TrackCard item={track} delay={key + config.munber / 100} variant="full" />
+                  </Fade>
                 ))}
               </div>
             </>
