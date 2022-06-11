@@ -1,13 +1,13 @@
+import { GTMProvider } from '@elgorditosalsero/react-gtm-hook';
+import { Head, MainLayout } from 'components';
+import 'components/articles/mdx/code/dark.css';
+import { UIProvider } from 'components/ui/ui-context';
+import React from 'react';
 import 'styles/global.css';
 import 'styles/nprogress.css';
-import 'components/articles/mdx/code/dark.css';
 
-import React from 'react';
 
-import { Head, MainLayout } from 'components';
 
-import { UIProvider } from 'components/ui/ui-context';
-import { GTMProvider } from '@elgorditosalsero/react-gtm-hook';
 
 export default function App({ Component, pageProps }) {
   // Retrieves the layout
@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <React.StrictMode>
+      {/* <React.StrictMode> */}
         <GTMProvider state={gtmParams}>
           <Head />
           <UIProvider>
@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }) {
             </Layout>
           </UIProvider>
         </GTMProvider>
-      </React.StrictMode>
+      {/* </React.StrictMode> */}
     </>
   );
 }
