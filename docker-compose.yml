@@ -7,13 +7,13 @@ services:
       context: .
       dockerfile: ./.docker/Dockerfile
     working_dir: /usr/src/mateonunez/website
-    restart: always
+    restart: on-failure
     ports:
       - 3000:3000
     volumes:
-      - .:/usr/src/mateonunez/website
       - /usr/src/mateonunez/website/node_modules
       - /usr/src/mateonunez/website/.next
+      - .:/usr/src/mateonunez/website
     networks:
       - mun_network
 

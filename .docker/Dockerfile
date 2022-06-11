@@ -18,6 +18,7 @@ COPY pages pages
 COPY public public
 COPY styles styles
 
+COPY .env.local .env.local
 COPY jsconfig.json .
 COPY next-sitemap.js .
 COPY next.config.js .
@@ -25,10 +26,10 @@ COPY postcss.config.js .
 COPY tailwind.config.js .
 
 # Development
-# EXPOSE 3000
-# CMD npm run dev
+EXPOSE 3000
+CMD npm run dev
 
 # Build
-RUN npm run build
-EXPOSE 3000
-CMD npm start
+# RUN npm run build
+# EXPOSE 3000
+# CMD npm start
