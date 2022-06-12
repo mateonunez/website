@@ -28,7 +28,7 @@ export default function Top({ artists, tracks }) {
             <>
               <div ref={artistTitleRef}>
                 <Fade direction="left" trigger={artistTitleRef}>
-                  <Title className="text-2xl" variant="naked" element="h4">
+                  <Title className="text-4xl" variant="subtitle" element="h2">
                     Artists
                   </Title>
                 </Fade>
