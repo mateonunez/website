@@ -3,8 +3,17 @@ import { getTopArtists, getTopTracks } from 'lib/spotify';
 import { normalizeArtists, normalizeTracks } from 'lib/utils/normalizers';
 
 export default async function handler(req, res) {
-  const artistsResponse = await getTopArtists();
-  const tracksResponse = await getTopTracks();
+  const artistsResponse = await getTopArtists().catch(err => {
+    return res
+      .status(200)
+      .json({ recently_played: false, message: 'Are you connected?', extra: err });
+  });
+
+  const tracksResponse = await getTopTracks().catch(err => {
+    return res
+      .status(200)
+      .json({ recently_played: false, message: 'Are you connected?', extra: err });
+  });
 
   if (!artistsResponse || !tracksResponse) {
     return res.status(500).json({ error: 'Spotify not available' });
