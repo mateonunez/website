@@ -6,9 +6,6 @@ import React from 'react';
 import 'styles/global.css';
 import 'styles/nprogress.css';
 
-
-
-
 export default function App({ Component, pageProps }) {
   // Retrieves the layout
   const Layout = Component.Layout || (({ children }) => <MainLayout>{children}</MainLayout>);
@@ -18,14 +15,14 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       {/* <React.StrictMode> */}
-        <GTMProvider state={gtmParams}>
-          <Head />
-          <UIProvider>
-            <Layout pageProps={pageProps}>
-              <Component {...pageProps} />
-            </Layout>
-          </UIProvider>
-        </GTMProvider>
+      <GTMProvider state={gtmParams}>
+        <Head />
+        <UIProvider>
+          <Layout pageProps={pageProps}>
+            <Component {...pageProps} />
+          </Layout>
+        </UIProvider>
+      </GTMProvider>
       {/* </React.StrictMode> */}
     </>
   );

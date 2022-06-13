@@ -8,8 +8,7 @@
     "postbuild": "next-sitemap --config next-sitemap.js",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc.json",
-    "pretty": "prettier --write .",
+    "format": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc.json",
     "quality": "npm run lint && npm run format"
   },
   "lint-staged": {
