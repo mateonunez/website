@@ -49,7 +49,7 @@ const About = ({ ...props }) => {
               {/* Intro  */}
               <Fade direction="left" distance={150} delay={0.5} trigger={introRef}>
                 <div className={s.introInner} ref={introRef}>
-                  <span>I&apos;m a Fullstack Developer based in Milan 🤌</span>
+                  <span>I&apos;m a Software Engineer & Solutions Architect based in Milan 🤌</span>
                 </div>
               </Fade>
               {/* Profile */}
@@ -83,7 +83,7 @@ const About = ({ ...props }) => {
                 <div className={s.sections} ref={sectionsRef}>
                   {/* Bio */}
                   <Fade
-                    className="m-0"
+                    className="m-0 mx-0"
                     direction="left"
                     distance={150}
                     delay={0.5}
@@ -131,7 +131,7 @@ const About = ({ ...props }) => {
 
                   {/* You should know */}
                   <Fade
-                    className="m-0"
+                    className="m-0 mx-0"
                     direction="left"
                     distance={150}
                     delay={0.5}
@@ -150,7 +150,7 @@ const About = ({ ...props }) => {
 
                   {/* You shouldn't */}
                   <Fade
-                    className="m-0"
+                    className="m-0 mx-0"
                     direction="left"
                     distance={150}
                     delay={1.2}
@@ -165,7 +165,7 @@ const About = ({ ...props }) => {
 
                   {/* Goals  */}
                   <Fade
-                    className="m-0"
+                    className="m-0 mx-0"
                     direction="left"
                     distance={150}
                     delay={1.8}
