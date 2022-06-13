@@ -35,7 +35,7 @@ export default function SpotifyPage({ recentlyPlayed, top }) {
       <Header />
 
       {/* Recently Played Component  */}
-      {recentlyPlayed?.length > 0 && <RecentlyPlayed items={recentlyPlayed} />}
+      <RecentlyPlayed items={recentlyPlayed} />
 
       {/* Top Component */}
       {artists?.length > 0 && tracks?.length > 0 && <Top artists={artists} tracks={tracks} />}
