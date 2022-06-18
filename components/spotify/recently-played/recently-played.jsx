@@ -33,15 +33,6 @@ export default function RecentlyPlayed({ items }) {
           <Title>Recently Played</Title>
         </Fade>
 
-        {/* You should know */}
-        <Container className="max-w-lg">
-          <Fade className="m-0 mx-0" direction="left" distance={150} delay={0.5}>
-            <article className="my-3">
-              <p className={s.paragraph}>Lorem ipsum here</p>
-            </article>
-          </Fade>
-        </Container>
-
         {items.length > 0 && (
           <div className={s.root}>
             <button
