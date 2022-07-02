@@ -1,10 +1,12 @@
-import { GTMProvider } from '@elgorditosalsero/react-gtm-hook';
-import { Head, MainLayout } from 'components';
-import 'components/articles/mdx/code/dark.css';
-import { UIProvider } from 'components/ui/ui-context';
-import React from 'react';
 import 'styles/global.css';
 import 'styles/nprogress.css';
+import 'components/articles/mdx/code/dark.css';
+
+import React from 'react';
+
+import { GTMProvider } from '@elgorditosalsero/react-gtm-hook';
+import { Head, MainLayout } from 'components';
+import { UIProvider } from 'components/ui/ui-context';
 
 export default function App({ Component, pageProps }) {
   // Retrieves the layout
