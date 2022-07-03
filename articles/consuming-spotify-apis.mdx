@@ -33,14 +33,55 @@ As you can see in this [section](https://mateonunez.dev/spotify) I made 2 sectio
 - [tailwindcss](https://tailwindcss.com/) | `v3.0.23` _(optional)_
 - [Spotify Docs](https://developer.spotify.com/documentation/web-api/) | `REQUIRED `
 
-I'll divide the article in 4 phases:
+## 🔑 Authorization Code Flow
 
-- [Authentication with OAuth2](#authentication-with-oauth2)
-- [Currently Listening](#currently-listening)
-- [Recently Played](#recently-played)
-- [Top Artists/Tracks](#top-artists-tracks)
+<Image
+  src="/images/articles/consuming-spotify-apis/authorization-code-flow.png"
+  width="1068"
+  height="970"
+  layout="responsive"
+  alt="'Authorization Code Flow' - How to consume Spotify APIs using Next.js and Node.js"
+  href="/images/articles/consuming-spotify-apis/authorization-code-flow.png"
+  target="_blank"
+/>
 
-## 🔑 Authentication with OAuth2
+Is the image above clear? (not for me)
+
+Now, Spotify has a lot types of _Authentication_ flows ([read more](https://developer.spotify.com/documentation/general/guides/authorization/)). I'll use the **Authorization Code Flow**, I'll run the flow locally because the only person who can access my API is me.
+
+The first step is to create a new Application in [Spotify Dashboard](https://developer.spotify.com/).
+
+<Image
+  src="/images/articles/consuming-spotify-apis/dashboard.png"
+  width="1660"
+  height="753"
+  layout="responsive"
+  alt="'New Application on Spotify Dashboard' - How to consume Spotify APIs using Next.js and Node.js"
+  href="/images/articles/consuming-spotify-apis/dashboard.png"
+  target="_blank"
+/>
+
+> Bro are you serious? Do I have explain you how to create a new application? I'm a developer, not a philosopher.
+
+> The only thing I can say is that you need add (into the Redirect URIs your `localhost:port` for development). I think it's enough.
+
+When you're done, you'll have a new application, a new `Client ID` and a new `Client Secret`, required for the next step.
+
+Personally, I prefer to store the `Client ID` and `Client Secret` in a `.env` file, but you can use any other way.
+
+> .env.local.example
+
+```script
+# Spotify
+SPOTIFY_CLIENT_ID=
+SPOTIFY_CLIENT_SECRET=
+SPOTIFY_REFRESH_TOKEN=
+SPOTIFY_REDIRECT_URI=
+```
+
+### Request authorization to access data
+
+
 
 ## 🎧 Currently Listening
 
