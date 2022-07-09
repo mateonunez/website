@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { dateWithoutYearForHumans } from 'lib/helpers/date';
 import { Clock, Tag, User } from 'components/icons';
+import { kebapCase } from 'lib/helpers/string';
 
 export default function ArticleMeta({ date, author, readingTime, tags = [] }) {
   return (
@@ -23,7 +24,7 @@ export default function ArticleMeta({ date, author, readingTime, tags = [] }) {
           <div className={s.tagList}>
             {tags.map((tag, index) => (
               <span className={index !== tags.length - 1 ? 'mr-2' : ''} key={tag}>
-                <Link href="/blog/tags/[tag]" as={`/blog/tags/${tag}`}>
+                <Link href={`/blog/tags/${kebapCase(tag)}`} as={`/blog/tags/${kebapCase(tag)}`}>
                   <a className={s.tag} title={tag}>
                     #{tag}
                   </a>

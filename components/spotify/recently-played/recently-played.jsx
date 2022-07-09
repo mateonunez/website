@@ -17,7 +17,9 @@ export default function RecentlyPlayed({ items }) {
           left:
             direction === 'left'
               ? current.scrollLeft - current.clientWidth - config.munber
-              : current.scrollLeft + current.clientWidth - config.munber,
+              : direction === 'right'
+              ? current.scrollLeft + current.clientWidth - config.munber
+              : 0,
           behavior: 'smooth'
         });
       }

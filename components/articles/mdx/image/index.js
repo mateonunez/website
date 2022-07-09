@@ -12,6 +12,7 @@ export default function MDXImage({
   quality,
   priority,
   href,
+  target = '_self',
   ...rest
 }) {
   const ImageWrapper = (
@@ -34,7 +35,7 @@ export default function MDXImage({
     <div className={s.root}>
       {href ? (
         <Link href={href} fancy={false} passHref>
-          <a href={href} alt={alt} aria-label={alt} title={alt}>
+          <a href={href} alt={alt} aria-label={alt} title={alt} target={target}>
             {ImageWrapper}
           </a>
         </Link>
