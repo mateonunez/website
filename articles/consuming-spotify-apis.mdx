@@ -71,7 +71,7 @@ Personally, I prefer to store the `Client ID` and `Client Secret` in a `.env` fi
 
 > .env.local.example
 
-```script
+```env
 # Spotify
 SPOTIFY_CLIENT_ID=
 SPOTIFY_CLIENT_SECRET=
@@ -81,7 +81,134 @@ SPOTIFY_REDIRECT_URI=
 
 ### Request authorization to access data
 
+The first step is to compose the URL to request the authorization. It is comopsed by the following parameters:
 
+```
+https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&scope=${SCOPES}
+```
+
+In my case I've indicated as `${REDIRECT_URI}` my `localhost:port` for development (keep in mind that you need to add this in the Redirect URIs section on Spotify Dashboard).
+
+The list of my scopes:
+
+- user-read-currently-playing
+- user-read-recently-played
+- user-read-playback-state
+- user-read-playback-position
+- user-top-read
+- playlist-read-collaborative
+- playlist-read-private
+
+[Read More about Spotify Authorization Scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/)
+
+Visit the composed URL. After you're done, you'll have a new URL with the `code` parameter in the Redirect URI you've indicated.
+
+> http://localhost:3000/?code=AQAwWOR1VPrAsrsRhAVzPOGg2Dg....
+
+Save that code.
+
+The following step is to encode the `${CLIENT_ID}:${CLIENT_SECRET}` variables in Base64.
+
+```bash
+> echo -n "${CLIENT_ID}:${CLIENT_SECRET}" | base64
+```
+
+> or just use [base64encode](https://www.base64encode.org/)
+
+When you have encrypted the `${CLIENT_ID}` and the `${CLIENT_SECRET}`, sperated by `:`, you can compose the URL to request the authorization that we will use in the next step.
+
+```bash
+curl -H "Authorization: Basic ${CLIENT_PARAMETERS_IN_BASE64}" -d grant_type=authorization_code -d code=${AUTHORIZATION_CODE} -d redirect_uri=http%3A%2F%2Flocalhost:3000 https://accounts.spotify.com/api/token
+```
+
+The response will be something like this:
+
+```json
+{
+  "access_token": "ACCESS_TOKEN",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "refresh_token": "REFRESH_TOKEN",
+  "scope": "playlist-read-private playlist-read-collaborative user-read-playback-state user-read-currently-playing user-read-recently-played user-read-playback-position user-top-read"
+}
+```
+
+The `access_token` allows you to access the API data.
+
+A simple example of how to use the `access_token` to get the current user's data:
+
+**Request:**
+
+```bash
+curl -X "GET" "https://api.spotify.com/v1/me/player/currently-playing" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer ${ACCESS_TOKEN}"
+```
+
+**Response:**
+
+```json
+{
+  timestamp: 1657357734036,
+  context: {
+    external_urls: {
+      spotify: 'https://open.spotify.com/playlist/5yIhKIf3Hf3g8HOLNGYWeM'
+    },
+    href: 'https://api.spotify.com/v1/playlists/5yIhKIf3Hf3g8HOLNGYWeM',
+    type: 'playlist',
+    uri: 'spotify:playlist:5yIhKIf3Hf3g8HOLNGYWeM'
+  },
+  progress_ms: 9490,
+  item: {
+    album: {
+      album_type: 'album',
+      artists: [Array],
+      available_markets: [Array],
+      external_urls: [Object],
+      href: 'https://api.spotify.com/v1/albums/2noRn2Aes5aoNVsU6iWThc',
+      id: '2noRn2Aes5aoNVsU6iWThc',
+      images: [Array],
+      name: 'Discovery',
+      release_date: '2001-03-12',
+      release_date_precision: 'day',
+      total_tracks: 14,
+      type: 'album',
+      uri: 'spotify:album:2noRn2Aes5aoNVsU6iWThc'
+    },
+    artists: [ [Object] ],
+    available_markets: [
+      'AD', 'AE', 'AG', 'AL', 'AM', 'AO', 'AR', 'AT', 'AU', 'AZ',
+      'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BN',
+      'BO', 'BR', 'BS', 'BT', 'BW', 'BY', 'BZ', 'CA', 'CD', 'CG',
+      'CH', 'CI', 'CL', 'CM', 'CO', 'CR', 'CV', 'CW', 'CY', 'CZ',
+      'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'ES',
+      'FI', 'FJ', 'FM', 'FR', 'GA', 'GB', 'GD', 'GE', 'GH', 'GM',
+      'GN', 'GQ', 'GR', 'GT', 'GW', 'GY', 'HK', 'HN', 'HR', 'HT',
+      'HU', 'ID', 'IE', 'IL', 'IN', 'IQ', 'IS', 'IT', 'JM', 'JO',
+      'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KR', 'KW', 'KZ',
+      'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV',
+      ... 83 more items
+    ],
+    disc_number: 1,
+    duration_ms: 320357,
+    explicit: false,
+    external_ids: { isrc: 'GBDUW0000053' },
+    external_urls: {
+      spotify: 'https://open.spotify.com/track/0DiWol3AO6WpXZgp0goxAV'
+    },
+    href: 'https://api.spotify.com/v1/tracks/0DiWol3AO6WpXZgp0goxAV',
+    id: '0DiWol3AO6WpXZgp0goxAV',
+    is_local: false,
+    name: 'One More Time',
+    popularity: 77,
+    preview_url: 'https://p.scdn.co/mp3-preview/18781de52205d9ade22904945510161feab085ce?cid=703d39064908445898701a125f391745',
+    track_number: 1,
+    type: 'track',
+    uri: 'spotify:track:0DiWol3AO6WpXZgp0goxAV'
+  },
+  currently_playing_type: 'track',
+  actions: { disallows: { resuming: true, skipping_prev: true } },
+  is_playing: true
+}
+```
 
 ## 🎧 Currently Listening
 
