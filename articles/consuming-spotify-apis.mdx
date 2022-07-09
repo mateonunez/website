@@ -212,6 +212,228 @@ curl -X "GET" "https://api.spotify.com/v1/me/player/currently-playing" -H "Accep
 
 ## 🎧 Currently Listening
 
+Finally, with that introduction, we can start with the funny part.
+
+In this section, on my website, I've created a Player Component tho show the current track I'm playing on Spotify. This is how it looks like:
+
+<Image
+  src="/images/articles/consuming-spotify-apis/spotify-player.png"
+  width="752"
+  height="113"
+  layout="responsive"
+  alt="Spotify Player"
+/>
+
+For that component I've used the following packages, libs and assets:
+
+- [react-lottie-player](https://github.com/mifi/react-lottie-player)
+- [player-animation](https://github.com/mateonunez/mateonunez-website/blob/main/lib/lottie-files/player.json)
+- [SWR](https://swr.vercel.app/)
+
+### Fetching the Current Track
+
+I've created an API on Next.JS to fetch the current track.
+
+_**pages/api/spotify/current-listening**_
+
+```js {8,21} showLineNumbers
+/**
+ * API handler
+ */
+import { getCurrentlyListening } from 'lib/spotify';
+import { normalizeCurrentlyListening } from 'lib/utils/normalizers';
+
+export default async function handler(req, res) {
+  const response = await getCurrentlyListening();
+
+  if (!response) {
+    return res.status(500).json({ error: 'Spotify not available' });
+  }
+
+  if (response.status === 204 || response.status > 400) {
+    // TODO handle better this
+    return res.status(200).json({ is_playing: false });
+  }
+
+  const data = await response.json();
+
+  return res.status(200).json(normalizeCurrentlyListening(data));
+}
+```
+
+The `getCurrentlyListening()` is a simple method that takes the **access token**, calls the Spotify API and return a _normalized_ response.
+
+_**lib/spotify.js**_
+
+```js {7} showLineNumbers
+/**
+ * Consumer of the currently playing track
+ */
+export const getCurrentlyListening = async () => {
+  const nowPlayingEndpoint = 'https://api.spotify.com/v1/me/player/currently-playing';
+
+  const { access_token: accessToken } = await getAccessToken();
+
+  if (!accessToken) {
+    return;
+  }
+
+  return fetch(nowPlayingEndpoint, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  });
+};
+```
+
+The `getAccessToken()` just resolve the access token, stored in the session or refreshed by the `refresh_token` flow.
+
+_**lib/utils/normalizers/normalizeSpotify.js**_
+
+```js showLineNumbers
+export const normalizeCurrentlyListening = ({ is_playing, progress_ms, item }) => ({
+  id: item.id,
+  isPlaying: is_playing,
+  title: item.name,
+  artist: item.artists?.map(({ name }) => name).join(' '),
+  album: item.album?.name,
+  thumbnail: item.album?.images[0]?.url,
+  url: item.external_urls?.spotify,
+  progress: progress_ms,
+  duration: item.duration_ms
+});
+```
+
+After the API is ready, I can use it to fetch the current track. For that, I've created a **contenxt** to manage **current playing song**.
+
+_**pages/index.tsx**_
+
+```js {14,21} showLineNumbers
+import s from 'styles/pages/home.module.css';
+import useSWR from 'swr';
+import { Player } from 'components/spotify';
+import { useUI } from 'components/ui/ui-context';
+
+export default function HomePage({ article }) {
+  const { setSpotifyListening } = useUI();
+
+  const fetcher = url =>
+    fetch(url)
+      .then(response => response.json())
+      .then(setSpotifyListening);
+
+  useSWR('/api/spotify/currently-listening', fetcher, {
+    refreshInterval: 10 * 1000 // 10 seconds
+  });
+
+  return (
+    <>
+      <div className={s.root}>
+        <Player />
+      </div>
+    </>
+  );
+}
+```
+
+The motivation for manage the current song via a `context` it's because I need that data in other components. So I can use it in the `Player` component and in others.
+
+And this is the _Player_ component:
+
+_**components/spotify/player.tsx**_
+
+```js {13,23,77} showLineNumbers
+import s from './player.module.css';
+
+import React, { useMemo } from 'react';
+
+import Link from 'next/link';
+import Lottie from 'react-lottie-player';
+import PlayerJson from 'lib/lottie-files/player.json';
+
+import { ChevronUp, Spotify } from 'components/icons';
+import { useUI } from 'components/ui/ui-context';
+import config from 'lib/config';
+
+const PlayerAnimation = () => {
+  return <Lottie loop animationData={PlayerJson} play style={{ width: '1rem', height: '1rem' }} />;
+};
+
+const Player = () => {
+  const { listening } = useUI();
+
+  const url = listening && listening.isPlaying ? listening.url : `${config.baseUrl}/spotify`;
+
+  const progress = useMemo(
+    () => listening && (listening.progress / listening.duration) * 100,
+    [listening]
+  );
+
+  return (
+    <>
+      <div className={s.root}>
+        <div className={s.inner}>
+          <Link href={url} passHref>
+            <a
+              target={listening?.isPlaying ? '_blank' : '_self'}
+              aria-label="Mateo Nunez on Spotify"
+              rel="noopener noreferer noreferrer"
+              title="Mateo Nunez on Spotify"
+              href={url}>
+              {listening?.isPlaying ? (
+                <div className="w-auto h-auto">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img width="40" height="40" src={listening?.thumbnail} alt={listening?.album} />
+                </div>
+              ) : (
+                <Spotify className="w-10 h-10" color={'#1ED760'} />
+              )}
+            </a>
+          </Link>
+
+          <div className={s.details}>
+            <div className="flex flex-row items-center justify-between">
+              <div className="flex flex-col">
+                <p className={s.title}>
+                  {listening?.isPlaying ? listening.title : 'Not Listening'}
+                </p>
+                <p className={s.artist}>{listening?.isPlaying ? listening.artist : 'Spotify'}</p>
+              </div>
+              <div className="flex flex-row">
+                <Link href="/spotify" passHref>
+                  <a
+                    target={listening?.isPlaying ? '_blank' : '_self'}
+                    aria-label="Mateo Nunez on Spotify"
+                    rel="noopener noreferer noreferrer"
+                    title="Mateo Nunez on Spotify">
+                    <ChevronUp className="w-4 h-4 rotate-90" />
+                  </a>
+                </Link>
+              </div>
+            </div>
+            {listening?.isPlaying && (
+              <>
+                <div className={s.playingContainer}>
+                  <div className={s.progress}>
+                    <div className={s.listened} style={{ width: `${progress}%` }} />
+                  </div>
+
+                  <div className={s.animation}>
+                    <PlayerAnimation />
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default React.memo(Player);
+```
+
 ## 🔁 Recently Played
 
 ## 🔝 Top Artists/Tracks
