@@ -20,6 +20,7 @@ author:
   layout="responsive"
   alt="'How to consume Spotify APIs using Next.js and Node.js"
   href="/blog/consuming-spotify-apis"
+  quality={60}
 />
 
 Finally, another article in my (poor 😓) blog. Sometimes I don't know what to say, or what to explain you. But in this case, I show you how I've integrated **Spotify** API's into my website.
@@ -59,6 +60,7 @@ The first step is to create a new Application in [Spotify Dashboard](https://dev
   alt="'New Application on Spotify Dashboard' - How to consume Spotify APIs using Next.js and Node.js"
   href="/images/articles/consuming-spotify-apis/dashboard.png"
   target="_blank"
+  quality={60}
 />
 
 > Bro are you serious? Do I have explain you how to create a new application? I'm a developer, not a philosopher.
@@ -222,6 +224,7 @@ In this section, on my website, I've created a Player Component tho show the cur
   height="113"
   layout="responsive"
   alt="Spotify Player"
+  quality={60}
 />
 
 For that component I've used the following packages, libs and assets:
@@ -236,7 +239,7 @@ I've created an API on Next.JS to fetch the current track.
 
 _**pages/api/spotify/current-listening**_
 
-```js {8,21} showLineNumbers
+```js {8,20} showLineNumbers
 /**
  * API handler
  */
@@ -251,7 +254,6 @@ export default async function handler(req, res) {
   }
 
   if (response.status === 204 || response.status > 400) {
-    // TODO handle better this
     return res.status(200).json({ is_playing: false });
   }
 
@@ -261,7 +263,7 @@ export default async function handler(req, res) {
 }
 ```
 
-The `getCurrentlyListening()` is a simple method that takes the **access token**, calls the Spotify API and return a _normalized_ response.
+The `getCurrentlyListening()` is a simple method that takes the **access token** and calls the Spotify API.
 
 _**lib/spotify.js**_
 
@@ -436,4 +438,248 @@ export default React.memo(Player);
 
 ## 🔁 Recently Played
 
+The [preview](https://mateonunez.dev/spotify).
+
+<Image
+  src="/images/articles/consuming-spotify-apis/recently-played.png"
+  width="1834"
+  height="656"
+  layout="responsive"
+  alt="Spotify Player"
+  quality={60}
+/>
+
+Like the previous section, I've created a dedicated API to manage the `fetch`.
+
+_**pages/api/spotify/recently-played.tsx**_
+
+```js {6,22} showLineNumbers
+import config from 'lib/config';
+import { getRecentlyPlayed } from 'lib/spotify';
+import { normalizeRecentlyPlayed } from 'lib/utils/normalizers';
+
+export default async function handler(req, res) {
+  const response = await getRecentlyPlayed().catch(err => {
+    return res
+      .status(200) // prevent the error from being sent to the client
+      .json({ recently_played: false, message: 'Are you connected?', extra: err });
+  });
+
+  if (!response) {
+    return res.status(500).json({ error: 'Spotify not available' });
+  }
+
+  if (response.status === 204 || response.status > 400) {
+    return res.status(200).json({ recently_played: false });
+  }
+
+  const { items = [] } = await response.json();
+
+  const data = items.map(normalizeRecentlyPlayed).sort((a, b) => b.played_at - a.played_at);
+
+  return res.status(200).json(data);
+}
+```
+
+The `getRecentlyPlayed()` is a simple method that takes the **access token** and calls the Spotify API.
+
+```js showLineNumbers
+/**
+ * Consumer of the recently played API
+ */
+export const getRecentlyPlayed = async () => {
+  const limit = config.munber; // max 33 tracks
+  const before = new Date().getTime(); // now() - 1 hour
+
+  const params = querystring.stringify({ limit, before });
+
+  const recentlyPlayedEndpoint = `https://api.spotify.com/v1/me/player/recently-played?${params}`;
+
+  const { access_token: accessToken } = await getAccessToken();
+
+  if (!accessToken) {
+    return;
+  }
+
+  return fetch(recentlyPlayedEndpoint, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  });
+};
+```
+
+Now the API is ready to be consumed by the client. To do that I've create a simple `fetcher` to use via server-side.
+
+```js showLineNumbers
+export async function recentlyPlayedFetcher() {
+  const recentlyPlayedResponse = await fetch(`${config.baseUrl}/api/spotify/recently-played`);
+
+  const recentlyPlayed = await recentlyPlayedResponse.json();
+
+  return recentlyPlayed;
+}
+```
+
+I should to put it all togheter in the dedicated page.
+
+_**pages/api/spotify/recently-played.tsx**_
+
+```js {8,30} showLineNumbers
+import { Footer, Header, RecentlyPlayed, Top } from 'components';
+import { NextSeo } from 'next-seo';
+import { recentlyPlayedFetcher } from 'pages/api/spotify/recently-played';
+
+export async function getServerSideProps({ res }) {
+  res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
+
+  const recentlyPlayed = await recentlyPlayedFetcher(); // consuming my API via server-side
+
+  return {
+    props: {
+      recentlyPlayed
+    }
+  };
+}
+
+export default function SpotifyPage({ recentlyPlayed }) {
+  return (
+    <>
+      <NextSeo
+        title="I show you what I 🎧"
+        description="I ❤️ the music and you should know it."
+        openGraph={{
+          title: "Mateo's activity on Spotify"
+        }}
+      />
+      <Header />
+
+      {/* Recently Played Component  */}
+      <RecentlyPlayed items={recentlyPlayed} />
+
+      <Footer />
+    </>
+  );
+}
+```
+
+Yes, this component it'v very simple: just `SSR`, `caching`, `fetching`, `parsing` and a little bit of `SEO`.
+
+The core is the `<RecentlyPlayed>` component. It takes the `items` as a prop and renders the _carousel_ of tracks.
+
+> I didn't used any external components for the _carousel_
+
+```js {12-30,44,47,64,67} showLineNumbers
+import s from './recently-played.module.css';
+
+import config from 'lib/config';
+
+import { ChevronUp, Container, Fade, Title, TrackCard } from 'components';
+import { useCallback, useRef } from 'react';
+
+export default function RecentlyPlayed({ items }) {
+  const trackContainerRef = useRef();
+
+  // makes the containers scroll method
+  const scrollTrackContainer = useCallback(
+    direction => {
+      const { current } = trackContainerRef;
+
+      if (current) {
+        current.scroll({
+          left:
+            direction === 'left'
+              ? current.scrollLeft - current.clientWidth - config.munber
+              : direction === 'right'
+              ? current.scrollLeft + current.clientWidth - config.munber
+              : 0,
+          behavior: 'smooth'
+        });
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [trackContainerRef.current]
+  );
+
+  return (
+    <>
+      <Container clean>
+        <Fade>
+          <Title>Recently Played</Title>
+        </Fade>
+
+        {items.length > 0 && (
+          <div className={s.root}>
+            <button
+              className={s.navigator}
+              onClick={() => {
+                scrollTrackContainer('left');
+              }}
+              onTouchStart={() => {
+                scrollTrackContainer('left');
+              }}
+              aria-label="Less Tracks">
+              <ChevronUp className="w-6 h-6 font-black transition duration-500 transform -rotate-90" />
+            </button>
+
+            <div className={s['track-container']} ref={trackContainerRef}>
+              {items.map((item, key) => (
+                <Fade key={`${item.id}-${key}`} delay={key + config.munber / 100} clean>
+                  <TrackCard item={item} delay={key + config.munber / 100} />
+                </Fade>
+              ))}
+            </div>
+
+            <button
+              className={s.navigator}
+              onClick={() => {
+                scrollTrackContainer('right');
+              }}
+              onTouchStart={() => {
+                scrollTrackContainer('right');
+              }}
+              aria-label="More Tracks">
+              <ChevronUp className="w-6 h-6 transition duration-500 transform rotate-90 hover:scale-110" />
+            </button>
+          </div>
+        )}
+      </Container>
+    </>
+  );
+}
+```
+
+The scrollTrackContainer uses `useCallback` to prevent re-render of the component. It just checks if the `trackContainerRef` is defined and if it is, it calls the `scroll (native)` method of the _node_.
+
+_Is you are asking why I called a variable `munber`, I'll answer you another time (or article)._
+
+> `<Fade>` component just animates the children following the specified criteria.
+
 ## 🔝 Top Artists/Tracks
+
+Actually, I don't feel like to copy and paste part of my code (that you can check [here](https://github.com/mateonunez/mateonunez-website)).
+
+This is because the `Top Artist and Tops Tracks` on _Spotify_ is almost the same as the `Recently Played` on _Spotify_.
+
+So I've created a new api in _**pages/api/spotify/top.jsx**_, that calls two methods: `getTopArtists()` and `getTopTracks()`. Those methods resolve _Spotify endpoints_ and returns the data.
+
+I have a two methods to _normalize_ both responses.
+
+In this case I've create a single `fetcher` that consumes my API. The json looks something like this:
+
+```json
+{
+  "artists": [],
+  "tracks": []
+}
+```
+
+The page has no particular logic, just render the items and make things beautiful using `tailwindcss` classes.
+
+---
+
+## Resources
+
+- [https://github.com/vercel/next.js](https://github.com/vercel/next.js)
+- [https://github.com/facebook/react/](https://github.com/facebook/react/)
+- [https://github.com/tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss)
