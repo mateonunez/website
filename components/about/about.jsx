@@ -135,6 +135,7 @@ const About = ({ ...props }) => {
                     direction="left"
                     distance={150}
                     delay={0.5}
+                    clean
                     trigger={sectionsRef}>
                     <article className="my-3">
                       <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
@@ -154,6 +155,7 @@ const About = ({ ...props }) => {
                     direction="left"
                     distance={150}
                     delay={1.2}
+                    clean
                     trigger={sectionsRef}>
                     <article className="my-3">
                       <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
@@ -169,6 +171,7 @@ const About = ({ ...props }) => {
                     direction="left"
                     distance={150}
                     delay={1.8}
+                    clean
                     trigger={sectionsRef}>
                     <article className="my-3">
                       <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>

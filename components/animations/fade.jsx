@@ -17,9 +17,13 @@ export default function Fade({
   clean = false,
   ...rest
 }) {
-  const classNames = cn(className, {
-    'block mx-auto': !clean
-  });
+  const classNames = cn(
+    {
+      block: !clean,
+      'mx-auto': !clean
+    },
+    className
+  );
 
   const ref = useRef();
 
