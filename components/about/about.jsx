@@ -49,7 +49,7 @@ const About = ({ ...props }) => {
               {/* Intro  */}
               <Fade direction="left" distance={150} delay={0.5} trigger={introRef}>
                 <div className={s.introInner} ref={introRef}>
-                  <span>I&apos;m a Software Engineer & Solutions Architect based in Milan 🤌</span>
+                  <span>I&apos;m a Software Architect & Team Leader based in Milan 🤌</span>
                 </div>
               </Fade>
               {/* Profile */}
