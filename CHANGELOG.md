@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v0.0.2
+
+### What's Changed
+
+* chore(Fade): prevent margin auto on clean component by @mateonunez in https://github.com/mateonunez/mateonunez-website/pull/12
+* chore(*): change default job description by @mateonunez in https://github.com/mateonunez/mateonunez-website/pull/13
+
+**Full Changelog**: https://github.com/mateonunez/mateonunez-website/compare/v0.0.1...v0.0.2
+
 ## v0.0.1
 
 ### What's Changed
