@@ -1,6 +1,6 @@
 import s from 'styles/pages/blog/index.module.css';
 
-import { Footer, Header } from 'components';
+import { Container, Footer, Header, Title } from 'components';
 
 import ArticlePreview from 'components/articles/preview';
 
@@ -30,23 +30,27 @@ export default function Blog({ articles }) {
 
       <Header />
 
-      <div className={s.root}>
-        <div className="container">
-          {articles.map(article => (
-            <ArticlePreview
-              key={article.slug}
-              author={article.author}
-              date={article.date}
-              title={article.title}
-              description={article.description}
-              image={article.image}
-              slug={article.slug}
-              tags={article.tags}
-              readingTime={article.readingTime}
-            />
-          ))}
+      <Container clean>
+        <Title>Blog</Title>
+
+        <div className={s.root}>
+          <div className="container">
+            {articles.map(article => (
+              <ArticlePreview
+                key={article.slug}
+                author={article.author}
+                date={article.date}
+                title={article.title}
+                description={article.description}
+                image={article.image}
+                slug={article.slug}
+                tags={article.tags}
+                readingTime={article.readingTime}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      </Container>
 
       <Footer />
     </>
