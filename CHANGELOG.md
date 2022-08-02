@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v0.0.3
+
+## What's Changed
+
+* Limit get recently played tracks by @mateonunez in https://github.com/mateonunez/mateonunez-website/pull/15
+* chore(deps-dev): bump terser from 5.13.0 to 5.14.2 by @dependabot in https://github.com/mateonunez/mateonunez-website/pull/14
+
+**Full Changelog**: https://github.com/mateonunez/mateonunez-website/compare/v0.0.2...v0.0.3
+
 ## v0.0.2
 
 ### What's Changed
