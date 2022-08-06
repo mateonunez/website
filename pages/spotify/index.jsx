@@ -19,9 +19,7 @@ export async function getServerSideProps({ res }) {
 }
 
 export default function SpotifyPage({ recentlyPlayed, top }) {
-  const { artists, tracks } = useMemo(() => {
-    return top;
-  }, [top]);
+  const { artists, tracks } = useMemo(() => top, [top]);
 
   return (
     <>

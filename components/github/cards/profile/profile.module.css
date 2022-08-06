@@ -1,0 +1,37 @@
+.root {
+  margin: auto 4rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 600px;
+  min-height: auto;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.bioContainer {
+  margin-top: 1rem;
+  margin-left: 2rem;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.bio {
+  font-size: 1rem;
+  font-weight: lighter;
+}
+
+@media (max-width: 600px) {
+  .root {
+    margin: 1rem 0 4rem;
+  }
+}
