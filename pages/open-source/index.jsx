@@ -15,7 +15,9 @@ export async function getServerSideProps({ res }) {
 }
 
 export default function OpenSourcePage({ profile }) {
+  // repositories missing in destructuring
   const { avatar, bio, company, email, username, location, url } = profile;
+
   return (
     <>
       <NextSeo

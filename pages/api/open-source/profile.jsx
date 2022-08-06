@@ -19,9 +19,14 @@ export default async function handler(req, res) {
 }
 
 export async function profileFetcher() {
-  const profileResponse = await fetch(`${config.baseUrl}/api/open-source/profile`);
+  let profileResponse;
+  try {
+    profileResponse = await fetch(`${config.baseUrl}/api/open-source/profile`);
+  } catch (err) {
+    console.warn(err);
+  }
 
-  const profile = await profileResponse.json();
+  const { profile } = await profileResponse.json();
 
   return profile;
 }
