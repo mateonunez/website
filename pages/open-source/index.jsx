@@ -2,14 +2,26 @@ import { Footer, Header, Title } from 'components';
 import { NextSeo } from 'next-seo';
 import { profileFetcher } from 'pages/api/open-source/profile';
 import { Profile as GitHubProfile } from 'components/github/cards/profile';
+import { readmeFetcher } from 'pages/api/open-source/readme';
 export async function getServerSideProps({ res }) {
   res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
 
   const profile = await profileFetcher();
 
+  const { repositories = [] } = profile;
+
+  const readme = await readmeFetcher();
+  console.log({ readme });
+  // `
+  // curl \
+  //   -H "Accept: application/vnd.github+json" \
+  //   -H "Authorization: token <TOKEN>" \
+  //   https://api.github.com/repos/OWNER/REPO/contents/PATH
+  // `
   return {
     props: {
-      profile
+      profile,
+      repositories
     }
   };
 }

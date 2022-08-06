@@ -6,8 +6,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Profile({ avatar, bio, company, email, username, url, location, ...rest }) {
-  console.log({ avatar, bio, company, email, username, url, location });
-
   return (
     <>
       <Container {...rest}>

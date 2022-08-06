@@ -1,9 +1,9 @@
 import config from 'lib/config';
-import { getUser } from 'lib/github';
+import { getProfile } from 'lib/github';
 import { normalizeGithubProfile } from 'lib/utils/normalizers/normalizeGithub';
 
 export default async function handler(req, res) {
-  const profile = await getUser().catch(err => {
+  const profile = await getProfile().catch(err => {
     return res
       .status(200)
       .json({ recently_played: false, message: 'Something went wrong with GitHub.', extra: err });
