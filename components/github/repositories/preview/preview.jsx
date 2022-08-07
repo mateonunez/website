@@ -1,4 +1,4 @@
-import { Container, Fork, Star } from 'components';
+import { Fork, Star } from 'components';
 import Link from 'next/link';
 import s from './preview.module.css';
 
@@ -9,8 +9,7 @@ export default function RepositoryPreview({
   language,
   languageColor,
   stars,
-  url,
-  pushedAt
+  url
 }) {
   return (
     <>
