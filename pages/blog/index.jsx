@@ -36,17 +36,7 @@ export default function Blog({ articles }) {
         <div className={s.root}>
           <div className="container">
             {articles.map(article => (
-              <ArticlePreview
-                key={article.slug}
-                author={article.author}
-                date={article.date}
-                title={article.title}
-                description={article.description}
-                image={article.image}
-                slug={article.slug}
-                tags={article.tags}
-                readingTime={article.readingTime}
-              />
+              <ArticlePreview key={article.slug} {...article} />
             ))}
           </div>
         </div>
