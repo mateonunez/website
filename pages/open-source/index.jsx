@@ -19,7 +19,7 @@ export async function getServerSideProps({ res }) {
   };
 }
 
-export default function OpenSourcePage({ profile, repositories, source }) {
+export default function OpenSourcePage({ profile, repositories }) {
   // repositories missing in destructuring
   const { avatar, bio, company, email, username, location, url } = profile;
 
