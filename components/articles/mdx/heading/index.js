@@ -16,19 +16,28 @@ const copyToClipboard = ({ id, title, ...rest }) => {
   );
 };
 
-export const H1 = ({ id, children, ...rest }) => (
-  <>
-    <h1 title={children} aria-label={children} {...rest}>
-      {children}
+export const H1 = ({ id, children, ...rest }) => {
+  let title;
+  if (typeof children === 'object') {
+    title = children.props?.title;
+  } else {
+    title = children;
+  }
 
-      {id && copyToClipboard({ id, title: children })}
-    </h1>
-  </>
-);
+  return (
+    <>
+      <h1 title={title} aria-label={title} {...rest} className="flex text-2xl">
+        {children}
+
+        {id && copyToClipboard({ id, title: children })}
+      </h1>
+    </>
+  );
+};
 
 export const H2 = ({ id, children, ...rest }) => (
   <>
-    <h2 title={children} aria-label={children} {...rest}>
+    <h2 title={children} aria-label={children} {...rest} className="text-lg">
       {children}
 
       {id && copyToClipboard({ id, title: children })}

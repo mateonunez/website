@@ -9,3 +9,5 @@ export { Menu } from './Menu';
 export { default as Clock } from './Clock';
 export { default as Tag } from './Tag';
 export { default as User } from './User';
+export { default as Star } from './Star';
+export { default as Fork } from './Fork';

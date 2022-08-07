@@ -2,14 +2,14 @@ module.exports = {
   reactStrictMode: true,
   images: {
     formats: ['image/avif', 'image/webp'],
-    domains: ['i.scdn.co'],
-    minimumCacheTTL: 60,
+    domains: ['i.scdn.co', 'avatars.githubusercontent.com'],
+    minimumCacheTTL: 60
   },
-  webpackDevMiddleware: (config) => {
+  webpackDevMiddleware: config => {
     config.watchOptions = {
       poll: 1000,
-      aggregateTimeout: 300,
+      aggregateTimeout: 300
     };
     return config;
-  },
+  }
 };

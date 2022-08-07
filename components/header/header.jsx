@@ -58,6 +58,9 @@ export default function Header() {
           <ActiveLink href="/blog" title="Blog">
             📝 Blog
           </ActiveLink>
+          <ActiveLink href="/open-source" title="Open Source">
+            💻 Open Source
+          </ActiveLink>
           <ActiveLink href="/spotify" title="Spotify">
             🎧 Spotify
           </ActiveLink>
