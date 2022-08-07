@@ -1,35 +1,41 @@
-import { Footer, Header, Title } from 'components';
-import { NextSeo } from 'next-seo';
-import { profileFetcher } from 'pages/api/open-source/profile';
+import * as components from 'components/articles/mdx';
+
+import { Container, Footer, Header, Title } from 'components';
 import { Profile as GitHubProfile } from 'components/github/cards/profile';
+import { MDXRemote } from 'next-mdx-remote';
+import { NextSeo } from 'next-seo';
+
 import { readmeFetcher } from 'pages/api/open-source/readme';
+import { profileFetcher } from 'pages/api/open-source/profile';
+import { compileSource, minifySource, parseArticleData } from 'lib/articles/parser';
+
 export async function getServerSideProps({ res }) {
   res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
 
   const profile = await profileFetcher();
 
   const { repositories = [] } = profile;
+  delete profile['repositories'];
 
-  const readme = await readmeFetcher();
-  console.log({ readme });
-  // `
-  // curl \
-  //   -H "Accept: application/vnd.github+json" \
-  //   -H "Authorization: token <TOKEN>" \
-  //   https://api.github.com/repos/OWNER/REPO/contents/PATH
-  // `
+  const { text: raw = '' } = await readmeFetcher();
+  const { content } = parseArticleData({ raw });
+  const compiledSource = await compileSource({ content });
+  const minifiedSource = await minifySource({ compiledSource });
+
   return {
     props: {
       profile,
-      repositories
+      repositories,
+      source: minifiedSource
     }
   };
 }
 
-export default function OpenSourcePage({ profile }) {
+export default function OpenSourcePage({ profile, repositories, source }) {
   // repositories missing in destructuring
   const { avatar, bio, company, email, username, location, url } = profile;
 
+  console.log(repositories);
   return (
     <>
       <NextSeo
@@ -43,15 +49,23 @@ export default function OpenSourcePage({ profile }) {
 
       <Title>Open Source</Title>
 
-      <GitHubProfile
-        avatar={avatar}
-        bio={bio}
-        company={company}
-        email={email}
-        username={username}
-        location={location}
-        url={url}
-      />
+      <div className="flex flex-col">
+        <GitHubProfile
+          avatar={avatar}
+          bio={bio}
+          company={company}
+          email={email}
+          username={username}
+          location={location}
+          url={url}
+          className="mb-12"
+        />
+
+        {/* Readme  */}
+        <Container clean className="flex h-full mt-12">
+          <MDXRemote compiledSource={source} components={components} />
+        </Container>
+      </div>
 
       <Footer />
     </>
