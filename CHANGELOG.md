@@ -1,8 +1,16 @@
 # CHANGELOG
 
+## v0.0.5
+
+### What's Changed
+
+* Open source section responsive by @mateonunez in https://github.com/mateonunez/mateonunez-website/pull/17
+
+**Full Changelog**: https://github.com/mateonunez/mateonunez-website/compare/v0.0.4...v0.0.5
+
 ## v0.0.4
 
-## What's Changed
+### What's Changed
 
 * Open Source projects by @mateonunez in https://github.com/mateonunez/mateonunez-website/pull/16
 
@@ -10,7 +18,7 @@
 
 ## v0.0.3
 
-## What's Changed
+### What's Changed
 
 * Limit get recently played tracks by @mateonunez in https://github.com/mateonunez/mateonunez-website/pull/15
 * chore(deps-dev): bump terser from 5.13.0 to 5.14.2 by @dependabot in https://github.com/mateonunez/mateonunez-website/pull/14
