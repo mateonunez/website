@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v0.0.4
+
+## What's Changed
+
+* Open Source projects by @mateonunez in https://github.com/mateonunez/mateonunez-website/pull/16
+
+**Full Changelog**: https://github.com/mateonunez/mateonunez-website/compare/v0.0.3...v0.0.4
+
 ## v0.0.3
 
 ## What's Changed
