@@ -85,6 +85,12 @@ export default function Header() {
           </a>
         </Link>
 
+        <Link href="/open-source" passHref>
+          <a rel="canonical" title="Open Source">
+            💻 Open Source
+          </a>
+        </Link>
+
         <Link href="/spotify" passHref>
           <a rel="canonical" title="Blog">
             🎧 Spotify
