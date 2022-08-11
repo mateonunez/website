@@ -74,8 +74,9 @@
   @apply prose prose-invert;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 600px) {
   .root {
-    width: 80vw;
+    margin: 1rem auto;
+    width: 100%;
   }
 }
