@@ -73,3 +73,9 @@
 .description {
   @apply prose prose-invert;
 }
+
+@media (min-width: 768px) {
+  .root {
+    width: 80vw;
+  }
+}
