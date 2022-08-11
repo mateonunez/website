@@ -32,6 +32,21 @@
 
 @media (max-width: 600px) {
   .root {
-    margin: 1rem 0 4rem;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    min-height: auto;
+    text-align: center;
+  }
+
+  .avatar {
+    margin: 1rem auto;
+  }
+
+  .bioContainer,
+  .name,
+  .bio {
+    margin: auto;
   }
 }
