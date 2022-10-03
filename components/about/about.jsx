@@ -9,18 +9,10 @@ import { Fade, CircularProgress } from 'components';
 import cn from 'classnames';
 
 const goals = [
-  {
-    title: 'Become a Solution Architect',
-    progress: 70
-  },
-  {
-    title: 'Learn Rust as I know JavaScript',
-    progress: 30
-  },
-  {
-    title: "Learn Solidity as I'll know Rust",
-    progress: 20
-  }
+  { title: 'Work fully remote', progress: 70 },
+  { title: 'Learn Rust as I know JavaScript', progress: 40 },
+  { title: 'Make my first public talk', progress: 30 },
+  { title: 'First Node.js contribution', progress: 30 }
 ];
 
 const About = ({ ...props }) => {
