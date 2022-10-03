@@ -1,7 +1,7 @@
 import s from './social-links.module.css';
 
 import Link from 'next/link';
-import { Github, LinkedIn, Instagram, Spotify } from 'components/icons';
+import { Github, LinkedIn, Instagram, Spotify, Twitter } from 'components/icons';
 
 export default function SocialLinks() {
   return (
@@ -14,6 +14,17 @@ export default function SocialLinks() {
           rel="noopener noreferrer"
           aria-label="Github | Mateo Nunez">
           <Github />
+        </a>
+      </Link>
+
+      {/* Twitter  */}
+      <Link href="https://twitter.com/mateonunez95" passHref>
+        <a
+          className={s.personalLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Twitter | Mateo Nunez">
+          <Twitter />
         </a>
       </Link>
 
