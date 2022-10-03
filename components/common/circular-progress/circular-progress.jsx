@@ -5,7 +5,7 @@ const CircularProgress = ({ progress = 50, ...props }) => {
   const circunference = width * 2 * Math.PI;
 
   return (
-    <div x-data="scrollProgress">
+    <div>
       <svg className="w-8 h-8 rotate-90" {...props}>
         {/* Gray  */}
         <circle
