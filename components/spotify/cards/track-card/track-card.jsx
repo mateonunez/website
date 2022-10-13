@@ -1,6 +1,5 @@
 import s from './track-card.module.css';
 
-import Image from 'next/image';
 import Link from 'next/link';
 
 import config from 'lib/config';
@@ -12,7 +11,6 @@ import { dateFromNowForHumans } from 'lib/helpers/date';
 
 // eslint-disable-next-line no-unused-vars
 const TrackCard = ({ item, delay = 0, variant = 'default' }, ref) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [playedAtIsVisible, setPlayedAtIsVisible] = useState(false);
 
   const classNames = cn(s.root, {
@@ -38,45 +36,27 @@ const TrackCard = ({ item, delay = 0, variant = 'default' }, ref) => {
               }}>
               <div className="absolute inset-0 gradient blend-darken" />
 
-              <Image
-                className={s.image}
-                src={item.thumbnail}
-                alt={item.title}
-                height={320}
-                width={260}
-                layout="responsive"
-                quality={60}
-                onLoadingComplete={() => {
-                  setImageLoaded(true);
-                }}
-              />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className={s.image} src={item.thumbnail} alt={item.title} />
 
-              {imageLoaded && (
-                <>
-                  <Fade className={s['title-container']} delay={delay / 100}>
-                    <Title element="h3" variant="naked" className={s.title}>
-                      {item.title}
-                    </Title>
-                  </Fade>
-                </>
-              )}
+              <Fade className={s['title-container']} delay={delay / 100}>
+                <Title element="h3" variant="naked" className={s.title}>
+                  {item.title}
+                </Title>
+              </Fade>
             </div>
           </a>
         </Link>
 
-        {imageLoaded && (
-          <>
-            <Fade className={s['artist-container']} direction="bottom" delay={delay / 33}>
-              <div className={s.artist}>{item.artist}</div>
+        <Fade className={s['artist-container']} direction="bottom" delay={delay / 33}>
+          <div className={s.artist}>{item.artist}</div>
 
-              {playedAtIsVisible && variant.default && (
-                <Fade className="mt-1" delay={0} duration={config.munber / 100} direction="top">
-                  <div className={s['played-at']}>{dateFromNowForHumans(item.playedAt)}</div>
-                </Fade>
-              )}
+          {playedAtIsVisible && variant.default && (
+            <Fade className="mt-1" delay={0} duration={config.munber / 100} direction="top">
+              <div className={s['played-at']}>{dateFromNowForHumans(item.playedAt)}</div>
             </Fade>
-          </>
-        )}
+          )}
+        </Fade>
       </div>
     </>
   );
