@@ -1,7 +1,7 @@
 // https://github.com/vercel/hyper-site/
 import s from './terminal.module.css';
 
-import { Keyframes, Frame } from './react-keyframes.ts';
+import { Keyframes, Frame } from './react-keyframes.js';
 import { useEffect, useMemo, useState } from 'react';
 import { useUI } from 'components/ui/ui-context';
 
