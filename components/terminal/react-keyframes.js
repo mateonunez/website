@@ -2,39 +2,21 @@
 // with an added onEnd prop for the Keyframes component
 import React from 'react';
 
-type Props = {
-  children: any;
-  component?: any;
-  [frameProp: string]: any;
-};
-
-type State = {
-  frameNum: number;
-};
-
-export function Frame({
-  component,
-  ...rest
-}: {
-  children?: any;
-  component?: any;
-  duration?: number;
-  [prop: string]: any;
-}) {
+export function Frame({ component, ...rest }) {
   return React.createElement(component, rest);
 }
 
-export class Keyframes extends React.Component<Props, State> {
-  timer: any;
+export class Keyframes extends React.Component {
+  timer;
 
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
     this.state = {
       frameNum: 0
     };
   }
 
-  shouldComponentUpdate(_nextProps: Props, nextState: State) {
+  shouldComponentUpdate(_nextProps, nextState) {
     const { frameNum } = nextState;
     if (this.state.frameNum === frameNum) {
       return false;
@@ -80,7 +62,7 @@ export class Keyframes extends React.Component<Props, State> {
     });
   }
 
-  waitForDelay(fn: () => void) {
+  waitForDelay(fn) {
     const currentFrame = this.getFrame();
     // Defaults duration to 0
     const delay = currentFrame.props.duration || 0;

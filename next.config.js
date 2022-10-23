@@ -4,12 +4,5 @@ module.exports = {
     formats: ['image/avif', 'image/webp'],
     domains: ['i.scdn.co', 'avatars.githubusercontent.com'],
     minimumCacheTTL: 60
-  },
-  webpackDevMiddleware: config => {
-    config.watchOptions = {
-      poll: 1000,
-      aggregateTimeout: 300
-    };
-    return config;
   }
 };
