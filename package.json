@@ -6,9 +6,8 @@
     "build": "next build",
     "postbuild": "next-sitemap --config next-sitemap.js",
     "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc.json",
-    "quality": "npm run lint && npm run format"
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore .",
+    "format": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc.json --ignore-path ./.gitignore"
   },
   "dependencies": {
     "next": "^12.3.1",
