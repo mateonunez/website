@@ -55,10 +55,7 @@ export default function BlogArticle({ frontMatter, source }) {
             }
           ]
         }}
-        twitter={{
-          // missing author twitter account
-          cardType: 'summary_large_image'
-        }}
+        twitter={config.twitter}
       />
       <ArticleJsonLd
         title={frontMatter.title}
