@@ -21,9 +21,7 @@
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react"],
   "settings": {
     "react": {
       "version": "detect"
@@ -31,13 +29,8 @@
   },
   "overrides": [
     {
-      "files": [
-        "*.md",
-        "*.mdx"
-      ],
-      "extends": [
-        "plugin:mdx/recommended"
-      ],
+      "files": ["*.md", "*.mdx"],
+      "extends": ["plugin:mdx/recommended"],
       "rules": {
         "react/jsx-no-undef": "off"
       }
@@ -48,17 +41,9 @@
     "jsx-a11y/anchor-is-valid": [
       "error",
       {
-        "components": [
-          "Link"
-        ],
-        "specialLink": [
-          "hrefLeft",
-          "hrefRight"
-        ],
-        "aspects": [
-          "invalidHref",
-          "preferButton"
-        ]
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight"],
+        "aspects": ["invalidHref", "preferButton"]
       }
     ]
   }

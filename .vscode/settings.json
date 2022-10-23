@@ -1,9 +1,7 @@
 {
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
-  "editor.rulers": [
-    120
-  ],
+  "editor.rulers": [120],
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
@@ -33,5 +31,5 @@
     "titleBar.inactiveForeground": "#15202b99",
     "commandCenter.border": "#15202b99"
   },
-  "peacock.color": "#f9e64f",
+  "peacock.color": "#f9e64f"
 }
