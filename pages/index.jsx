@@ -2,7 +2,7 @@ import s from 'styles/pages/home.module.css';
 
 import useSWR from 'swr';
 
-import { Header, Footer, Hero, About } from 'components';
+import { Hero, About } from 'components';
 
 import { useUI } from 'components/ui/ui-context';
 import { getLastArticle } from 'lib/articles/parser';
@@ -33,15 +33,11 @@ export default function HomePage({ article }) {
 
   return (
     <>
-      <Header />
-
       <div className={s.root}>
         <Hero className="h-full" article={article} />
 
         <About className="h-full" />
       </div>
-
-      <Footer />
     </>
   );
 }

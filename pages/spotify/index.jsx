@@ -1,4 +1,4 @@
-import { Footer, Header, RecentlyPlayed, Top } from 'components';
+import { RecentlyPlayed, Top } from 'components';
 import { NextSeo } from 'next-seo';
 import { recentlyPlayedFetcher } from 'pages/api/spotify/recently-played';
 import { topFetcher } from 'pages/api/spotify/top';
@@ -30,15 +30,12 @@ export default function SpotifyPage({ recentlyPlayed, top }) {
           title: "Mateo's activity on Spotify"
         }}
       />
-      <Header />
 
       {/* Recently Played Component  */}
       <RecentlyPlayed items={recentlyPlayed} />
 
       {/* Top Component */}
       {artists?.length > 0 && tracks?.length > 0 && <Top artists={artists} tracks={tracks} />}
-
-      <Footer />
     </>
   );
 }

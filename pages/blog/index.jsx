@@ -1,6 +1,6 @@
 import s from 'styles/pages/blog/index.module.css';
 
-import { Container, Footer, Header, Title } from 'components';
+import { Container, Title } from 'components';
 
 import ArticlePreview from 'components/articles/preview';
 
@@ -28,8 +28,6 @@ export default function Blog({ articles }) {
         }}
       />
 
-      <Header />
-
       <Container clean>
         <Title>Blog</Title>
 
@@ -41,8 +39,6 @@ export default function Blog({ articles }) {
           </div>
         </div>
       </Container>
-
-      <Footer />
     </>
   );
 }

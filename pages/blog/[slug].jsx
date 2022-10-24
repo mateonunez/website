@@ -1,7 +1,5 @@
 import s from 'styles/pages/blog/[slug].module.css';
 
-import { Footer, Header } from 'components';
-
 import Article from 'components/articles';
 import { getArticle, getArticleSlugs } from 'lib/articles/parser';
 import { ArticleJsonLd, NextSeo } from 'next-seo';
@@ -69,13 +67,9 @@ export default function BlogArticle({ frontMatter, source }) {
         publisherLogo={frontMatter.author.image}
       />
 
-      <Header />
-
       <div className={s.root}>
         <Article frontMatter={frontMatter} source={source} />
       </div>
-
-      <Footer />
     </>
   );
 }
