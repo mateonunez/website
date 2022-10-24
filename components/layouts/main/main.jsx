@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 
 import nProgress from 'nprogress';
 
+import { Header, Footer } from 'components';
+
 export default function MainLayout({ children }) {
   const { loading, setLoading } = useUI();
   const router = useRouter();
@@ -34,8 +36,12 @@ export default function MainLayout({ children }) {
     <>
       {loading && <div className="loading-overlay" />}
 
+      <Header />
+
       {/* Main  */}
       <main>{children}</main>
+
+      <Footer />
     </>
   );
 }
