@@ -1,4 +1,4 @@
-import { Container, GitHubProfile, Footer, Header, RepositoryPreview, Title } from 'components';
+import { Container, GitHubProfile, RepositoryPreview, Title } from 'components';
 import { NextSeo } from 'next-seo';
 
 import { profileFetcher } from 'pages/api/open-source/profile';
@@ -33,8 +33,6 @@ export default function OpenSourcePage({ profile, repositories }) {
           title: "Mateo's Open Source Projects by GitHub"
         }}
       />
-      <Header />
-
       <Container clean>
         <Title>Open Source</Title>
 
@@ -58,7 +56,6 @@ export default function OpenSourcePage({ profile, repositories }) {
           </div>
         </div>
       </Container>
-      <Footer />
     </>
   );
 }

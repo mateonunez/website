@@ -1,6 +1,6 @@
 import s from 'styles/pages/blog/tags/[tag].module.css';
 
-import { Container, Footer, Header, Title } from 'components';
+import { Container, Title } from 'components';
 import { getAllArticles } from 'lib/articles/parser';
 import { kebapCase } from 'lib/helpers/string';
 import { NextSeo } from 'next-seo';
@@ -46,8 +46,6 @@ export default function BlogTag({ articles, tag }) {
     <>
       <NextSeo title={`${tag} Articles Archive`} />
 
-      <Header />
-
       <Container clean>
         <Title>{tag}</Title>
 
@@ -59,8 +57,6 @@ export default function BlogTag({ articles, tag }) {
           </div>
         </div>
       </Container>
-
-      <Footer />
     </>
   );
 }
