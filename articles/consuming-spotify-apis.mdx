@@ -375,22 +375,22 @@ const Player = () => {
     <>
       <div className={s.root}>
         <div className={s.inner}>
-          <Link href={url} passHref>
-            <a
-              target={listening?.isPlaying ? '_blank' : '_self'}
-              aria-label="Mateo Nunez on Spotify"
-              rel="noopener noreferer noreferrer"
-              title="Mateo Nunez on Spotify"
-              href={url}>
-              {listening?.isPlaying ? (
-                <div className="w-auto h-auto">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img width="40" height="40" src={listening?.thumbnail} alt={listening?.album} />
-                </div>
-              ) : (
-                <Spotify className="w-10 h-10" color={'#1ED760'} />
-              )}
-            </a>
+          <Link
+            href={url}
+            passHref
+            target={listening?.isPlaying ? '_blank' : '_self'}
+            aria-label="Mateo Nunez on Spotify"
+            rel="noopener noreferer noreferrer"
+            title="Mateo Nunez on Spotify"
+            href={url}>
+            {listening?.isPlaying ? (
+              <div className="w-auto h-auto">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img width="40" height="40" src={listening?.thumbnail} alt={listening?.album} />
+              </div>
+            ) : (
+              <Spotify className="w-10 h-10" color={'#1ED760'} />
+            )}
           </Link>
 
           <div className={s.details}>
@@ -402,14 +402,14 @@ const Player = () => {
                 <p className={s.artist}>{listening?.isPlaying ? listening.artist : 'Spotify'}</p>
               </div>
               <div className="flex flex-row">
-                <Link href="/spotify" passHref>
-                  <a
-                    target={listening?.isPlaying ? '_blank' : '_self'}
-                    aria-label="Mateo Nunez on Spotify"
-                    rel="noopener noreferer noreferrer"
-                    title="Mateo Nunez on Spotify">
-                    <ChevronUp className="w-4 h-4 rotate-90" />
-                  </a>
+                <Link
+                  href="/spotify"
+                  passHref
+                  target={listening?.isPlaying ? '_blank' : '_self'}
+                  aria-label="Mateo Nunez on Spotify"
+                  rel="noopener noreferer noreferrer"
+                  title="Mateo Nunez on Spotify">
+                  <ChevronUp className="w-4 h-4 rotate-90" />
                 </Link>
               </div>
             </div>

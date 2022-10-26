@@ -12,10 +12,8 @@ export default function MDXLink({ children, ...rest }) {
 
   return (
     <>
-      <Link href={href}>
-        <a href={href} alt={title} title={title} target="_blank" rel="noreferrer">
-          {children}
-        </a>
+      <Link href={href} alt={title} title={title} target="_blank" rel="noreferrer">
+        {children}
       </Link>
     </>
   );

@@ -18,15 +18,13 @@ export default function RepositoryPreview({
           {/* Heading */}
 
           {/* Name  */}
-          <Link href={url}>
-            <a
-              rel="canonical noreferrer"
-              target="_blank"
-              className={s.name}
-              title={name}
-              href={url}>
-              {name}
-            </a>
+          <Link
+            href={url}
+            rel="canonical noreferrer"
+            target="_blank"
+            className={s.name}
+            title={name}>
+            {name}
           </Link>
 
           {/* Description  */}
@@ -44,33 +42,29 @@ export default function RepositoryPreview({
 
             {/* Stars */}
             <div className={s.stars}>
-              <Link href={`${url}/stargazers`}>
-                <a
-                  href={`${url}/stargazers`}
-                  rel="canonical noreferrer"
-                  target="_blank"
-                  aria-label={`${name} stars`}
-                  title={`${name} stars`}
-                  className="flex">
-                  <Star className="w-5 h-5" />
-                  <span className={s.starsCount}>{stars}</span>
-                </a>
+              <Link
+                href={`${url}/stargazers`}
+                rel="canonical noreferrer"
+                target="_blank"
+                aria-label={`${name} stars`}
+                title={`${name} stars`}
+                className="flex">
+                <Star className="w-5 h-5" />
+                <span className={s.starsCount}>{stars}</span>
               </Link>
             </div>
 
             {/* Forks  */}
             <div className={s.forks}>
-              <Link href={`${url}/network/members`}>
-                <a
-                  href={`${url}/network/members`}
-                  rel="canonical noreferrer"
-                  target="_blank"
-                  aria-label={`${name} forks`}
-                  title={`${name} forks`}
-                  className="flex">
-                  <Fork className="w-5 h-5" />
-                  <div className={s.forksCount}>{forks}</div>
-                </a>
+              <Link
+                href={`${url}/network/members`}
+                rel="canonical noreferrer"
+                target="_blank"
+                aria-label={`${name} forks`}
+                title={`${name} forks`}
+                className="flex">
+                <Fork className="w-5 h-5" />
+                <div className={s.forksCount}>{forks}</div>
               </Link>
             </div>
           </div>

@@ -13,13 +13,13 @@ const ActiveLink = ({ href, children, title }) => {
   const { pathname } = useRouter();
 
   return (
-    <Link href={href} as={href}>
-      <a
-        className={`${s.link} ${pathname.split('/')[1] === href.split('/')[1] ? s.active : ''}`}
-        rel="canonical"
-        title={title}>
-        {children}
-      </a>
+    <Link
+      href={href}
+      as={href}
+      className={`${s.link} ${pathname.split('/')[1] === href.split('/')[1] ? s.active : ''}`}
+      rel="canonical"
+      title={title}>
+      {children}
     </Link>
   );
 };
@@ -40,10 +40,8 @@ export default function Header() {
             setBigBang(false);
           }}
           className={s.logo}>
-          <Link href="/" passHref>
-            <a aria-label="Mateo Nunez">
-              <MN />
-            </a>
+          <Link href="/" passHref aria-label="Mateo Nunez">
+            <MN />
           </Link>
         </button>
 
@@ -79,22 +77,16 @@ export default function Header() {
       </header>
 
       <nav className={cn(s.mobileNav, mobileNavShown && s.active)}>
-        <Link href="/blog" passHref>
-          <a rel="canonical" title="Blog">
-            📝 Blog
-          </a>
+        <Link href="/blog" passHref rel="canonical" title="Blog">
+          📝 Blog
         </Link>
 
-        <Link href="/open-source" passHref>
-          <a rel="canonical" title="Open Source">
-            💻 Open Source
-          </a>
+        <Link href="/open-source" passHref rel="canonical" title="Open Source">
+          💻 Open Source
         </Link>
 
-        <Link href="/spotify" passHref>
-          <a rel="canonical" title="Blog">
-            🎧 Spotify
-          </a>
+        <Link href="/spotify" passHref rel="canonical" title="Blog">
+          🎧 Spotify
         </Link>
       </nav>
     </>
