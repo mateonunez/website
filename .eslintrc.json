@@ -13,14 +13,6 @@
     "next",
     "next/core-web-vitals"
   ],
-  "parser": "@babel/eslint-parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 2020,
-    "sourceType": "module"
-  },
   "plugins": ["react"],
   "settings": {
     "react": {
