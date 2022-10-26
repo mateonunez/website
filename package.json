@@ -15,15 +15,11 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.6",
-    "@babel/eslint-parser": "^7.19.1",
     "@elgorditosalsero/react-gtm-hook": "^2.6.0",
     "@mdx-js/loader": "^2.1.5",
     "@octokit/graphql": "^5.0.4",
     "@tailwindcss/typography": "^0.5.7",
     "autoprefixer": "^10.4.12",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^10.1.0",
     "classnames": "^2.3.2",
     "eslint": "^8.26.0",
     "eslint-config-next": "^13.0.0",
@@ -31,7 +27,6 @@
     "eslint-plugin-mdx": "^2.0.5",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.10",
-    "eslint-plugin-react-hooks": "^4.6.0",
     "gray-matter": "^4.0.3",
     "gsap": "^3.11.3",
     "moment": "^2.29.4",
