@@ -32,10 +32,8 @@ export default function Profile({ avatar, bio, company, email, username, url, lo
             {/* Bio  */}
             <p className={s.bio}>{bio}</p>
             {/* Url */}
-            <Link href={url}>
-              <a title="Github" aria-label="Github" rel="canonical" target="_blank">
-                {url}
-              </a>
+            <Link href={url} title="Github" aria-label="Github" rel="canonical" target="_blank">
+              {url}
             </Link>
           </div>
         </div>

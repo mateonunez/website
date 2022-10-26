@@ -23,45 +23,45 @@ const TrackCard = ({ item, delay = 0, variant = 'default' }, ref) => {
   return (
     <>
       <div className={classNames}>
-        <Link href={item.url} passHref>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            title={`${item.title} by: ${item.artist}`}
-            aria-label={`${item.title} by: ${item.artist}`}>
-            <div
-              onMouseEnter={() => {
-                setPlayedAtIsVisible(true);
+        <Link
+          href={item.url}
+          passHref
+          target="_blank"
+          rel="noopener noreferrer"
+          title={`${item.title} by: ${item.artist}`}
+          aria-label={`${item.title} by: ${item.artist}`}>
+          <div
+            onMouseEnter={() => {
+              setPlayedAtIsVisible(true);
+            }}
+            onMouseLeave={() => {
+              setPlayedAtIsVisible(false);
+            }}>
+            <div className="absolute inset-0 gradient blend-darken" />
+
+            <Image
+              className={s.image}
+              src={item.thumbnail}
+              alt={item.title}
+              height={320}
+              width={260}
+              layout="responsive"
+              quality={60}
+              onLoadingComplete={() => {
+                setImageLoaded(true);
               }}
-              onMouseLeave={() => {
-                setPlayedAtIsVisible(false);
-              }}>
-              <div className="absolute inset-0 gradient blend-darken" />
+            />
 
-              <Image
-                className={s.image}
-                src={item.thumbnail}
-                alt={item.title}
-                height={320}
-                width={260}
-                layout="responsive"
-                quality={60}
-                onLoadingComplete={() => {
-                  setImageLoaded(true);
-                }}
-              />
-
-              {imageLoaded && (
-                <>
-                  <Fade className={s['title-container']} delay={delay / 100}>
-                    <Title element="h3" variant="naked" className={s.title}>
-                      {item.title}
-                    </Title>
-                  </Fade>
-                </>
-              )}
-            </div>
-          </a>
+            {imageLoaded && (
+              <>
+                <Fade className={s['title-container']} delay={delay / 100}>
+                  <Title element="h3" variant="naked" className={s.title}>
+                    {item.title}
+                  </Title>
+                </Fade>
+              </>
+            )}
+          </div>
         </Link>
 
         <Fade className={s['artist-container']} direction="bottom" delay={delay / 33}>

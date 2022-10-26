@@ -34,10 +34,15 @@ export default function MDXImage({
   return (
     <div className={s.root}>
       {href ? (
-        <Link href={href} fancy={false} passHref>
-          <a href={href} alt={alt} aria-label={alt} title={alt} target={target}>
-            {ImageWrapper}
-          </a>
+        <Link
+          href={href}
+          fancy={false}
+          passHref
+          alt={alt}
+          aria-label={alt}
+          title={alt}
+          target={target}>
+          {ImageWrapper}
         </Link>
       ) : (
         <>{ImageWrapper}</>

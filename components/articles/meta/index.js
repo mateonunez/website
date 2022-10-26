@@ -24,10 +24,12 @@ export default function ArticleMeta({ date, author, readingTime, tags = [] }) {
           <div className={s.tagList}>
             {tags.map((tag, index) => (
               <span className={index !== tags.length - 1 ? 'mr-2' : ''} key={tag}>
-                <Link href={`/blog/tags/${kebapCase(tag)}`} as={`/blog/tags/${kebapCase(tag)}`}>
-                  <a className={s.tag} title={tag}>
-                    #{tag}
-                  </a>
+                <Link
+                  href={`/blog/tags/${kebapCase(tag)}`}
+                  as={`/blog/tags/${kebapCase(tag)}`}
+                  className={s.tag}
+                  title={tag}>
+                  #{tag}
                 </Link>
               </span>
             ))}
@@ -40,10 +42,12 @@ export default function ArticleMeta({ date, author, readingTime, tags = [] }) {
           <span className="ml-1 text-white">By: </span>
 
           {/* {author} */}
-          <Link href="/blog/author/[author]" as={`/blog/author/${author.name}`}>
-            <a className={s.author} title={author.name}>
-              {author.name}
-            </a>
+          <Link
+            href="/blog/author/[author]"
+            as={`/blog/author/${author.name}`}
+            className={s.author}
+            title={author.name}>
+            {author.name}
           </Link>
         </div>
       </div>

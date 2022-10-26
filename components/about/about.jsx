@@ -105,14 +105,13 @@ const About = ({ ...props }) => {
                         <span className={s.bioYear}>2017 to date</span>
                         <span className={s.bioText}>
                           Works on{' '}
-                          <Link href="https://sabicom.com" passHref>
-                            <a
-                              href="http://sabicom.com"
-                              alt="Sabicom SRL"
-                              target="_blank"
-                              rel="noreferrer">
-                              Sabicom SRL
-                            </a>
+                          <Link
+                            href="https://sabicom.com"
+                            passHref
+                            alt="Sabicom SRL"
+                            target="_blank"
+                            rel="noreferrer">
+                            Sabicom SRL
                           </Link>{' '}
                           as a Developer. In these years I learned how to work with different
                           technologies. I&apos;m currently the <i>Team Leader</i>.

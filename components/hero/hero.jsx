@@ -31,10 +31,8 @@ export default function Hero({ article, ...props }) {
           <div className={s.lastArticle}>
             <Fade>
               <h2 className="text-center subtitle">
-                <Link href="/blog">
-                  <a title="Blog" aria-label="Blog" rel="canonical">
-                    From the Blog
-                  </a>
+                <Link href="/blog" title="Blog" aria-label="Blog" rel="canonical">
+                  From the Blog
                 </Link>
               </h2>
               <ArticlePreview {...article} />
@@ -42,15 +40,15 @@ export default function Hero({ article, ...props }) {
           </div>
           {/* Start the BigBang */}
           {/* <div
-            className={cn(
-              s.start,
-              'transition ease-in-out duration-1000',
-              isTerminalCompleted ? 'opacity-100' : 'opacity-0'
-            )}>
-            <button className={s.startButton} onClick={() => setBigBang(true)}>
-              <ChevronDown className={s.startIcon} />
-            </button>
-          </div> */}
+          className={cn(
+            s.start,
+            'transition ease-in-out duration-1000',
+            isTerminalCompleted ? 'opacity-100' : 'opacity-0'
+          )}>
+          <button className={s.startButton} onClick={() => setBigBang(true)}>
+            <ChevronDown className={s.startIcon} />
+          </button>
+        </div> */}
         </div>
       </div>
     </>
