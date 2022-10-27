@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import nProgress from 'nprogress';
 
 import { Header, Footer } from 'components';
+import { Analytics } from 'components/analytics';
 
 export default function MainLayout({ children }) {
   const { loading, setLoading } = useUI();
@@ -42,6 +43,8 @@ export default function MainLayout({ children }) {
       <main>{children}</main>
 
       <Footer />
+
+      <Analytics />
     </>
   );
 }
