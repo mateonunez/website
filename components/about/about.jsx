@@ -102,7 +102,7 @@ const About = ({ ...props }) => {
                         </span>
                       </div>
                       <div className={s.bio}>
-                        <span className={s.bioYear}>2017 to date</span>
+                        <span className={s.bioYear}>2017 to 2022</span>
                         <span className={s.bioText}>
                           Works on{' '}
                           <Link
@@ -115,6 +115,21 @@ const About = ({ ...props }) => {
                           </Link>{' '}
                           as a Developer. In these years I learned how to work with different
                           technologies. I&apos;m currently the <i>Team Leader</i>.
+                        </span>
+                      </div>
+                      <div className={s.bio}>
+                        <span className={s.bioYear}>2022 to date</span>
+                        <span className={s.bioText}>
+                          Starting a new adventure in{' '}
+                          <Link
+                            href="https://hlpy.co"
+                            passHref
+                            alt="hlpy"
+                            target="_blank"
+                            rel="noreferrer">
+                            hlpy
+                          </Link>{' '}
+                          as a Senior Developer.
                         </span>
                       </div>
                     </article>
