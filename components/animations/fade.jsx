@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
@@ -25,6 +25,7 @@ export default function Fade({
     className
   );
 
+  const [isRendered, setIsRendered] = useState(false);
   const ref = useRef();
 
   useEffect(() => {
@@ -66,9 +67,13 @@ export default function Fade({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    setIsRendered(true);
+  }, []);
+
   return (
     <div className={classNames} ref={ref} {...rest}>
-      {children}
+      {isRendered && children}
     </div>
   );
 }
