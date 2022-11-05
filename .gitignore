@@ -36,3 +36,6 @@ yarn-error.log*
 # public
 /public/robots.txt
 /public/sitemap*
+
+# Synk
+.dccache
