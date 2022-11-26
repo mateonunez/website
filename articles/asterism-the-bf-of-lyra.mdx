@@ -1,0 +1,101 @@
+---
+title: 'Asterism, the best friend of Lyra'
+date: 2022-11-26T16:00:00.000Z
+description: 'Asterism is a CLI tool that helps you to manage your Lyra instances and searches.'
+tags:
+  - javascript
+  - lyra
+  - search engine
+  - asterism
+image: '/images/articles/asterism-the-bf-of-lyra/cover.png'
+author:
+  name: Mateo
+  image: '/images/profile.jpeg'
+---
+
+<Image
+  src="/images/articles/asterism-the-bf-of-lyra/cover.png"
+  width="1280"
+  height="720"
+  layout="responsive"
+  alt="Create your Blog with Next.js and MDX"
+  href="/blog/asterism-the-bf-of-lyra"
+/>
+
+Today was released the first stable version of [Asterism](https://github.com/mateonunez/asterism). Asterism provides a CLI to manage your Lyra instances and searches in a simple way.
+
+## What is Lyra?
+
+Lyra is a search engine created by [Michele Riva](https://twitter.com/MicheleRivaCode). Lyra makes **thousands** searches within a few **microseconds** (_μs_) (yes, ms \* 1000).
+
+The main idea of Lyra is to provide a search engine that can be used in all devices that JavaScript can run: web, mobile, desktop, TVs, etc. Everywhere!
+
+## Ok, but what is Asterism?
+
+Asterism is a CLI tool that helps you to convert your database instances (MySQL and PostgreSQL) into Lyra instances and to create searches in a simple way.
+
+## How to install it?
+
+You can install Asterism using `npm|yarn|pnpm`:
+
+```bash
+npm install -g asterism
+```
+
+## How to use it?
+
+Asterism provides a simple CLI to manage your Lyra instances and searches.
+
+### Create a new Lyra instance
+
+To create a new Lyra instance you can use the `migrate` command:
+
+```bash
+asterism migrate postgres -d postgres -t posts
+```
+
+This command will create a new Lyra instance from a PostgreSQL table. You can also use the `mysql` option to create a new Lyra instance from a MySQL table.
+
+A new persistent Lyra instance will be created in the provided folder. (default is `/out`).
+
+### Make a search
+
+To make a search you can use the `search` command:
+
+```bash
+asterism search "cool"
+```
+
+This command will search the provided string in all the Lyra instances and will return the results.
+
+Example:
+
+```bash
+$ asterism search "cool"
+
+[2022-11-26 14:26:49.844] INFO: Resolving asterism.
+[2022-11-26 14:26:50.032] INFO: Searching on asterism.
+[2022-11-26 14:26:50.034] INFO:
+  instance_one: {
+    "count": 0,
+    "elapsed": 225799,
+    "hits": []
+  }
+  instance_two: {
+    "count": 1,
+    "elapsed": 931864,
+    "hits": [
+      {
+        "id": 1,
+        "title": "Cool title",
+        "content": "Cool content"
+      }
+    ]
+  }
+```
+
+### Contribute
+
+**Asterism** is an open source project and you can contribute to it. You can find the source code in [GitHub](https://github.com/mateonunez/asterism).
+
+You can also contribute to **Lyra**. You can find the source code in [GitHub](https://github.com/lyrasearch/lyra).
