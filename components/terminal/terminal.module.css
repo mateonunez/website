@@ -77,7 +77,7 @@
 
 @media (max-width: 600px) {
   .root {
-    height: 250px;
+    height: 300px;
     min-width: 100%;
     max-width: 80vw;
   }
@@ -106,7 +106,7 @@
   }
 
   .root {
-    height: 200px;
+    height: 250px;
     width: 300px;
   }
 }
