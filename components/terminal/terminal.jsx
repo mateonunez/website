@@ -22,10 +22,14 @@ const Line = ({ text, noPrompt = false, noCaret = false }) => (
 );
 
 const paragraphs = [
-  'Hey.. Nice to met you. 😳',
-  'What are you doing here? Are you lost? 😱',
+  "Hey there! I'm Mateo 👋",
   '',
-  'Anyway, Now you are here and you will stay here forever (with me 😉).',
+  "👨‍💻 I'm a Senior Developer at hlpy.",
+  '⌨️ I code often in JavaScript and TypeScript.',
+  '💭 I also like to try languages like Rust, PHP, Python and Go.',
+  '☁️ Love the Cloud and sometimes I play with K8S, AWS and CNCF treats.',
+  '📐 My favourite setup is: VS Code with Vim and Colemak layout.',
+  '',
   ''
 ];
 
