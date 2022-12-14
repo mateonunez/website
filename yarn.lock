@@ -3183,10 +3183,10 @@ punycode@^2.1.0:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-query-string@^8.0.2:
-  version "8.0.2"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-8.0.2.tgz#500007fca8d244478a1e264e5bdd561c34055c18"
-  integrity sha512-clIYj8NRVQzKAfyESeANUl+YHHVsl+QzGta8ndvqeGaJK/2RMDHiEI7iuu3erIWVdK27aePhuXUHCVojWT+Tjw==
+query-string@^8.0.3:
+  version "8.0.3"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-8.0.3.tgz#c6f18a1ce18005fb5d3dcd6507dbcdc165615c49"
+  integrity sha512-RtRwkRFCLPQWz27ETbeqIA9UdaLv2Ps7EiNjIS57BaZyx/gWi4QKq7K4+rYBEHToSo/dvLZ+S1fEOKcacojA/Q==
   dependencies:
     decode-uri-component "^0.2.2"
     filter-obj "^5.1.0"
