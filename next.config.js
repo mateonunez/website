@@ -1,9 +1,14 @@
 const contentSecurityPolicy = `
-  default-src 'self';
-  script-src 'self';
-  child-src mateonunez.dev;
-  style-src 'self' mateonunez.dev;
-  font-src 'self';
+  default-src 'self' https://*.googletagmanager.com https://*.google-analytics.com https://*.vercel-insights.com https://vercel.live;
+  base-uri 'self';
+  block-all-mixed-content;
+  font-src 'self' https://fonts.gstatic.com https://*.vercel.com https://vercel.live;
+  frame-ancestors 'self';
+  img-src 'self' data: https://i.scdn.co https://avatars.githubusercontent.com https://*.googletagmanager.com https://*.google-analytics.com https://*.vercel.com https://*.vercel-insights.com https://vercel.live;
+  object-src 'none';
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.googletagmanager.com https://*.google-analytics.com https://*.vercel-insights.com https://vercel.live;
+  script-src-attr 'none';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com
 `;
 
 // Security Headers
