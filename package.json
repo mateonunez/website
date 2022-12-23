@@ -29,7 +29,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.11",
     "gray-matter": "^4.0.3",
-    "gsap": "^3.11.3",
+    "gsap": "^3.11.4",
     "moment": "^2.29.4",
     "next-mdx-remote": "^4.2.0",
     "next-seo": "^5.15.0",
