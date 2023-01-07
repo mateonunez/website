@@ -9,14 +9,14 @@
 
 .avatar {
   width: 150px;
-  height: 150px;
+  height: auto;
   border-radius: 50%;
   overflow: hidden;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
-.bioContainer {
-  margin-top: 1rem;
+.container {
+  margin-top: 2rem;
   margin-left: 2rem;
 }
 

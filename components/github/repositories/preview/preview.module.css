@@ -1,5 +1,5 @@
 .root {
-  margin: 1rem auto 2rem auto;
+  margin: 2rem auto 2rem auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,6 +8,7 @@
 
 .container {
   @apply border-slate-300 border rounded-sm;
+  margin-top: 0.3rem;
   padding: 1rem;
   border-radius: 0.5rem;
 }
