@@ -9,12 +9,16 @@ export async function getServerSideProps({ res }) {
   const profile = await profileFetcher();
 
   const { repositories = [] } = profile;
+  const { followers = [] } = profile;
+
   delete profile['repositories'];
+  delete profile['followers'];
 
   return {
     props: {
       profile,
-      repositories
+      repositories,
+      followers
     }
   };
 }
@@ -23,7 +27,6 @@ export default function OpenSourcePage({ profile, repositories }) {
   // repositories missing in destructuring
   const { avatar, bio, company, email, username, location, url } = profile;
 
-  console.log(repositories);
   return (
     <>
       <NextSeo
@@ -45,7 +48,7 @@ export default function OpenSourcePage({ profile, repositories }) {
             username={username}
             location={location}
             url={url}
-            className="mb-12"
+            className="mb-24"
           />
 
           {/* Repositories  */}
