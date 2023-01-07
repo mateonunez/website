@@ -1,0 +1,52 @@
+.root {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Make a large and tiny title */
+.title {
+  margin-top: 3rem;
+  font-size: 3rem;
+  font-weight: 300;
+  font-family: 'Inter', sans-serif;
+  color: #ccc;
+}
+
+.follower-container {
+  @apply scroll-smooth;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 2rem 0 2rem 0;
+}
+
+.navigator {
+  margin: auto;
+  padding: 0 0.7rem 0 0.7rem;
+}
+
+.paragraph {
+  padding: 0 1rem 0 1rem;
+  text-indent: 1rem;
+}
+
+@media (max-width: 768px) {
+  .root {
+    width: 92vw;
+    min-height: calc(100vh - 12rem);
+  }
+
+  .track-container {
+    overflow-x: scroll;
+  }
+
+  .navigator {
+    display: none;
+  }
+}
