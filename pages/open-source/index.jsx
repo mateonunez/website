@@ -1,4 +1,4 @@
-import { Container, GitHubProfile, RepositoryPreview, Title } from 'components';
+import { Container, Fade, Followers, GitHubProfile, RepositoryPreview, Title } from 'components';
 import { NextSeo } from 'next-seo';
 
 import { profileFetcher } from 'pages/api/open-source/profile';
@@ -14,6 +14,9 @@ export async function getServerSideProps({ res }) {
   delete profile['repositories'];
   delete profile['followers'];
 
+  // sort random followers
+  followers.sort(() => Math.random() - 0.5);
+
   return {
     props: {
       profile,
@@ -23,7 +26,7 @@ export async function getServerSideProps({ res }) {
   };
 }
 
-export default function OpenSourcePage({ profile, repositories }) {
+export default function OpenSourcePage({ profile, repositories, followers }) {
   // repositories missing in destructuring
   const { avatar, bio, company, email, username, location, url } = profile;
 
@@ -40,23 +43,36 @@ export default function OpenSourcePage({ profile, repositories }) {
         <Title>Open Source</Title>
 
         <div className="flex flex-col">
-          <GitHubProfile
-            avatar={avatar}
-            bio={bio}
-            company={company}
-            email={email}
-            username={username}
-            location={location}
-            url={url}
-            className="mb-24"
-          />
+          <Container>
+            <Fade delay={0.3}>
+              <GitHubProfile
+                avatar={avatar}
+                bio={bio}
+                company={company}
+                email={email}
+                username={username}
+                location={location}
+                url={url}
+                className="mb-24"
+              />
+            </Fade>
+          </Container>
+
+          {/* Followers  */}
+          <Container>
+            <Fade delay={1.3}>
+              <Followers followers={followers} />
+            </Fade>
+          </Container>
 
           {/* Repositories  */}
-          <div className="container">
-            {repositories.map(repository => (
-              <RepositoryPreview key={repository.name} {...repository} />
-            ))}
-          </div>
+          <Container>
+            <Fade delay={3}>
+              {repositories.map(repository => (
+                <RepositoryPreview key={repository.name} {...repository} />
+              ))}
+            </Fade>
+          </Container>
         </div>
       </Container>
     </>
