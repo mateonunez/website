@@ -17,16 +17,17 @@ export default function Profile({ avatar, bio, company, email, username, url, lo
       <Container {...rest}>
         <div className={s.root}>
           {/* Avatar  */}
-          <div className={s.avatar}>
+          <div className={s.container}>
             <Image
               width={150}
               height={150}
               src={avatar}
+              className={s.avatar}
               alt="Mateo Nunez's face"
               layout="responsive"
             />
           </div>
-          <div className={s.bioContainer}>
+          <div className={s.container}>
             {/* Name  */}
             <h1 className={s.name}>@{username}</h1>
             {/* Bio  */}
