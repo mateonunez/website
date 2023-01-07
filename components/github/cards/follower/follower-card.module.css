@@ -1,0 +1,52 @@
+.root {
+  margin: 1.7rem;
+  width: 4rem;
+  height: 8rem;
+  cursor: pointer;
+}
+
+.image {
+  @apply shadow-md opacity-40 hover:opacity-100;
+  position: aboslute;
+  inset: 0px;
+  box-sizing: border-box;
+  padding: 0px;
+  border: 1px solid;
+  border-radius: 3rem;
+  display: block;
+  object-fit: cover;
+  width: 28px;
+  height: 28px;
+}
+
+.follower-container {
+  word-break: break-word;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.follower {
+  @apply font-mono;
+  color: white;
+  white-space: pre-wrap;
+  font-size: 0.8rem;
+}
+
+.played-at {
+  @apply font-mono;
+  color: white;
+  white-space: pre-wrap;
+  font-size: 0.6rem;
+}
+
+@media (max-width: 768px) {
+  .root_default {
+    width: 20rem;
+    height: 28rem;
+  }
+
+  .root_full {
+    width: 100%;
+    height: 100%;
+  }
+}
