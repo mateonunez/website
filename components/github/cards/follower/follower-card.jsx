@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { forwardRef } from 'react';
 import s from './follower-card.module.css';
 import cn from 'classnames';
