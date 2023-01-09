@@ -50,7 +50,13 @@ export default function Followers({ followers }) {
               <ChevronUp className="w-6 h-6 font-black transition duration-500 transform -rotate-90" />
             </button>
 
-            <div className={s['follower-container']} ref={followerContainerRef}>
+            <div
+              className={s['follower-container']}
+              ref={followerContainerRef}
+              onTouchStart={() => {
+                // TODO: Add touch and swipe direction detection
+                scrollFollowersContainer('right');
+              }}>
               {followers.map((follower, key) => (
                 <Fade key={`${follower.id}-${key}`} delay={key + config.munber / 100} clean>
                   <FollowerCard follower={follower} delay={key + config.munber / 100} />
@@ -65,6 +71,7 @@ export default function Followers({ followers }) {
               }}
               onTouchStart={() => {
                 scrollFollowersContainer('right');
+                console.log('here');
               }}
               aria-label="More Followers">
               <ChevronUp className="w-6 h-6 transition duration-500 transform rotate-90 hover:scale-110" />
