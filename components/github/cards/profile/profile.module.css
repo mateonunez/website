@@ -1,5 +1,5 @@
 .root {
-  margin: auto 4rem;
+  margin: 1rem auto;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -8,6 +8,7 @@
 }
 
 .avatar {
+  margin: auto;
   width: 150px;
   height: auto;
   border-radius: 50%;
@@ -17,7 +18,6 @@
 
 .container {
   margin-top: 2rem;
-  margin-left: 2rem;
 }
 
 .name {

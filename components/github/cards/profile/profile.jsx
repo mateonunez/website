@@ -14,7 +14,7 @@ export default function Profile({ avatar, bio, company, email, username, url, lo
 
   return (
     <>
-      <Container {...rest}>
+      <Container clean {...rest}>
         <div className={s.root}>
           {/* Avatar  */}
           <div className={s.container}>
