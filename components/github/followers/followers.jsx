@@ -1,32 +1,13 @@
 import { ChevronUp, Container, Fade, FollowerCard, Title } from 'components';
 import config from 'lib/config';
-import { useCallback } from 'react';
-import { useRef } from 'react';
+import { useScroll } from 'lib/hooks';
+import { useRef, useState } from 'react';
 import s from './followers.module.css';
 
 export default function Followers({ followers }) {
   const followerContainerRef = useRef();
-
-  // Create a
-  const scrollFollowersContainer = useCallback(
-    direction => {
-      const { current } = followerContainerRef;
-
-      if (current) {
-        current.scroll({
-          left:
-            direction === 'left'
-              ? current.scrollLeft - current.clientWidth - config.munber
-              : direction === 'right'
-              ? current.scrollLeft + current.clientWidth - config.munber
-              : 0,
-          behavior: 'smooth'
-        });
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [followerContainerRef.current]
-  );
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const scroll = useScroll;
 
   return (
     <>
@@ -41,10 +22,7 @@ export default function Followers({ followers }) {
             <button
               className={s.navigator}
               onClick={() => {
-                scrollFollowersContainer('left');
-              }}
-              onTouchStart={() => {
-                scrollFollowersContainer('left');
+                scroll(followerContainerRef, 'left');
               }}
               aria-label="Less Followers">
               <ChevronUp className="w-6 h-6 font-black transition duration-500 transform -rotate-90" />
@@ -53,13 +31,15 @@ export default function Followers({ followers }) {
             <div
               className={s['follower-container']}
               ref={followerContainerRef}
-              onTouchStart={() => {
-                // TODO: Add touch and swipe direction detection
-                scrollFollowersContainer('right');
+              onTouchMove={event => {
+                const direction = prevScrollPos > event.touches[0].clientX ? 'right' : 'left';
+
+                scroll(followerContainerRef, direction);
+                setPrevScrollPos(event.touches[0].clientX);
               }}>
               {followers.map((follower, key) => (
                 <Fade key={`${follower.id}-${key}`} delay={key + config.munber / 100} clean>
-                  <FollowerCard follower={follower} delay={key + config.munber / 100} />
+                  <FollowerCard follower={follower} delay={key + 1} />
                 </Fade>
               ))}
             </div>
@@ -67,11 +47,7 @@ export default function Followers({ followers }) {
             <button
               className={s.navigator}
               onClick={() => {
-                scrollFollowersContainer('right');
-              }}
-              onTouchStart={() => {
-                scrollFollowersContainer('right');
-                console.log('here');
+                scroll(followerContainerRef, 'right');
               }}
               aria-label="More Followers">
               <ChevronUp className="w-6 h-6 transition duration-500 transform rotate-90 hover:scale-110" />
