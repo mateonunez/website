@@ -7,7 +7,7 @@
 
 ## Getting Started
 
-Run `npm install` to install the necessary dependencies and `npm run dev` to start the local server.
+Run `yarn` to install the necessary dependencies and `yarn dev` to start the local server.
 
 Open [http://localhost:3000/](http://localhost:3000/). Pages will live-refresh when source files are changed.
 
