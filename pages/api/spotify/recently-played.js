@@ -14,7 +14,6 @@ export default async function handler(req, res) {
   }
 
   if (response.status === 204 || response.status > 400) {
-    // TODO handle better this
     return res.status(200).json({ recently_played: false });
   }
 
