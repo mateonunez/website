@@ -6,23 +6,27 @@ import config from 'lib/config';
 import cn from 'classnames';
 
 import { Fade, Title } from 'components';
-import { useState, forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { dateFromNowForHumans } from 'lib/helpers/date';
-import Image from 'next/image';
 
 // eslint-disable-next-line no-unused-vars
-const TrackCard = ({ item, delay = 0, variant = 'default' }, ref) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [playedAtIsVisible, setPlayedAtIsVisible] = useState(false);
-
+const TrackCard = ({ item, delay = 0, variant = 'default', currentIndex }, ref) => {
   const classNames = cn(s.root, {
     [s.root_default]: variant === 'default',
     [s.root_full]: variant === 'full'
   });
 
+  const repeat = useMemo(() => {
+    return Math.random();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentIndex]);
+
   return (
     <>
-      <div className={classNames}>
+      <div className={classNames} ref={ref}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={item.thumbnail} alt={item.title} className={s.image} />
+
         <Link
           href={item.url}
           passHref
@@ -30,49 +34,29 @@ const TrackCard = ({ item, delay = 0, variant = 'default' }, ref) => {
           rel="noopener noreferrer"
           title={`${item.title} by: ${item.artist}`}
           aria-label={`${item.title} by: ${item.artist}`}>
-          <div
-            onMouseEnter={() => {
-              setPlayedAtIsVisible(true);
-            }}
-            onMouseLeave={() => {
-              setPlayedAtIsVisible(false);
-            }}>
-            <div className="absolute inset-0 gradient blend-darken" />
+          {/* Title */}
+          <Fade
+            className={s['title-container']}
+            delay={delay / 100}
+            duration={config.munber / 50}
+            trigger={ref}
+            repeat={repeat}>
+            <Title element="h3" variant="naked" className={s.title}>
+              {item.title}
+            </Title>
+          </Fade>
 
-            <Image
-              className={s.image}
-              src={item.thumbnail}
-              alt={item.title}
-              height={320}
-              width={260}
-              layout="responsive"
-              quality={60}
-              onLoadingComplete={() => {
-                setImageLoaded(true);
-              }}
-            />
-
-            {imageLoaded && (
-              <>
-                <Fade className={s['title-container']} delay={delay / 100}>
-                  <Title element="h3" variant="naked" className={s.title}>
-                    {item.title}
-                  </Title>
-                </Fade>
-              </>
-            )}
-          </div>
+          {/* Artist name */}
+          <Fade
+            className={s['artist-container']}
+            direction="bottom"
+            delay={delay / 33}
+            repeat={repeat}>
+            <div className={s.artist}>
+              {item.artist} ({dateFromNowForHumans(item.playedAt)})
+            </div>
+          </Fade>
         </Link>
-
-        <Fade className={s['artist-container']} direction="bottom" delay={delay / 33}>
-          <div className={s.artist}>{item.artist}</div>
-
-          {playedAtIsVisible && variant.default && (
-            <Fade className="mt-1" delay={0} duration={config.munber / 100} direction="top">
-              <div className={s['played-at']}>{dateFromNowForHumans(item.playedAt)}</div>
-            </Fade>
-          )}
-        </Fade>
       </div>
     </>
   );
