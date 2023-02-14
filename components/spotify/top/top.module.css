@@ -1,41 +1,15 @@
 .root {
-  margin: 2rem auto 2rem auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 1200px;
 }
 
 .artists-container {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-
-.artist {
-  display: flex;
-  width: 20rem;
+  margin: auto;
 }
 
 .tracks-container {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-
-.track {
-  display: flex;
-  width: 20rem;
-}
-
-@media (max-width: 768px) {
-  .tracks-container {
-    flex-direction: row;
-  }
+  margin: auto;
 }
