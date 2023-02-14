@@ -15,6 +15,7 @@ export default function Fade({
   trigger,
   className = '',
   clean = false,
+  repeat = false,
   ...rest
 }) {
   const classNames = cn(
@@ -65,7 +66,7 @@ export default function Fade({
 
     return () => timeline.kill();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [repeat]);
 
   useEffect(() => {
     setIsRendered(true);
