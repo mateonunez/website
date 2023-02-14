@@ -55,7 +55,7 @@ export default function Top({ artists, tracks }) {
             <>
               <div ref={tracksTitleRef}>
                 <Fade delay={config.munber / 100} direction="right" trigger={tracksTitleRef}>
-                  <Title className="text-4xl" variant="subtitle" element="h2">
+                  <Title className="my-2 text-4xl" variant="subtitle" element="h2">
                     Tracks
                   </Title>
                 </Fade>

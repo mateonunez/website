@@ -18,16 +18,12 @@ export default async function handler(req, res) {
   }
 
   const { items = [] } = await response.json();
-
   const data = items.map(normalizeRecentlyPlayed).sort((a, b) => b.played_at - a.played_at);
-
   return res.status(200).json(data);
 }
 
 export async function recentlyPlayedFetcher() {
   const recentlyPlayedResponse = await fetch(`${config.baseUrl}/api/spotify/recently-played`);
-
   const recentlyPlayed = await recentlyPlayedResponse.json();
-
   return recentlyPlayed;
 }
