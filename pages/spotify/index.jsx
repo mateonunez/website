@@ -24,7 +24,7 @@ export default function SpotifyPage({ recentlyPlayed, top }) {
   return (
     <>
       <NextSeo
-        title="I show you what I 🎧"
+        title="Music that I love"
         description="I ❤️ the music and you should know it."
         openGraph={{
           title: "Mateo's activity on Spotify"
