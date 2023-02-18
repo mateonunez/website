@@ -19,7 +19,7 @@
     "@mdx-js/loader": "^2.3.0",
     "@octokit/graphql": "^5.0.5",
     "@tailwindcss/typography": "^0.5.9",
-    "@vercel/analytics": "^0.1.9",
+    "@vercel/analytics": "^0.1.10",
     "autoprefixer": "^10.4.13",
     "classnames": "^2.3.2",
     "eslint": "^8.34.0",
