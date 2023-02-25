@@ -43,8 +43,8 @@ export default function ArticleMeta({ date, author, readingTime, tags = [] }) {
 
           {/* {author} */}
           <Link
-            href="/blog/author/[author]"
-            as={`/blog/author/${author.name}`}
+            href={`/blog/authors/${kebapCase(author.name)}`}
+            as={`/blog/authors/${kebapCase(author.name)}`}
             className={s.author}
             title={author.name}>
             {author.name}
