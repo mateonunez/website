@@ -20,7 +20,7 @@
     "@octokit/graphql": "^5.0.5",
     "@tailwindcss/typography": "^0.5.9",
     "@vercel/analytics": "^0.1.11",
-    "autoprefixer": "^10.4.13",
+    "autoprefixer": "^10.4.14",
     "classnames": "^2.3.2",
     "eslint": "^8.35.0",
     "eslint-config-next": "^13.2.3",
