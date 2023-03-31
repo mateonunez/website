@@ -3739,10 +3739,10 @@ thenify-all@^1.0.0:
   dependencies:
     any-promise "^1.0.0"
 
-three@^0.151.1:
-  version "0.151.1"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.151.1.tgz#1dbb330db1e78fba4f0b0dc3ea7080099abbfdc1"
-  integrity sha512-9xfF6FIaQmdG5kAUhVNDEJwOF1Ss39g2N9FSvAJNk9zBkaMhfyNqD9cDBxiR7OOA7oKhEdneeSU1qq0ZUbb0FQ==
+three@^0.151.2:
+  version "0.151.2"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.151.2.tgz#b5b1906165499fa0586dd4adcc8c40dd781514c2"
+  integrity sha512-tGaLRP2H6++tj2JumHD25slhFAx0C619rl6G6Utjq7JTrDGJwDxpu+J2XpnYIUMfEmhNvIFDQJfp79JtKmNBWw==
 
 tiny-glob@^0.2.9:
   version "0.2.9"
