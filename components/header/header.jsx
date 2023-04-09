@@ -3,7 +3,6 @@
 import s from './header.module.css';
 
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { MN, Menu } from 'components/icons';
 import cn from 'classnames';

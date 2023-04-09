@@ -1,5 +1,4 @@
 import { Container, Fade, Followers, GitHubProfile, RepositoryPreview, Title } from 'components';
-import { NextSeo } from 'next-seo';
 
 import { profileFetcher } from 'pages/api/open-source/profile';
 
@@ -13,7 +12,6 @@ export default async function OpenSourcePage() {
 
   followers.sort(() => Math.random() - 0.5);
 
-  // repositories missing in destructuring
   const { avatar, bio, company, email, username, location, url } = profile;
 
   return (

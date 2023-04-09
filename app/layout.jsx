@@ -3,10 +3,7 @@ import 'styles/nprogress.css';
 import 'components/articles/mdx/code/dark.css';
 import Loading from './loading';
 
-import seo from 'lib/config/seo.json';
-
 import { MainLayout, UIProvider } from 'components';
-import { DefaultSeo } from 'next-seo';
 import { Suspense } from 'react';
 
 export default function RootLayout({ children }) {

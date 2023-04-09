@@ -1,10 +1,7 @@
 import s from 'styles/pages/blog/[slug].module.css';
 
 import Article from 'components/articles';
-import { getArticle, getArticleSlugs } from 'lib/articles/parser';
-import { ArticleJsonLd, NextSeo } from 'next-seo';
-import urlJoin from 'url-join';
-import config from 'lib/config';
+import { getArticle } from 'lib/articles/parser';
 
 export default async function BlogArticle({ params }) {
   const { slug } = params;
