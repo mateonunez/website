@@ -1,9 +1,7 @@
-// import { useUI } from 'components/ui/ui-context';
-// import { useRouter } from 'next/router';
-// import { useEffect } from 'react';
-
-import RenderingPageSkeleton from './../components/ui/rendering-skeleton-page';
-
 export default function Loading() {
-  return <RenderingPageSkeleton />;
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <div className="w-32 h-32 border-b-2 border-gray-300 rounded-full animate-spin"></div>
+    </div>
+  );
 }
