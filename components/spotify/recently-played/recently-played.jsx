@@ -1,3 +1,5 @@
+'use client';
+
 import s from './recently-played.module.css';
 
 import { ChevronUp, Container, Title, TrackCard } from 'components';

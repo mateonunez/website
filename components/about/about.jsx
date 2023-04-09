@@ -1,3 +1,5 @@
+'use client';
+
 import s from './about.module.css';
 
 import React, { useRef } from 'react';

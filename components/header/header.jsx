@@ -1,3 +1,5 @@
+'use client';
+
 import s from './header.module.css';
 
 import { useState } from 'react';
@@ -10,7 +12,8 @@ import { useUI } from 'components/ui/ui-context';
 
 // eslint-disable-next-line no-unused-vars
 const ActiveLink = ({ href, children, title }) => {
-  const { pathname } = useRouter();
+  // const { pathname } = useRouter();
+  const pathname = '/blog';
 
   return (
     <Link

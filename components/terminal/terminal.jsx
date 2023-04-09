@@ -1,4 +1,5 @@
-// https://github.com/vercel/hyper-site/
+'use client';
+
 import s from './terminal.module.css';
 
 import { Keyframes, Frame } from './react-keyframes.js';

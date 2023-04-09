@@ -1,3 +1,5 @@
+'use client';
+
 import s from './preview.module.css';
 
 import Image from 'next/image';

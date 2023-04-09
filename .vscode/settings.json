@@ -1,7 +1,9 @@
 {
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
-  "editor.rulers": [120],
+  "editor.rulers": [
+    120
+  ],
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
@@ -14,5 +16,7 @@
   "workbench.colorCustomizations": {
     "activityBar.activeBorder": "#06b9a5"
   },
-  "peacock.color": "#f9e64f"
+  "peacock.color": "#f9e64f",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }

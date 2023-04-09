@@ -1,3 +1,5 @@
+'use client';
+
 import s from './player.module.css';
 
 import React, { useMemo } from 'react';

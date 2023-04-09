@@ -1,3 +1,5 @@
+'use client';
+
 import s from './mdx-code.module.css';
 
 import { useEffect, useState } from 'react';

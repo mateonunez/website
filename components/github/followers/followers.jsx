@@ -1,8 +1,11 @@
+'use client';
+
+import s from './followers.module.css';
+
 import { ChevronUp, Container, Fade, FollowerCard, Title } from 'components';
 import config from 'lib/config';
 import { useScroll } from 'lib/hooks';
 import { useRef, useState } from 'react';
-import s from './followers.module.css';
 
 export default function Followers({ followers }) {
   const followerContainerRef = useRef();
