@@ -1,10 +1,21 @@
 import { Container, Fade, Followers, GitHubProfile, RepositoryPreview, Title } from 'components';
-
 import { profileFetcher } from 'pages/api/open-source/profile';
+import meta from 'lib/config/metadata.js';
+
+export const metadata = {
+  title: '> open source',
+  description: `Open Source projects made with ❤️ by ${meta.author.name} and the Community. ${meta.description}`,
+  keywords: [...meta.keywords, 'open source', 'github', 'projects'],
+  other: [
+    {
+      name: 'followers',
+      content: 'https://api.github.com/users/mateonunez/followers'
+    }
+  ]
+};
 
 export default async function OpenSourcePage() {
   const profile = await profileFetcher();
-
   const { repositories = [], followers = [] } = profile;
 
   delete profile['repositories'];
