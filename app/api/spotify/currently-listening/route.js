@@ -1,25 +1,24 @@
 import config from 'lib/config';
 import { getCurrentlyListening } from 'lib/spotify';
 import { normalizeCurrentlyListening } from 'lib/utils/normalizers';
-
+import { NextResponse } from 'next/server';
 /**
  * API handler
  */
-export default async function handler(req, res) {
+export async function GET() {
   const response = await getCurrentlyListening();
 
   if (!response) {
-    return res.status(500).json({ error: 'Spotify not available' });
+    return NextResponse.json({ error: 'Spotify not available' }, { status: 503 });
   }
 
   if (response.status === 204 || response.status > 400) {
-    // TODO handle better this
-    return res.status(200).json({ is_playing: false });
+    return NextResponse.json({ is_playing: false }, { status: 200 });
   }
 
   const data = await response.json();
 
-  return res.status(200).json(normalizeCurrentlyListening(data));
+  return NextResponse.json(normalizeCurrentlyListening(data), { status: 200 });
 }
 
 /**

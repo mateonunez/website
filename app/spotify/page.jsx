@@ -1,6 +1,6 @@
 import { RecentlyPlayed, Top } from 'components';
-import { recentlyPlayedFetcher } from 'pages/api/spotify/recently-played';
-import { topFetcher } from 'pages/api/spotify/top';
+import { recentlyPlayedFetcher } from 'app/api/spotify/recently-played/route';
+import { topFetcher } from 'app/api/spotify/top/route';
 import meta from 'lib/config/metadata.js';
 
 export const metadata = {

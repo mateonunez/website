@@ -237,7 +237,7 @@ For that component I've used the following packages, libs and assets:
 
 I've created an API on Next.JS to fetch the current track.
 
-_**pages/api/spotify/current-listening**_
+_**app/api/spotify/current-listening**_
 
 ```js {8,20} showLineNumbers
 /**
@@ -451,7 +451,7 @@ The [preview](https://mateonunez.dev/spotify).
 
 Like the previous section, I've created a dedicated API to manage the `fetch`.
 
-_**pages/api/spotify/recently-played.tsx**_
+_**app/api/spotify/recently-played.tsx**_
 
 ```js {6,22} showLineNumbers
 import config from 'lib/config';
@@ -523,12 +523,12 @@ export async function recentlyPlayedFetcher() {
 
 I should to put it all togheter in the dedicated page.
 
-_**pages/api/spotify/recently-played.tsx**_
+_**app/api/spotify/recently-played.tsx**_
 
 ```js {8,30} showLineNumbers
 import { Footer, Header, RecentlyPlayed, Top } from 'components';
 import { NextSeo } from 'next-seo';
-import { recentlyPlayedFetcher } from 'pages/api/spotify/recently-played';
+import { recentlyPlayedFetcher } from 'app/api/spotify/recently-played';
 
 export async function getServerSideProps({ res }) {
   res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
@@ -658,7 +658,7 @@ Actually, I don't feel like to copy and paste part of my code (that you can chec
 
 This is because the `Top Artist and Tops Tracks` on _Spotify_ is almost the same as the `Recently Played` on _Spotify_.
 
-So I've created a new api in _**pages/api/spotify/top.jsx**_, that calls two methods: `getTopArtists()` and `getTopTracks()`. Those methods resolve _Spotify endpoints_ and returns the data.
+So I've created a new api in _**app/api/spotify/top.jsx**_, that calls two methods: `getTopArtists()` and `getTopTracks()`. Those methods resolve _Spotify endpoints_ and returns the data.
 
 I have a two methods to _normalize_ both responses.
 

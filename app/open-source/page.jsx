@@ -1,5 +1,5 @@
 import { Container, Fade, Followers, GitHubProfile, RepositoryPreview, Title } from 'components';
-import { profileFetcher } from 'pages/api/open-source/profile';
+import { profileFetcher } from 'app/api/open-source/profile';
 import meta from 'lib/config/metadata.js';
 
 export const metadata = {

@@ -41,18 +41,6 @@ export default async function BlogArticle({ params }) {
 
   return (
     <>
-      {/* <ArticleJsonLd
-        title={frontMatter.title}
-        description={frontMatter.description}
-        datePublished={frontMatter.date}
-        dateModified={frontMatter.date}
-        images={[urlJoin(config.baseUrl, frontMatter.image)]}
-        url={frontMatter.permalink}
-        authorName={frontMatter.author.name}
-        publisherName={frontMatter.author.name}
-        publisherLogo={frontMatter.author.image}
-      /> */}
-
       <div className={s.root}>
         <Article frontMatter={frontMatter} source={source} />
       </div>
