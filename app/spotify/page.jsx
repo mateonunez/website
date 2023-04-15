@@ -1,6 +1,13 @@
 import { RecentlyPlayed, Top } from 'components';
 import { recentlyPlayedFetcher } from 'pages/api/spotify/recently-played';
 import { topFetcher } from 'pages/api/spotify/top';
+import meta from 'lib/config/metadata.js';
+
+export const metadata = {
+  title: '> spotify',
+  description: `Music that I love. ${meta.description}`,
+  keywords: [...meta.keywords, 'spotify', 'music', 'recently played', 'top']
+};
 
 export default async function SpotifyPage() {
   const recentlyPlayed = await recentlyPlayedFetcher();
@@ -8,15 +15,6 @@ export default async function SpotifyPage() {
 
   return (
     <>
-      {/* <NextSeo
-        title="Music that I love"
-        description="I ❤️ the music and you should know it."
-        openGraph={{
-          title: "Mateo's activity on Spotify"
-        }}
-      /> */}
-
-      {/* Recently Played Component  */}
       <RecentlyPlayed items={recentlyPlayed} />
 
       {/* Top Component */}
