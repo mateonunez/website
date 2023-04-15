@@ -5,6 +5,9 @@ import Loading from './loading';
 
 import { MainLayout, UIProvider } from 'components';
 import { Suspense } from 'react';
+import meta from 'lib/config/metadata.js';
+
+export const metadata = meta;
 
 export default function RootLayout({ children }) {
   return (
