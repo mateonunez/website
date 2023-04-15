@@ -5,6 +5,14 @@ import { getAllArticles } from 'lib/articles/parser';
 import ArticlePreview from 'components/articles/preview';
 import { kebapCase } from 'lib/helpers/string';
 
+export async function generateMetadata({ params }) {
+  const { author } = params;
+
+  return {
+    title: `> blog - ${author}`
+  };
+}
+
 export default function BlogAuthor({ params }) {
   const { author } = params;
 
