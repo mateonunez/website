@@ -1,5 +1,4 @@
 import 'styles/global.css';
-import 'styles/nprogress.css';
 import 'components/articles/mdx/code/dark.css';
 import Loading from './loading';
 
