@@ -17,3 +17,5 @@ export async function GET() {
 
   return NextResponse.json(normalizeCurrentlyListening(data), { status: 200 });
 }
+
+export const revalidate = 10;
