@@ -1,3 +1,5 @@
+'use client';
+
 import s from './top.module.css';
 
 import config from 'lib/config';

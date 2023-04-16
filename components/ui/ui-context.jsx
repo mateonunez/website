@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useCallback, useMemo, useContext, useReducer } from 'react';
 
 export const initialState = {

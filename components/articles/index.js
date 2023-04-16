@@ -1,3 +1,5 @@
+'use client';
+
 import s from './article.module.css';
 
 import ArticleMeta from './meta';

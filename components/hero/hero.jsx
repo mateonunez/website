@@ -1,11 +1,25 @@
+'use client';
+
 import s from './hero.module.css';
 
-import { Fade, Terminal, Player } from 'components';
+import { Fade, Terminal, Player, useUI } from 'components';
 
 import ArticlePreview from 'components/articles/preview';
 import Link from 'next/link';
+import useSWR from 'swr';
 
 export default function Hero({ article, ...props }) {
+  const { setSpotifyListening } = useUI();
+
+  const fetcher = url =>
+    fetch(url)
+      .then(response => response.json())
+      .then(setSpotifyListening);
+
+  useSWR('/api/spotify/currently-listening', fetcher, {
+    refreshInterval: 10 * 1000
+  });
+
   return (
     <>
       <div {...props}>

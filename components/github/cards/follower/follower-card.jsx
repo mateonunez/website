@@ -1,5 +1,7 @@
-import { forwardRef } from 'react';
+'use client';
+
 import s from './follower-card.module.css';
+import { forwardRef } from 'react';
 import cn from 'classnames';
 import Link from 'next/link';
 import Image from 'next/image';

@@ -17,7 +17,11 @@
 }
 
 .container {
-  margin-top: 2rem;
+  margin: 2rem;
+  margon-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .name {
