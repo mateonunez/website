@@ -1,7 +1,6 @@
-import config from 'lib/config';
+import { NextResponse } from 'next/server';
 import { getTopArtists, getTopTracks } from 'lib/spotify';
 import { normalizeArtists, normalizeTracks } from 'lib/utils/normalizers';
-import { NextResponse } from 'next/server';
 
 export async function GET() {
   const artistsResponse = await getTopArtists().catch(err => {
@@ -32,12 +31,4 @@ export async function GET() {
     artists: artists.map(normalizeArtists),
     tracks: tracks.map(normalizeTracks)
   });
-}
-
-export async function topFetcher() {
-  const topResponse = await fetch(`${config.baseUrl}/api/spotify/top`);
-
-  const top = await topResponse.json();
-
-  return top;
 }

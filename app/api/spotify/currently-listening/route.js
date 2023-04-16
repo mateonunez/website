@@ -1,10 +1,7 @@
-import config from 'lib/config';
+import { NextResponse } from 'next/server';
 import { getCurrentlyListening } from 'lib/spotify';
 import { normalizeCurrentlyListening } from 'lib/utils/normalizers';
-import { NextResponse } from 'next/server';
-/**
- * API handler
- */
+
 export async function GET() {
   const response = await getCurrentlyListening();
 
@@ -19,17 +16,4 @@ export async function GET() {
   const data = await response.json();
 
   return NextResponse.json(normalizeCurrentlyListening(data), { status: 200 });
-}
-
-/**
- * Fetcher used on server side
- */
-export async function currentlyListeningFetcher() {
-  const currentlyListeningResponse = await fetch(
-    `${config.baseUrl}/api/spotify/currently-listening`
-  );
-
-  const currentlyListening = await currentlyListeningResponse.json();
-
-  return currentlyListening;
 }

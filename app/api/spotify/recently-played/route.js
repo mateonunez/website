@@ -1,7 +1,6 @@
-import config from 'lib/config';
+import { NextResponse } from 'next/server';
 import { getRecentlyPlayed } from 'lib/spotify';
 import { normalizeRecentlyPlayed } from 'lib/utils/normalizers';
-import { NextResponse } from 'next/server';
 
 export async function GET() {
   const response = await getRecentlyPlayed().catch(err => {
@@ -19,10 +18,4 @@ export async function GET() {
   const { items = [] } = await response.json();
   const data = items.map(normalizeRecentlyPlayed).sort((a, b) => b.played_at - a.played_at);
   return NextResponse.json(data, { status: 200 });
-}
-
-export async function recentlyPlayedFetcher() {
-  const recentlyPlayedResponse = await fetch(`${config.baseUrl}/api/spotify/recently-played`);
-  const recentlyPlayed = await recentlyPlayedResponse.json();
-  return recentlyPlayed;
 }
