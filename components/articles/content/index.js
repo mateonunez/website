@@ -2,7 +2,7 @@ import s from './content.module.css';
 
 import { MDXRemote } from 'next-mdx-remote';
 import * as components from 'components/articles/mdx';
-
+console.log({ components });
 export default function ArticleContent({ source }) {
   return (
     <>
