@@ -288,7 +288,7 @@ And this is an example of how to use it:
 
 ```jsx
 // app/layout.jsx
-import metadata from './metadata';
+import meta from './metadata';
 
 export const metadata = meta;
 
@@ -351,4 +351,212 @@ export async function generateMetadata({ params }) {
 
 Generating dynamic metadata is useful when you want to define a `metadata` object for a specific route or a group of routes (tree, subtree, etc) that depends on the route params.
 
+## <a name="new-api-routes" /> New **API** routes
 
+The new API routes, or `Route Handlers` as they are called in the Next.js [documentation](https://beta.nextjs.org/docs/routing/route-handlers), are a great way to create a REST API in a Next.js application.
+
+The **route handlers** can be defined inside the `app` directory named `route.js|ts` and they are automatically exposed as API routes.
+
+In my case I had all my API routes inside the `api` directory:
+
+<Row>
+  <Column>
+    <h3>`pages/api` structure</h3>
+    <Image
+      src="/images/articles/nextjs-appdir-migration/apitree.png"
+      width="221"
+      height="139"
+      alt="Next.js pages dir migration to appDir"
+    />
+  </Column>
+  <Column>
+    <h3>`routes handler` structure</h3>
+    <Image
+      src="/images/articles/nextjs-appdir-migration/appapitree.png"
+      width="216"
+      height="210"
+      alt="Next.js pages dir migration to appDir"
+    />
+  </Column>
+</Row>
+
+As you can note, I've created a _subdir_ in the **app** directory just to keep the `/api` route. This is because I wanted to keep the same API routes structure as before but you can define the **route handlers** in the root of the **app** directory.
+
+The main difference between the **API routes** and the **route handlers** is that the you need to export the method following the `HTTP` method name you want to use. In the old **API routes** you need to define the `HTTP` method inside the `req` object and expose the `handle` method as default. Furthermore, you can't expose other methods than allowed by the `HTTP` protocol.
+
+### Supported HTTP method
+
+> The following HTTP methods are supported: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `HEAD`, and `OPTIONS`. If an unsupported method is called, Next.js will return a 405 Method Not Allowed response.
+
+This is an example of how to define a **route handler**:
+
+> /app/api/open-source/profile/route.js
+
+```jsx
+import { NextResponse } from 'next/server';
+import { getProfile } from 'lib/github';
+import { normalizeGithubProfile } from 'lib/utils/normalizers/normalizeGithub';
+
+export async function GET() {
+  const profile = await getProfile().catch(err => {
+    return NextResponse.json(
+      { message: 'Something went wrong with GitHub.', extra: err },
+      { status: 500 }
+    );
+  });
+  if (!profile) {
+    return NextResponse.json({ error: 'Github not available' }, { status: 500 });
+  }
+
+  const profileNormalized = normalizeGithubProfile(profile);
+  return NextResponse.json({ profile: profileNormalized });
+}
+```
+
+This route handler will be exposed as `/api/open-source/profile` and it will be available for `GET` requests.
+
+<details>
+  <summary>This is the old version</summary>
+
+  ```jsx
+  import config from 'lib/config';
+  import { getProfile } from 'lib/github';
+  import { normalizeGithubProfile } from 'lib/utils/normalizers/normalizeGithub';
+
+  export default async function handler(req, res) {
+    const profile = await getProfile().catch(err => {
+      return res.status(200).json({ message: 'Something went wrong with GitHub.', extra: err });
+    });
+    if (!profile) {
+      return res.status(500).json({ error: 'Github not available' });
+    }
+
+    const profileNormalized = normalizeGithubProfile(profile);
+    return res.status(200).json({
+      profile: profileNormalized
+    });
+  }
+
+  export async function profileFetcher() {
+    let response;
+    try {
+      response = await fetch(`${config.baseUrl}/api/open-source/profile`);
+    } catch (err) {
+      console.warn(err);
+    }
+    const { profile } = await response.json();
+    return profile;
+  }
+  ```
+
+  > Note: I had to move the `profileFetcher` in the new route handle because it's not possible to expose a function as default and another one as named export.
+</details>
+
+### Revalidating static data
+
+> If you want to revalidate the data, you can return a `revalidate` property from the `GET` method. The value of `revalidate` is the number of seconds after which a page revalidation is triggered.
+
+```jsx
+export async function GET() {
+  // ...
+  return NextResponse.json(data);
+}
+
+export const revalidate = 60;
+```
+
+For full documentation about the **route handlers** you can check the [official documentation](https://beta.nextjs.org/docs/routing/route-handlers).
+
+## <a name="the-use-client-directive" /> The `useClient` directive
+
+I would have many things to say about the new system of rendering components both server-side and client-side. I recommend you to read the [fundamentals](https://beta.nextjs.org/docs/rendering/fundamentals) about the new `React v18` and `Next.js 13` rendering system.
+
+Simply put, there are two environments where your application code can be rendered: the `server` and the `client`.
+
+### Server Components
+
+All the components inside the `app` directory are **RSC** (React Server Components), introduced in [v18](https://react.dev/blog/2022/03/29/react-v18) of React. When a route is requested with Next.js, the server will render the components allowing the client to take over the application and add interactivity, by asynchronously loading the client-side runtime.
+
+With Server Compoments you can improve the performance of your application by delegating the rendering of the components to the server. The client-side JavaScript bundle size is reduced, cachable and predictable in size.
+
+### Client Components
+
+The client components are the components that are rendered only on the client-side. In Next.js they are `prerendered` on the server and `hydrated` on the client.
+
+> The `use client` directive is a new way to to define the **cut-off** point where it crosses the boundary from the server-only to che client part. One `use client` is defined in a file, all the other modules imported into it, including child components, are considered **part of the client bundle**.
+
+Rappresented in a diagram:
+
+<Image
+  src="/images/articles/nextjs-appdir-migration/useclient.png"
+  width="1103"
+  height="937"
+  alt="Next.js pages dir migration to appDir"
+  href="https://beta.nextjs.org/docs/rendering/server-and-client-components#using-the-use-client-directive"
+  target="_blank"
+/>
+
+This is a simple example of a component that is rendered only on the client-side:
+
+> /app/components/Counter.js
+
+```jsx
+'use client';
+
+import React, { useState } from 'react';
+import Button from 'components/Button';
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <Button onClick={() => setCount(count + 1)}>Click me</Button>
+    </div>
+  );
+}
+```
+
+> /app/components/Button.js
+
+```jsx
+import React from 'react';
+
+export default function Button({ children, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        background: 'blue',
+        color: 'white',
+        padding: '10px 20px',
+        border: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer',
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+```
+
+Note that:
+
+- The `use client` directive must be the first statement in the file.
+- The `use client` doesn't need to be defined in every file. The client bundle is automatically created for all files that are imported into a file that has the `use client` directive.
+
+For full documentation about the **use client** directive you can check the [official documentation](https://beta.nextjs.org/docs/rendering/server-and-client-components#using-the-use-client-directive).
+
+## <a href="#considerations" /> Considerations
+
+I have to say that I'm really happy with the new `Next.js 13` and `React v18` rendering system. I think that the new `app` directory is a great improvement and it will allow us to write more maintainable and scalable applications. I'm really excited to see what the future will bring.
+
+Next.js 13 is still in beta, so there are some things that doesn't work as expected or has different behaviors (caching, revalidation, etc). You can check the [roadmap](https://beta.nextjs.org/docs/app-directory-roadmap) to see the current status of the new `app` directory.
+
+I think that the migration to the new `app` directory is not so difficult. I hope that this article will help you to migrate your application to the new `app` directory.
+
+If you have any questions or suggestions, feel free to text me on [Twitter](https://twitter.com/mateonunez95) or check this repository on [GitHub](https://github.com/mateonunez/website).
+
+Bye! 👋
