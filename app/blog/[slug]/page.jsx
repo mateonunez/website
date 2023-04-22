@@ -16,6 +16,7 @@ export async function generateMetadata({ params }) {
     description: frontMatter.description,
     keywords: frontMatter.tags,
     openGraph: {
+      ...meta.openGraph,
       title: frontMatter.title,
       description: frontMatter.description,
       type: 'article',
