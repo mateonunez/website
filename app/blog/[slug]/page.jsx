@@ -7,12 +7,12 @@ import urlJoin from 'url-join';
 import config from 'lib/config';
 import meta from 'lib/config/metadata.js';
 
-export const revalidate = 60 * 60 * 24; // 24 hours
-
-export const fetchArticle = cache(async ({ slug }) => {
+const fetchArticle = cache(async ({ slug }) => {
   const { frontMatter, source } = await getArticle({ slug });
   return { frontMatter, source };
 });
+
+export const revalidate = 60 * 60 * 24; // 24 hours
 
 export async function generateMetadata({ params }) {
   const { slug } = params;
