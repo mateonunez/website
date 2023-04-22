@@ -17,8 +17,11 @@
 }
 
 .tagList {
+  max-width: 100%;
   margin-left: 0.25rem;
   font-size: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .tag {
