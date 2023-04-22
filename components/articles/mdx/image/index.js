@@ -8,7 +8,6 @@ export default function MDXImage({
   width,
   height,
   alt,
-  layout,
   quality,
   priority,
   href,
@@ -23,7 +22,6 @@ export default function MDXImage({
         height={height}
         alt={alt}
         aria-label={alt}
-        layout={layout}
         quality={quality}
         priority={priority}
         {...rest}

@@ -27,7 +27,6 @@ export default function ArticlePreview({
             alt={author.name}
             width={32}
             height={32}
-            layout="fixed"
             className={s.authorImage}
           />
           {/* Author Name */}
@@ -49,7 +48,6 @@ export default function ArticlePreview({
                 alt={title}
                 width={1280}
                 height={720}
-                layout="responsive"
                 className={s.image}
                 priority
               />

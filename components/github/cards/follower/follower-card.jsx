@@ -33,7 +33,6 @@ const FollowerCard = ({ follower, delay, variant = 'default' }, ref) => {
             alt={follower.username}
             height={48}
             width={48}
-            layout="responsive"
             quality={60}
             onLoadingComplete={() => {
               setUsernameVisible(true);

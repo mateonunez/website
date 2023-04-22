@@ -16,7 +16,6 @@ author:
   src="/images/articles/hello-blog/cover.png"
   width="1280"
   height="720"
-  layout="responsive"
   alt="Create your Blog with Next.js and MDX"
   href="/blog/hello-blog"
 />
@@ -226,7 +225,6 @@ export default function ArticlePreview({ author, date, title, description, image
             alt={author.name}
             width={32}
             height={32}
-            layout="fixed"
             className={s.authorImage}
           />
           {/* Author Name */}
@@ -249,7 +247,6 @@ export default function ArticlePreview({ author, date, title, description, image
                   alt={title}
                   width={1280}
                   height={720}
-                  layout="responsive"
                   className={s.image}
                 />
               </div>
@@ -275,7 +272,6 @@ And this is how my component looks like:
   width="823"
   height="237"
   alt="Article Preview using Next.JS and MDX"
-  layout="responsive"
 />
 
 ### What about the _/blog/[slug]_ page?
@@ -340,7 +336,6 @@ How my `mdx-components` looks like?
   width="749"
   height="194"
   alt="MDX Components | Blog with Next.JS and MDX"
-  layout="responsive"
 />
 
 So each time the _MDXRemote_ will render a native HTML element like `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, `<a>` or `<code>` (in this case) they will be replaced with my own components.

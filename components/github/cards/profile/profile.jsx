@@ -24,7 +24,6 @@ export default function Profile({ avatar, bio, company, email, username, url, lo
               src={avatar}
               className={s.avatar}
               alt="Mateo Nunez's face"
-              layout="responsive"
             />
           </div>
           <div className={s.container}>
