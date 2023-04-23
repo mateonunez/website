@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
   siteUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://mateonunez.dev',
   generateRobotsTxt: true,
-  additionalPaths: async config => {
+  additionalPaths: () => {
     const result = [];
     const articleSlugs = fs
       .readdirSync(path.join(process.cwd(), './articles'))
@@ -19,16 +19,6 @@ module.exports = {
         lastmod: new Date().toISOString()
       });
     }
-
-    // result.push({
-    //   loc: '/blog',
-    //   changefreq: 'yearly',
-    //   priority: 0.7,
-    //   lastmod: new Date().toISOString(),
-
-    //   // article slugs
-
-    // });
 
     return result;
   }
