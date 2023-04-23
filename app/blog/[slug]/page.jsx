@@ -2,7 +2,7 @@ import s from 'styles/pages/blog/[slug].module.css';
 
 import Article from 'components/articles';
 import { cache } from 'react';
-import { getArticle, getAllArticles } from 'lib/articles/parser';
+import { getArticle } from 'lib/articles/parser';
 
 const fetchArticle = cache(async ({ slug }) => {
   const { frontMatter, source } = await getArticle({ slug });
