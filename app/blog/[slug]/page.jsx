@@ -1,14 +1,22 @@
 import s from 'styles/pages/blog/[slug].module.css';
 
 import Article from 'components/articles';
+import { cache } from 'react';
 import { getArticle } from 'lib/articles/parser';
 import urlJoin from 'url-join';
 import config from 'lib/config';
 import meta from 'lib/config/metadata.js';
 
+const fetchArticle = cache(async ({ slug }) => {
+  const { frontMatter, source } = await getArticle({ slug });
+  return { frontMatter, source };
+});
+
+export const revalidate = 60 * 60 * 24; // 24 hours
+
 export async function generateMetadata({ params }) {
   const { slug } = params;
-  const { frontMatter } = await getArticle({ slug });
+  const { frontMatter } = await fetchArticle({ slug });
 
   return {
     ...meta,
@@ -38,7 +46,7 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogArticle({ params }) {
   const { slug } = params;
-  const { frontMatter, source } = await getArticle({ slug });
+  const { frontMatter, source } = await fetchArticle({ slug });
 
   return (
     <>
