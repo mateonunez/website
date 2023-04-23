@@ -11,8 +11,8 @@ export const metadata = {
   keywords: [...meta.keywords, 'blog', 'articles']
 };
 
-export default function Blog() {
-  const articles = getAllArticles();
+export default async function Blog() {
+  const articles = await getAllArticles();
   return (
     <>
       <Container clean>

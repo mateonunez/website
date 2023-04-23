@@ -4,7 +4,8 @@ import { Hero, About } from 'components';
 import { getLastArticle } from 'lib/articles/parser';
 
 export default async function HomePage() {
-  const article = getLastArticle();
+  const article = await getLastArticle();
+  console.log({ article });
 
   return (
     <>

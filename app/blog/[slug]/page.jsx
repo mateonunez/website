@@ -12,13 +12,11 @@ const fetchArticle = cache(async ({ slug }) => {
   return { frontMatter, source };
 });
 
-export const revalidate = 60 * 60 * 24; // 24 hours
-
 export async function generateMetadata({ params }) {
   const { slug } = params;
   const { frontMatter } = await fetchArticle({ slug });
 
-  return {
+  const dynamicMetadata = {
     ...meta,
     title: frontMatter.title,
     description: frontMatter.description,
@@ -42,6 +40,7 @@ export async function generateMetadata({ params }) {
       ]
     }
   };
+  return dynamicMetadata;
 }
 
 export default async function BlogArticle({ params }) {
