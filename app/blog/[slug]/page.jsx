@@ -3,11 +3,45 @@ import s from 'styles/pages/blog/[slug].module.css';
 import Article from 'components/articles';
 import { cache } from 'react';
 import { getArticle } from 'lib/articles/parser';
+import urlJoin from 'url-join';
+import config from 'lib/config';
+import meta from 'lib/config/metadata.js';
 
 const fetchArticle = cache(async ({ slug }) => {
   const { frontMatter, source } = await getArticle({ slug });
   return { frontMatter, source };
 });
+
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+  const { frontMatter } = await fetchArticle({ slug });
+
+  const dynamicMetadata = {
+    ...meta,
+    title: frontMatter.title,
+    description: frontMatter.description,
+    keywords: frontMatter.tags,
+    openGraph: {
+      ...meta.openGraph,
+      title: frontMatter.title,
+      description: frontMatter.description,
+      type: 'article',
+      article: {
+        authors: [frontMatter.author.name],
+        tags: frontMatter.tags,
+        publishedTime: frontMatter.date,
+        modifiedTime: frontMatter.date
+      },
+      images: [
+        {
+          url: urlJoin(config.baseUrl, frontMatter.image),
+          alt: frontMatter.title
+        }
+      ]
+    }
+  };
+  return dynamicMetadata;
+}
 
 export default async function BlogArticle({ params }) {
   const { slug } = params;
