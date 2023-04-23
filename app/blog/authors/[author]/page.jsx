@@ -13,15 +13,15 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function BlogAuthor({ params }) {
+export default async function BlogAuthor({ params }) {
   const { author } = params;
 
-  const articles = getAllArticles().filter(article => kebapCase(article.author.name) === author);
+  const articles = (await getAllArticles()).filter(
+    article => kebapCase(article.author.name) === author
+  );
 
   return (
     <>
-      {/* <NextSeo title={`${author.at(0).toUpperCase() + author.slice(1)} Articles Archive`} /> */}
-
       <Container clean>
         {/* Capitalize author */}
         <Title>{author.at(0).toUpperCase() + author.slice(1)}</Title>

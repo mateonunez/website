@@ -13,17 +13,15 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function BlogTag({ params }) {
+export default async function BlogTag({ params }) {
   const { tag } = params;
 
-  const articles = getAllArticles().filter(article => {
+  const articles = (await getAllArticles()).filter(article => {
     return article.tags.map(tag => kebapCase(tag)).includes(tag);
   });
 
   return (
     <>
-      {/* <NextSeo title={`${tag} Articles Archive`} /> */}
-
       <Container clean>
         <Title>{tag}</Title>
 
