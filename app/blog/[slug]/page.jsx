@@ -2,14 +2,12 @@ import s from 'styles/pages/blog/[slug].module.css';
 
 import Article from 'components/articles';
 import { cache } from 'react';
-import { getArticle } from 'lib/articles/parser';
+import { getArticle, getAllArticles } from 'lib/articles/parser';
 
 const fetchArticle = cache(async ({ slug }) => {
   const { frontMatter, source } = await getArticle({ slug });
   return { frontMatter, source };
 });
-
-export const revalidate = 60 * 60 * 24; // 24 hours
 
 export default async function BlogArticle({ params }) {
   const { slug } = params;

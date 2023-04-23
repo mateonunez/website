@@ -1,13 +1,20 @@
-import { getArticle } from 'lib/articles/parser';
+import { cache } from 'react';
+import { getArticle, getArticleSlugs } from 'lib/articles/parser';
 import urlJoin from 'url-join';
 import config from 'lib/config';
 import meta from 'lib/config/metadata.js';
 
+const fetchArticle = cache(async ({ slug }) => {
+  const { frontMatter, source } = await getArticle({ slug });
+  return { frontMatter, source };
+});
+
 export async function generateMetadata({ params }) {
   const { slug } = params;
-  const { frontMatter } = await getArticle({ slug });
+  const { frontMatter } = await fetchArticle({ slug });
 
-  return {
+  console.time('generateMetadata');
+  const dynamicMeta = {
     ...meta,
     title: frontMatter.title,
     description: frontMatter.description,
@@ -31,6 +38,14 @@ export async function generateMetadata({ params }) {
       ]
     }
   };
+  console.timeEnd('generateMetadata');
+
+  return dynamicMeta;
+}
+
+export async function generateStaticParams() {
+  const articles = await getArticleSlugs();
+  return articles.map(slug => ({ params: { slug } }));
 }
 
 export default function ArticleLayout({ children }) {
