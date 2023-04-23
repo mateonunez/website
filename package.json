@@ -1,6 +1,6 @@
 {
   "name": "@mateonunez/website",
-  "version": "v0.3.2",
+  "version": "v0.3.3",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
