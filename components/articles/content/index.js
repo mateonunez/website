@@ -1,5 +1,3 @@
-'use client';
-
 import s from './content.module.css';
 
 import { MDXRemote } from 'next-mdx-remote';

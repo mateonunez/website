@@ -1,7 +1,7 @@
 import s from 'styles/pages/blog/[slug].module.css';
 
-import { cache } from 'react';
 import Article from 'components/articles';
+import { cache } from 'react';
 import { getArticle } from 'lib/articles/parser';
 import urlJoin from 'url-join';
 import config from 'lib/config';
