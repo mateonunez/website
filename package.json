@@ -46,8 +46,7 @@
     "swr": "^2.1.5",
     "tailwindcss": "^3.3.2",
     "three": "^0.152.2",
-    "typescript": "5.0.4",
-    "url-join": "^5.0.0"
+    "typescript": "5.0.4"
   },
   "author": "mateonunez"
 }

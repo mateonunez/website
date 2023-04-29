@@ -3,7 +3,6 @@ import s from 'styles/pages/blog/[slug].module.css';
 import Article from 'components/articles';
 import { cache } from 'react';
 import { getArticle } from 'lib/articles/parser';
-import urlJoin from 'url-join';
 import config from 'lib/config';
 import meta from 'lib/config/metadata.js';
 
@@ -15,6 +14,10 @@ const fetchArticle = cache(async ({ slug }) => {
 export async function generateMetadata({ params }) {
   const { slug } = params;
   const { frontMatter } = await fetchArticle({ slug });
+
+  const baseUrl = new URL(config.baseUrl);
+  const imagePath = frontMatter.image.startsWith('/') ? frontMatter.image : '/' + frontMatter.image;
+  const imageUrl = new URL(imagePath, baseUrl).toString();
 
   const dynamicMetadata = {
     ...meta,
@@ -34,7 +37,7 @@ export async function generateMetadata({ params }) {
       },
       images: [
         {
-          url: urlJoin(config.baseUrl, frontMatter.image),
+          url: imageUrl,
           alt: frontMatter.title
         }
       ]
