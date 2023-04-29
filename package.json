@@ -19,7 +19,6 @@
     "@mdx-js/loader": "^2.3.0",
     "@octokit/graphql": "^5.0.5",
     "@tailwindcss/typography": "^0.5.9",
-    "@types/node": "18.16.2",
     "@vercel/analytics": "^1.0.0",
     "autoprefixer": "^10.4.14",
     "classnames": "^2.3.2",
@@ -45,8 +44,7 @@
     "remove-markdown": "^0.5.0",
     "swr": "^2.1.5",
     "tailwindcss": "^3.3.2",
-    "three": "^0.152.2",
-    "typescript": "5.0.4"
+    "three": "^0.152.2"
   },
   "author": "mateonunez"
 }
