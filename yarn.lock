@@ -40,10 +40,10 @@
   resolved "https://registry.yarnpkg.com/@corex/deepmerge/-/deepmerge-4.0.43.tgz#9bd42559ebb41cc5a7fb7cfeea5f231c20977dca"
   integrity sha512-N8uEMrMPL0cu/bdboEWpQYb/0i2K5Qn8eCsxzOmxSggJbbQte7ljMRoXm917AbntqTGOzdTu+vP3KOOzoC70HQ==
 
-"@elgorditosalsero/react-gtm-hook@^2.6.0":
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/@elgorditosalsero/react-gtm-hook/-/react-gtm-hook-2.6.0.tgz#4e6e8738fa4524357b7cd81df4309c2e7f086722"
-  integrity sha512-NuqsNJJ5+/Py47WyZU1JjTW48yIYvAwiqRm22ObQmCRnM32uqisJqD6FEmY1AtAwjvAiC3I+TGz7rrK0EGBS7g==
+"@elgorditosalsero/react-gtm-hook@^2.7.1":
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/@elgorditosalsero/react-gtm-hook/-/react-gtm-hook-2.7.1.tgz#9bc2402842c5439306b598ed54c9dbfca2546221"
+  integrity sha512-Kknjn60tNGqAq4T9LW1ByJx64z5zX0VYxi62v/Nr/yvS36rgySk+/JiSMEGl1B4LPYSyShdcE+Qjn+JjBBg9hQ==
 
 "@eslint-community/eslint-utils@^4.2.0":
   version "4.4.0"
