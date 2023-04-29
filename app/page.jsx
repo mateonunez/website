@@ -5,7 +5,6 @@ import { getLastArticle } from 'lib/articles/parser';
 
 export default async function HomePage() {
   const article = await getLastArticle();
-  console.log({ article });
 
   return (
     <>
