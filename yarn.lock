@@ -35,10 +35,10 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
-"@elgorditosalsero/react-gtm-hook@^2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@elgorditosalsero/react-gtm-hook/-/react-gtm-hook-2.7.1.tgz#9bc2402842c5439306b598ed54c9dbfca2546221"
-  integrity sha512-Kknjn60tNGqAq4T9LW1ByJx64z5zX0VYxi62v/Nr/yvS36rgySk+/JiSMEGl1B4LPYSyShdcE+Qjn+JjBBg9hQ==
+"@elgorditosalsero/react-gtm-hook@^2.7.2":
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/@elgorditosalsero/react-gtm-hook/-/react-gtm-hook-2.7.2.tgz#dd3b76ab331d61bada1b0b0ec5923d243d311458"
+  integrity sha512-5lGZOk7BcWTdz2pqu2sa/IyAtuTItCCZuEGUthnlJgpWKvVGrzVyhIOVj1/ed575jusaMIr+yIfeZ11WzH2QqQ==
 
 "@eslint-community/eslint-utils@^4.2.0":
   version "4.4.0"

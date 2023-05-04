@@ -14,7 +14,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@elgorditosalsero/react-gtm-hook": "^2.7.1",
+    "@elgorditosalsero/react-gtm-hook": "^2.7.2",
     "@mdx-js/loader": "^2.3.0",
     "@octokit/graphql": "^5.0.5",
     "@tailwindcss/typography": "^0.5.9",
