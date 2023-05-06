@@ -9,4 +9,3 @@ export * from './icons';
 export * from './layouts';
 export * from './spotify';
 export * from './terminal';
-export * from './ui/ui-context';

@@ -2,7 +2,8 @@
 
 import s from './hero.module.css';
 
-import { Fade, Terminal, Player, useUI } from 'components';
+import { Fade, Terminal, Player } from 'components';
+import { useUI } from 'components/ui/ui-context';
 
 import ArticlePreview from 'components/articles/preview';
 import Link from 'next/link';
