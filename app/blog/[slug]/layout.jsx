@@ -1,6 +1,5 @@
 import 'styles/global.css';
 import 'components/articles/mdx/code/dark.css';
-import Loading from './loading';
 
 // import { MainLayout } from 'components';
 import { Suspense } from 'react';
@@ -19,7 +18,7 @@ export default function RootLayout({ children }) {
 
       <body className="antialiased">
         {/* <MainLayout> */}
-        <Suspense fallback={<Loading />}>{children}</Suspense>
+        <Suspense fallback={<div>Loading</div>}>{children}</Suspense>
         {/* </MainLayout> */}
       </body>
     </html>
