@@ -1,8 +1,8 @@
 import s from 'styles/pages/blog/[slug].module.css';
 
-import { cache, Suspense } from 'react';
-import { getArticle } from 'lib/articles/parser';
 import Article from 'components/articles';
+import { cache } from 'react';
+import { getArticle } from 'lib/articles/parser';
 import config from 'lib/config';
 import meta from 'lib/config/metadata.js';
 
@@ -47,16 +47,15 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function BlogArticle({ params }) {
-  'use server';
+  'use client';
+
   const { slug } = params;
   const { frontMatter, source } = await fetchArticle({ slug });
 
   return (
     <>
       <div className={s.root}>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Article frontMatter={frontMatter} source={source} />
-        </Suspense>
+        <Article frontMatter={frontMatter} source={source} />
       </div>
     </>
   );
