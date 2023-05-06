@@ -11,8 +11,6 @@ const fetchArticle = cache(async ({ slug }) => {
   return { frontMatter, source };
 });
 
-export const runtime = 'edge';
-
 export async function generateMetadata({ params }) {
   const { slug } = params;
   const { frontMatter } = await fetchArticle({ slug });
