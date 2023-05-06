@@ -2,7 +2,8 @@ import 'styles/global.css';
 import 'components/articles/mdx/code/dark.css';
 import Loading from './loading';
 
-import { MainLayout, UIProvider } from 'components';
+import { MainLayout } from 'components';
+import { UIProvider } from 'components/ui/ui-context';
 import { Suspense } from 'react';
 import meta from 'lib/config/metadata.js';
 

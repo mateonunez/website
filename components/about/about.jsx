@@ -11,10 +11,10 @@ import { Fade, CircularProgress } from 'components';
 import cn from 'classnames';
 
 const goals = [
-  { title: 'Work fully remote', progress: 70 },
+  { title: 'First Node.js contribution', progress: 100 },
+  { title: 'Work fully remote', progress: 90 },
   { title: 'Learn Rust as I know JavaScript', progress: 40 },
-  { title: 'Make my first public talk', progress: 30 },
-  { title: 'First Node.js contribution', progress: 30 }
+  { title: 'Make my first public talk', progress: 30 }
 ];
 
 const About = ({ ...props }) => {
@@ -79,7 +79,7 @@ const About = ({ ...props }) => {
                     className="m-0 mx-0"
                     direction="left"
                     distance={150}
-                    delay={0.5}
+                    delay={0.3}
                     trigger={sectionsRef}>
                     <article className="my-1">
                       <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>Bio</h2>
