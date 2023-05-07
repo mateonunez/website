@@ -6,7 +6,7 @@ import { getArticle } from 'lib/articles/parser';
 import config from 'lib/config';
 import meta from 'lib/config/metadata.js';
 
-const Article = dynamic(() => import('components/articles'), { ssr: false });
+const Article = dynamic(() => import('components/articles'));
 
 const fetchArticle = cache(async ({ slug }) => {
   const { frontMatter, source } = await getArticle({ slug });
