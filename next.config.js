@@ -1,10 +1,10 @@
 const contentSecurityPolicy = `
-  default-src 'self' https://*.googletagmanager.com https://*.google-analytics.com https://*.vercel-insights.com https://vercel.live;
+  default-src 'self' https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.vercel-insights.com https://vercel.live;
   base-uri 'self';
   block-all-mixed-content;
   font-src 'self' https://fonts.gstatic.com https://*.vercel.com https://vercel.live;
   frame-ancestors 'self';
-  img-src 'self' data: https://i.scdn.co https://avatars.githubusercontent.com https://*.googletagmanager.com https://*.google-analytics.com https://*.vercel.com https://*.vercel-insights.com https://vercel.live;
+  img-src 'self' data: https://i.scdn.co https://avatars.githubusercontent.com https://*.googletagmanager.com https://*.google-analytics.com https://*.vercel.com https://*.vercel-insights.com https://vercel.live https://*.google.com https://*.google.it;
   object-src 'none';
   script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.googletagmanager.com https://*.google-analytics.com https://*.vercel-insights.com https://vercel.live;
   script-src-attr 'none';
