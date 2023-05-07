@@ -4,7 +4,7 @@ import s from './header.module.css';
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { MN, Menu } from 'components/icons';
+import { MN, Menu, Close } from 'components/icons';
 import cn from 'classnames';
 import SocialLinks from 'components/common/social-links/social-links';
 import { useUI } from 'components/ui/ui-context';
@@ -69,12 +69,12 @@ export default function Header() {
         <button
           className={cn(
             s.toggle,
-            'transform ease-linear duration-500',
+            'transform ease-linear duration-300',
             mobileNavShown && 'rotate-90'
           )}
           onClick={toggle}
           aria-label="Toggle Menu">
-          <Menu />
+          {mobileNavShown ? <Close /> : <Menu />}
         </button>
       </header>
 
