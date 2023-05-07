@@ -12,3 +12,4 @@ export { default as User } from './User';
 export { default as Star } from './Star';
 export { default as Fork } from './Fork';
 export { default as Twitter } from './Twitter';
+export { default as Close } from './Close';
