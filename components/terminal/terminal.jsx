@@ -26,10 +26,10 @@ const paragraphs = [
   "Hey there! I'm Mateo 👋",
   '',
   "👨‍💻 I'm a Senior Developer at hlpy.",
-  '⌨️ I code often in JavaScript and TypeScript.',
-  '💭 I also like to try languages like Rust, PHP, Python and Go.',
-  '☁️ Love the Cloud and sometimes I play with K8S, AWS and CNCF treats.',
-  '📐 My favourite setup is: VS Code with Vim and Colemak layout.',
+  '⌨️ I code often in JavaScript, TypeScript and Python.',
+  "💭 I'm currently learning Rust and Zig.",
+  '☁️ I Love the Cloud and sometimes I play with K8S, AWS and CNCF treats.',
+  '📐 My favourite setup is: VS Code with Vim, tmux and Colemak layout.',
   '',
   ''
 ];
