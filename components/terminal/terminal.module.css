@@ -20,9 +20,9 @@
 }
 
 .inner.amber {
-  background: #191724;
-  color: var(--amber);
-  border-color: #000;
+  background: #121212;
+  /* color: var(--amber); */
+  border-color: #191723;
 }
 
 .inner.amber .caret {
