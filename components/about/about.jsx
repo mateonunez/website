@@ -53,7 +53,7 @@ const About = ({ ...props }) => {
                     <Image
                       width={150}
                       height={150}
-                      src="/images/profile.png"
+                      src="/images/profile.jpg"
                       alt="Mateo Nunez's face"
                     />
                   </div>
