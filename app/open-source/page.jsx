@@ -25,7 +25,7 @@ export default async function OpenSourcePage() {
   const { sponsors = [], followers = [] } = profile;
 
   followers.sort(() => Math.random() - 0.5);
-  const followersShown = followers.slice(0, config.munber);
+  const followersShown = followers.slice(0, config.munber + 1);
 
   delete profile['repositories'];
   delete profile['followers'];
