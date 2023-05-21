@@ -1,11 +1,9 @@
 import s from 'styles/pages/open-source/page.module.css';
 
-import { Container, Fade, Followers, GitHubProfile, RepositoryPreview, Title } from 'components';
+import { Container, Fade, RepositoryPreview, Title } from 'components';
 import { WordAnimator } from 'components';
-import { profileFetcher, repositoryFetcher } from 'lib/fetchers/open-source/fetcher';
+import { profileFetcher } from 'lib/fetchers/open-source/fetcher';
 import meta from 'lib/config/metadata.js';
-import cn from 'classnames';
-import Image from 'next/image';
 import config from 'lib/config';
 
 export const metadata = {
@@ -24,7 +22,7 @@ export default async function OpenSourcePage() {
   const words = ['', 'Art', 'People', 'Code', 'Passion', 'You'];
 
   const profile = await profileFetcher();
-  const { sponsors = [], repositories = [], followers = [] } = profile;
+  const { sponsors = [], followers = [] } = profile;
 
   followers.sort(() => Math.random() - 0.5);
   const followersShown = followers.slice(0, config.munber);
