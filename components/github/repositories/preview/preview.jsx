@@ -9,11 +9,12 @@ export default function RepositoryPreview({
   language,
   languageColor,
   stars,
-  url
+  url,
+  style
 }) {
   return (
     <>
-      <div className={s.root}>
+      <div className={s.root} style={style}>
         <div className={s.container}>
           {/* Heading */}
 
