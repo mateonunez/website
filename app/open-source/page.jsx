@@ -7,6 +7,7 @@ import meta from 'lib/config/metadata.js';
 import config from 'lib/config';
 import Image from 'next/image';
 
+// TODO: Add SEO
 export const metadata = {
   title: '> open source',
   description: `Open Source projects made with ❤️ by ${meta.author.name} and the Community. ${meta.description}`,
