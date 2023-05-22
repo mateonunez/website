@@ -20,7 +20,7 @@ export const metadata = {
 };
 
 export default async function OpenSourcePage() {
-  const words = ['', 'Art', 'People', 'Code', 'Passion', 'You'];
+  const words = ['Art', 'People', 'Code', 'Passion', 'You'];
 
   const profile = await profileFetcher();
   const { sponsors = [], followers = [] } = profile;

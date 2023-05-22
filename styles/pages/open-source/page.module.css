@@ -43,7 +43,7 @@
   /* make a grid */
   width: 80%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 1rem;
   margin: 0 auto;
 }
