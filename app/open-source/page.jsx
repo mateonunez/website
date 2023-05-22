@@ -26,6 +26,8 @@ export default async function OpenSourcePage() {
   const profile = await profileFetcher();
   const { sponsors = [], followers = [] } = profile;
 
+  console.log({ profile });
+
   followers.sort(() => Math.random() - 0.5);
   const followersShown = followers.slice(0, config.munber + 1);
 
