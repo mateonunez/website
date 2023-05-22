@@ -17,33 +17,32 @@ export default function Sponsors({ sponsors }) {
 
         {/* Create a section for the sponsors */}
         <div className={s.sponsorsContainer}>
-          {sponsors.length > 0 &&
-            sponsors.map(sponsor => (
-              <div key={sponsor.login} className={s.sponsorContainer}>
-                <Link
-                  href={sponsor.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 text-center">
-                  <Image
-                    src={sponsor.avatar}
-                    alt={sponsor.username}
-                    className="w-64 h-64 rounded-full shadow-lg"
-                    width={512}
-                    height={512}
-                  />
-                  <span className="block pt-4 font-black">@{sponsor.username}</span>
-                </Link>
+          {sponsors.map(sponsor => (
+            <div key={sponsor.login} className={s.sponsorContainer}>
+              <Link
+                href={sponsor.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 text-center">
+                <Image
+                  src={sponsor.avatar}
+                  alt={sponsor.username}
+                  className="w-64 h-64 rounded-full shadow-lg"
+                  width={512}
+                  height={512}
+                />
+                <span className="block pt-4 font-black">@{sponsor.username}</span>
+              </Link>
 
-                <div className="px-4 text-sm lg:px-2">
-                  <RepositoryPreview
-                    key={sponsor.repositories[0].name}
-                    className={s.sponsorRepository}
-                    {...sponsor.repositories[0]}
-                  />
-                </div>
+              <div className="px-4 text-sm lg:px-2">
+                <RepositoryPreview
+                  key={sponsor.repositories[0].name}
+                  className={s.sponsorRepository}
+                  {...sponsor.repositories[0]}
+                />
               </div>
-            ))}
+            </div>
+          ))}
         </div>
 
         {/* Consider sposoring me section */}
