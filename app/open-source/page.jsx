@@ -5,7 +5,7 @@ import s from 'styles/pages/open-source/page.module.css';
 import { Container, Fade, Sponsors, Title } from 'components';
 import { WordAnimator } from 'components';
 import { profileFetcher } from 'lib/fetchers/open-source/fetcher';
-import meta from 'lib/config/metadata.js';
+// import meta from 'lib/config/metadata.js';
 import config from 'lib/config';
 import Image from 'next/image';
 
