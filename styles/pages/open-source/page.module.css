@@ -30,12 +30,13 @@
   gap: 2rem;
 }
 
-.followerContainer {
+.followersContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  margin-top: 2rem;
 }
 
 .followers {

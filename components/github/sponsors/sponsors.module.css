@@ -1,0 +1,49 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.description {
+  @apply prose lg:prose-xl text-gray-100;
+  margin: 2rem;
+}
+
+.sponsorsContainer {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(512px, 1fr));
+  gap: 1rem;
+}
+
+.sponsorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+.sponsorRepository {
+  max-width: 380px;
+}
+
+.considerSponsoringContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem;
+}
+
+@media (max-width: 768px) {
+  .sponsorsContainer {
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+
+  .sponsorRepository {
+    min-width: 90vw;
+  }
+}

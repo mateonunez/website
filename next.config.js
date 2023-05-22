@@ -53,7 +53,7 @@ module.exports = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
-    domains: ['i.scdn.co', 'avatars.githubusercontent.com'],
+    domains: ['i.scdn.co', 'avatars.githubusercontent.com', 'github.githubassets.com'],
     minimumCacheTTL: 60
   },
   async headers() {
