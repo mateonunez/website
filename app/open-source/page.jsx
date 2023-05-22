@@ -26,8 +26,6 @@ export default async function OpenSourcePage() {
   const profile = await profileFetcher();
   const { sponsors = [], followers = [] } = profile;
 
-  console.log({ profile });
-
   followers.sort(() => Math.random() - 0.5);
   const followersShown = followers.slice(0, config.munber + 1);
 
@@ -50,9 +48,9 @@ export default async function OpenSourcePage() {
       </Container>
 
       {/* Sponsors */}
-      <Container clean id="you">
+      <Container clean name="you">
         <div className={s.thanksContainer}>
-          <Fade direction="left" delay={0.5} clean className="w-full">
+          <Fade direction="left" clean className="w-full">
             <h2 className="text-4xl font-bold text-center">Thank you.</h2>
 
             <Sponsors sponsors={sponsors} />
@@ -72,7 +70,7 @@ export default async function OpenSourcePage() {
             {/* You can be here */}
             <div className={s.followers}>
               {followersShown.map(follower => (
-                <div key={follower.login} className="p-4 m-4">
+                <div key={`follower-${follower.username}`} className="p-4 m-4">
                   <a
                     href={follower.url}
                     target="_blank"

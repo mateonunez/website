@@ -1,5 +1,3 @@
-'use client';
-
 import s from './sponsors.module.css';
 
 import Image from 'next/image';
@@ -20,7 +18,7 @@ export default function Sponsors({ sponsors }) {
         {/* Create a section for the sponsors */}
         <div className={s.sponsorsContainer}>
           {sponsors.map(sponsor => (
-            <div key={sponsor.login} className={s.sponsorContainer}>
+            <div key={`sponsor-${sponsor.username}`} className={s.sponsorContainer}>
               <Link
                 href={sponsor.url}
                 target="_blank"
