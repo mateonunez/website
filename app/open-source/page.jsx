@@ -1,3 +1,5 @@
+'use client';
+
 import s from 'styles/pages/open-source/page.module.css';
 
 import { Container, Fade, Sponsors, Title } from 'components';
@@ -8,6 +10,7 @@ import config from 'lib/config';
 import Image from 'next/image';
 
 // TODO: Add SEO
+/*
 export const metadata = {
   title: '> open source',
   description: `Open Source projects made with ❤️ by ${meta.author.name} and the Community. ${meta.description}`,
@@ -19,7 +22,7 @@ export const metadata = {
     }
   ]
 };
-
+*/
 export default async function OpenSourcePage() {
   const words = ['Art', 'People', 'Code', 'Passion', 'You'];
 
