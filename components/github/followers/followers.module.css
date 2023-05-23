@@ -1,55 +1,41 @@
 .root {
-  margin: 1rem auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 1200px;
 }
 
-/* Make a large and tiny title */
-.title {
-  margin-top: 3rem;
-  font-size: 3rem;
-  font-weight: 300;
-  font-family: 'Inter', sans-serif;
-  color: #ccc;
+.description {
+  @apply prose lg:prose-xl text-gray-100;
+  margin: 2rem;
 }
 
-.follower-container {
-  @apply scroll-smooth;
+.followersContainer {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.followerContainer {
   display: flex;
-  flex-direction: row;
-  overflow: hidden;
-  white-space: nowrap;
-  margin: 0 2rem 0 2rem 0;
-}
-
-.navigator {
+  flex-direction: column;
+  align-items: center;
   margin: auto;
-  padding: 0 0.7rem 0 0.7rem;
 }
 
-.paragraph {
-  padding: 0 1rem 0 1rem;
-  text-indent: 1rem;
+.youAllContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem auto;;
 }
 
 @media (max-width: 768px) {
-  .root {
-    width: 90wv;
-  }
-
-  .title {
-    font-size: 2rem;
-  }
-
-  .track-container {
-    overflow-x: scroll;
-  }
-
-  .navigator {
-    display: none;
+  .followersContainer {
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 }

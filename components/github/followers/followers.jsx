@@ -1,65 +1,54 @@
-'use client';
-
+import Link from 'next/link';
 import s from './followers.module.css';
 
-import { ChevronUp, Container, Fade, FollowerCard, Title } from 'components';
+import Image from 'next/image';
 import config from 'lib/config';
-import { useScroll } from 'lib/hooks';
-import { useRef, useState } from 'react';
 
 export default function Followers({ followers }) {
-  const followerContainerRef = useRef();
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const scroll = useScroll;
+  followers.sort(() => Math.random() - 0.5);
+  const followersShown = followers.slice(0, config.munber - 1);
 
   return (
     <>
-      <Container clean>
-        <Title className={s.title}>Thank you all!</Title>
+      <div className={s.root}>
+        <article className={s.description}>
+          Thanks to every single person that has contributed on growing this passion of mine.
+        </article>
 
-        {/* Left scroller */}
-
-        {/* Content */}
-        {followers.length > 0 && (
-          <div className={s.root}>
-            <button
-              className={s.navigator}
-              onClick={() => {
-                scroll(followerContainerRef, 'left');
-              }}
-              aria-label="Less Followers">
-              <ChevronUp className="w-6 h-6 font-black transition duration-500 transform -rotate-90" />
-            </button>
-
-            <div
-              className={s['follower-container']}
-              ref={followerContainerRef}
-              onTouchMove={event => {
-                const direction = prevScrollPos > event.touches[0].clientX ? 'right' : 'left';
-
-                scroll(followerContainerRef, direction);
-                setPrevScrollPos(event.touches[0].clientX);
-              }}>
-              {followers.map((follower, key) => (
-                <Fade key={`${follower.id}-${key}`} delay={key + config.munber / 100} clean>
-                  <FollowerCard follower={follower} delay={key + 1} />
-                </Fade>
-              ))}
+        <div className={s.followersContainer}>
+          {followersShown.map(follower => (
+            <div key={`follower-${follower.username}`} className={s.followerContainer}>
+              <Link
+                href={follower.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 text-center">
+                <Image
+                  src={follower.avatar}
+                  alt={follower.username}
+                  className="w-32 h-32 rounded-full shadow-lg"
+                  width={128}
+                  height={128}
+                />
+                <span className="mt-2 text-sm text-center text-caption">@{follower.username}</span>
+              </Link>
             </div>
+          ))}
+        </div>
 
-            <button
-              className={s.navigator}
-              onClick={() => {
-                scroll(followerContainerRef, 'right');
-              }}
-              aria-label="More Followers">
-              <ChevronUp className="w-6 h-6 transition duration-500 transform rotate-90 hover:scale-110" />
-            </button>
-          </div>
-        )}
+        <div className={s.youAllContainer}>
+          <a
+            href="https://github.com/mateonunez?tab=followers"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-black text-center">
+            and {followers.length - followersShown.length} more...{' '}
+            <span className="text-xs text-emoji">(thank you ❤️)</span>
+          </a>
+        </div>
 
-        {/* Right scroller */}
-      </Container>
+        {/* Consider following me section */}
+      </div>
     </>
   );
 }
