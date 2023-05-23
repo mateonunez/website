@@ -13,7 +13,6 @@ export default function Sponsors({ sponsors }) {
           dreams. Thank you for your support and for believing in me.
         </article>
 
-        {/* Create a section for the sponsors */}
         <div className={s.sponsorsContainer}>
           {sponsors.map(sponsor => (
             <div key={`sponsor-${sponsor.username}`} className={s.sponsorContainer}>
@@ -45,7 +44,7 @@ export default function Sponsors({ sponsors }) {
 
         {/* Consider sposoring me section */}
         <div className={s.considerSponsoringContainer}>
-          <h2 className="text-4xl font-bold text-center">You love my job?</h2>
+          <h2 className="text-4xl font-bold text-center">You love my work`?</h2>
 
           <article className={s.description}>
             If you like my work and want to support me, consider sponsoring me on GitHub.
