@@ -1,0 +1,40 @@
+.welcomeContainer {
+  min-height: calc(100vh - 260px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.quoteContainer {
+  margin: 1rem auto;
+  max-width: 480px;
+}
+
+.quoteChar {
+  @apply text-3xl leading-tight text-amber-500;
+  line-height: 0;
+}
+
+.quoteText {
+  @apply px-5 text-sm text-center;
+}
+
+.thanksContainer {
+  min-height: calc(100vh - 160px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.genericContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}

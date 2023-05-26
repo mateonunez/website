@@ -2,7 +2,7 @@
   margin: 1rem auto;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  justify-content: space-around;
   width: 600px;
   min-height: auto;
 }
@@ -17,11 +17,9 @@
 }
 
 .container {
-  margin: 2rem;
-  margon-bottom: 0;
+  margin: auto;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 }
 
 .name {
@@ -31,6 +29,12 @@
 
 .bio {
   font-size: 1rem;
+  font-weight: lighter;
+}
+
+.company {
+  font-size: 1rem;
+  font-style: italic;
   font-weight: lighter;
 }
 

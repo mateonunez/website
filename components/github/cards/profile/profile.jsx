@@ -5,13 +5,7 @@ import { Container } from 'components';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Profile({ avatar, bio, company, email, username, url, location, ...rest }) {
-  console.log('Snooping...', {
-    company,
-    email,
-    location
-  });
-
+export default function Profile({ avatar, bio, company, username, url, ...rest }) {
   return (
     <>
       <Container clean {...rest}>
@@ -28,13 +22,19 @@ export default function Profile({ avatar, bio, company, email, username, url, lo
           </div>
           <div className={s.container}>
             {/* Name  */}
-            <h1 className={s.name}>@{username}</h1>
+            <Link
+              href={url}
+              title="Mateo on Github"
+              aria-label="Mateo on Github"
+              rel="canonical"
+              target="_blank"
+              className={s.name}>
+              @{username}
+            </Link>
             {/* Bio  */}
             <p className={s.bio}>{bio}</p>
-            {/* Url */}
-            <Link href={url} title="Github" aria-label="Github" rel="canonical" target="_blank">
-              {url}
-            </Link>
+            {/* Company */}
+            <p className={s.company}>{company}</p>
           </div>
         </div>
       </Container>

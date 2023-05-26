@@ -1,11 +1,15 @@
-import { Container, Fade, Followers, GitHubProfile, RepositoryPreview, Title } from 'components';
+import s from 'styles/pages/open-source/page.module.css';
+
+import { Container, Fade, Followers, GitHubProfile, Sponsors, Title } from 'components';
+import { WordAnimator } from 'components';
 import { profileFetcher } from 'lib/fetchers/open-source/fetcher';
 import meta from 'lib/config/metadata.js';
 
+// TODO: improve SEO
 export const metadata = {
   title: '> open source',
   description: `Open Source projects made with ❤️ by ${meta.author.name} and the Community. ${meta.description}`,
-  keywords: [...meta.keywords, 'open source', 'github', 'projects'],
+  keywords: [...meta.keywords, 'open source', 'github', 'projects', 'followers', 'sponsors'],
   other: [
     {
       name: 'followers',
@@ -15,61 +19,71 @@ export const metadata = {
 };
 
 export default async function OpenSourcePage() {
+  const words = ['Art', 'People', 'Code', 'Passion', 'You'];
+
   const profile = await profileFetcher();
-  const { repositories = [], followers = [] } = profile;
+  const { sponsors = [], followers = [] } = profile;
 
   delete profile['repositories'];
   delete profile['followers'];
-
-  followers.sort(() => Math.random() - 0.5);
-
-  const { avatar, bio, company, email, username, location, url } = profile;
+  delete profile['sponsors'];
 
   return (
     <>
-      {/* <NextSeo
-        title="Open Source"
-        description="Open Source projects made with ❤️ by Mateo Nunez."
-        openGraph={{
-          title: "Mateo's Open Source Projects by GitHub"
-        }}
-      /> */}
-      <Container clean>
-        <Title>Open Source</Title>
+      {/* Welcome */}
+      <Container>
+        <Title variant="title-secondary">Open Source Is About...</Title>
 
-        <div className="flex flex-col">
-          <Container>
-            <Fade delay={0.3}>
-              <GitHubProfile
-                avatar={avatar}
-                bio={bio}
-                company={company}
-                email={email}
-                username={username}
-                location={location}
-                url={url}
-                className="mb-24"
-              />
-            </Fade>
-          </Container>
-
-          {/* Followers  */}
-          <Container>
-            <Fade delay={1.3}>
-              <Followers followers={followers} />
-            </Fade>
-          </Container>
-
-          {/* Repositories  */}
-          <Container>
-            <Fade delay={3}>
-              {repositories.map(repository => (
-                <RepositoryPreview key={repository.name} {...repository} />
-              ))}
-            </Fade>
-          </Container>
+        <div className={s.welcomeContainer}>
+          <div />
+          <WordAnimator words={words} clickable />
+          <div />
         </div>
       </Container>
+
+      {/* Sponsors */}
+      <Container clean name="you">
+        <div className={s.thanksContainer}>
+          <Fade direction="left" clean className="w-full">
+            <h2 className="text-4xl font-bold text-center">Thank you.</h2>
+
+            <Sponsors sponsors={sponsors} />
+          </Fade>
+        </div>
+      </Container>
+
+      {/* Followers */}
+      <Container clean name="people">
+        <div className={s.genericContainer}>
+          <Fade direction="left" delay={0.5} className="w-full">
+            <h2 className="text-4xl font-bold text-center">Still You</h2>
+
+            <Followers followers={followers} />
+          </Fade>
+        </div>
+      </Container>
+
+      {/* Profile */}
+      <Container clean name="passion">
+        <div className={s.genericContainer}>
+          <Fade direction="left" delay={0.5} className="w-full">
+            <h2 className="text-4xl font-bold text-center">About me</h2>
+
+            <GitHubProfile {...profile} />
+          </Fade>
+        </div>
+      </Container>
+
+      {/* Last activity, Work in progress */}
+      {/* <Container clean name="passion">
+        <div className={s.genericContainer}>
+          <Fade direction="left" delay={0.5} className="w-full">
+            <h2 className="text-4xl font-bold text-center">Last Activity</h2>
+
+            <LastActivity contributions={contributions} />
+          </Fade>
+        </div>
+      </Container> */}
     </>
   );
 }

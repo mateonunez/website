@@ -1,6 +1,7 @@
 import { Fork, Star } from 'components';
 import Link from 'next/link';
 import s from './preview.module.css';
+import cn from 'classnames';
 
 export default function RepositoryPreview({
   name,
@@ -9,11 +10,15 @@ export default function RepositoryPreview({
   language,
   languageColor,
   stars,
-  url
+  url,
+  style,
+  className
 }) {
+  const rootClassName = cn(s.root, className);
+
   return (
     <>
-      <div className={s.root}>
+      <div className={rootClassName} style={style}>
         <div className={s.container}>
           {/* Heading */}
 

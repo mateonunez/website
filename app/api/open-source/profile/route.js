@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getProfile } from 'lib/github';
-import { normalizeGithubProfile } from 'lib/utils/normalizers/normalizeGithub';
+import { normalizeGitHubProfile } from 'lib/utils/normalizers/normalizeGithub';
 
 export async function GET() {
   const profile = await getProfile().catch(err => {
@@ -12,8 +12,7 @@ export async function GET() {
   if (!profile) {
     return NextResponse.json({ error: 'Github not available' }, { status: 500 });
   }
-
-  const profileNormalized = normalizeGithubProfile(profile);
+  const profileNormalized = normalizeGitHubProfile(profile);
 
   return NextResponse.json({ profile: profileNormalized });
 }

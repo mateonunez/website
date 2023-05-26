@@ -1,0 +1,20 @@
+.wordAnimatorContainer {
+  @apply flex flex-col items-center justify-center;
+  word-break: break-all;
+  /* height: 350px; */
+}
+
+.wordAnimator {
+  @apply text-transparent bg-clip-text font-black leading-none text-9xl;
+  @apply bg-gradient-to-r from-teal-400 to-purple-500 via-pink-500 animate-gradient-x;
+}
+
+@media (max-width: 768px) {
+  .wordAnimatorContainer {
+    /* height: 250px; */
+  }
+
+  .wordAnimator {
+    @apply text-transparent bg-clip-text font-black leading-none text-6xl;
+  }
+}

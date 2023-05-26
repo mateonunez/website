@@ -11,31 +11,39 @@
   margin: 2rem;
 }
 
-.followersContainer {
+.sponsorsContainer {
   width: 80%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(512px, 1fr));
   gap: 1rem;
 }
 
-.followerContainer {
+.sponsorContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: auto;
 }
 
-.youAllContainer {
+.sponsorRepository {
+  max-width: 380px;
+}
+
+.considerSponsoringContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1rem auto;;
+  margin: 2rem auto;
 }
 
 @media (max-width: 768px) {
-  .followersContainer {
+  .sponsorsContainer {
     width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+
+  .sponsorRepository {
+    min-width: 90vw;
   }
 }
