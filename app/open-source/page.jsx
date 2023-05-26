@@ -1,15 +1,15 @@
 import s from 'styles/pages/open-source/page.module.css';
 
-import { Container, Fade, Followers, Sponsors, Title } from 'components';
+import { Container, Fade, Followers, GitHubProfile, Sponsors, Title } from 'components';
 import { WordAnimator } from 'components';
 import { profileFetcher } from 'lib/fetchers/open-source/fetcher';
 import meta from 'lib/config/metadata.js';
 
-// TODO: Add SEO
+// TODO: improve SEO
 export const metadata = {
   title: '> open source',
   description: `Open Source projects made with ❤️ by ${meta.author.name} and the Community. ${meta.description}`,
-  keywords: [...meta.keywords, 'open source', 'github', 'projects'],
+  keywords: [...meta.keywords, 'open source', 'github', 'projects', 'followers', 'sponsors'],
   other: [
     {
       name: 'followers',
@@ -17,6 +17,7 @@ export const metadata = {
     }
   ]
 };
+
 export default async function OpenSourcePage() {
   const words = ['Art', 'People', 'Code', 'Passion', 'You'];
 
@@ -27,10 +28,9 @@ export default async function OpenSourcePage() {
   delete profile['followers'];
   delete profile['sponsors'];
 
-  // const { avatar, bio, company, email, username, location, url } = profile;
-
   return (
     <>
+      {/* Welcome */}
       <Container>
         <Title variant="title-secondary">Open Source Is About...</Title>
 
@@ -54,7 +54,7 @@ export default async function OpenSourcePage() {
 
       {/* Followers */}
       <Container clean name="people">
-        <div className={s.followersContainer}>
+        <div className={s.genericContainer}>
           <Fade direction="left" delay={0.5} className="w-full">
             <h2 className="text-4xl font-bold text-center">Still You</h2>
 
@@ -62,6 +62,28 @@ export default async function OpenSourcePage() {
           </Fade>
         </div>
       </Container>
+
+      {/* Profile */}
+      <Container clean name="passion">
+        <div className={s.genericContainer}>
+          <Fade direction="left" delay={0.5} className="w-full">
+            <h2 className="text-4xl font-bold text-center">About me</h2>
+
+            <GitHubProfile {...profile} />
+          </Fade>
+        </div>
+      </Container>
+
+      {/* Last activity, Work in progress */}
+      {/* <Container clean name="passion">
+        <div className={s.genericContainer}>
+          <Fade direction="left" delay={0.5} className="w-full">
+            <h2 className="text-4xl font-bold text-center">Last Activity</h2>
+
+            <LastActivity contributions={contributions} />
+          </Fade>
+        </div>
+      </Container> */}
     </>
   );
 }
