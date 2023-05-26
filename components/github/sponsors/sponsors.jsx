@@ -1,3 +1,5 @@
+'use client';
+
 import s from './sponsors.module.css';
 
 import Image from 'next/image';
@@ -5,6 +7,7 @@ import { RepositoryPreview } from 'components';
 import Link from 'next/link';
 
 export default function Sponsors({ sponsors }) {
+  console.log({ sponsors });
   return (
     <>
       <div className={s.root}>

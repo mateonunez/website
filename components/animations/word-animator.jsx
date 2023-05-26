@@ -34,7 +34,7 @@ const WordAnimator = ({ words, clickable }, ref) => {
     ? {
         href: `#${currentWord.toLowerCase()}`,
         alt: currentWord,
-        ariaHidden: true,
+        'aria-hidden': true,
         onClick: () => wordRef.current.scrollIntoView()
       }
     : {};
