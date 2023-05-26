@@ -46,7 +46,7 @@ export default function Sponsors({ sponsors }) {
 
         {/* Consider sposoring me section */}
         <div className={s.considerSponsoringContainer}>
-          <h2 className="text-4xl font-bold text-center">You love my work`?</h2>
+          <h2 className="text-4xl font-bold text-center">You love my work?</h2>
 
           <article className={s.description}>
             If you like my work and want to support me, consider sponsoring me on GitHub.
