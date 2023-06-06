@@ -119,7 +119,7 @@ const About = ({ ...props }) => {
                         </span>
                       </div>
                       <div className={s.bio}>
-                        <span className={s.bioYear}>2022 to date</span>
+                        <span className={s.bioYear}>2022 to 2023</span>
                         <span className={s.bioText}>
                           Starting a new adventure in{' '}
                           <Link
@@ -132,6 +132,20 @@ const About = ({ ...props }) => {
                           </Link>{' '}
                           as a Senior Developer.
                         </span>
+                      </div>
+                      <div className={s.bio}>
+                        <span className={s.bioYear}>2023 to date</span>
+                        <span className={s.bioText}>
+                          Software Architect at{' '}
+                          <Link
+                            href="https://bonusx.it"
+                            passHref
+                            alt="BonusX"
+                            target="_blank"
+                            rel="noreferrer">
+                            BonusX
+                          </Link>
+                        </div>
                       </div>
                     </article>
                   </Fade>
