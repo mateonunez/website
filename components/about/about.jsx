@@ -135,9 +135,7 @@ const About = ({ ...props }) => {
                       </div>
                       <div className={s.bio}>
                         <span className={s.bioYear}>2023 to date</span>
-                        <span className={s.bioText}>
-                          Software Architect at{' '}
-                        </span>
+                        <span className={s.bioText}>Software Architect at </span>
                         <Link
                           href="https://bonusx.it"
                           passHref
