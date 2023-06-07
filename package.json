@@ -28,7 +28,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "gray-matter": "^4.0.3",
-    "gsap": "^3.11.5",
+    "gsap": "^3.12.0",
     "next-mdx-remote": "^4.4.1",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
