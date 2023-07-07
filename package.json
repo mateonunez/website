@@ -30,7 +30,7 @@
     "gray-matter": "^4.0.3",
     "gsap": "^3.12.2",
     "next-mdx-remote": "^4.4.1",
-    "postcss": "^8.4.24",
+    "postcss": "^8.4.25",
     "prettier": "^2.8.8",
     "react-lottie-player": "^1.5.4",
     "reading-time": "^1.5.0",
