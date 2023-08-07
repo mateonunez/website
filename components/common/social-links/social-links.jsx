@@ -19,7 +19,7 @@ export default function SocialLinks() {
 
       {/* Twitter  */}
       <Link
-        href="https://twitter.com/mateonunez95"
+        href="https://twitter.com/mateonunezx"
         passHref
         className={s.personalLink}
         target="_blank"
