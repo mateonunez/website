@@ -22,7 +22,7 @@
     "autoprefixer": "^10.4.15",
     "classnames": "^2.3.2",
     "eslint": "^8.47.0",
-    "eslint-config-next": "^13.4.17",
+    "eslint-config-next": "^13.4.19",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-mdx": "^2.2.0",
     "eslint-plugin-prettier": "^4.2.1",
