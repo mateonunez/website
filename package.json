@@ -17,7 +17,7 @@
     "@elgorditosalsero/react-gtm-hook": "^2.7.2",
     "@mdx-js/loader": "^2.3.0",
     "@octokit/graphql": "^7.0.1",
-    "@tailwindcss/typography": "^0.5.9",
+    "@tailwindcss/typography": "^0.5.10",
     "@vercel/analytics": "^1.0.2",
     "autoprefixer": "^10.4.15",
     "classnames": "^2.3.2",
