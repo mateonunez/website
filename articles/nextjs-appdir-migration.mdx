@@ -1,7 +1,7 @@
 ---
 title: 'Migrating your Next.js application to `appDir`'
 date: 2023-04-19T10:00:00.000Z
-updated: 2023-04-22T14:15:00.000Z
+updated: 2023-10-27T12:10:00.000Z
 description: 'My personal experience migrating my Next.js application to the new `app` router.'
 tags:
   - nextjs
@@ -52,7 +52,7 @@ In this article, I will talk about:
     The <b>use client</b> directive
   </a>
 
-## <a name="what-is-appdir" /> What is `appDir`?
+## <a name="what-is-appdir" href="#what-is-appdir" /> What is `appDir`?
 
 > The new App Router works in a new directory named app. The app directory works alongside the pages directory to allow for incremental adoption. This allows you to opt some routes of your application into the new behavior while keeping other routes in the pages directory for previous behavior.
 > \- [Next.js documentation](https://beta.nextjs.org/docs/routing/fundamentals#the-app-directory)
@@ -207,7 +207,7 @@ export default function BlogPostPage({ children }) {
 }
 ```
 
-## <a name="the-metadata-object" /> The **metadata** object?
+## <a name="the-metadata-object" href="#the-metadata-object" /> The `metadata` object
 
 This is one of my favorite features of the new Next.js version. It allows you to define a `metadata` object for each subtree. This object is used to define the `title`, `description`, `image`, `url`, `type`, `locale`, `site_name`, `twitter`, and `facebook` of the subtree (or tree), avoiding external libraries or custom code.
 
@@ -314,7 +314,7 @@ export default function Blog() {
 }
 ```
 
-### <a name="generate-dynamic-metadata" /> Generate dynamic metadata
+### <a name="generate-dynamic-metadata" href="#generate-dynamic-metadata" /> Generate dynamic metadata
 
 It's also possible to generate dynamic metadata for a specific route or a group of routes (tree, subtree, etc) by using the `generateMetadata` function.
 
@@ -352,7 +352,7 @@ export async function generateMetadata({ params }) {
 
 Generating dynamic metadata is useful when you want to define a `metadata` object for a specific route or a group of routes (tree, subtree, etc) that depends on the route params.
 
-## <a name="new-api-routes" /> New **API** routes
+## <a name="new-api-routes" href="#new-api-routes" /> New API routes
 
 The new API routes, or `Route Handlers` as they are called in the Next.js [documentation](https://beta.nextjs.org/docs/routing/route-handlers), are a great way to create a REST API in a Next.js application.
 
@@ -416,43 +416,6 @@ export async function GET() {
 
 This route handler will be exposed as `/api/open-source/profile` and it will be available for `GET` requests.
 
-<details>
-  <summary>This is the old version</summary>
-
-  ```jsx
-  import config from 'lib/config';
-  import { getProfile } from 'lib/github';
-  import { normalizeGithubProfile } from 'lib/utils/normalizers/normalizeGithub';
-
-  export default async function handler(req, res) {
-    const profile = await getProfile().catch(err => {
-      return res.status(200).json({ message: 'Something went wrong with GitHub.', extra: err });
-    });
-    if (!profile) {
-      return res.status(500).json({ error: 'Github not available' });
-    }
-
-    const profileNormalized = normalizeGithubProfile(profile);
-    return res.status(200).json({
-      profile: profileNormalized
-    });
-  }
-
-  export async function profileFetcher() {
-    let response;
-    try {
-      response = await fetch(`${config.baseUrl}/api/open-source/profile`);
-    } catch (err) {
-      console.warn(err);
-    }
-    const { profile } = await response.json();
-    return profile;
-  }
-  ```
-
-  > Note: I had to move the `profileFetcher` in the new route handle because it's not possible to expose a function as default and another one as named export.
-</details>
-
 ### Revalidating static data
 
 > If you want to revalidate the data, you can return a `revalidate` property from the `GET` method. The value of `revalidate` is the number of seconds after which a page revalidation is triggered.
@@ -468,7 +431,7 @@ export const revalidate = 60;
 
 For full documentation about the **route handlers** you can check the [official documentation](https://beta.nextjs.org/docs/routing/route-handlers).
 
-## <a name="the-use-client-directive" /> The `useClient` directive
+## <a name="the-use-client-directive" href="#the-use-client-directive" /> The `use client` directive
 
 I would have many things to say about the new system of rendering components both server-side and client-side. I recommend you to read the [fundamentals](https://beta.nextjs.org/docs/rendering/fundamentals) about the new `React v18` and `Next.js 13` rendering system.
 
@@ -550,7 +513,7 @@ Note that:
 
 For full documentation about the **use client** directive you can check the [official documentation](https://beta.nextjs.org/docs/rendering/server-and-client-components#using-the-use-client-directive).
 
-## <a href="#considerations" /> Considerations
+## <a name="considerations" href="#considerations" /> Considerations
 
 I have to say that I'm really happy with the new `Next.js 13` and `React v18` rendering system. I think that the new `app` directory is a great improvement and it will allow us to write more maintainable and scalable applications. I'm really excited to see what the future will bring.
 
