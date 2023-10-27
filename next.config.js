@@ -48,9 +48,6 @@ const securityHeaders = [
 
 module.exports = {
   reactStrictMode: true,
-  experimental: {
-    appDir: true
-  },
   images: {
     formats: ['image/avif', 'image/webp'],
     domains: ['i.scdn.co', 'avatars.githubusercontent.com', 'github.githubassets.com'],
