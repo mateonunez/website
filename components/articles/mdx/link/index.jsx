@@ -1,8 +1,6 @@
 import Link from 'next/link';
 
-export default function MDXLink({ children, ...rest }) {
-  const { href } = rest;
-
+export default function MDXLink({ children, href }) {
   let title;
   if (typeof children === 'object') {
     title = children.props?.alt;
