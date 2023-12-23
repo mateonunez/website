@@ -13,7 +13,8 @@ export default function SocialLinks() {
         className={s.personalLink}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Github | Mateo Nunez">
+        aria-label="Github | Mateo Nunez"
+      >
         <Github />
       </Link>
 
@@ -24,7 +25,8 @@ export default function SocialLinks() {
         className={s.personalLink}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Twitter | Mateo Nunez">
+        aria-label="Twitter | Mateo Nunez"
+      >
         <Twitter />
       </Link>
 
@@ -35,7 +37,8 @@ export default function SocialLinks() {
         className={s.personalLink}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="LinkedIn | Mateo Nunez">
+        aria-label="LinkedIn | Mateo Nunez"
+      >
         <LinkedIn />
       </Link>
 
@@ -46,7 +49,8 @@ export default function SocialLinks() {
         className={s.personalLink}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Instagram | Mateo Nunez">
+        aria-label="Instagram | Mateo Nunez"
+      >
         <Instagram />
       </Link>
 
@@ -57,7 +61,8 @@ export default function SocialLinks() {
         className={s.personalLink}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Spotify | Mateo Nunez">
+        aria-label="Spotify | Mateo Nunez"
+      >
         <Spotify />
       </Link>
     </>

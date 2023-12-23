@@ -14,7 +14,7 @@ const goals = [
   { title: 'First Node.js contribution', progress: 100 },
   { title: 'Work fully remote', progress: 90 },
   { title: 'Learn Rust as I know JavaScript', progress: 40 },
-  { title: 'Make my first public talk', progress: 30 }
+  { title: 'Make my first public talk', progress: 30 },
 ];
 
 const About = ({ ...props }) => {
@@ -32,8 +32,7 @@ const About = ({ ...props }) => {
           {/* Title  */}
           <Fade className="m-0" delay={0.3} trigger={titleRef}>
             <h2 className={s.title} ref={titleRef}>
-              <span className={s['about-gradient']}>About</span>{' '}
-              <span className={s['me-gradient']}>Me</span>
+              <span className={s['about-gradient']}>About</span> <span className={s['me-gradient']}>Me</span>
             </h2>
           </Fade>
 
@@ -50,20 +49,14 @@ const About = ({ ...props }) => {
               <div className={s.profileContainer}>
                 <Fade distance={150} delay={0.5} trigger={profileRef}>
                   <div className={s.profileImage}>
-                    <Image
-                      width={150}
-                      height={150}
-                      src="/images/profile.jpg"
-                      alt="Mateo Nunez's face"
-                    />
+                    <Image width={150} height={150} src="/images/profile.jpg" alt="Mateo Nunez's face" />
                   </div>
 
                   <div className="w-full" ref={profileRef}>
                     <div className={s.profileQuoteContainer}>
                       <div className={cn(s.profileQuote, 'text-left')}>“</div>
                       <p className={s.profileText}>
-                        If you don&apos;t fix a different bug every day you aren&apos;t learning
-                        enough.
+                        If you don&apos;t fix a different bug every day you aren&apos;t learning enough.
                       </p>
                       <div className={cn(s.profileQuote, 'text-right')}>”</div>
                     </div>
@@ -75,59 +68,43 @@ const About = ({ ...props }) => {
 
                 <div className={s.sections} ref={sectionsRef}>
                   {/* Bio */}
-                  <Fade
-                    className="m-0 mx-0"
-                    direction="left"
-                    distance={150}
-                    delay={0.3}
-                    trigger={sectionsRef}>
+                  <Fade className="m-0 mx-0" direction="left" distance={150} delay={0.3} trigger={sectionsRef}>
                     <article className="my-1">
                       <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>Bio</h2>
                       <div className={s.bio}>
                         <span className={s.bioYear}>1995</span>
                         Born in Palmira, Colombia. <br />
-                        <b>Mi Tierra</b>. The place where I learned the most important thing:{' '}
-                        <i>The Value of Family</i>.
+                        <b>Mi Tierra</b>. The place where I learned the most important thing: <i>The Value of Family</i>
+                        .
                       </div>
                       <div className={s.bio}>
                         <span className={s.bioYear}>2009</span>
-                        Move to Milan, Italy. <br />I started a new life. Known new friends. Learned
-                        how to cook.
+                        Move to Milan, Italy. <br />
+                        I started a new life. Known new friends. Learned how to cook.
                       </div>
                       <div className={s.bio}>
                         <span className={s.bioYear}>2015</span>
                         <span className={s.bioText}>
-                          Start working as a Telecommunication Technician. I learned different
-                          exchanges such as <i>UT</i>, <i>1240</i>, <i>MSAN</i> and others telephony
-                          protocols.
+                          Start working as a Telecommunication Technician. I learned different exchanges such as{' '}
+                          <i>UT</i>, <i>1240</i>, <i>MSAN</i> and others telephony protocols.
                         </span>
                       </div>
                       <div className={s.bio}>
                         <span className={s.bioYear}>2017 to 2022</span>
                         <span className={s.bioText}>
                           Works on{' '}
-                          <Link
-                            href="https://sabicom.com"
-                            passHref
-                            alt="Sabicom SRL"
-                            target="_blank"
-                            rel="noreferrer">
+                          <Link href="https://sabicom.com" passHref alt="Sabicom SRL" target="_blank" rel="noreferrer">
                             Sabicom SRL
                           </Link>{' '}
-                          as a Developer. In these years I learned how to work with different
-                          technologies. I&apos;m currently the <i>Team Leader</i>.
+                          as a Developer. In these years I learned how to work with different technologies. I&apos;m
+                          currently the <i>Team Leader</i>.
                         </span>
                       </div>
                       <div className={s.bio}>
                         <span className={s.bioYear}>2022 to 2023</span>
                         <span className={s.bioText}>
                           Starting a new adventure in{' '}
-                          <Link
-                            href="https://hlpy.co"
-                            passHref
-                            alt="hlpy"
-                            target="_blank"
-                            rel="noreferrer">
+                          <Link href="https://hlpy.co" passHref alt="hlpy" target="_blank" rel="noreferrer">
                             hlpy
                           </Link>{' '}
                           as a Senior Developer.
@@ -136,12 +113,7 @@ const About = ({ ...props }) => {
                       <div className={s.bio}>
                         <span className={s.bioYear}>2023 to date</span>
                         <span className={s.bioText}>Software Architect at </span>
-                        <Link
-                          href="https://bonusx.it"
-                          passHref
-                          alt="BonusX"
-                          target="_blank"
-                          rel="noreferrer">
+                        <Link href="https://bonusx.it" passHref alt="BonusX" target="_blank" rel="noreferrer">
                           BonusX
                         </Link>
                       </div>
@@ -149,56 +121,31 @@ const About = ({ ...props }) => {
                   </Fade>
 
                   {/* You should know */}
-                  <Fade
-                    className="m-0 mx-0"
-                    direction="left"
-                    distance={150}
-                    delay={0.5}
-                    clean
-                    trigger={sectionsRef}>
+                  <Fade className="m-0 mx-0" direction="left" distance={150} delay={0.5} clean trigger={sectionsRef}>
                     <article className="my-3">
-                      <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
-                        You should know
-                      </h2>
+                      <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>You should know</h2>
                       <p className={s.paragraph}>
-                        Everything I learned, I learned on my own. I like challenges and every
-                        single goal for me means putting myself on the line, banging my head,
-                        falling down and getting back up.
+                        Everything I learned, I learned on my own. I like challenges and every single goal for me means
+                        putting myself on the line, banging my head, falling down and getting back up.
                       </p>
                     </article>
                   </Fade>
 
                   {/* You shouldn't */}
-                  <Fade
-                    className="m-0 mx-0"
-                    direction="left"
-                    distance={150}
-                    delay={1.2}
-                    clean
-                    trigger={sectionsRef}>
+                  <Fade className="m-0 mx-0" direction="left" distance={150} delay={1.2} clean trigger={sectionsRef}>
                     <article className="my-3">
-                      <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
-                        You shouldn&apos;t
-                      </h2>
+                      <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>You shouldn&apos;t</h2>
                       <p className={s.paragraph}>I&apos;m touchy.</p>
                     </article>
                   </Fade>
 
                   {/* Goals  */}
-                  <Fade
-                    className="m-0 mx-0"
-                    direction="left"
-                    distance={150}
-                    delay={1.8}
-                    clean
-                    trigger={sectionsRef}>
+                  <Fade className="m-0 mx-0" direction="left" distance={150} delay={1.8} clean trigger={sectionsRef}>
                     <article className="my-3">
-                      <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>
-                        Goals
-                      </h2>
+                      <h2 className={cn(s.profileSectionTitle, s.profileSectionTitleBlack)}>Goals</h2>
                       <div className="w-full">
                         <ul className={s.goalsList}>
-                          {goals.map(goal => (
+                          {goals.map((goal) => (
                             <li key={goal.title} className={s.goal}>
                               {goal.title} <CircularProgress progress={goal.progress} />
                             </li>

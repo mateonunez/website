@@ -12,13 +12,7 @@ export default function Profile({ avatar, bio, company, username, url, ...rest }
         <div className={s.root}>
           {/* Avatar  */}
           <div className={s.container}>
-            <Image
-              width={150}
-              height={150}
-              src={avatar}
-              className={s.avatar}
-              alt="Mateo Nunez's face"
-            />
+            <Image width={150} height={150} src={avatar} className={s.avatar} alt="Mateo Nunez's face" />
           </div>
           <div className={s.container}>
             {/* Name  */}
@@ -28,7 +22,8 @@ export default function Profile({ avatar, bio, company, username, url, ...rest }
               aria-label="Mateo on Github"
               rel="canonical"
               target="_blank"
-              className={s.name}>
+              className={s.name}
+            >
               @{username}
             </Link>
             {/* Bio  */}

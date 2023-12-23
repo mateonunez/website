@@ -31,7 +31,7 @@ const paragraphs = [
   '☁️ I Love the Cloud and sometimes I play with K8S, AWS and CNCF treats.',
   '📐 My favourite setup is: VS Code with Vim, tmux and Colemak layout.',
   '',
-  ''
+  '',
 ];
 
 const Terminal = () => {
@@ -46,18 +46,17 @@ const Terminal = () => {
     frames.push(
       <Frame duration={sleepDuration} key={`${text}-first`}>
         <Line />
-      </Frame>
+      </Frame>,
     );
 
     // typing out the line
     for (let i = 0; i < text.length; i++) {
-      const duration =
-        frames.length > 0 || renderedLines.length > 0 ? getTypingDuration() : sleepDuration;
+      const duration = frames.length > 0 || renderedLines.length > 0 ? getTypingDuration() : sleepDuration;
 
       frames.push(
         <Frame duration={duration} key={`${text}-${i}`}>
           <Line text={text.slice(0, i + 1)} />
-        </Frame>
+        </Frame>,
       );
     }
 
@@ -65,7 +64,7 @@ const Terminal = () => {
     frames.push(
       <Frame key={`${text}-last`}>
         <Line text={text} noCaret />
-      </Frame>
+      </Frame>,
     );
 
     const keyFrames = (
@@ -73,10 +72,11 @@ const Terminal = () => {
         component="p"
         onEnd={() => {
           if (newRender) {
-            setRenderedLines(renderedLines => [...renderedLines, text]);
-            setLineCount(c => c + 1);
+            setRenderedLines((renderedLines) => [...renderedLines, text]);
+            setLineCount((c) => c + 1);
           }
-        }}>
+        }}
+      >
         {frames}
       </Keyframes>
     );
@@ -102,7 +102,7 @@ const Terminal = () => {
 
   return (
     <div className={s.root}>
-      <div className={`${s.inner}${lineCount >= 8 ? ' ' + s.amber : ''}`}>
+      <div className={`${s.inner}${lineCount >= 8 ? ` ${s.amber}` : ''}`}>
         <div className={s.header}>
           <span className={s.icon} />
           <span className={s.icon} />
@@ -113,19 +113,23 @@ const Terminal = () => {
           {/* Rendered Lines  */}
           {renderedLines.length > 0 &&
             renderedLines.map((renderedLine, index) => (
-              <p key={index}>
+              <p key={`${renderedLine}-${index}`}>
                 <Line text={renderedLine} noCaret />
               </p>
             ))}
 
           {/* New paragraphs */}
-          {paragraphs.map((text, index) => (
-            <div key={index}>
-              {lineCount === index && !isLastParagraph && !isTerminalCompleted && (
-                <>{renderLine(text, true)}</>
-              )}
-            </div>
-          ))}
+          {paragraphs.map((text, index) => {
+            const shouldRenderLine = lineCount === index && !isLastParagraph && !isTerminalCompleted;
+
+            return (
+              <div key={`${text}-${index}`}>
+                {
+                  shouldRenderLine ? renderLine(text, true) : null
+                }
+              </div>
+            );
+          })}
 
           {/* Last paragraph */}
           {isLastParagraph && (

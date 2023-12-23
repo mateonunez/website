@@ -8,7 +8,7 @@ import meta from 'lib/config/metadata.js';
 export const metadata = {
   title: '> blog',
   description: `Articles written with ❤️ by ${meta.author.name} and the Community. ${meta.description}`,
-  keywords: [...meta.keywords, 'blog', 'articles']
+  keywords: [...meta.keywords, 'blog', 'articles'],
 };
 
 export default async function Blog() {
@@ -20,7 +20,7 @@ export default async function Blog() {
 
         <div className={s.root}>
           <div className="container">
-            {articles.map(article => (
+            {articles.map((article) => (
               <ArticlePreview key={article.slug} {...article} />
             ))}
           </div>

@@ -6,7 +6,8 @@ const CircularProgress = ({ progress = 50, ...props }) => {
 
   return (
     <div>
-      <svg className="w-8 h-8 rotate-90" {...props}>
+      <svg alt="circular-progress" className="w-8 h-8 rotate-90" {...props}>
+        <title>Circular Progress</title>
         {/* Gray  */}
         <circle
           className="text-gray-300"

@@ -13,7 +13,9 @@ export default function Eror({ error, reset }) {
       <div className={s.root}>
         <h2 className="title">Error unexpected. Can you fix me?</h2>
 
-        <button onClick={() => reset()}>Try again</button>
+        <button type="button" onClick={() => reset()}>
+          Try again
+        </button>
       </div>
     </>
   );

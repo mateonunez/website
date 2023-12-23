@@ -23,9 +23,9 @@ export default function Fade({
   const classNames = cn(
     {
       block: !clean,
-      'mx-auto': !clean
+      'mx-auto': !clean,
     },
-    className
+    className,
   );
 
   const [isRendered, setIsRendered] = useState(false);
@@ -35,9 +35,9 @@ export default function Fade({
     const timeline = gsap.timeline({
       defaults: {
         duration: 1,
-        ease: 'power2.inOut'
+        ease: 'power2.inOut',
       },
-      ...(trigger?.current && { scrollTrigger: { trigger: trigger.current } })
+      ...(trigger?.current && { scrollTrigger: { trigger: trigger.current } }),
     });
 
     const fadeDirection =
@@ -55,15 +55,15 @@ export default function Fade({
       ref.current,
       {
         ...fadeDirection,
-        opacity: 0
+        opacity: 0,
       },
       {
         opacity: 1,
         delay,
         duration,
         y: 0,
-        x: 0
-      }
+        x: 0,
+      },
     );
 
     return () => timeline.kill();

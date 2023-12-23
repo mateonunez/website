@@ -9,12 +9,12 @@ import { Fade } from 'components';
 import { useState } from 'react';
 
 // eslint-disable-next-line no-unused-vars
-const FollowerCard = ({ follower, delay, variant = 'default' }, ref) => {
+const FollowerCard = ({ follower, delay, variant = 'default' }) => {
   const [usernameVisible, setUsernameVisible] = useState(false);
 
   const classNames = cn(s.root, {
     [s.root_default]: variant === 'default',
-    [s.root_full]: variant === 'full'
+    [s.root_full]: variant === 'full',
   });
 
   return (
@@ -26,7 +26,8 @@ const FollowerCard = ({ follower, delay, variant = 'default' }, ref) => {
           target="_blank"
           rel="noopener noreferrer"
           title={`${follower.username}`}
-          aria-label={`${follower.username}`}>
+          aria-label={`${follower.username}`}
+        >
           <Image
             className={s.image}
             src={follower.avatar}

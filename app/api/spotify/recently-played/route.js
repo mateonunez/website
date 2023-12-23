@@ -3,7 +3,7 @@ import { getRecentlyPlayed } from 'lib/spotify';
 import { normalizeRecentlyPlayed } from 'lib/utils/normalizers';
 
 export async function GET() {
-  const response = await getRecentlyPlayed().catch(err => {
+  const response = await getRecentlyPlayed().catch((err) => {
     return NextResponse.json({ recently_played: false, message: 'Are you connected?', extra: err });
   });
 

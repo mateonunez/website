@@ -18,7 +18,8 @@ export default function ArtistCard({ item, delay = 0 }) {
           target="_blank"
           rel="noopener noreferrer"
           title={`${item.name} [${item.genres}]`}
-          aria-label={`${item.name} [${item.genres}]`}>
+          aria-label={`${item.name} [${item.genres}]`}
+        >
           <Fade className={s['name-container']} delay={delay + config.munber / 100}>
             <Title element="h3" variant="naked" className={s.name}>
               {item.name}

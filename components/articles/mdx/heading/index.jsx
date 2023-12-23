@@ -9,7 +9,8 @@ const copyToClipboard = ({ id, title, ...rest }) => {
       title={`Copy ${title} to clipboard`}
       tabIndex={-1}
       aria-hidden
-      {...rest}>
+      {...rest}
+    >
       {' '}
       #
     </a>

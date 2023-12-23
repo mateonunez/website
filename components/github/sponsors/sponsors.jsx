@@ -11,18 +11,14 @@ export default function Sponsors({ sponsors }) {
     <>
       <div className={s.root}>
         <article className={s.description}>
-          Special thanks to my sponsors, thanks to them who help me carry out all my projects and
-          dreams. Thank you for your support and for believing in me.
+          Special thanks to my sponsors, thanks to them who help me carry out all my projects and dreams. Thank you for
+          your support and for believing in me.
         </article>
 
         <div className={s.sponsorsContainer}>
-          {sponsors.map(sponsor => (
+          {sponsors.map((sponsor) => (
             <div key={`sponsor-${sponsor.username}`} className={s.sponsorContainer}>
-              <Link
-                href={sponsor.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 text-center">
+              <Link href={sponsor.url} target="_blank" rel="noopener noreferrer" className="mt-4 text-center">
                 <Image
                   src={sponsor.avatar}
                   alt={sponsor.username}
@@ -52,14 +48,13 @@ export default function Sponsors({ sponsors }) {
             If you like my work and want to support me, consider sponsoring me on GitHub.
           </article>
 
-          <div
-            className="flex flex-col items-center justify-center w-1/2 p-4 m-4"
-            style={{ margin: 'auto' }}>
+          <div className="flex flex-col items-center justify-center w-1/2 p-4 m-4" style={{ margin: 'auto' }}>
             <Link
               href="https://github.com/sponsors/mateonunez"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 text-lg font-bold text-center">
+              className="mt-4 text-lg font-bold text-center"
+            >
               <Image
                 src="https://github.githubassets.com/images/modules/site/sponsors/pixel-mona-heart.gif"
                 alt="Sponsor me"

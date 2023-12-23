@@ -4,60 +4,54 @@ export const initialState = {
   isLoading: false,
 
   prevRecentlyPlayed: false,
-  nextRecentlyPlayed: false
+  nextRecentlyPlayed: false,
 };
 
 export const types = {
   SET_LOADING: 'SET_LOADING',
-  SET_RECENTLY_TRACK_SELECTED: 'SET_RECENTLY_TRACK_SELECTED'
+  SET_RECENTLY_TRACK_SELECTED: 'SET_RECENTLY_TRACK_SELECTED',
 };
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case types.SET_LOADING: {
+    case types.SET_LOADING:
       return {
         ...state,
-        isLoading: action.payload
+        isLoading: action.payload,
       };
-    }
-    case types.SET_RECENTLY_TRACK_SELECTED: {
+    case types.SET_RECENTLY_TRACK_SELECTED:
       return {
         ...state,
-        recentlyTrackSelected: action.payload
+        recentlyTrackSelected: action.payload,
       };
-    }
-    default: {
+    default:
       return state;
-    }
   }
 };
 
 export const SpotifyContext = React.createContext();
 SpotifyContext.displayName = 'SpotifyContext';
 
-export const SpotifyProvider = props => {
+export const SpotifyProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // Loading
-  const setLoading = useCallback(
-    payload => dispatch({ type: types.SET_LOADING, payload }),
-    [dispatch]
-  );
+  const setLoading = useCallback((payload) => dispatch({ type: types.SET_LOADING, payload }), []);
 
   // Recently Track Selected
   const setRecentlyTrackSelected = useCallback(
-    payload => dispatch({ type: types.SET_RECENTLY_TRACK_SELECTED, payload }),
-    [dispatch]
+    (payload) => dispatch({ type: types.SET_RECENTLY_TRACK_SELECTED, payload }),
+    [],
   );
 
   const value = useMemo(
     () => ({
       ...state,
       setLoading,
-      setRecentlyTrackSelected
+      setRecentlyTrackSelected,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [state]
+    [state],
   );
 
   return <SpotifyContext.Provider value={value} {...props} />;

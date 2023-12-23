@@ -35,7 +35,7 @@ const WordAnimator = ({ words, clickable }, ref) => {
         href: `#${currentWord.toLowerCase()}`,
         alt: currentWord,
         'aria-hidden': true,
-        onClick: () => wordRef.current.scrollIntoView()
+        onClick: () => wordRef.current.scrollIntoView(),
       }
     : {};
 
@@ -44,11 +44,8 @@ const WordAnimator = ({ words, clickable }, ref) => {
       <Wrapper {...wrapperProps} ref={ref}>
         <span
           ref={wordRef}
-          className={cn(
-            s.wordAnimator,
-            `transition-opacity duration-500 ${opacity}`,
-            clickable && 'cursor-pointer'
-          )}>
+          className={cn(s.wordAnimator, `transition-opacity duration-500 ${opacity}`, clickable && 'cursor-pointer')}
+        >
           {currentWord}
         </span>
       </Wrapper>

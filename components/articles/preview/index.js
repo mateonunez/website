@@ -12,7 +12,7 @@ export default function ArticlePreview({
   title,
   description,
   image,
-  slug
+  slug,
   // tags,
   // readingTime
 }) {
@@ -22,13 +22,7 @@ export default function ArticlePreview({
         {/* Heading  */}
         <div className={s.heading}>
           {/* Author image  */}
-          <Image
-            src={author.image}
-            alt={author.name}
-            width={32}
-            height={32}
-            className={s.authorImage}
-          />
+          <Image src={author.image} alt={author.name} width={32} height={32} className={s.authorImage} />
           {/* Author Name */}
           <span className={s.simpleText}>Written by: </span>
           <span className={s.authorName}>{author.name}</span>
@@ -43,14 +37,7 @@ export default function ArticlePreview({
           <div className={s.body}>
             {/* Image */}
             <div className={s.imagePreview}>
-              <Image
-                src={image}
-                alt={title}
-                width={1280}
-                height={720}
-                className={s.image}
-                priority
-              />
+              <Image src={image} alt={title} width={1280} height={720} className={s.image} priority />
             </div>
 
             {/* Title and Description */}

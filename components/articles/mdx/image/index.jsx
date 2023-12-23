@@ -3,17 +3,7 @@ import s from './mdx-image.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function MDXImage({
-  src,
-  width,
-  height,
-  alt,
-  quality,
-  priority,
-  href,
-  target = '_self',
-  ...rest
-}) {
+export default function MDXImage({ src, width, height, alt, quality, priority, href, target = '_self', ...rest }) {
   const ImageWrapper = (
     <div className="w-full h-full">
       <Image
@@ -32,14 +22,7 @@ export default function MDXImage({
   return (
     <div className={s.root}>
       {href ? (
-        <Link
-          href={href}
-          fancy={false}
-          passHref
-          alt={alt}
-          aria-label={alt}
-          title={alt}
-          target={target}>
+        <Link href={href} fancy={false} passHref alt={alt} aria-label={alt} title={alt} target={target}>
           {ImageWrapper}
         </Link>
       ) : (
