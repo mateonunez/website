@@ -17,33 +17,33 @@ const securityHeaders = [
   // Content Security Policy
   {
     key: 'Content-Security-Policy',
-    value: contentSecurityPolicy.replace(/\s{2,}/g, ' ').trim()
+    value: contentSecurityPolicy.replace(/\s{2,}/g, ' ').trim(),
   },
   // XSS Protection
   {
     key: 'X-XSS-Protection',
-    value: '1; mode=block'
+    value: '1; mode=block',
   },
   // No Sniff
   {
     key: 'X-Content-Type-Options',
-    value: 'nosniff'
+    value: 'nosniff',
   },
   // Force HTTPS
   {
     key: 'Strict-Transport-Security',
-    value: 'max-age=31536000; includeSubDomains; preload'
+    value: 'max-age=31536000; includeSubDomains; preload',
   },
   // Referrer Policy
   {
     key: 'Referrer-Policy',
-    value: 'same-origin'
+    value: 'same-origin',
   },
   // Frame Options
   {
     key: 'X-Frame-Options',
-    value: 'DENY'
-  }
+    value: 'DENY',
+  },
 ];
 
 module.exports = {
@@ -51,14 +51,14 @@ module.exports = {
   images: {
     formats: ['image/avif', 'image/webp'],
     domains: ['i.scdn.co', 'avatars.githubusercontent.com', 'github.githubassets.com'],
-    minimumCacheTTL: 60
+    minimumCacheTTL: 60,
   },
   async headers() {
     return [
       {
         source: '/(.*)',
-        headers: securityHeaders
-      }
+        headers: securityHeaders,
+      },
     ];
-  }
+  },
 };

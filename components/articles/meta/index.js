@@ -28,7 +28,8 @@ export default function ArticleMeta({ date, author, readingTime, tags = [] }) {
                   href={`/blog/tags/${kebapCase(tag)}`}
                   as={`/blog/tags/${kebapCase(tag)}`}
                   className={s.tag}
-                  title={tag}>
+                  title={tag}
+                >
                   #{tag}
                 </Link>
               </span>
@@ -46,7 +47,8 @@ export default function ArticleMeta({ date, author, readingTime, tags = [] }) {
             href={`/blog/authors/${kebapCase(author.name)}`}
             as={`/blog/authors/${kebapCase(author.name)}`}
             className={s.author}
-            title={author.name}>
+            title={author.name}
+          >
             {author.name}
           </Link>
         </div>

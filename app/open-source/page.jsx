@@ -13,9 +13,9 @@ export const metadata = {
   other: [
     {
       name: 'followers',
-      content: 'https://api.github.com/users/mateonunez/followers'
-    }
-  ]
+      content: 'https://api.github.com/users/mateonunez/followers',
+    },
+  ],
 };
 
 export default async function OpenSourcePage() {
@@ -24,9 +24,9 @@ export default async function OpenSourcePage() {
   const profile = await profileFetcher();
   const { sponsors = [], followers = [] } = profile;
 
-  delete profile['repositories'];
-  delete profile['followers'];
-  delete profile['sponsors'];
+  profile.repositories = undefined;
+  profile.followers = undefined;
+  profile.sponsors = undefined;
 
   return (
     <>

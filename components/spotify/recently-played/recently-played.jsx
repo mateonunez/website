@@ -21,7 +21,7 @@ export default function RecentlyPlayed({ items }) {
 
   // Listen to keydown events
   useEffect(() => {
-    window.addEventListener('keydown', event => {
+    window.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowRight') {
         nextIndex();
       }
@@ -32,7 +32,7 @@ export default function RecentlyPlayed({ items }) {
     });
 
     return () => {
-      window.removeEventListener('keydown', event => {
+      window.removeEventListener('keydown', (event) => {
         if (event.key === 'ArrowRight') {
           nextIndex();
         }
@@ -58,14 +58,16 @@ export default function RecentlyPlayed({ items }) {
       {items.length > 0 && (
         <div className={s.root}>
           <button
+            type="button"
             className={s.navigator}
             onClick={() => {
               prevIndex();
             }}
             aria-label="Less Tracks"
             style={{
-              left: '10px'
-            }}>
+              left: '10px',
+            }}
+          >
             <ChevronUp className="w-6 h-6 font-black transition duration-500 transform -rotate-90" />
           </button>
 
@@ -84,14 +86,16 @@ export default function RecentlyPlayed({ items }) {
           {/* </div> */}
 
           <button
+            type="button"
             className={s.navigator}
             onClick={() => {
               nextIndex();
             }}
             aria-label="More Tracks"
             style={{
-              right: '10px'
-            }}>
+              right: '10px',
+            }}
+          >
             <ChevronUp className="w-6 h-6 transition duration-500 transform rotate-90 hover:scale-110" />
           </button>
         </div>

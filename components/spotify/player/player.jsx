@@ -19,12 +19,9 @@ const PlayerAnimation = () => {
 const Player = () => {
   const { listening } = useUI();
 
-  const url = listening && listening.isPlaying ? listening.url : `${config.baseUrl}/spotify`;
+  const url = listening?.isPlaying ? listening.url : `${config.baseUrl}/spotify`;
 
-  const progress = useMemo(
-    () => listening && (listening.progress / listening.duration) * 100,
-    [listening]
-  );
+  const progress = useMemo(() => listening && (listening.progress / listening.duration) * 100, [listening]);
 
   return (
     <>
@@ -36,7 +33,8 @@ const Player = () => {
             aria-label="Mateo Nunez on Spotify"
             rel="noopener noreferer noreferrer"
             title="Mateo Nunez on Spotify"
-            href={url}>
+            href={url}
+          >
             {listening?.isPlaying ? (
               <div className="w-auto h-auto">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -50,9 +48,7 @@ const Player = () => {
           <div className={s.details}>
             <div className="flex flex-row items-center justify-between">
               <div className="flex flex-col">
-                <p className={s.title}>
-                  {listening?.isPlaying ? listening.title : 'Not Listening'}
-                </p>
+                <p className={s.title}>{listening?.isPlaying ? listening.title : 'Not Listening'}</p>
                 <p className={s.artist}>{listening?.isPlaying ? listening.artist : 'Spotify'}</p>
               </div>
               <div className="flex flex-row">
@@ -62,7 +58,8 @@ const Player = () => {
                   target={listening?.isPlaying ? '_blank' : '_self'}
                   aria-label="Mateo Nunez on Spotify"
                   rel="noopener noreferer noreferrer"
-                  title="Mateo Nunez on Spotify">
+                  title="Mateo Nunez on Spotify"
+                >
                   <ChevronUp className="w-4 h-4 rotate-90" />
                 </Link>
               </div>

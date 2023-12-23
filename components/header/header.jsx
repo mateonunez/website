@@ -19,7 +19,8 @@ const ActiveLink = ({ href, children, title }) => {
       as={href}
       className={`${s.link} ${pathname.split('/')[1] === href.split('/')[1] ? s.active : ''}`}
       rel="canonical"
-      title={title}>
+      title={title}
+    >
       {children}
     </Link>
   );
@@ -34,7 +35,7 @@ export default function Header() {
     <>
       <header className={s.header}>
         {/* Logo  */}
-        <button aria-label="Home" className={s.logo}>
+        <button type="button" aria-label="Home" className={s.logo}>
           <Link href="/" passHref aria-label="Mateo Nunez">
             <MN />
           </Link>
@@ -60,13 +61,11 @@ export default function Header() {
         </div>
 
         <button
-          className={cn(
-            s.toggle,
-            'transform ease-linear duration-300',
-            mobileNavShown && 'rotate-90'
-          )}
+          type="button"
+          className={cn(s.toggle, 'transform ease-linear duration-300', mobileNavShown && 'rotate-90')}
           onClick={toggle}
-          aria-label="Toggle Menu">
+          aria-label="Toggle Menu"
+        >
           {mobileNavShown ? <Close /> : <Menu />}
         </button>
       </header>

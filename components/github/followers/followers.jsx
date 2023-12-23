@@ -16,13 +16,9 @@ export default function Followers({ followers }) {
         </article>
 
         <div className={s.followersContainer}>
-          {followersShown.map(follower => (
+          {followersShown.map((follower) => (
             <div key={`follower-${follower.username}`} className={s.followerContainer}>
-              <Link
-                href={follower.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 text-center">
+              <Link href={follower.url} target="_blank" rel="noopener noreferrer" className="mt-4 text-center">
                 <Image
                   src={follower.avatar}
                   alt={follower.username}
@@ -41,7 +37,8 @@ export default function Followers({ followers }) {
             href="https://github.com/mateonunez?tab=followers"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-black text-center">
+            className="text-sm font-black text-center"
+          >
             and {followers.length - followersShown.length} more...{' '}
             <span className="text-xs text-emoji">(thank you ❤️)</span>
           </a>

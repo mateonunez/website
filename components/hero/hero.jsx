@@ -12,13 +12,13 @@ import useSWR from 'swr';
 export default function Hero({ article, ...props }) {
   const { setSpotifyListening } = useUI();
 
-  const fetcher = url =>
+  const fetcher = (url) =>
     fetch(url)
-      .then(response => response.json())
+      .then((response) => response.json())
       .then(setSpotifyListening);
 
   useSWR('/api/spotify/currently-listening', fetcher, {
-    refreshInterval: 10 * 1000
+    refreshInterval: 10 * 1000,
   });
 
   return (

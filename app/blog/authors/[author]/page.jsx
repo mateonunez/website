@@ -9,16 +9,14 @@ export async function generateMetadata({ params }) {
   const { author } = params;
 
   return {
-    title: `> blog - ${author}`
+    title: `> blog - ${author}`,
   };
 }
 
 export default async function BlogAuthor({ params }) {
   const { author } = params;
 
-  const articles = (await getAllArticles()).filter(
-    article => kebapCase(article.author.name) === author
-  );
+  const articles = (await getAllArticles()).filter((article) => kebapCase(article.author.name) === author);
 
   return (
     <>
@@ -28,7 +26,7 @@ export default async function BlogAuthor({ params }) {
 
         <div className={s.root}>
           <div className="container">
-            {articles.map(article => (
+            {articles.map((article) => (
               <ArticlePreview key={article.slug} {...article} />
             ))}
           </div>

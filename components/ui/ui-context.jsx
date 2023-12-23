@@ -24,7 +24,7 @@ export const initialState = {
   bigBang: false,
 
   // Spotify
-  listening: {}
+  listening: {},
 };
 
 export const types = {
@@ -51,161 +51,129 @@ export const types = {
   // BigBang
   SET_BIG_BANG: 'SET_BIG_BANG',
 
-  SET_SPOTIFY_LISTENING: 'SET_SPOTIFY_LISTENING'
+  SET_SPOTIFY_LISTENING: 'SET_SPOTIFY_LISTENING',
 };
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case types.SET_LOADING: {
+    case types.SET_LOADING:
       return {
         ...state,
-        isLoading: action.payload
+        isLoading: action.payload,
       };
-    }
 
     // Sidebar
-    case types.OPEN_SIDEBAR: {
+    case types.OPEN_SIDEBAR:
       return {
         ...state,
-        showSidebar: true
+        showSidebar: true,
       };
-    }
-    case types.CLOSE_SIDEBAR: {
+    case types.CLOSE_SIDEBAR:
       return {
         ...state,
-        showSidebar: false
+        showSidebar: false,
       };
-    }
-    case types.SET_SIDEBAR_VIEW: {
+    case types.SET_SIDEBAR_VIEW:
       return {
         ...state,
-        sidebarView: action.payload
+        sidebarView: action.payload,
       };
-    }
 
     // Modal
-    case types.OPEN_MODAL: {
+    case types.OPEN_MODAL:
       return {
         ...state,
         showModal: true,
-        showSidebar: false
+        showSidebar: false,
       };
-    }
-    case types.CLOSE_MODAL: {
+    case types.CLOSE_MODAL:
       return {
         ...state,
-        showModal: false
+        showModal: false,
       };
-    }
-    case types.SET_MODAL_VIEW: {
+    case types.SET_MODAL_VIEW:
       return {
         ...state,
-        modalView: action.payload
+        modalView: action.payload,
       };
-    }
 
     // Navbar
-    case types.OPEN_NAVBAR: {
+    case types.OPEN_NAVBAR:
       return {
         ...state,
-        showNavbar: true
+        showNavbar: true,
       };
-    }
-    case types.CLOSE_NAVBAR: {
+    case types.CLOSE_NAVBAR:
       return {
         ...state,
-        showNavbar: false
+        showNavbar: false,
       };
-    }
-    case types.SET_NAVBAR_VIEW: {
+    case types.SET_NAVBAR_VIEW:
       return {
         ...state,
-        navbarView: action.payload
+        navbarView: action.payload,
       };
-    }
 
     // Terminal
-    case types.COMPLETE_TERMINAL: {
+    case types.COMPLETE_TERMINAL:
       return {
         ...state,
-        isTerminalCompleted: true
+        isTerminalCompleted: true,
       };
-    }
 
     // BigBang
-    case types.SET_BIG_BANG: {
+    case types.SET_BIG_BANG:
       return {
         ...state,
-        bigBang: action.payload
+        bigBang: action.payload,
       };
-    }
 
     // Spotify
-    case types.SET_SPOTIFY_LISTENING: {
+    case types.SET_SPOTIFY_LISTENING:
       return {
         ...state,
-        listening: action.payload
+        listening: action.payload,
       };
-    }
 
-    default: {
+    default:
       throw new Error(`Unhandled action type: ${action.type}`);
-    }
   }
 };
 
 export const UIContext = React.createContext(initialState);
 UIContext.displayName = 'UIContext';
 
-export const UIProvider = props => {
+export const UIProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // Loading
-  const setLoading = useCallback(
-    payload => dispatch({ type: types.SET_LOADING, payload }),
-    [dispatch]
-  );
+  const setLoading = useCallback((payload) => dispatch({ type: types.SET_LOADING, payload }), [dispatch]);
 
   // Sidebar
   const openSidebar = useCallback(() => dispatch({ type: types.OPEN_SIDEBAR }), [dispatch]);
   const closeSidebar = useCallback(() => dispatch({ type: types.CLOSE_SIDEBAR }), [dispatch]);
-  const setSidebarView = useCallback(
-    payload => dispatch({ type: types.SET_SIDEBAR_VIEW, payload }),
-    [dispatch]
-  );
+  const setSidebarView = useCallback((payload) => dispatch({ type: types.SET_SIDEBAR_VIEW, payload }), [dispatch]);
 
   // Modal
   const openModal = useCallback(() => dispatch({ type: types.OPEN_MODAL }), [dispatch]);
   const closeModal = useCallback(() => dispatch({ type: types.CLOSE_MODAL }), [dispatch]);
-  const setModalView = useCallback(
-    payload => dispatch({ type: types.SET_MODAL_VIEW, payload }),
-    [dispatch]
-  );
+  const setModalView = useCallback((payload) => dispatch({ type: types.SET_MODAL_VIEW, payload }), [dispatch]);
 
   // Navbar
   const openNavbar = useCallback(() => dispatch({ type: types.OPEN_NAVBAR }), [dispatch]);
   const closeNavbar = useCallback(() => dispatch({ type: types.CLOSE_NAVBAR }), [dispatch]);
-  const setNavbarView = useCallback(
-    payload => dispatch({ type: types.SET_NAVBAR_VIEW, payload }),
-    [dispatch]
-  );
+  const setNavbarView = useCallback((payload) => dispatch({ type: types.SET_NAVBAR_VIEW, payload }), [dispatch]);
 
   // Terminal
-  const completeTerminal = useCallback(
-    () => dispatch({ type: types.COMPLETE_TERMINAL }),
-    [dispatch]
-  );
+  const completeTerminal = useCallback(() => dispatch({ type: types.COMPLETE_TERMINAL }), [dispatch]);
 
   // BigBang
-  const setBigBang = useCallback(
-    payload => dispatch({ type: types.SET_BIG_BANG, payload }),
-    [dispatch]
-  );
+  const setBigBang = useCallback((payload) => dispatch({ type: types.SET_BIG_BANG, payload }), [dispatch]);
 
   // Spotify
   const setSpotifyListening = useCallback(
-    payload => dispatch({ type: types.SET_SPOTIFY_LISTENING, payload }),
-    [dispatch]
+    (payload) => dispatch({ type: types.SET_SPOTIFY_LISTENING, payload }),
+    [dispatch],
   );
 
   const value = useMemo(
@@ -223,10 +191,10 @@ export const UIProvider = props => {
       setNavbarView,
       completeTerminal,
       setBigBang,
-      setSpotifyListening
+      setSpotifyListening,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [state]
+    [state],
   );
 
   return <UIContext.Provider value={value} {...props} />;

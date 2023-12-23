@@ -12,7 +12,7 @@ export class Keyframes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      frameNum: 0
+      frameNum: 0,
     };
   }
 
@@ -43,7 +43,7 @@ export class Keyframes extends React.Component {
     }
 
     // eslint-disable-next-line no-unused-vars
-    const { component = 'span', children, onEnd, ...rest } = this.props;
+    const { component = 'span', ...rest } = this.props;
 
     return React.cloneElement(frame, { component, ...rest, ...frame.props });
   }

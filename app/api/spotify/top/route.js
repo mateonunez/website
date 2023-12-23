@@ -3,11 +3,11 @@ import { getTopArtists, getTopTracks } from 'lib/spotify';
 import { normalizeArtists, normalizeTracks } from 'lib/utils/normalizers';
 
 export async function GET() {
-  const artistsResponse = await getTopArtists().catch(err => {
+  const artistsResponse = await getTopArtists().catch((err) => {
     return NextResponse.json({ recently_played: false, message: 'Are you connected?', extra: err });
   });
 
-  const tracksResponse = await getTopTracks().catch(err => {
+  const tracksResponse = await getTopTracks().catch((err) => {
     return NextResponse.json({ recently_played: false, message: 'Are you connected?', extra: err });
   });
 
@@ -29,6 +29,6 @@ export async function GET() {
 
   return NextResponse.json({
     artists: artists.map(normalizeArtists),
-    tracks: tracks.map(normalizeTracks)
+    tracks: tracks.map(normalizeTracks),
   });
 }

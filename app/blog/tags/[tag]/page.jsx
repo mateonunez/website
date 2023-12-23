@@ -9,15 +9,15 @@ export async function generateMetadata({ params }) {
   const { tag } = params;
 
   return {
-    title: `> blog - ${tag}`
+    title: `> blog - ${tag}`,
   };
 }
 
 export default async function BlogTag({ params }) {
   const { tag } = params;
 
-  const articles = (await getAllArticles()).filter(article => {
-    return article.tags.map(tag => kebapCase(tag)).includes(tag);
+  const articles = (await getAllArticles()).filter((article) => {
+    return article.tags.map((tag) => kebapCase(tag)).includes(tag);
   });
 
   return (
@@ -27,7 +27,7 @@ export default async function BlogTag({ params }) {
 
         <div className={s.root}>
           <div className="container">
-            {articles.map(article => (
+            {articles.map((article) => (
               <ArticlePreview key={article.slug} {...article} />
             ))}
           </div>

@@ -12,7 +12,7 @@ export default function RepositoryPreview({
   stars,
   url,
   style,
-  className
+  className,
 }) {
   const rootClassName = cn(s.root, className);
 
@@ -23,12 +23,7 @@ export default function RepositoryPreview({
           {/* Heading */}
 
           {/* Name  */}
-          <Link
-            href={url}
-            rel="canonical noreferrer"
-            target="_blank"
-            className={s.name}
-            title={name}>
+          <Link href={url} rel="canonical noreferrer" target="_blank" className={s.name} title={name}>
             {name}
           </Link>
 
@@ -53,7 +48,8 @@ export default function RepositoryPreview({
                 target="_blank"
                 aria-label={`${name} stars`}
                 title={`${name} stars`}
-                className="flex">
+                className="flex"
+              >
                 <Star className="w-5 h-5" />
                 <span className={s.starsCount}>{stars}</span>
               </Link>
@@ -67,7 +63,8 @@ export default function RepositoryPreview({
                 target="_blank"
                 aria-label={`${name} forks`}
                 title={`${name} forks`}
-                className="flex">
+                className="flex"
+              >
                 <Fork className="w-5 h-5" />
                 <div className={s.forksCount}>{forks}</div>
               </Link>

@@ -6,13 +6,13 @@ function generateArticlesSitemap() {
   const result = [];
   const articleSlugs = fs
     .readdirSync(path.join(process.cwd(), './articles'))
-    .filter(file => /\.mdx?$/.test(file))
-    .map(file => file.replace(/\.mdx?$/, ''));
+    .filter((file) => /\.mdx?$/.test(file))
+    .map((file) => file.replace(/\.mdx?$/, ''));
 
   for (const slug of articleSlugs) {
     result.push({
       url: new URL(`/blog/${slug}`, config.baseUrl).toString(),
-      lastModified: new Date()
+      lastModified: new Date(),
     });
   }
 
@@ -25,20 +25,20 @@ export default function sitemap() {
   return [
     {
       url: new URL('/', config.baseUrl).toString(),
-      lastModified: new Date()
+      lastModified: new Date(),
     },
     {
       url: new URL('/blog', config.baseUrl).toString(),
-      lastModified: new Date()
+      lastModified: new Date(),
     },
     ...articles,
     {
       url: new URL('/open-source', config.baseUrl).toString(),
-      lastModified: new Date()
+      lastModified: new Date(),
     },
     {
       url: new URL('/spotify', config.baseUrl).toString(),
-      lastModified: new Date()
-    }
+      lastModified: new Date(),
+    },
   ];
 }

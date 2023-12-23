@@ -5,6 +5,6 @@ const { author } = metadata;
 
 export async function GET() {
   return NextResponse.json({
-    ...author
+    ...author,
   });
 }

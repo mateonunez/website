@@ -7,7 +7,7 @@ export default function LastActivity({ contributions }) {
   return (
     <>
       <div className={s.root}>
-        <article className="prose prose-lg text-gray-200"></article>
+        <article className="prose prose-lg text-gray-200" />
       </div>
     </>
   );

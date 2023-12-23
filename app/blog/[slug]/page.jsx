@@ -18,7 +18,7 @@ export async function generateMetadata({ params }) {
   const { frontMatter } = await fetchArticle({ slug });
 
   const baseUrl = new URL(config.baseUrl);
-  const imagePath = frontMatter.image.startsWith('/') ? frontMatter.image : '/' + frontMatter.image;
+  const imagePath = frontMatter.image.startsWith('/') ? frontMatter.image : `/${frontMatter.image}`;
   const imageUrl = new URL(imagePath, baseUrl).toString();
 
   const dynamicMetadata = {
@@ -35,15 +35,15 @@ export async function generateMetadata({ params }) {
         authors: [frontMatter.author.name],
         tags: frontMatter.tags,
         publishedTime: frontMatter.date,
-        modifiedTime: frontMatter.date
+        modifiedTime: frontMatter.date,
       },
       images: [
         {
           url: imageUrl,
-          alt: frontMatter.title
-        }
-      ]
-    }
+          alt: frontMatter.title,
+        },
+      ],
+    },
   };
   return dynamicMetadata;
 }

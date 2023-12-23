@@ -44,7 +44,8 @@ export default function Top({ artists, tracks }) {
                     className={s.artist}
                     delay={key - config.munber / 100}
                     trigger={artistsRef}
-                    clean>
+                    clean
+                  >
                     <ArtistCard item={artist} delay={key + config.munber / 100} />
                   </Fade>
                 ))}
@@ -71,7 +72,8 @@ export default function Top({ artists, tracks }) {
                     className={s.track}
                     delay={key - config.munber / 100}
                     clean
-                    trigger={tracksRef}>
+                    trigger={tracksRef}
+                  >
                     <TrackCard item={track} delay={key + config.munber / 100} variant="full" />
                   </Fade>
                 ))}
