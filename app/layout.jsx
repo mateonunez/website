@@ -6,6 +6,7 @@ import { MainLayout } from 'components';
 import { UIProvider } from 'components/ui/ui-context';
 import { Suspense } from 'react';
 import meta from 'lib/config/metadata.js';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata = meta;
 
@@ -19,11 +20,13 @@ export default function RootLayout({ children }) {
       </head>
 
       <body className="antialiased">
-        <UIProvider>
-          <MainLayout>
-            <Suspense fallback={<Loading />}>{children}</Suspense>
-          </MainLayout>
-        </UIProvider>
+        <SpeedInsights>
+          <UIProvider>
+            <MainLayout>
+              <Suspense fallback={<Loading />}>{children}</Suspense>
+            </MainLayout>
+          </UIProvider>
+        </SpeedInsights>
       </body>
     </html>
   );
