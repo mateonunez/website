@@ -25,7 +25,7 @@ const Line = ({ text, noPrompt = false, noCaret = false }) => (
 const paragraphs = [
   "Hey there! I'm Mateo 👋",
   '',
-  "👨‍💻 I'm a Software Architect at BonusX.",
+  "👨‍💻 I'm a Senior Software Engineer at BonusX.",
   '⌨️ I code often in JavaScript, TypeScript and Python.',
   "💭 I'm currently learning Rust and Zig.",
   '☁️ I Love the Cloud and sometimes I play with K8S, AWS and CNCF treats.',
