@@ -9,7 +9,7 @@ import { Fade } from 'components';
 import { useState } from 'react';
 
 // eslint-disable-next-line no-unused-vars
-const FollowerCard = ({ follower, delay, variant = 'default' }) => {
+const FollowerCard = ({ follower, delay, variant = 'default' }, ref) => {
   const [usernameVisible, setUsernameVisible] = useState(false);
 
   const classNames = cn(s.root, {
@@ -19,7 +19,7 @@ const FollowerCard = ({ follower, delay, variant = 'default' }) => {
 
   return (
     <>
-      <div className={classNames}>
+      <div className={classNames} ref={ref}>
         <Link
           href={follower.url}
           passHref
