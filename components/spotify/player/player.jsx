@@ -13,7 +13,7 @@ import { useUI } from 'components/ui/ui-context';
 import config from 'lib/config';
 
 const PlayerAnimation = () => {
-  return <Lottie loop animationData={PlayerJson} play style={{ width: '1rem', height: '1rem' }} />;
+  return <Lottie loop animationData={PlayerJson} play />;
 };
 
 const Player = () => {
