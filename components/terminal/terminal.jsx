@@ -2,7 +2,7 @@
 
 import s from './terminal.module.css';
 
-import { Keyframes, Frame } from './react-keyframes.js';
+import { Keyframes, Frame } from './keyframes.js';
 import { useEffect, useMemo, useState } from 'react';
 import { useUI } from 'components/ui/ui-context';
 
@@ -70,7 +70,7 @@ const Terminal = () => {
     const keyFrames = (
       <Keyframes
         component="p"
-        onEnd={() => {
+        onFinished={() => {
           if (newRender) {
             setRenderedLines((renderedLines) => [...renderedLines, text]);
             setLineCount((c) => c + 1);
