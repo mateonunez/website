@@ -122,13 +122,7 @@ const Terminal = () => {
           {paragraphs.map((text, index) => {
             const shouldRenderLine = lineCount === index && !isLastParagraph && !isTerminalCompleted;
 
-            return (
-              <div key={`${text}-${index}`}>
-                {
-                  shouldRenderLine ? renderLine(text, true) : null
-                }
-              </div>
-            );
+            return <div key={`${text}-${index}`}>{shouldRenderLine ? renderLine(text, true) : null}</div>;
           })}
 
           {/* Last paragraph */}

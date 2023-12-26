@@ -44,12 +44,12 @@ export default function Fade({
       direction === 'top'
         ? { y: distance }
         : direction === 'right'
-        ? { x: distance }
-        : direction === 'bottom'
-        ? { y: -distance }
-        : direction === 'left'
-        ? { x: -distance }
-        : { x: 0 };
+          ? { x: distance }
+          : direction === 'bottom'
+            ? { y: -distance }
+            : direction === 'left'
+              ? { x: -distance }
+              : { x: 0 };
 
     timeline.fromTo(
       ref.current,

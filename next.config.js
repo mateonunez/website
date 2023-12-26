@@ -62,11 +62,11 @@ module.exports = {
       {
         protocol: 'https',
         hostname: '**.githubassets.com',
-      }
+      },
     ],
     minimumCacheTTL: 60,
   },
-  async headers() {
+  headers() {
     return [
       {
         source: '/(.*)',
@@ -75,6 +75,6 @@ module.exports = {
     ];
   },
   eslint: {
-    ignoreDuringBuilds: true
-  }
+    ignoreDuringBuilds: true,
+  },
 };
