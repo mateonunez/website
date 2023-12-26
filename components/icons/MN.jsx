@@ -1,13 +1,7 @@
 export default function MN({ ...props }) {
   return (
     <>
-      <svg
-        alt="mn"
-        className="w-6 h-6"
-        viewBox="0 0 48 48"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        {...props}>
+      <svg alt="mn" className="w-6 h-6" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
         <title>MN</title>
         <path d="M0 0H48V48H0V0Z" fill="black" />
         <path

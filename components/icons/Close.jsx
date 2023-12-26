@@ -2,7 +2,7 @@ const Close = ({ ...props }) => {
   return (
     <>
       <svg
-      alt="close"
+        alt="close"
         xmlns="http://www.w3.org/2000/svg"
         className="w-6 h-6"
         fill="none"

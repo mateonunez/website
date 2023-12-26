@@ -10,7 +10,8 @@ export default function Star({ ...props }) {
           viewBox="0 0 16 16"
           stroke="currentColor"
           strokeWidth="1"
-          {...props}>
+          {...props}
+        >
           <title>Star</title>
           <path
             fillRule="evenodd"

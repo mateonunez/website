@@ -12,7 +12,7 @@ export function Keyframes({ children, onFinished, component = 'span', ...rest })
       if (onFinished && typeof onFinished === 'function') {
         onFinished();
       }
-    }
+    };
 
     const currentFrame = children[frameNum];
     if (!currentFrame) {

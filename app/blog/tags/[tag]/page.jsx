@@ -5,7 +5,7 @@ import { getAllArticles } from 'lib/articles/parser';
 import { kebapCase } from 'lib/helpers/string';
 import ArticlePreview from 'components/articles/preview';
 
-export async function generateMetadata({ params }) {
+export function generateMetadata({ params }) {
   const { tag } = params;
 
   return {
