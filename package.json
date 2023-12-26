@@ -23,7 +23,7 @@
     "autoprefixer": "^10.4.16",
     "classnames": "^2.3.2",
     "gray-matter": "^4.0.3",
-    "gsap": "^3.12.3",
+    "gsap": "^3.12.4",
     "next-mdx-remote": "^3.0.8",
     "postcss": "^8.4.32",
     "react-lottie-player": "^1.5.5",
