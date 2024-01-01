@@ -1,73 +1,59 @@
-const copyToClipboard = ({ id, title, ...rest }) => {
-  return (
-    // eslint-disable-next-line jsx-a11y/anchor-has-content
-    <a
-      className="transition-all duration-300 opacity-0 hover:opacity-100"
-      style={{ textDecoration: 'none', color: '#f59e0b' }}
-      href={`#${id}`}
-      rel="canonical"
-      title={`Copy ${title} to clipboard`}
-      tabIndex={-1}
-      aria-hidden
-      {...rest}
-    >
-      {' '}
-      #
-    </a>
-  );
+import { kebapCase } from "lib/helpers/string";
+
+const extractTitle = (children) => {
+  return typeof children === 'object' ? children.props?.title : children;
 };
 
-export const H1 = ({ id, children, ...rest }) => {
-  let title;
-  if (typeof children === 'object') {
-    title = children.props?.title;
-  } else {
-    title = children;
-  }
+const extractName = (title) => {
+  return title ? kebapCase(title) : null;
+}
+
+const CopyToClipboard = ({ id, title, children }) => (
+  <button
+    className="hover:text-amber-700 hover:scale-105 transform transition-all duration-500 hover:underline text-amber-500"
+    title={`Copy "${title}" to clipboard`}
+    onClick={(event) => {
+      const fullUrl = `${window.location.origin}${window.location.pathname}#${id}`;
+      navigator.clipboard.writeText(fullUrl);
+
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest',
+        });
+      }
+
+      window.history.pushState({}, '', `#${id}`);
+
+      event.preventDefault();
+    }}
+    tabIndex={-1}
+    type="button"
+  >
+    {children}
+  </button>
+);
+
+// Generic Heading Component
+const Heading = ({ type, id, children, ...rest }) => {
+  const Component = type;
+  const title = extractTitle(children);
+  const name = extractName(title) || id;
 
   return (
-    <>
-      <h1 title={title} aria-label={title} {...rest} className="flex text-2xl">
+    <Component title={title} aria-label={title} name={name} id={id} {...rest}>
+      <CopyToClipboard id={name} title={title}>
         {children}
-
-        {id && copyToClipboard({ id, title: children })}
-      </h1>
-    </>
+      </CopyToClipboard>
+    </Component>
   );
 };
 
-export const H2 = ({ id, children, ...rest }) => (
-  <>
-    <h2 title={children} aria-label={children} {...rest} className="text-lg">
-      {children}
-
-      {id && copyToClipboard({ id, title: children })}
-    </h2>
-  </>
-);
-
-export const H3 = ({ id, children, ...rest }) => (
-  <>
-    <h3 title={children} aria-label={children} {...rest}>
-      {children}
-
-      {id && copyToClipboard({ id, title: children })}
-    </h3>
-  </>
-);
-
-export const H4 = ({ children, ...rest }) => (
-  <>
-    <h4 title={children} aria-label={children} {...rest}>
-      {children}
-    </h4>
-  </>
-);
-
-export const H5 = ({ children, ...rest }) => (
-  <>
-    <h5 title={children} aria-label={children} {...rest}>
-      {children}
-    </h5>
-  </>
-);
+// Export specific heading components
+export const H1 = (props) => <Heading type="h1" {...props} />;
+export const H2 = (props) => <Heading type="h2" {...props} />;
+export const H3 = (props) => <Heading type="h3" {...props} />;
+export const H4 = (props) => <Heading type="h4" {...props} />;
+export const H5 = (props) => <Heading type="h5" {...props} />;
