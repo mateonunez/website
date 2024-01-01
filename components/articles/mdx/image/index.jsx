@@ -22,7 +22,7 @@ export default function MDXImage({ src, width, height, alt, quality, priority, h
   return (
     <div className={s.root}>
       {href ? (
-        <Link href={href} fancy={false} passHref alt={alt} aria-label={alt} title={alt} target={target}>
+        <Link href={href} fancy="false" passHref alt={alt} aria-label={alt} title={alt} target={target}>
           {ImageWrapper}
         </Link>
       ) : (

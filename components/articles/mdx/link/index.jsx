@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function MDXLink({ children, href }) {
+export default function MDXLink({ children, href, target }) {
   let title;
   if (typeof children === 'object') {
     title = children.props?.alt;
@@ -9,10 +9,8 @@ export default function MDXLink({ children, href }) {
   }
 
   return (
-    <>
-      <Link href={href} alt={title} title={title} target="_blank" rel="noreferrer">
-        {children}
-      </Link>
-    </>
+    <Link href={href} alt={title} title={title} target={target} rel="noreferrer">
+      {children}
+    </Link>
   );
 }
