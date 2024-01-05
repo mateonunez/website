@@ -1,6 +1,6 @@
 .root {
   font-weight: 700;
   line-height: 1.3;
-  font-size: 2rem;
-  margin: 2rem auto;
+  margin: auto;
+  padding-top: 1rem;
 }
