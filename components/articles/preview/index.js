@@ -17,37 +17,29 @@ export default function ArticlePreview({
   // readingTime
 }) {
   return (
-    <>
-      <div className={s.root}>
-        {/* Heading  */}
-        <div className={s.heading}>
-          {/* Author image  */}
-          <Image src={author.image} alt={author.name} width={32} height={32} className={s.authorImage} />
-          {/* Author Name */}
-          <span className={s.simpleText}>Written by: </span>
-          <span className={s.authorName}>{author.name}</span>
-          {/* Separator */}
-          <span className={s.simpleText}>at</span>
-          {/* Date */}
-          <span className={s.date}>{dateForHumans(date)}</span>
-        </div>
+    <div className={s.root}>
 
-        {/* Body */}
-        <Link as={`/blog/${slug}`} rel="canonical" href={`/blog/${slug}`} title={title}>
-          <div className={s.body}>
-            {/* Image */}
-            <div className={s.imagePreview}>
-              <Image src={image} alt={title} width={1280} height={720} className={s.image} priority />
-            </div>
 
-            {/* Title and Description */}
-            <div className={s.textPreview}>
-              <h2 className={s.title}>{title}</h2>
-              <p className={s.description}>{description}</p>
-            </div>
+      <Link as={`/blog/${slug}`} rel="canonical" href={`/blog/${slug}`} title={title}>
+        <div className={s.body}>
+          <div className={s.imagePreview}>
+            <Image src={image} alt={title} width={1280} height={720} className={s.image} priority />
           </div>
-        </Link>
+
+          <div className={s.textPreview}>
+            <h2 className={s.title}>{title}</h2>
+            <p className={s.description}>{description}</p>
+          </div>
+        </div>
+      </Link>
+
+      <div className={s.heading}>
+        <Image src={author.image} alt={author.name} width={32} height={32} className={s.authorImage} />
+        <span className={s.simpleText}>Written by: </span>
+        <span className={s.authorName}>{author.name}</span>
+        <span className={s.simpleText}>at</span>
+        <span className={s.date}>{dateForHumans(date)}</span>
       </div>
-    </>
+    </div>
   );
 }

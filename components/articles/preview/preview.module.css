@@ -1,5 +1,5 @@
 .root {
-  margin: 1rem auto 2rem auto;
+  margin: 2rem auto 3rem auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,16 +9,17 @@
 .heading {
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
+  margin-top: 1rem;
 }
 
 .body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   transition: 0.5s;
-  margin-top: 0.3rem;
+  margin-top: 0.5rem;
 }
 
 .body:hover {
@@ -32,8 +33,10 @@
 }
 
 .imagePreview {
-  width: 15rem;
+  width: 100%;
+  max-width: 15em;
   margin-right: 1rem;
+  overflow: hidden;
 }
 
 .authorImage {

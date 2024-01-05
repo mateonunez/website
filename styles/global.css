@@ -14,7 +14,7 @@
   font-family: 'Incompleeta';
   font-weight: 'normal';
   font-display: block;
-  src: url('~/assets/fonts/IncompleetaRegular.woff2') format('woff2');
+  src: url('/fonts/IncompleetaRegular.woff2') format('woff2');
 }
 
 :root {

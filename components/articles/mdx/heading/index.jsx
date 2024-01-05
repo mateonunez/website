@@ -1,4 +1,4 @@
-import { kebapCase } from "lib/helpers/string";
+import { kebapCase } from 'lib/helpers/string';
 
 const extractTitle = (children) => {
   return typeof children === 'object' ? children.props?.title : children;
@@ -6,7 +6,7 @@ const extractTitle = (children) => {
 
 const extractName = (title) => {
   return title ? kebapCase(title) : null;
-}
+};
 
 const CopyToClipboard = ({ id, title, children }) => (
   <button

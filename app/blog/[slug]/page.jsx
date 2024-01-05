@@ -1,6 +1,6 @@
 import s from 'styles/pages/blog/[slug].module.css';
 
-import { cache } from 'react';
+import { Suspense, cache } from 'react';
 import dynamic from 'next/dynamic';
 import { getArticle } from 'lib/articles/parser';
 import config from 'lib/config';
@@ -55,10 +55,10 @@ export default async function BlogArticle({ params }) {
   const { frontMatter, source } = await fetchArticle({ slug });
 
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
       <div className={s.root}>
         <Article frontMatter={frontMatter} source={source} />
       </div>
-    </>
+    </Suspense>
   );
 }
