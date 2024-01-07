@@ -29,7 +29,7 @@ In the JavaScript ecosystem, I have always appreciated of **Deno** and **Bun**, 
 
 Basically, the new native `node:test` module is a test runner that allows you to run the tests. The APIs are designed to be as similar as possible to the [node-tap](https://node-tap.org/basics/) framework, so if you've used it before, you'll feel right at home.
 
-I'm not here to tell you that you have to stop using framework _X_ or _Y_ to use `node:test`. I'm here to tell you about my experience migrating almost **~1500** tests, of different projects, from `node-tap` to `node:test`. I refactored almost the entire [Platformatic](https://github.com/platformatic/platformatic) monorepo codebase to use the new `node:test` module. The [same](https://github.com/mcollina/async-cache-dedupe/pull/107) with the [async-cache-dedupe](https://github.com/mcollina/async-cache-dedupe) module, and many other ones. ([expirables](https://github.com/Cadienvan/expirables/pull/40), [orama-cache](https://github.com/mateonunez/orama-cache/pull/123), [etc](https://github.com/mateonunez/asterism/pull/119)).
+I'm not here to tell you that you have to stop using framework _X_ or _Y_ to use `node:test`. I'm here to tell you about my experience migrating almost **~1500** tests, of different projects, from `node-tap` to `node:test`. I refactored almost the entire [Platformatic](https://github.com/platformatic/platformatic/issues/1796) monorepo codebase to use the new `node:test` module. The [same](https://github.com/mcollina/async-cache-dedupe/pull/107) with the [async-cache-dedupe](https://github.com/mcollina/async-cache-dedupe/pull/107) module, and many other ones. ([expirables](https://github.com/Cadienvan/expirables/pull/40), [orama-cache](https://github.com/mateonunez/orama-cache/pull/123), [etc](https://github.com/mateonunez/asterism/pull/119)).
 
 If you are wondering which frameworks I like to use to test my applications, I like these the most:
 
@@ -41,8 +41,7 @@ If you are wondering which frameworks I like to use to test my applications, I l
 
 ## Table of Contents
 
-- <a href="#introduction" alt="What is Node Test Runner" target="_self">
-    Introduction
+
   </a>
 - <a href="#how-it-looks-like" alt="How it looks like?" target="_self">
     How it looks like?
@@ -153,7 +152,7 @@ describe('group of tests', () => {
 });
 ```
 
-When you're using the `describe`/`it` syntax, keep in mind that a [https://nodejs.org/api/test.html#class-suitecontext](SuiteContext) is created for each `describe` block. It's only the constructor and it doesn't expose any APIs or properties. The `it` function, generates a [TestContext](https://nodejs.org/api/test.html#class-testcontext) for each test.
+When you're using the `describe`/`it` syntax, keep in mind that a [SuiteContext](https://nodejs.org/api/test.html#class-suitecontext) is created for each `describe` block. It's only the constructor and it doesn't expose any APIs or properties. The `it` function, generates a [TestContext](https://nodejs.org/api/test.html#class-testcontext) for each test.
 
 The **Act One** is over. In the next **act**, we will expolre more features of the `node:test` module.
 
