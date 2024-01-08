@@ -180,12 +180,17 @@ import assert from 'node:assert';
 
 test('should use hooks', async (t) => {
   t.before(() => console.log('before from test'));
-  t.beforeEach(() => console.log('beforeEach from test'));
+  t.beforeEach(() => console.log('beforeEach from test, printed twice'));
+
   t.after(() => console.log('after from test'));
-  t.afterEach(() => console.log('afterEach from test'));
+  t.afterEach(() => console.log('afterEach from test, printed twice'));
 
   await t.test('should be equal', () => {
     assert.equal(1, 1);
+  });
+
+  await t.test('should be not equal', () => {
+    assert.notEqual(1, 2);
   });
 });
 ```
@@ -213,12 +218,17 @@ import assert from 'node:assert';
 
 describe('should use hooks with describe/it syntax', () => {
   before(() => console.log('before from describe'));
-  beforeEach(() => console.log('beforeEach from describe'));
+  beforeEach(() => console.log('beforeEach from describe, printed twice'));
+
   after(() => console.log('after from describe'));
-  afterEach(() => console.log('afterEach from describe'));
+  afterEach(() => console.log('afterEach from describe, printed twice'));
 
   it('should be equal', () => {
     assert.equal(1, 1);
+  });
+
+  it('should be not equal', () => {
+    assert.notEqual(1, 2);
   });
 });
 ```
