@@ -42,18 +42,6 @@ export default function SocialLinks() {
         <LinkedIn />
       </Link>
 
-      {/* Instagram  */}
-      <Link
-        href="https://www.instagram.com/mateonunez95/"
-        passHref
-        className={s.personalLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Instagram | Mateo Nunez"
-      >
-        <Instagram />
-      </Link>
-
       {/* Spotify  */}
       <Link
         href="https://open.spotify.com/user/ltstcqtg2k6q3a17xzdbmcd8q?si=c09bc43e12754f0b"
