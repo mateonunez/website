@@ -7,7 +7,12 @@ export default function Footer() {
           ❤️
         </span>
       </p>
-      <p className="text-xs">&copy; {new Date().getFullYear()} Mateo Nunez. All Rights Reserved.</p>
+      <p className="text-xs">
+        &copy; {new Date().getFullYear()}{' '}
+        <a href="https://x.com/mateonunezx" alt="Mateo on Twitter" target="_blank" rel="noopener noreferrer">
+          Mateo Nunez.
+        </a>
+      </p>
     </footer>
   );
 }
