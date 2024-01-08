@@ -44,11 +44,21 @@ If you are wondering which frameworks I like to use to test my applications, I l
 - <a href="#how-it-looks-like" alt="How it looks like?" target="_self">
     How it looks like?
   </a>
+
 - <a href="#test-runner" alt="Test runner" target="_self">
     Test runner
   </a>
+
 - <a href="#subtests" alt="Subtests" target="_self">
     Subtests
+  </a>
+
+  - <a href="#describe-and-it-syntax" alt="Describe and It syntax" target="_self">
+      Describe and It syntax
+    </a>
+
+- <a href="#hooks" alt="Hooks" target="_self">
+    Hooks
   </a>
 
 ## Act One
@@ -152,9 +162,76 @@ describe('group of tests', () => {
 
 When you're using the `describe`/`it` syntax, keep in mind that a [SuiteContext](https://nodejs.org/api/test.html#class-suitecontext) is created for each `describe` block. It's only the constructor and it doesn't expose any APIs or properties. The `it` function, generates a [TestContext](https://nodejs.org/api/test.html#class-testcontext) for each test.
 
-The **Act One** is over. In the next **act**, we will expolre more features of the `node:test` module.
+### Hooks
+
+One of the most interesting features of testing frameworks is the ability to perform operations _before_ and/or _after_ the execution of a test.
+
+This practice can be useful not only for setting up shared functionality between tests, for example starting an http server locally, mocking external services, etc. But also for cleaning up resources after the execution of the tests, for example closing the http server, cleaning up the mocks, etc.
+
+Frameworks often offer some `hooks` that allow this type of behavior.
+
+The Node Test Runner includes 4 different types of hooks: **before**, **beforeEach**, **after** and **afterEach**.
+
+Each hook accepts a callback function that will be executed before or after the execution of the tests and some options to configure the behavior of the hook.
+
+```js
+import { test } from 'node:test';
+import assert from 'node:assert';
+
+test('should use hooks', async (t) => {
+  t.before(() => console.log('before from test'));
+  t.beforeEach(() => console.log('beforeEach from test'));
+  t.after(() => console.log('after from test'));
+  t.afterEach(() => console.log('afterEach from test'));
+
+  await t.test('should be equal', () => {
+    assert.equal(1, 1);
+  });
+});
+```
+
+You can also pass some options like `timeout` or `signal` ([AbortSignal](https://nodejs.org/api/globals.html#class-abortsignal)) to the hooks:
+
+```js
+import { test } from 'node:test';
+import assert from 'node:assert';
+
+test('should use hooks with options', async (t) => {
+  t.before(() => console.log('before from test'), { timeout: 1000 });
+
+  await t.test('should be equal', () => {
+    assert.equal(1, 1);
+  });
+});
+```
+
+To use the hooks with the `describe`/`it` syntax, you need to import them from the `node:test` module:
+
+```js
+import { describe, it, before, beforeEach, after, afterEach } from 'node:test';
+import assert from 'node:assert';
+
+describe('should use hooks with describe/it syntax', () => {
+  before(() => console.log('before from describe'));
+  beforeEach(() => console.log('beforeEach from describe'));
+  after(() => console.log('after from describe'));
+  afterEach(() => console.log('afterEach from describe'));
+
+  it('should be equal', () => {
+    assert.equal(1, 1);
+  });
+});
+```
+
+---
+
+The **Act One** is over, in the next **Act**, I'll show you more features of the `node:test` module. If you want a spoiler on **Act Two**, just take a look [here](https://nodejs.org/api/test.html).
+
+Byeeee! 👊
 
 ## References
 
-- [Node.js Test Runner](https://nodejs.org/api/test.html)
+- [Official Node Test Runner documentation](https://nodejs.org/api/test.html)
+- [Migrating from Jest to Node.js Native Test Runner](https://www.youtube.com/watch?v=2YfIB4gia60&) by [Erick Wendel](https://twitter.com/erickwendel_)
 - [Exploring Node.js Test Runner](https://portal.gitnation.org/contents/exploring-nodejs-test-runner) by [Marco Ippolito](https://twitter.com/satanacchio)
+- [Node Native Test Runner Benchmark](https://medium.com/@lucas_levandoski/node-native-test-runner-benchmark-5cb47d4706cb) by Lucas Levandoski
