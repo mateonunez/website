@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function MDXLink({ children, href, target }) {
+export default function MDXLink({ children, href, target = '_blank' }) {
   let title;
   if (typeof children === 'object') {
     title = children.props?.alt;

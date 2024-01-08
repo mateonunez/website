@@ -1,0 +1,237 @@
+---
+title: 'You should use `node:test` - Act One'
+date: 2024-01-06T13:00:00.000Z
+updated: 2024-01-08T19:35:00.000Z
+description: >-
+  My personal experience moving from different testing frameworks to
+  the new Node Test Runner. Act One.
+tags:
+  - node
+  - test
+  - tap
+image: '/images/articles/you-should-use-node-test-act-one/cover.png'
+author:
+  name: Mateo
+  image: '/images/profile.jpg'
+---
+
+<Image
+  src="/images/articles/you-should-use-node-test-act-one/cover.png"
+  width="1280"
+  height="720"
+  alt="You should use node:test"
+  href="/blog/you-should-use-node-test-act-one"
+/>
+
+Hi folks! 👋
+
+In the JavaScript ecosystem, I have always appreciated of **Deno** and **Bun**, that they have natively integrated a **testing system**. This allows you to run the tests without the need to install any external dependencies. In 2021, the Node.js team has also moved in that direction. Opening an [issue](https://github.com/nodejs/node/issues/40954) for discussion of how useful it might be to have a native testing system and, 5 months later, a [PR](https://github.com/nodejs/node/pull/42325) was submitted to implement it.
+
+Basically, the new native `node:test` module is a test runner that allows you to run the tests. The APIs are designed to be as similar as possible to the [node-tap](https://node-tap.org/basics/) framework, so if you've used it before, you'll feel right at home.
+
+I'm not here to tell you that you have to stop using framework _X_ or _Y_ to use `node:test`. I'm here to tell you about my experience migrating almost **~1500** tests, of different projects, from `node-tap` to `node:test`. I refactored almost the entire [Platformatic](https://github.com/platformatic/platformatic/issues/1796) monorepo codebase to use the new `node:test` module. The same with the [async-cache-dedupe](https://github.com/mcollina/async-cache-dedupe/pull/107) module, and many other ones. ([expirables](https://github.com/Cadienvan/expirables/pull/40), [orama-cache](https://github.com/mateonunez/orama-cache/pull/123), [etc](https://github.com/mateonunez/asterism/pull/119)).
+
+If you are wondering which frameworks I like to use to test my applications, I like these the most:
+
+- [node-tap](https://github.com/tapjs/tapjs)
+- [vitest](https://github.com/vitest-dev/vitest)
+- [playwright](https://github.com/microsoft/playwright)
+
+> There are specific use cases for each type of framework. The `node-tap` framework I used mainly in pure Node.js . `Vite`, on the other hand, for frontend applications while `Playwright` for E2E testing.
+
+## Table of Contents
+
+- <a href="#how-it-looks-like" alt="How it looks like?" target="_self">
+    How it looks like?
+  </a>
+
+- <a href="#test-runner" alt="Test runner" target="_self">
+    Test runner
+  </a>
+
+- <a href="#subtests" alt="Subtests" target="_self">
+    Subtests
+  </a>
+
+  - <a href="#describe-and-it-syntax" alt="Describe and It syntax" target="_self">
+      Describe and It syntax
+    </a>
+
+- <a href="#hooks" alt="Hooks" target="_self">
+    Hooks
+  </a>
+
+## Act One
+
+In this series of articles, I will share my personal experience moving from different testing frameworks to the new Node Test Runner. I will also share some tips and tricks that I have learned along the way.
+
+The **Act One** consists of a brief introduction to the `node:test` module and some basic concepts that you should know before starting to use it.
+
+### How it looks like?
+
+The `node:test` module is a module that is installed by default when you install Node.js.
+
+To use it, you need to create a file with the name `whateva.test.js` or `whateva.test.mjs` in the test folder of your project.
+
+```js
+// cjs
+const { test } = require('node:test');
+const { equal } = require('node:assert');
+
+// or esm
+import { test } from 'node:test';
+import { equal } from 'node:assert';
+
+test('should be equal', () => {
+  equal(1, 1);
+});
+```
+
+Run the tests:
+
+```bash
+node --test
+```
+
+That's it! 🎉
+
+Note: when you run `node --test` the test runner will look for all the files that match the following patterns:
+
+- `**/*.test.?(c|m)js`
+- `**/*-test.?(c|m)js`
+- `**/*_test.?(c|m)js`
+- `**/test-*.?(c|m)js`
+- `**/test.?(c|m)js`
+- `**/test/**/*.?(c|m)js`
+
+> [Execution Model official documentation](https://nodejs.org/api/test.html#test-runner-execution-model).
+
+### Test runner
+
+The first concept you should know is the _test runner_. The test runner, as the name implies, is the functionality that allows you to run a single test. Each test you will run in your application will be executed, discovered, and reported by the test runner.
+
+Each test, and their subtests, will be executed in a separate child process. If the test fail the process exit code will be set to `1`.
+
+Tests created via the test module consist of a single function that is processed in one of three ways:
+
+1. A sync function fails if it errors, and passes otherwise.
+2. A function with a Promise fails if it rejects, and passes if it fulfills.
+3. A function with a callback fails if the callback gets a truthy value first, otherwise it passes. If it returns a Promise too, it fails.
+
+> [Read more about the test runner](https://nodejs.org/api/test.html#test-runner).
+
+### Subtests
+
+The subtests are tests that are executed within a test. This is a very useful feature when you want to group tests that are related to each other (or not).
+
+```js
+import { test } from 'node:test';
+import { equal, notDeepEqual } from 'node:assert';
+
+test('group of tests', async (t) => {
+  await t.test('should be equal', () => {
+    equal(1, 1);
+  });
+
+  await t.test('should be not equal', () => {
+    notDeepEqual(1, 2);
+  });
+});
+```
+
+Subtests are executed in the same process as the parent test. This means that if a subtest fails, the parent test will also fail. Furthermore, you need to `await` the subtests to ensure that they are executed before the parent test ends. Any subtests that are not awaited will be cancelled and treated as a failure, doing so will cause the parent test to fail.
+
+#### Describe and It syntax
+
+Subtests can also be written using the `describe` and `it` functions. The `describe` function is an alias for `test` and the `it` function is an alias for `t.test`.
+
+```js
+import { describe, it } from 'node:test';
+import { equal, notDeepEqual } from 'node:assert';
+
+describe('group of tests', () => {
+  it('should be equal', () => {
+    equal(1, 1);
+  });
+
+  it('should be not equal', () => {
+    notDeepEqual(1, 2);
+  });
+});
+```
+
+When you're using the `describe`/`it` syntax, keep in mind that a [SuiteContext](https://nodejs.org/api/test.html#class-suitecontext) is created for each `describe` block. It's only the constructor and it doesn't expose any APIs or properties. The `it` function, generates a [TestContext](https://nodejs.org/api/test.html#class-testcontext) for each test.
+
+### Hooks
+
+One of the most interesting features of testing frameworks is the ability to perform operations _before_ and/or _after_ the execution of a test.
+
+This practice can be useful not only for setting up shared functionality between tests, for example starting an http server locally, mocking external services, etc. But also for cleaning up resources after the execution of the tests, for example closing the http server, cleaning up the mocks, etc.
+
+Frameworks often offer some `hooks` that allow this type of behavior.
+
+The Node Test Runner includes 4 different types of hooks: **before**, **beforeEach**, **after** and **afterEach**.
+
+Each hook accepts a callback function that will be executed before or after the execution of the tests and some options to configure the behavior of the hook.
+
+```js
+import { test } from 'node:test';
+import assert from 'node:assert';
+
+test('should use hooks', async (t) => {
+  t.before(() => console.log('before from test'));
+  t.beforeEach(() => console.log('beforeEach from test'));
+  t.after(() => console.log('after from test'));
+  t.afterEach(() => console.log('afterEach from test'));
+
+  await t.test('should be equal', () => {
+    assert.equal(1, 1);
+  });
+});
+```
+
+You can also pass some options like `timeout` or `signal` ([AbortSignal](https://nodejs.org/api/globals.html#class-abortsignal)) to the hooks:
+
+```js
+import { test } from 'node:test';
+import assert from 'node:assert';
+
+test('should use hooks with options', async (t) => {
+  t.before(() => console.log('before from test'), { timeout: 1000 });
+
+  await t.test('should be equal', () => {
+    assert.equal(1, 1);
+  });
+});
+```
+
+To use the hooks with the `describe`/`it` syntax, you need to import them from the `node:test` module:
+
+```js
+import { describe, it, before, beforeEach, after, afterEach } from 'node:test';
+import assert from 'node:assert';
+
+describe('should use hooks with describe/it syntax', () => {
+  before(() => console.log('before from describe'));
+  beforeEach(() => console.log('beforeEach from describe'));
+  after(() => console.log('after from describe'));
+  afterEach(() => console.log('afterEach from describe'));
+
+  it('should be equal', () => {
+    assert.equal(1, 1);
+  });
+});
+```
+
+---
+
+The **Act One** is over, in the next **Act**, I'll show you more features of the `node:test` module. If you want a spoiler on **Act Two**, just take a look [here](https://nodejs.org/api/test.html).
+
+Byeeee! 👊
+
+## References
+
+- [Official Node Test Runner documentation](https://nodejs.org/api/test.html)
+- [Migrating from Jest to Node.js Native Test Runner](https://www.youtube.com/watch?v=2YfIB4gia60&) by [Erick Wendel](https://twitter.com/erickwendel_)
+- [Exploring Node.js Test Runner](https://portal.gitnation.org/contents/exploring-nodejs-test-runner) by [Marco Ippolito](https://twitter.com/satanacchio)
+- [Node Native Test Runner Benchmark](https://medium.com/@lucas_levandoski/node-native-test-runner-benchmark-5cb47d4706cb) by Lucas Levandoski
