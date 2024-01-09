@@ -25,9 +25,9 @@ author:
 
 Hi folks! 👋
 
-In the JavaScript ecosystem, I have always appreciated of **Deno** and **Bun**, that they have natively integrated a **testing system**. This allows you to run the tests without the need to install any external dependencies. In 2021, the Node.js team has also moved in that direction. Opening an [issue](https://github.com/nodejs/node/issues/40954) for discussion of how useful it might be to have a native testing system and, 5 months later, a [PR](https://github.com/nodejs/node/pull/42325) was submitted to implement it.
+In the JavaScript ecosystem, what I have always appreciated of **Deno** and **Bun** is they have natively integrated a **testing system**. This allows you to run the tests without the need to install any external dependencies. In 2021, the Node.js team has also moved in that direction, opening an [issue](https://github.com/nodejs/node/issues/40954) for discussion of how useful it might be to have a native testing system and, 5 months later, a [PR](https://github.com/nodejs/node/pull/42325) was submitted to implement it.
 
-Basically, the new native `node:test` module is a test runner that allows you to run the tests. The APIs are designed to be as similar as possible to the [node-tap](https://node-tap.org/basics/) framework, so if you've used it before, you'll feel right at home.
+Basically, the new native `node:test` module is a test runner that allows you to run tests. The APIs are designed to be as similar as possible to the [node-tap](https://node-tap.org/basics/) library, so if you've used it before, you'll feel right at home.
 
 I'm not here to tell you that you have to stop using framework _X_ or _Y_ to use `node:test`. I'm here to tell you about my experience migrating almost **~1500** tests, of different projects, from `node-tap` to `node:test`. I refactored almost the entire [Platformatic](https://github.com/platformatic/platformatic/issues/1796) monorepo codebase to use the new `node:test` module. The same with the [async-cache-dedupe](https://github.com/mcollina/async-cache-dedupe/pull/107) module, and many other ones. ([expirables](https://github.com/Cadienvan/expirables/pull/40), [orama-cache](https://github.com/mateonunez/orama-cache/pull/123), [etc](https://github.com/mateonunez/asterism/pull/119)).
 
@@ -37,7 +37,7 @@ If you are wondering which frameworks I like to use to test my applications, I l
 - [vitest](https://github.com/vitest-dev/vitest)
 - [playwright](https://github.com/microsoft/playwright)
 
-> There are specific use cases for each type of framework. The `node-tap` framework I used mainly in pure Node.js . `Vite`, on the other hand, for frontend applications while `Playwright` for E2E testing.
+> There are specific use cases for each type of framework. I mainly used the `node-tap` framework in pure Node.js, `Vitest` for frontend applications and `Playwright` for E2E testing.
 
 ## Table of Contents
 
@@ -65,9 +65,9 @@ If you are wondering which frameworks I like to use to test my applications, I l
 
 In this series of articles, I will share my personal experience moving from different testing frameworks to the new Node Test Runner. I will also share some tips and tricks that I have learned along the way.
 
-The **Act One** consists of a brief introduction to the `node:test` module and some basic concepts that you should know before starting to use it.
+The **Act One** consists of a brief introduction to the `node:test` module and some basic concepts you should know before starting to use it.
 
-### How it looks like?
+### How does it look like?
 
 The `node:test` module is a module that is installed by default when you install Node.js.
 
@@ -160,7 +160,7 @@ describe('group of tests', () => {
 });
 ```
 
-When you're using the `describe`/`it` syntax, keep in mind that a [SuiteContext](https://nodejs.org/api/test.html#class-suitecontext) is created for each `describe` block. It's only the constructor and it doesn't expose any APIs or properties. The `it` function, generates a [TestContext](https://nodejs.org/api/test.html#class-testcontext) for each test.
+When you're using the `describe`/`it` syntax, keep in mind that a [SuiteContext](https://nodejs.org/api/test.html#class-suitecontext) is created for each `describe` block. It's only the constructor and it doesn't expose any APIs or properties. The `it` function, on the other side, generates a [TestContext](https://nodejs.org/api/test.html#class-testcontext) for each test.
 
 ### Hooks
 
@@ -172,7 +172,7 @@ Frameworks often offer some `hooks` that allow this type of behavior.
 
 The Node Test Runner includes 4 different types of hooks: **before**, **beforeEach**, **after** and **afterEach**.
 
-Each hook accepts a callback function that will be executed before or after the execution of the tests and some options to configure the behavior of the hook.
+Each hook accepts a callback function that will be executed at the proper time and some options to configure the behavior of the hook.
 
 ```js
 import { test } from 'node:test';
