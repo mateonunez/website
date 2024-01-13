@@ -1,0 +1,373 @@
+---
+title: 'How I made my Blog with Next.js and MDX'
+date: 2022-04-19T10:54:18.459Z
+description: 'Hello stranger! In this article I will show you how I made my blog serverless with Next.js and MDX.'
+tags:
+  - next.js
+  - mdx
+  - javascript
+image: '/images/articles/hello-blog/cover.png'
+author:
+  name: Mateo
+  image: '/images/profile.jpg'
+---
+
+<Image
+  src="/images/articles/hello-blog/cover.png"
+  width="1280"
+  height="720"
+  alt="Create your Blog with Next.js and MDX"
+  href="/blog/hello-blog"
+/>
+
+I've been thinking about creating a blog with **Next.js** and **MDX** for a while. I've read a lot of articles about it, but honestly I haven't found any good ones. So I decided to create my own blog and write an article about it.
+
+## 👨‍🍳️ Ingredients
+
+- [next](https://nextjs.org/) | `v12.1.5`
+- [react](https://reactjs.org/) | `v18.0`
+- [@mdx-js/loader](https://github.com/mdx-js/mdx) | `v2.1.1`
+- [gray-matter](https://github.com/jonschlinkert/gray-matter) | `v4.0.3`
+- [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote) | `v4.0.1*`
+- [next-seo](https://github.com/garmeeh/next-seo) | `v5.2.0`
+- [reading-time](https://github.com/ngryman/reading-time) | `v1.5.0`
+- [rehype-prism-plus](https://github.com/timlrx/rehype-prism-plus) | `v1.3.2`
+- [rehype-remark](https://github.com/remarkjs/remark-gfm) | `v0.3.0`
+- [tailwindcss](https://tailwindcss.com/) | `v3.0.23` _(optional)_
+- [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin) | `v0.5.2`
+
+> I'm using [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote) **v4.0.1** because the last version **v4.0.2** is not working with **React v18.0**. More information about this issue can be found [here on Github](https://github.com/hashicorp/next-mdx-remote/issues/254).
+
+At first you should know that it's not a simple task to create a blog with **Next.js** and **MDX**. (I struggle with it, and I'm sure you will too 😘).
+
+I won't explain to you how to create a new app using Next.js since I assume you already know how to do that.
+
+## [MDX](https://mdxjs.com/)
+
+> MDX allows you to use JSX in your markdown content. You can import components, such as interactive charts or alerts, and embed them within your content. This makes writing long-form content with components a blast. 🚀
+
+What about `next-mdx-remote`?
+
+This package allows you to load MDX files from anywhere, in this case I'll retrieve the data using `Node.js`.
+
+## ⚙️ The Parser
+
+Used to _fetch_, _resolve_, _sort_ and _compile_ MDX files.
+
+### Getting the slugs
+
+_**lib/articles/parser.js**_
+
+```js showLineNumbers
+import fs from 'fs';
+import path from 'path';
+
+export const getArticleSlugs = () =>
+  fs
+    .readdirSync(path.join(process.cwd(), './articles'))
+    .filter(file => /\.mdx?$/.test(file))
+    .map(file => file.replace(/\.mdx?$/, ''));
+```
+
+The `getArticleSlugs` function returns an array with all the slugs of the articles, it reads from the filesystem and looks for MDX files inside the `./articles` path.
+
+### Retrieve single article data
+
+_**lib/articles/parser.js**_
+
+```js showLineNumbers
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import readingTime from 'reading-time';
+
+export const getArticleData = ({ slug }) => {
+  const fullPath = path.join(process.cwd(), './articles', `${slug}.mdx`);
+  const raw = fs.readFileSync(fullPath, 'utf8');
+
+  const { data, content } = matter(raw);
+
+  return {
+    frontMatter: {
+      ...data,
+      slug,
+      title: removeMarkdown(data.title),
+      permalink: `${config.baseUrl}/articles/${slug}`,
+      date: new Date(data.date).toISOString(),
+      readingTime: Math.ceil(readingTime(content).minutes)
+    },
+    content
+  };
+};
+```
+
+The `getArticleData` looks for the article with the slug and it's read from the filesystem.
+The `matter` method will parse the _front-matter_ from the article and its content, it will return the **data** (that contains the "header" part) and the **content** (that will contain the MDX content).
+Finally, I prepare the object, composing other elements and properties useful for the frontend such as the **reading-time**, the **permalink**, the **date**, etc.
+
+### Put it all together
+
+_**lib/articles/parser.js**_
+
+```js {12,13} showLineNumbers
+import remarkGfm from 'remark-gfm';
+import rehypePrism from 'rehype-prism-plus';
+
+import { serialize } from 'next-mdx-remote/serialize';
+
+export const getArticle = async ({ slug }) => {
+  const { frontMatter, content } = await getArticleData({ slug });
+
+  const source = await serialize(content, {
+    parseFrontmatter: false,
+    mdxOptions: {
+      remarkPlugins: [[remarkGfm]],
+      rehypePlugins: [[rehypePrism, { ignoreMissing: true }]]
+    }
+  });
+
+  const { compiledSource } = source;
+
+  return {
+    frontMatter,
+    source: {
+      compiledSource
+    }
+  };
+};
+```
+
+I used two plugins: `remark-gfm` and `rehype-prism-plus`.
+
+- **remarkGfm** supports the [GMF](https://github.github.com/gfm/) specs.
+- **rehypePrism** is a rehype plugin to highlight code blocks in HTML. This plugin is a fork of [mapbox/rehype-prism](https://github.com/mapbox/rehype-prism) and allows to show the number of lines and the line highlighting.
+
+The `serialize` method consumes the _MDX_ string. It will return an object that will contains the compiled source that will be passed to the `<MDXRemote>` component.
+
+### Creating the _/blog/_ page
+
+_**pages/blog/index.js**_
+
+```js showLineNumbers
+import { getAllArticles } from 'lib/articles/parser';
+
+export async function getServerSideProps() {
+  const articles = getAllArticles();
+
+  return {
+    props: {
+      articles
+    }
+  };
+}
+```
+
+Just asking to the server for looking the articles.
+
+_**pages/blog/index.js**_
+
+```jsx showLineNumbers
+import s from 'styles/pages/blog.module.css'; // This file contains the CSS for the blog page.
+import { NextSeo } from 'next-seo';
+
+export default function Blog({ articles }) {
+  return (
+    <>
+      <NextSeo
+        title="Blog"
+        description="Articles written with ❤️ by Mateo Nunez."
+        openGraph={{
+          title: "Mateo's Blog"
+        }}
+      />
+
+      <div className={s.root}>
+        {articles.map(article => (
+          <ArticlePreview
+            key={article.slug}
+            author={article.author}
+            date={article.date}
+            title={article.title}
+            description={article.description}
+            image={article.image}
+            slug={article.slug}
+            tags={article.tags}
+            readingTime={article.readingTime}
+          />
+        ))}
+      </div>
+    </>
+  );
+}
+```
+
+As you can see having all the data inside the props it's very simply to map the articles data into a `Preview` component.
+
+_**components/articles/preview/index.js**_
+
+```jsx showLineNumbers
+import s from './preview.module.css';
+
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { dateForHumans } from 'lib/helpers/date';
+
+export default function ArticlePreview({ author, date, title, description, image, slug }) {
+  return (
+    <>
+      <div className={s.root}>
+        {/* Heading  */}
+        <div className={s.heading}>
+          {/* Author image  */}
+          <Image
+            src={author.image}
+            alt={author.name}
+            width={32}
+            height={32}
+            className={s.authorImage}
+          />
+          {/* Author Name */}
+          <span className={s.simpleText}>Written by: </span>
+          <span className={s.authorName}>{author.name}</span>
+          {/* Separator */}
+          <span className={s.simpleText}>at</span>
+          {/* Date */}
+          <span className={s.date}>{dateForHumans(date)}</span>
+        </div>
+
+        {/* Body */}
+        <Link href="/blog/[slug]" as={`/blog/${slug}`}>
+          <a rel="canonical" href={`/blog/${slug}`} title={title}>
+            <div className={s.body}>
+              {/* Image */}
+              <div className={s.imagePreview}>
+                <Image
+                  src={image}
+                  alt={title}
+                  width={1280}
+                  height={720}
+                  className={s.image}
+                />
+              </div>
+
+              {/* Title and Description */}
+              <div className={s.textPreview}>
+                <h2 className={s.title}>{title}</h2>
+                <p className={s.description}>{description}</p>
+              </div>
+            </div>
+          </a>
+        </Link>
+      </div>
+    </>
+  );
+}
+```
+
+And this is how my component looks like:
+
+<Image
+  src="/images/articles/hello-blog/article-preview.png"
+  width="823"
+  height="237"
+  alt="Article Preview using Next.JS and MDX"
+/>
+
+### What about the _/blog/[slug]_ page?
+
+Keep calm bro, have you copied and pasted the code? Is it working? Well, it's not the end of the world. I spent 3 days to get it working.
+
+_**components/articles/index.js**_
+
+```jsx showLineNumbers
+import s from './article.module.css';
+
+import ArticleHeader from './header';
+import ArticleTitle from './title';
+import ArticleContent from './content';
+
+export default function Article({ frontMatter, source }) {
+  const { title, date, author, tags, readingTime } = frontMatter;
+
+  return (
+    <>
+      <div className={s.root}>
+        <ArticleHeader date={date} author={author} tags={tags} readingTime={readingTime} />
+
+        <ArticleTitle title={title} />
+
+        <ArticleContent {...source} />
+      </div>
+    </>
+  );
+}
+```
+
+I ❤️ clean (and clear) components or at least I think so.
+
+The `Header` and the `Title` components are pretty simple. So I show you just the `<ArticleContent />` component.
+
+_**components/articles/content/index.js**_
+
+```jsx {4,10} showLineNumbers
+import s from './content.module.css';
+
+import { MDXRemote } from 'next-mdx-remote';
+import * as components from 'components/articles/mdx';
+
+export default function ArticleContent({ compiledSource }) {
+  return (
+    <>
+      <div className={s.root}>
+        <MDXRemote compiledSource={compiledSource} components={components} />
+      </div>
+    </>
+  );
+}
+```
+
+Ok ok ok... What the hell is **MDXRemote**? It's a component that consumes the _serialized_ compiled source and uses the _components_ you passed to it. Each component will render only in your **MDX** source. In my case, I prefer to create specific components for each case.
+
+How my `mdx-components` looks like?
+
+<Image
+  src="/images/articles/hello-blog/mdx-components-index.png"
+  width="749"
+  height="194"
+  alt="MDX Components | Blog with Next.JS and MDX"
+/>
+
+So each time the _MDXRemote_ will render a native HTML element like `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, `<a>` or `<code>` (in this case) they will be replaced with my own components.
+
+### That's good, but...
+
+Oh yes, **Tailwind**.
+
+I advise you to use the typography plugin. It helps you to create good typography and layout for your posts.
+
+_**components/articles/article.module.css**_
+
+```css {2}
+.root {
+  @apply prose prose-invert prose-code:before:hidden prose-code:after:hidden;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 800px;
+}
+```
+
+The reason I hide the **before** and **after** mutators is because the _typography_ plugin appends the **\`** char into the `<code>` element.
+
+---
+
+## Resources
+
+- [https://github.com/vercel/next.js](https://github.com/vercel/next.js)
+- [https://github.com/facebook/react/](https://github.com/facebook/react/)
+- [https://github.com/mdx-js/mdx/](https://github.com/mdx-js/mdx/)
+- [https://github.com/jonschlinkert/gray-matter](https://github.com/jonschlinkert/gray-matter)
+- [https://github.com/hashicorp/next-mdx-remote](https://github.com/hashicorp/next-mdx-remote)
+- [https://github.com/timlrx/rehype-prism-plus](https://github.com/timlrx/rehype-prism-plus)

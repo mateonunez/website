@@ -1,0 +1,673 @@
+import { Image } from 'components/articles/mdx'
+
+export const metadata = {
+  title: 'How to consume Spotify APIs using Next.js and JavaScript',
+  date: '2022-06-01T12:33:33.333Z',
+  updated: '2022-06-01T12:33:33.333Z',
+  description: 'Hello stranger! In this article I will show you how I made my blog serverless with Next.js and MDX.',
+  tags: ['next.js', 'spotify', 'javascript', 'apis'],
+  image: '/images/articles/consuming-spotify-apis/cover.png',
+}
+
+<Image
+  src="/images/articles/consuming-spotify-apis/cover.png"
+  width="1280"
+  height="720"
+  alt="'How to consume Spotify APIs using Next.js and Node.js"
+  href="/blog/consuming-spotify-apis"
+  quality={60}
+/>
+
+Finally, another article in my (poor 😓) blog. Sometimes I don't know what to say, or what to explain you. But in this case, I show you how I've integrated **Spotify** API's into my website.
+
+As you can see in this [section](https://mateonunez.dev/spotify) I made 2 sections showing you my the **Last Songs I Played**, the **Top Artists** and my **Top Tracks**.
+
+## 👨‍🍳️ Ingredients
+
+- [next](https://nextjs.org/) | `v12.1.5`
+- [react](https://reactjs.org/) | `v18.0`
+- [tailwindcss](https://tailwindcss.com/) | `v3.0.23` _(optional)_
+- [Spotify Docs](https://developer.spotify.com/documentation/web-api/) | `REQUIRED `
+
+## 🔑 Authorization Code Flow
+
+<Image
+  src="/images/articles/consuming-spotify-apis/authorization-code-flow.png"
+  width="1068"
+  height="970"
+  alt="'Authorization Code Flow' - How to consume Spotify APIs using Next.js and Node.js"
+  href="/images/articles/consuming-spotify-apis/authorization-code-flow.png"
+  target="_blank"
+/>
+
+Is the image above clear? (not for me)
+
+Now, Spotify has a lot types of _Authentication_ flows ([read more](https://developer.spotify.com/documentation/general/guides/authorization/)). I'll use the **Authorization Code Flow**, I'll run the flow locally because the only person who can access my API is me.
+
+The first step is to create a new Application in [Spotify Dashboard](https://developer.spotify.com/).
+
+<Image
+  src="/images/articles/consuming-spotify-apis/dashboard.png"
+  width="1660"
+  height="753"
+  alt="'New Application on Spotify Dashboard' - How to consume Spotify APIs using Next.js and Node.js"
+  href="/images/articles/consuming-spotify-apis/dashboard.png"
+  target="_blank"
+  quality={60}
+/>
+
+> Bro are you serious? Do I have explain you how to create a new application? I'm a developer, not a philosopher.
+
+> The only thing I can say is that you need add (into the Redirect URIs your `localhost:port` for development). I think it's enough.
+
+When you're done, you'll have a new application, a new `Client ID` and a new `Client Secret`, required for the next step.
+
+Personally, I prefer to store the `Client ID` and `Client Secret` in a `.env` file, but you can use any other way.
+
+> .env.local.example
+
+```env
+# Spotify
+SPOTIFY_CLIENT_ID=
+SPOTIFY_CLIENT_SECRET=
+SPOTIFY_REFRESH_TOKEN=
+SPOTIFY_REDIRECT_URI=
+```
+
+### Request authorization to access data
+
+The first step is to compose the URL to request the authorization. It is comopsed by the following parameters:
+
+```
+https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&scope=${SCOPES}
+```
+
+In my case I've indicated as `${REDIRECT_URI}` my `localhost:port` for development (keep in mind that you need to add this in the Redirect URIs section on Spotify Dashboard).
+
+The list of my scopes:
+
+- user-read-currently-playing
+- user-read-recently-played
+- user-read-playback-state
+- user-read-playback-position
+- user-top-read
+- playlist-read-collaborative
+- playlist-read-private
+
+[Read More about Spotify Authorization Scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/)
+
+Visit the composed URL. After you're done, you'll have a new URL with the `code` parameter in the Redirect URI you've indicated.
+
+> http://localhost:3000/?code=AQAwWOR1VPrAsrsRhAVzPOGg2Dg....
+
+Save that code.
+
+The following step is to encode the `${CLIENT_ID}:${CLIENT_SECRET}` variables in Base64.
+
+```bash
+> echo -n "${CLIENT_ID}:${CLIENT_SECRET}" | base64
+```
+
+> or just use [base64encode](https://www.base64encode.org/)
+
+When you have encrypted the `${CLIENT_ID}` and the `${CLIENT_SECRET}`, sperated by `:`, you can compose the URL to request the authorization that we will use in the next step.
+
+```bash
+curl -H "Authorization: Basic ${CLIENT_PARAMETERS_IN_BASE64}" -d grant_type=authorization_code -d code=${AUTHORIZATION_CODE} -d redirect_uri=http%3A%2F%2Flocalhost:3000 https://accounts.spotify.com/api/token
+```
+
+The response will be something like this:
+
+```json
+{
+  "access_token": "ACCESS_TOKEN",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "refresh_token": "REFRESH_TOKEN",
+  "scope": "playlist-read-private playlist-read-collaborative user-read-playback-state user-read-currently-playing user-read-recently-played user-read-playback-position user-top-read"
+}
+```
+
+The `access_token` allows you to access the API data.
+
+A simple example of how to use the `access_token` to get the current user's data:
+
+**Request:**
+
+```bash
+curl -X "GET" "https://api.spotify.com/v1/me/player/currently-playing" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer ${ACCESS_TOKEN}"
+```
+
+**Response:**
+
+```json
+{
+  timestamp: 1657357734036,
+  context: {
+    external_urls: {
+      spotify: 'https://open.spotify.com/playlist/5yIhKIf3Hf3g8HOLNGYWeM'
+    },
+    href: 'https://api.spotify.com/v1/playlists/5yIhKIf3Hf3g8HOLNGYWeM',
+    type: 'playlist',
+    uri: 'spotify:playlist:5yIhKIf3Hf3g8HOLNGYWeM'
+  },
+  progress_ms: 9490,
+  item: {
+    album: {
+      album_type: 'album',
+      artists: [Array],
+      available_markets: [Array],
+      external_urls: [Object],
+      href: 'https://api.spotify.com/v1/albums/2noRn2Aes5aoNVsU6iWThc',
+      id: '2noRn2Aes5aoNVsU6iWThc',
+      images: [Array],
+      name: 'Discovery',
+      release_date: '2001-03-12',
+      release_date_precision: 'day',
+      total_tracks: 14,
+      type: 'album',
+      uri: 'spotify:album:2noRn2Aes5aoNVsU6iWThc'
+    },
+    artists: [ [Object] ],
+    available_markets: [
+      'AD', 'AE', 'AG', 'AL', 'AM', 'AO', 'AR', 'AT', 'AU', 'AZ',
+      'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BN',
+      'BO', 'BR', 'BS', 'BT', 'BW', 'BY', 'BZ', 'CA', 'CD', 'CG',
+      'CH', 'CI', 'CL', 'CM', 'CO', 'CR', 'CV', 'CW', 'CY', 'CZ',
+      'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'ES',
+      'FI', 'FJ', 'FM', 'FR', 'GA', 'GB', 'GD', 'GE', 'GH', 'GM',
+      'GN', 'GQ', 'GR', 'GT', 'GW', 'GY', 'HK', 'HN', 'HR', 'HT',
+      'HU', 'ID', 'IE', 'IL', 'IN', 'IQ', 'IS', 'IT', 'JM', 'JO',
+      'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KR', 'KW', 'KZ',
+      'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV',
+      ... 83 more items
+    ],
+    disc_number: 1,
+    duration_ms: 320357,
+    explicit: false,
+    external_ids: { isrc: 'GBDUW0000053' },
+    external_urls: {
+      spotify: 'https://open.spotify.com/track/0DiWol3AO6WpXZgp0goxAV'
+    },
+    href: 'https://api.spotify.com/v1/tracks/0DiWol3AO6WpXZgp0goxAV',
+    id: '0DiWol3AO6WpXZgp0goxAV',
+    is_local: false,
+    name: 'One More Time',
+    popularity: 77,
+    preview_url: 'https://p.scdn.co/mp3-preview/18781de52205d9ade22904945510161feab085ce?cid=703d39064908445898701a125f391745',
+    track_number: 1,
+    type: 'track',
+    uri: 'spotify:track:0DiWol3AO6WpXZgp0goxAV'
+  },
+  currently_playing_type: 'track',
+  actions: { disallows: { resuming: true, skipping_prev: true } },
+  is_playing: true
+}
+```
+
+## 🎧 Currently Listening
+
+Finally, with that introduction, we can start with the funny part.
+
+In this section, on my website, I've created a Player Component tho show the current track I'm playing on Spotify. This is how it looks like:
+
+<Image
+  src="/images/articles/consuming-spotify-apis/spotify-player.png"
+  width="752"
+  height="113"
+  alt="Spotify Player"
+  quality={60}
+/>
+
+For that component I've used the following packages, libs and assets:
+
+- [react-lottie-player](https://github.com/mifi/react-lottie-player)
+- [player-animation](https://github.com/mateonunez/mateonunez-website/blob/main/lib/lottie-files/player.json)
+- [SWR](https://swr.vercel.app/)
+
+### Fetching the Current Track
+
+I've created an API on Next.JS to fetch the current track.
+
+_**app/api/spotify/current-listening**_
+
+```js {8,20} showLineNumbers
+/**
+ * API handler
+ */
+import { getCurrentlyListening } from 'lib/spotify';
+import { normalizeCurrentlyListening } from 'lib/utils/normalizers';
+
+export default async function handler(req, res) {
+  const response = await getCurrentlyListening();
+
+  if (!response) {
+    return res.status(500).json({ error: 'Spotify not available' });
+  }
+
+  if (response.status === 204 || response.status > 400) {
+    return res.status(200).json({ is_playing: false });
+  }
+
+  const data = await response.json();
+
+  return res.status(200).json(normalizeCurrentlyListening(data));
+}
+```
+
+The `getCurrentlyListening()` is a simple method that takes the **access token** and calls the Spotify API.
+
+_**lib/spotify.js**_
+
+```js {7} showLineNumbers
+/**
+ * Consumer of the currently playing track
+ */
+export const getCurrentlyListening = async () => {
+  const nowPlayingEndpoint = 'https://api.spotify.com/v1/me/player/currently-playing';
+
+  const { access_token: accessToken } = await getAccessToken();
+
+  if (!accessToken) {
+    return;
+  }
+
+  return fetch(nowPlayingEndpoint, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  });
+};
+```
+
+The `getAccessToken()` just resolve the access token, stored in the session or refreshed by the `refresh_token` flow.
+
+_**lib/utils/normalizers/normalizeSpotify.js**_
+
+```js showLineNumbers
+export const normalizeCurrentlyListening = ({ is_playing, progress_ms, item }) => ({
+  id: item.id,
+  isPlaying: is_playing,
+  title: item.name,
+  artist: item.artists?.map(({ name }) => name).join(' '),
+  album: item.album?.name,
+  thumbnail: item.album?.images[0]?.url,
+  url: item.external_urls?.spotify,
+  progress: progress_ms,
+  duration: item.duration_ms
+});
+```
+
+After the API is ready, I can use it to fetch the current track. For that, I've created a **contenxt** to manage **current playing song**.
+
+_**pages/index.tsx**_
+
+```js {14,21} showLineNumbers
+import s from 'styles/pages/home.module.css';
+import useSWR from 'swr';
+import { Player } from 'components/spotify';
+import { useUI } from 'components/ui/ui-context';
+
+export default function HomePage({ article }) {
+  const { setSpotifyListening } = useUI();
+
+  const fetcher = url =>
+    fetch(url)
+      .then(response => response.json())
+      .then(setSpotifyListening);
+
+  useSWR('/api/spotify/currently-listening', fetcher, {
+    refreshInterval: 10 * 1000 // 10 seconds
+  });
+
+  return (
+    <>
+      <div className={s.root}>
+        <Player />
+      </div>
+    </>
+  );
+}
+```
+
+The motivation for manage the current song via a `context` it's because I need that data in other components. So I can use it in the `Player` component and in others.
+
+And this is the _Player_ component:
+
+_**components/spotify/player.tsx**_
+
+```js {13,23,77} showLineNumbers
+import s from './player.module.css';
+
+import React, { useMemo } from 'react';
+
+import Link from 'next/link';
+import Lottie from 'react-lottie-player';
+import PlayerJson from 'lib/lottie-files/player.json';
+
+import { ChevronUp, Spotify } from 'components/icons';
+import { useUI } from 'components/ui/ui-context';
+import config from 'lib/config';
+
+const PlayerAnimation = () => {
+  return <Lottie loop animationData={PlayerJson} play style={{ width: '1rem', height: '1rem' }} />;
+};
+
+const Player = () => {
+  const { listening } = useUI();
+
+  const url = listening && listening.isPlaying ? listening.url : `${config.baseUrl}/spotify`;
+
+  const progress = useMemo(
+    () => listening && (listening.progress / listening.duration) * 100,
+    [listening]
+  );
+
+  return (
+    <>
+      <div className={s.root}>
+        <div className={s.inner}>
+          <Link
+            href={url}
+            passHref
+            target={listening?.isPlaying ? '_blank' : '_self'}
+            aria-label="Mateo Nunez on Spotify"
+            rel="noopener noreferer noreferrer"
+            title="Mateo Nunez on Spotify"
+            href={url}>
+            {listening?.isPlaying ? (
+              <div className="w-auto h-auto">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img width="40" height="40" src={listening?.thumbnail} alt={listening?.album} />
+              </div>
+            ) : (
+              <Spotify className="w-10 h-10" color={'#1ED760'} />
+            )}
+          </Link>
+
+          <div className={s.details}>
+            <div className="flex flex-row items-center justify-between">
+              <div className="flex flex-col">
+                <p className={s.title}>
+                  {listening?.isPlaying ? listening.title : 'Not Listening'}
+                </p>
+                <p className={s.artist}>{listening?.isPlaying ? listening.artist : 'Spotify'}</p>
+              </div>
+              <div className="flex flex-row">
+                <Link
+                  href="/spotify"
+                  passHref
+                  target={listening?.isPlaying ? '_blank' : '_self'}
+                  aria-label="Mateo Nunez on Spotify"
+                  rel="noopener noreferer noreferrer"
+                  title="Mateo Nunez on Spotify">
+                  <ChevronUp className="w-4 h-4 rotate-90" />
+                </Link>
+              </div>
+            </div>
+            {listening?.isPlaying && (
+              <>
+                <div className={s.playingContainer}>
+                  <div className={s.progress}>
+                    <div className={s.listened} style={{ width: `${progress}%` }} />
+                  </div>
+
+                  <div className={s.animation}>
+                    <PlayerAnimation />
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default React.memo(Player);
+```
+
+## 🔁 Recently Played
+
+The [preview](https://mateonunez.dev/spotify).
+
+<Image
+  src="/images/articles/consuming-spotify-apis/recently-played.png"
+  width="1834"
+  height="656"
+  alt="Spotify Player"
+  quality={60}
+/>
+
+Like the previous section, I've created a dedicated API to manage the `fetch`.
+
+_**app/api/spotify/recently-played.tsx**_
+
+```js {6,22} showLineNumbers
+import config from 'lib/config';
+import { getRecentlyPlayed } from 'lib/spotify';
+import { normalizeRecentlyPlayed } from 'lib/utils/normalizers';
+
+export default async function handler(req, res) {
+  const response = await getRecentlyPlayed().catch(err => {
+    return res
+      .status(200) // prevent the error from being sent to the client
+      .json({ recently_played: false, message: 'Are you connected?', extra: err });
+  });
+
+  if (!response) {
+    return res.status(500).json({ error: 'Spotify not available' });
+  }
+
+  if (response.status === 204 || response.status > 400) {
+    return res.status(200).json({ recently_played: false });
+  }
+
+  const { items = [] } = await response.json();
+
+  const data = items.map(normalizeRecentlyPlayed).sort((a, b) => b.played_at - a.played_at);
+
+  return res.status(200).json(data);
+}
+```
+
+The `getRecentlyPlayed()` is a simple method that takes the **access token** and calls the Spotify API.
+
+```js showLineNumbers
+/**
+ * Consumer of the recently played API
+ */
+export const getRecentlyPlayed = async () => {
+  const limit = config.munber; // max 33 tracks
+  const before = new Date().getTime(); // now() - 1 hour
+
+  const params = querystring.stringify({ limit, before });
+
+  const recentlyPlayedEndpoint = `https://api.spotify.com/v1/me/player/recently-played?${params}`;
+
+  const { access_token: accessToken } = await getAccessToken();
+
+  if (!accessToken) {
+    return;
+  }
+
+  return fetch(recentlyPlayedEndpoint, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  });
+};
+```
+
+Now the API is ready to be consumed by the client. To do that I've create a simple `fetcher` to use via server-side.
+
+```js showLineNumbers
+export async function recentlyPlayedFetcher() {
+  const recentlyPlayedResponse = await fetch(`${config.baseUrl}/api/spotify/recently-played`);
+
+  const recentlyPlayed = await recentlyPlayedResponse.json();
+
+  return recentlyPlayed;
+}
+```
+
+I should to put it all togheter in the dedicated page.
+
+_**app/api/spotify/recently-played.tsx**_
+
+```js {8,30} showLineNumbers
+import { Footer, Header, RecentlyPlayed, Top } from 'components';
+import { NextSeo } from 'next-seo';
+import { recentlyPlayedFetcher } from 'app/api/spotify/recently-played';
+
+export async function getServerSideProps({ res }) {
+  res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
+
+  const recentlyPlayed = await recentlyPlayedFetcher(); // consuming my API via server-side
+
+  return {
+    props: {
+      recentlyPlayed
+    }
+  };
+}
+
+export default function SpotifyPage({ recentlyPlayed }) {
+  return (
+    <>
+      <NextSeo
+        title="I show you what I 🎧"
+        description="I ❤️ the music and you should know it."
+        openGraph={{
+          title: "Mateo's activity on Spotify"
+        }}
+      />
+
+      {/* Recently Played Component  */}
+      <RecentlyPlayed items={recentlyPlayed} />
+    </>
+  );
+}
+```
+
+Yes, this component it'v very simple: just `SSR`, `caching`, `fetching`, `parsing` and a little bit of `SEO`.
+
+The core is the `<RecentlyPlayed>` component. It takes the `items` as a prop and renders the _carousel_ of tracks.
+
+> I didn't used any external components for the _carousel_
+
+```js {12-30,44,47,64,67} showLineNumbers
+import s from './recently-played.module.css';
+
+import config from 'lib/config';
+
+import { ChevronUp, Container, Fade, Title, TrackCard } from 'components';
+import { useCallback, useRef } from 'react';
+
+export default function RecentlyPlayed({ items }) {
+  const trackContainerRef = useRef();
+
+  // makes the containers scroll method
+  const scrollTrackContainer = useCallback(
+    direction => {
+      const { current } = trackContainerRef;
+
+      if (current) {
+        current.scroll({
+          left:
+            direction === 'left'
+              ? current.scrollLeft - current.clientWidth - config.munber
+              : direction === 'right'
+              ? current.scrollLeft + current.clientWidth - config.munber
+              : 0,
+          behavior: 'smooth'
+        });
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [trackContainerRef.current]
+  );
+
+  return (
+    <>
+      <Container clean>
+        <Fade>
+          <Title>Recently Played</Title>
+        </Fade>
+
+        {items.length > 0 && (
+          <div className={s.root}>
+            <button
+              className={s.navigator}
+              onClick={() => {
+                scrollTrackContainer('left');
+              }}
+              onTouchStart={() => {
+                scrollTrackContainer('left');
+              }}
+              aria-label="Less Tracks">
+              <ChevronUp className="w-6 h-6 font-black transition duration-500 transform -rotate-90" />
+            </button>
+
+            <div className={s['track-container']} ref={trackContainerRef}>
+              {items.map((item, key) => (
+                <Fade key={`${item.id}-${key}`} delay={key + config.munber / 100} clean>
+                  <TrackCard item={item} delay={key + config.munber / 100} />
+                </Fade>
+              ))}
+            </div>
+
+            <button
+              className={s.navigator}
+              onClick={() => {
+                scrollTrackContainer('right');
+              }}
+              onTouchStart={() => {
+                scrollTrackContainer('right');
+              }}
+              aria-label="More Tracks">
+              <ChevronUp className="w-6 h-6 transition duration-500 transform rotate-90 hover:scale-110" />
+            </button>
+          </div>
+        )}
+      </Container>
+    </>
+  );
+}
+```
+
+The scrollTrackContainer uses `useCallback` to prevent re-render of the component. It just checks if the `trackContainerRef` is defined and if it is, it calls the `scroll (native)` method of the _node_.
+
+_Is you are asking why I called a variable `munber`, I'll answer you another time (or article)._
+
+> `<Fade>` component just animates the children following the specified criteria.
+
+## 🔝 Top Artists/Tracks
+
+Actually, I don't feel like to copy and paste part of my code (that you can check [here](https://github.com/mateonunez/mateonunez-website)).
+
+This is because the `Top Artist and Tops Tracks` on _Spotify_ is almost the same as the `Recently Played` on _Spotify_.
+
+So I've created a new api in _**app/api/spotify/top.jsx**_, that calls two methods: `getTopArtists()` and `getTopTracks()`. Those methods resolve _Spotify endpoints_ and returns the data.
+
+I have a two methods to _normalize_ both responses.
+
+In this case I've create a single `fetcher` that consumes my API. The json looks something like this:
+
+```json
+{
+  "artists": [],
+  "tracks": []
+}
+```
+
+The page has no particular logic, just render the items and make things beautiful using `tailwindcss` classes.
+
+---
+
+## Resources
+
+- [https://github.com/vercel/next.js](https://github.com/vercel/next.js)
+- [https://github.com/facebook/react/](https://github.com/facebook/react/)
+- [https://github.com/tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss)
