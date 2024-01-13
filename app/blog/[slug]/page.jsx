@@ -1,6 +1,6 @@
 'use client';
 import s from 'styles/pages/blog/[slug].module.css';
-import { default as DefaultArticle, metadata } from 'articles/you-should-use-node-test-act-one.mdx';
+import { metadata } from 'articles/you-should-use-node-test-act-one.mdx';
 import Article from 'components/articles';
 
 // import { getArticle } from 'lib/articles/parser';
@@ -56,7 +56,8 @@ export default function BlogArticle({ params }) {
   return (
     <div className={s.root}>
       <Article frontMatter={metadata}>
-        <DefaultArticle />
+        {/* <DefaultArticle /> */}
+        Ciao!
       </Article>
     </div>
   );
