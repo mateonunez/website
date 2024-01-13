@@ -1,3 +1,5 @@
+const widthMDX = require('@next/mdx')();
+
 const contentSecurityPolicy = `
   default-src 'self' https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.vercel-insights.com https://vercel.live https://mateonunez.dev/;
   base-uri 'self';
@@ -46,7 +48,8 @@ const securityHeaders = [
   },
 ];
 
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -78,3 +81,5 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
 };
+
+module.exports = widthMDX(nextConfig);
