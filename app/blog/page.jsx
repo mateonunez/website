@@ -2,7 +2,7 @@ import s from 'styles/pages/blog/index.module.css';
 
 import { Container, Title } from 'components';
 import { getAllArticles } from 'lib/articles/parser';
-import ArticlePreview from 'components/articles/preview';
+// import ArticlePreview from 'components/articles/preview';
 import meta from 'lib/config/metadata.js';
 
 export const metadata = {
@@ -11,8 +11,8 @@ export const metadata = {
   keywords: [...meta.keywords, 'blog', 'articles'],
 };
 
-export default async function Blog() {
-  const articles = await getAllArticles();
+export default function Blog() {
+  // const articles = await getAllArticles();
   return (
     <>
       <Container clean>
@@ -20,9 +20,10 @@ export default async function Blog() {
 
         <div className={s.root}>
           <div className="container">
-            {articles.map((article) => (
+            WIIIIIP
+            {/* {articles.map((article) => (
               <ArticlePreview key={article.slug} {...article} />
-            ))}
+            ))} */}
           </div>
         </div>
       </Container>
