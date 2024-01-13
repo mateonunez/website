@@ -1,4 +1,4 @@
-import withMDX from '@next/mdx';
+const withMDX = require('@next/mdx')()
 
 const contentSecurityPolicy = `
   default-src 'self' https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.vercel-insights.com https://vercel.live https://mateonunez.dev/;
@@ -82,9 +82,6 @@ const nextConfig = {
   },
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   outputFileTracing: false,
-  experimental: {
-    mdxRs: true
-  }
 };
 
-export default withMDX()(nextConfig);
+module.exports = withMDX(nextConfig);
