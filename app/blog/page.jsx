@@ -1,7 +1,7 @@
 import s from 'styles/pages/blog/index.module.css';
 
 import { Container, Title } from 'components';
-import { getAllArticles } from 'lib/articles/parser';
+// import { getAllArticles } from 'lib/articles/parser';
 // import ArticlePreview from 'components/articles/preview';
 import meta from 'lib/config/metadata.js';
 
