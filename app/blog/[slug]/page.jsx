@@ -1,6 +1,5 @@
 'use client';
 import s from 'styles/pages/blog/[slug].module.css';
-import { metadata } from 'articles/you-should-use-node-test-act-one.mdx';
 import Article from 'components/articles';
 
 // import { getArticle } from 'lib/articles/parser';
@@ -48,17 +47,12 @@ import Article from 'components/articles';
 export default function BlogArticle({ params }) {
   const { slug } = params;
 
-  console.log({
-    slug,
-    metadata
-  });
+  console.log({ slug });
 
   return (
     <div className={s.root}>
-      <Article frontMatter={metadata}>
         {/* <DefaultArticle /> */}
-        Ciao!
-      </Article>
+      Ciao!
     </div>
   );
 }
