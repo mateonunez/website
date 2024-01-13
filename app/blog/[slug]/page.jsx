@@ -1,5 +1,7 @@
 'use client';
 import s from 'styles/pages/blog/[slug].module.css';
+import { default as DefaultArticle, metadata } from 'articles/you-should-use-node-test-act-one.mdx';
+import Article from 'components/articles';
 
 // import { getArticle } from 'lib/articles/parser';
 
@@ -44,15 +46,18 @@ import s from 'styles/pages/blog/[slug].module.css';
 // }
 
 export default function BlogArticle({ params }) {
-  'use client';
   const { slug } = params;
-  const { default: AsterismTheBfOfLyra, metadata = {} } = require(`../../../articles/${slug}.mdx`);
+
   console.log({
-    metadata,
+    slug,
+    metadata
   });
+
   return (
     <div className={s.root}>
-      <AsterismTheBfOfLyra />
+      <Article frontMatter={metadata}>
+        <DefaultArticle />
+      </Article>
     </div>
   );
 }
