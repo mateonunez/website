@@ -1,7 +1,6 @@
 'use client';
 import s from 'styles/pages/blog/[slug].module.css';
 import Article from 'components/articles';
-import { default as DefaultArticle, metadata } from 'articles/you-should-use-node-test-act-one.mdx';
 
 // import { getArticle } from 'lib/articles/parser';
 
@@ -45,16 +44,19 @@ import { default as DefaultArticle, metadata } from 'articles/you-should-use-nod
 //   return dynamicMetadata;
 // }
 
-export default function BlogArticle({ params }) {
+export default async function BlogArticle({ params }) {
   const { slug } = params;
+  // import { default as DefaultArticle, metadata } from 'articles/you-should-use-node-test-act-one.mdx';
+
+  const { default: DefaultArticle, metadata } = await import(`articles/${slug}.mdx`);
 
   console.log({ slug });
 
   return (
     <div className={s.root}>
-        <Article frontMatter={metadata}>
+      <Article frontMatter={metadata}>
         <DefaultArticle />
-        </Article>
+      </Article>
     </div>
   );
 }
