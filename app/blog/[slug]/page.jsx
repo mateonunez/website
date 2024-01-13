@@ -48,7 +48,7 @@ export default function BlogArticle({ params }) {
   'use client';
   const { slug } = params;
   const { default: AsterismTheBfOfLyra, metadata = {} } = require(`../../../articles/${slug}.mdx`);
-  const Article = dynamic(() => import('components/articles'), { ssr: false });
+  const Article = dynamic(() => import('../../../components/articles'), { ssr: false });
 
   return (
     <div className={s.root}>
