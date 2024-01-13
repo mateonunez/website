@@ -1,5 +1,4 @@
-import remarkGfm from 'remark-gfm';
-import createMDX from '@next/mdx';
+import withMDX from '@next/mdx';
 
 const contentSecurityPolicy = `
   default-src 'self' https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.vercel-insights.com https://vercel.live https://mateonunez.dev/;
@@ -87,13 +86,5 @@ const nextConfig = {
     mdxRs: true
   }
 };
-
-const withMDX = createMDX({
-  // Add markdown plugins here, as desired
-  options: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [],
-  },
-})
 
 export default withMDX(nextConfig);

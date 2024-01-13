@@ -5,7 +5,7 @@ import s from './hero.module.css';
 import { Fade, Terminal, Player } from 'components';
 import { useUI } from 'components/ui/ui-context';
 
-import ArticlePreview from 'components/articles/preview';
+// import ArticlePreview from 'components/articles/preview';
 import Link from 'next/link';
 import useSWR from 'swr';
 
@@ -50,7 +50,7 @@ export default function Hero({ article, ...props }) {
                   From the Blog
                 </Link>
               </h2>
-              <ArticlePreview {...article} />
+              {/* <ArticlePreview {...article} /> */}
             </Fade>
           </div>
           {/* Start the BigBang */}
