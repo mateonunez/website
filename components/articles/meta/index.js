@@ -6,7 +6,7 @@ import { dateWithoutYearForHumans } from 'lib/helpers/date';
 import { Clock, Tag, User } from 'components/icons';
 import { kebapCase } from 'lib/helpers/string';
 
-export default function ArticleMeta({ date, author, readingTime, tags = [] }) {
+export default function ArticleMeta({ date, author = { name: 'Mateo' }, readingTime, tags = [] }) {
   return (
     <>
       <div className={s.root}>

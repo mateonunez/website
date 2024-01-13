@@ -1,15 +1,21 @@
-import { Image } from 'components/articles/mdx'
+import * as MDX from '../components/articles/mdx'
 
-export const metadata = {
-  title: 'Asterism: The BF of Lyra',
-  description: 'Asterism is a CLI tool that helps you to convert your database instances (MySQL and PostgreSQL) into Lyra instances and to create searches in a simple way.',
-  date: '2021-11-26T14:00:00.000Z',
-  cover: '/images/articles/asterism-the-bf-of-lyra/cover.png',
-  slug: 'asterism-the-bf-of-lyra',
-  tags: ['asterism', 'lyra', 'search', 'cli', 'javascript', 'nodejs'],
-}
+---
+title: 'Asterism, the best friend of Lyra'
+date: 2022-11-26T16:00:00.000Z
+description: 'Asterism is a CLI tool that helps you to manage your Lyra instances and searches.'
+tags:
+  - javascript
+  - lyra
+  - search engine
+  - asterism
+image: '/images/articles/asterism-the-bf-of-lyra/cover.png'
+author:
+  name: Mateo
+  image: '/images/profile.jpg'
+---
 
-<Image
+<MDX.Image
   src="/images/articles/asterism-the-bf-of-lyra/cover.png"
   width="1280"
   height="720"
