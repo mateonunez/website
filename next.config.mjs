@@ -59,7 +59,8 @@ const nextConfig = {
       }
     ];
   },
-  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx']
+  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+  outputFileTracing: false
 };
 
 export default withMDX({
