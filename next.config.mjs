@@ -1,5 +1,4 @@
-import remarkGfm from 'remark-gfm';
-import createMDX from '@next/mdx';
+import { withMDX } from '@next/mdx';
 
 const contentSecurityPolicy = `
   default-src 'self' https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.vercel-insights.com https://vercel.live https://mateonunez.dev/;
@@ -20,77 +19,49 @@ const securityHeaders = [
   // Content Security Policy
   {
     key: 'Content-Security-Policy',
-    value: contentSecurityPolicy.replace(/\s{2,}/g, ' ').trim(),
+    value: contentSecurityPolicy.replace(/\s{2,}/g, ' ').trim()
   },
   // XSS Protection
   {
     key: 'X-XSS-Protection',
-    value: '1; mode=block',
+    value: '1; mode=block'
   },
   // No Sniff
   {
     key: 'X-Content-Type-Options',
-    value: 'nosniff',
+    value: 'nosniff'
   },
   // Force HTTPS
   {
     key: 'Strict-Transport-Security',
-    value: 'max-age=31536000; includeSubDomains; preload',
+    value: 'max-age=31536000; includeSubDomains; preload'
   },
   // Referrer Policy
   {
     key: 'Referrer-Policy',
-    value: 'same-origin',
+    value: 'same-origin'
   },
   // Frame Options
   {
     key: 'X-Frame-Options',
-    value: 'DENY',
-  },
+    value: 'DENY'
+  }
 ];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  images: {
-    formats: ['image/avif', 'image/webp'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**.scdn.co',
-      },
-      {
-        protocol: 'https',
-        hostname: '**.githubusercontent.com',
-      },
-      {
-        protocol: 'https',
-        hostname: '**.githubassets.com',
-      },
-    ],
-    minimumCacheTTL: 60,
-  },
+  images: { remotePatterns: [{ protocol: 'https', hostname: '**' }] },
   headers() {
     return [
       {
         source: '/(.*)',
-        headers: securityHeaders,
-      },
+        headers: securityHeaders
+      }
     ];
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx']
 };
-
-const withMDX = createMDX({
-  // Add markdown plugins here, as desired
-  options: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [],
-  },
-})
 
 export default withMDX({
   ...nextConfig,
