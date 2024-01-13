@@ -1,7 +1,6 @@
 'use client';
-
+import dynamic from 'next/dynamic';
 import s from 'styles/pages/blog/[slug].module.css';
-import Article from 'components/articles';
 
 // import { getArticle } from 'lib/articles/parser';
 
@@ -46,8 +45,10 @@ import Article from 'components/articles';
 // }
 
 export default function BlogArticle({ params }) {
+  'use client';
   const { slug } = params;
   const { default: AsterismTheBfOfLyra, metadata = {} } = require(`../../../articles/${slug}.mdx`);
+  const Article = dynamic(() => import('components/articles'), { ssr: false });
 
   return (
     <div className={s.root}>
