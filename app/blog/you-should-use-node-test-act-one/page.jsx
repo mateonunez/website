@@ -1,7 +1,7 @@
 'use client';
 
 import Article from 'components/articles';
-// import { default as DefaultArticle, metadata } from 'articles/you-should-use-node-test-act-one.mdx';
+import { default as DefaultArticle, metadata } from 'articles/you-should-use-node-test-act-one.mdx';
 
 // import { getArticle } from 'lib/articles/parser';
 
@@ -27,7 +27,7 @@ import Article from 'components/articles';
 //       ...meta.openGraph,
 //       title: frontMatter.title,
 //       description: frontMatter.description,
-//       type: 'article',
+//       type: 'article'
 //       article: {
 //         authors: [frontMatter.author.name],
 //         tags: frontMatter.tags,
@@ -45,10 +45,7 @@ import Article from 'components/articles';
 //   return dynamicMetadata;
 // }
 
-export default function BlogArticle({ params }) {
-  const { slug } = params;
-  const { default: DefaultArticle, metadata } = require(`articles/${slug}.mdx`);
-
+export default function BlogArticle() {
   return (
     <Article frontMatter={metadata}>
       <DefaultArticle />

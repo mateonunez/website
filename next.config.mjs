@@ -14,38 +14,13 @@ const contentSecurityPolicy = `
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com
 `;
 
-// Security Headers
 const securityHeaders = [
-  // Content Security Policy
-  {
-    key: 'Content-Security-Policy',
-    value: contentSecurityPolicy.replace(/\s{2,}/g, ' ').trim(),
-  },
-  // XSS Protection
-  {
-    key: 'X-XSS-Protection',
-    value: '1; mode=block',
-  },
-  // No Sniff
-  {
-    key: 'X-Content-Type-Options',
-    value: 'nosniff',
-  },
-  // Force HTTPS
-  {
-    key: 'Strict-Transport-Security',
-    value: 'max-age=31536000; includeSubDomains; preload',
-  },
-  // Referrer Policy
-  {
-    key: 'Referrer-Policy',
-    value: 'same-origin',
-  },
-  // Frame Options
-  {
-    key: 'X-Frame-Options',
-    value: 'DENY',
-  },
+  { key: 'Content-Security-Policy', value: contentSecurityPolicy.replace(/\s{2,}/g, ' ').trim() },
+  { key: 'X-XSS-Protection', value: '1; mode=block' },
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' },
+  { key: 'Referrer-Policy', value: 'same-origin' },
+  { key: 'X-Frame-Options', value: 'DENY' },
 ];
 
 /** @type {import('next').NextConfig} */
