@@ -1,7 +1,8 @@
 'use client';
+
 import s from 'styles/pages/blog/[slug].module.css';
 import Article from 'components/articles';
-import { default as DefaultArticle, metadata } from 'articles/you-should-use-node-test-act-one.mdx';
+// import { default as DefaultArticle, metadata } from 'articles/you-should-use-node-test-act-one.mdx';
 
 // import { getArticle } from 'lib/articles/parser';
 
@@ -48,7 +49,7 @@ import { default as DefaultArticle, metadata } from 'articles/you-should-use-nod
 export default function BlogArticle({ params }) {
   const { slug } = params;
 
-  console.log({ slug });
+  const { default: DefaultArticle, metadata } = require(`articles/${slug}.mdx`);
 
   return (
     <div className={s.root}>
