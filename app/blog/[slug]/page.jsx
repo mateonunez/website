@@ -1,6 +1,5 @@
 'use client';
 
-import s from 'styles/pages/blog/[slug].module.css';
 import Article from 'components/articles';
 // import { default as DefaultArticle, metadata } from 'articles/you-should-use-node-test-act-one.mdx';
 
@@ -52,10 +51,8 @@ export default function BlogArticle({ params }) {
   const { default: DefaultArticle, metadata } = require(`articles/${slug}.mdx`);
 
   return (
-    <div className={s.root}>
-      <Article frontMatter={metadata}>
-        <DefaultArticle />
-      </Article>
-    </div>
+    <Article frontMatter={metadata}>
+      <DefaultArticle />
+    </Article>
   );
 }
