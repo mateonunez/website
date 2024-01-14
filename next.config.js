@@ -77,4 +77,5 @@ module.exports = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  outputFileTracing: false,
 };
