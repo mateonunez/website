@@ -7,7 +7,13 @@ import ArticleTitle from './title';
 import ArticleContent from './content';
 
 export default function Article({ frontMatter, children }) {
-  const { title, date, author, tags, readingTime } = frontMatter;
+  const {
+    title = 'Unknown',
+    date = new Date(),
+    author = { name: 'Mateo' },
+    tags = ['node'],
+    readingTime = '3 min',
+  } = frontMatter;
 
   return (
     <div className={s.root}>
@@ -15,9 +21,7 @@ export default function Article({ frontMatter, children }) {
 
       <ArticleTitle title={title} />
 
-      <ArticleContent>
-        {children}
-      </ArticleContent>
+      <ArticleContent>{children}</ArticleContent>
     </div>
   );
 }
