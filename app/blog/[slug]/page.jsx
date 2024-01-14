@@ -1,8 +1,13 @@
-import Article from "components/articles"
+import config from "lib/config";
+import BlogArticleClient from "./page-client";
+import meta from "lib/config/metadata";
+import { getArticle } from "lib/articles/parser";
 
 export async function generateMetadata({ params }) {
   const { slug } = params;
-  const { metadata: frontMatter } = await import(`./../../../articles/${slug}.mdx`);
+  const { frontMatter } = await getArticle({ slug });
+
+  console.log('frontMatter', frontMatter);
 
   const baseUrl = new URL(config.baseUrl);
   const imagePath = frontMatter.image.startsWith('/') ? frontMatter.image : `/${frontMatter.image}`;
@@ -35,15 +40,9 @@ export async function generateMetadata({ params }) {
   return dynamicMetadata;
 }
 
-export default async function BlogArticle({ params }) {
-  'use client';
-
-  const { slug } = params
-  const { default: BlogArticle, metadata } = await import(`./../../../articles/${slug}.mdx`)
-
+export default function BlogArticle({ params }) {
+  const { slug } = params;
   return (
-    <Article frontMatter={metadata}>
-      <BlogArticle />
-    </Article>
+    <BlogArticleClient slug={slug} />
   )
 }
