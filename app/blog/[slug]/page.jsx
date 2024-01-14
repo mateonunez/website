@@ -43,6 +43,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function BlogArticle({ params }) {
+  'use client';
+
   const { slug } = params;
   const { frontMatter, source } = await getArticle({ slug });
 
