@@ -57,7 +57,6 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
-  outputFileTracing: false,
 };
 
 const withMDX = createMDX({
