@@ -1,5 +1,7 @@
-import remarkGfm from 'remark-gfm';
 import createMDX from '@next/mdx';
+import remarkGfm from 'remark-gfm';
+import rehypeSlug from 'rehype-slug';
+import rehypePrism from 'rehype-prism-plus';
 
 const contentSecurityPolicy = `
   default-src 'self' https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.vercel-insights.com https://vercel.live https://mateonunez.dev/;
@@ -63,7 +65,7 @@ const withMDX = createMDX({
   // Add markdown plugins here, as desired
   options: {
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [],
+    rehypePlugins: [[rehypeSlug], [rehypePrism, { ignoreMissing: true }]],
   },
 });
 

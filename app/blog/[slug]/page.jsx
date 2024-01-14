@@ -1,22 +1,14 @@
-import { getArticle } from 'lib/articles/parser.js'
-import PageClient from './page-client.jsx'
-import { serialize } from 'next-mdx-remote/serialize'
+'use client';
 
-// needed because of bug: https://github.com/hashicorp/next-mdx-remote/issues/350
-const mdxOptions = { development: process.env.NODE_ENV === 'development' }
+import Article from "components/articles"
 
-export default async function PageBlogArticle ({ params: { slug } }) {
-  const content = await getArticle({slug})
-  const source = await serialize(content, { mdxOptions })
+export default async function BlogArticle({ params }) {
+  const { slug } = params
+  const { default: BlogArticle, metadata } = await import(`./../../../articles/${slug}.mdx`)
+
   return (
-    <PageClient source={source} />
+    <Article frontMatter={metadata}>
+      <BlogArticle />
+    </Article>
   )
-}
-
-// biome-ignore lint/nursery/useAwait: <explanation>
-export  async function generateMetadata ({ params: { slug } }) {
-  return {
-    title: 'Ciao!',
-    description: 'This is a description',
-  }
 }
