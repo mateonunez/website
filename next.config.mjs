@@ -1,4 +1,4 @@
-const withMDX = require('@next/mdx')()
+import withMDX from '@next/mdx';
 
 const contentSecurityPolicy = `
   default-src 'self' https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.vercel-insights.com https://vercel.live https://mateonunez.dev/;
@@ -84,4 +84,4 @@ const nextConfig = {
   outputFileTracing: false,
 };
 
-module.exports = withMDX(nextConfig);
+export default withMDX()(nextConfig);

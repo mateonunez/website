@@ -47,7 +47,6 @@ import Article from 'components/articles';
 
 export default function BlogArticle({ params }) {
   const { slug } = params;
-
   const { default: DefaultArticle, metadata } = require(`articles/${slug}.mdx`);
 
   return (
