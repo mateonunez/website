@@ -6,7 +6,6 @@ import { serialize } from 'next-mdx-remote/serialize'
 const mdxOptions = { development: process.env.NODE_ENV === 'development' }
 
 export default async function PageBlogArticle ({ params: { slug } }) {
-  console.log('slug', slug)
   const content = await getArticle({slug})
   const source = await serialize(content, { mdxOptions })
   return (
