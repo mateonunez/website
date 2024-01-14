@@ -1,5 +1,6 @@
 import s from 'styles/pages/blog/[slug].module.css';
 
+import { Suspense, cache } from 'react';
 import dynamic from 'next/dynamic';
 import { getArticle } from 'lib/articles/parser';
 import config from 'lib/config';
@@ -7,9 +8,14 @@ import meta from 'lib/config/metadata.js';
 
 const Article = dynamic(() => import('components/articles'));
 
+const fetchArticle = cache(async ({ slug }) => {
+  const { frontMatter, source } = await getArticle({ slug });
+  return { frontMatter, source };
+});
+
 export async function generateMetadata({ params }) {
   const { slug } = params;
-  const { frontMatter } = await getArticle({ slug });
+  const { frontMatter } = await fetchArticle({ slug });
 
   const baseUrl = new URL(config.baseUrl);
   const imagePath = frontMatter.image.startsWith('/') ? frontMatter.image : `/${frontMatter.image}`;
@@ -46,11 +52,13 @@ export default async function BlogArticle({ params }) {
   'use client';
 
   const { slug } = params;
-  const { frontMatter, source } = await getArticle({ slug });
+  const { frontMatter, source } = await fetchArticle({ slug });
 
   return (
-    <div className={s.root}>
-      <Article frontMatter={frontMatter} source={source} />
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className={s.root}>
+        <Article frontMatter={frontMatter} source={source} />
+      </div>
+    </Suspense>
   );
 }
