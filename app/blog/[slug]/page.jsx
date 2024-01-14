@@ -1,13 +1,14 @@
+import { getArticle } from 'lib/articles/parser.js'
 import PageClient from './page-client.jsx'
 import { serialize } from 'next-mdx-remote/serialize'
-import fs from 'node:fs'
+
 // needed because of bug: https://github.com/hashicorp/next-mdx-remote/issues/350
 const mdxOptions = { development: process.env.NODE_ENV === 'development' }
 
 export default async function PageBlogArticle ({ params: { slug } }) {
-  const content = fs.readFileSync(`articles/${slug}.mdx`, 'utf8')
+  console.log('slug', slug)
+  const content = await getArticle({slug})
   const source = await serialize(content, { mdxOptions })
-
   return (
     <PageClient source={source} />
   )
