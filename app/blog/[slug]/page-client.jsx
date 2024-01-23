@@ -2,10 +2,9 @@
 
 import s from 'components/articles/article.module.css';
 
-import { MDXRemote } from 'next-mdx-remote';
-import * as mdxComponents from 'components/articles/mdx';
 import ArticleMeta from 'components/articles/meta';
 import ArticleTitle from 'components/articles/title';
+import ArticleContent from 'components/articles/content';
 
 export default function ArticlePageClient({ source, frontmatter }) {
   const { title, date, author, tags, readingTime } = frontmatter;
@@ -16,7 +15,7 @@ export default function ArticlePageClient({ source, frontmatter }) {
 
       <ArticleTitle title={title} />
 
-      <MDXRemote compiledSource={source} components={mdxComponents} />
+      <ArticleContent source={source} />
     </div>
   );
 }

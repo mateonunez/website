@@ -82,14 +82,14 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
 };
 
-const remarkPlugins = [[remarkGfm]];
-const rehypePlugins = [[rehypeSlug], [rehypePrism, { ignoreMissing: true }]];
+// const remarkPlugins = [[remarkGfm]];
+// const rehypePlugins = [[rehypeSlug], [rehypePrism, { ignoreMissing: true }]];
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins,
-    rehypePlugins,
+    remarkPlugins: [[remarkGfm]],
+    rehypePlugins: [[rehypePrism]]
   },
 });
 

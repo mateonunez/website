@@ -13,6 +13,7 @@ export const metadata = {
 
 export default async function Blog() {
   const articles = await getAllArticles();
+
   return (
     <Container clean>
       <Title>Blog</Title>
@@ -20,7 +21,7 @@ export default async function Blog() {
       <div className={s.root}>
         <div className="container">
           {articles.map((article) => (
-            <ArticlePreview key={article.slug} {...article} />
+            <ArticlePreview key={article.frontmatter.slug} {...article.frontmatter} />
           ))}
         </div>
       </div>
