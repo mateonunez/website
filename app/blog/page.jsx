@@ -14,18 +14,16 @@ export const metadata = {
 export default async function Blog() {
   const articles = await getAllArticles();
   return (
-    <>
-      <Container clean>
-        <Title>Blog</Title>
+    <Container clean>
+      <Title>Blog</Title>
 
-        <div className={s.root}>
-          <div className="container">
-            {articles.map((article) => (
-              <ArticlePreview key={article.slug} {...article} />
-            ))}
-          </div>
+      <div className={s.root}>
+        <div className="container">
+          {articles.map((article) => (
+            <ArticlePreview key={article.slug} {...article} />
+          ))}
         </div>
-      </Container>
-    </>
+      </div>
+    </Container>
   );
 }

@@ -7,12 +7,10 @@ export default async function HomePage() {
   const article = await getLastArticle();
 
   return (
-    <>
-      <div className={s.root}>
-        <Hero className="h-full" article={article} />
+    <div className={s.root}>
+      <Hero className="h-full" article={article} />
 
-        <About className="h-full" />
-      </div>
-    </>
+      <About className="h-full" />
+    </div>
   );
 }

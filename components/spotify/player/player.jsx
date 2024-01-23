@@ -24,63 +24,59 @@ const Player = () => {
   const progress = useMemo(() => listening && (listening.progress / listening.duration) * 100, [listening]);
 
   return (
-    <>
-      <div className={s.root}>
-        <div className={s.inner}>
-          <Link
-            passHref
-            target={listening?.isPlaying ? '_blank' : '_self'}
-            aria-label="Mateo Nunez on Spotify"
-            rel="noopener noreferer noreferrer"
-            title="Mateo Nunez on Spotify"
-            href={url}
-          >
-            {listening?.isPlaying ? (
-              <div className="w-auto h-auto">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img width="40" height="40" src={listening?.thumbnail} alt={listening?.album} />
-              </div>
-            ) : (
-              <Spotify className="w-10 h-10" color={'#1ED760'} />
-            )}
-          </Link>
+    <div className={s.root}>
+      <div className={s.inner}>
+        <Link
+          passHref
+          target={listening?.isPlaying ? '_blank' : '_self'}
+          aria-label="Mateo Nunez on Spotify"
+          rel="noopener noreferer noreferrer"
+          title="Mateo Nunez on Spotify"
+          href={url}
+        >
+          {listening?.isPlaying ? (
+            <div className="w-auto h-auto">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img width="40" height="40" src={listening?.thumbnail} alt={listening?.album} />
+            </div>
+          ) : (
+            <Spotify className="w-10 h-10" color={'#1ED760'} />
+          )}
+        </Link>
 
-          <div className={s.details}>
-            <div className="flex flex-row items-center justify-between">
-              <div className="flex flex-col">
-                <p className={s.title}>{listening?.isPlaying ? listening.title : 'Not Listening'}</p>
-                <p className={s.artist}>{listening?.isPlaying ? listening.artist : 'Spotify'}</p>
+        <div className={s.details}>
+          <div className="flex flex-row items-center justify-between">
+            <div className="flex flex-col">
+              <p className={s.title}>{listening?.isPlaying ? listening.title : 'Not Listening'}</p>
+              <p className={s.artist}>{listening?.isPlaying ? listening.artist : 'Spotify'}</p>
+            </div>
+            <div className="flex flex-row">
+              <Link
+                href="/spotify"
+                passHref
+                target={listening?.isPlaying ? '_blank' : '_self'}
+                aria-label="Mateo Nunez on Spotify"
+                rel="noopener noreferer noreferrer"
+                title="Mateo Nunez on Spotify"
+              >
+                <ChevronUp className="w-4 h-4 rotate-90" />
+              </Link>
+            </div>
+          </div>
+          {listening?.isPlaying && (
+            <div className={s.playingContainer}>
+              <div className={s.progress}>
+                <div className={s.listened} style={{ width: `${progress}%` }} />
               </div>
-              <div className="flex flex-row">
-                <Link
-                  href="/spotify"
-                  passHref
-                  target={listening?.isPlaying ? '_blank' : '_self'}
-                  aria-label="Mateo Nunez on Spotify"
-                  rel="noopener noreferer noreferrer"
-                  title="Mateo Nunez on Spotify"
-                >
-                  <ChevronUp className="w-4 h-4 rotate-90" />
-                </Link>
+
+              <div className={s.animation}>
+                <PlayerAnimation />
               </div>
             </div>
-            {listening?.isPlaying && (
-              <>
-                <div className={s.playingContainer}>
-                  <div className={s.progress}>
-                    <div className={s.listened} style={{ width: `${progress}%` }} />
-                  </div>
-
-                  <div className={s.animation}>
-                    <PlayerAnimation />
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
+          )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

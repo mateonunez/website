@@ -10,14 +10,12 @@ export default function Article({ frontMatter, source }) {
   const { title, date, author, tags, readingTime } = frontMatter;
 
   return (
-    <>
-      <div className={s.root}>
-        <ArticleMeta date={date} author={author} tags={tags} readingTime={readingTime} />
+    <div className={s.root}>
+      <ArticleMeta date={date} author={author} tags={tags} readingTime={readingTime} />
 
-        <ArticleTitle title={title} />
+      <ArticleTitle title={title} />
 
-        <ArticleContent source={source} />
-      </div>
-    </>
+      <ArticleContent source={source} />
+    </div>
   );
 }

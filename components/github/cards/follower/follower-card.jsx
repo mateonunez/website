@@ -18,36 +18,34 @@ const FollowerCard = ({ follower, delay, variant = 'default' }, ref) => {
   });
 
   return (
-    <>
-      <div className={classNames} ref={ref}>
-        <Link
-          href={follower.url}
-          passHref
-          target="_blank"
-          rel="noopener noreferrer"
-          title={`${follower.username}`}
-          aria-label={`${follower.username}`}
-        >
-          <Image
-            className={s.image}
-            src={follower.avatar}
-            alt={follower.username}
-            height={48}
-            width={48}
-            quality={60}
-            onLoadingComplete={() => {
-              setUsernameVisible(true);
-            }}
-          />
-        </Link>
+    <div className={classNames} ref={ref}>
+      <Link
+        href={follower.url}
+        passHref
+        target="_blank"
+        rel="noopener noreferrer"
+        title={`${follower.username}`}
+        aria-label={`${follower.username}`}
+      >
+        <Image
+          className={s.image}
+          src={follower.avatar}
+          alt={follower.username}
+          height={48}
+          width={48}
+          quality={60}
+          onLoadingComplete={() => {
+            setUsernameVisible(true);
+          }}
+        />
+      </Link>
 
-        {usernameVisible && (
-          <Fade className={s['follower-container']} direction="bottom" delay={delay}>
-            <div className={s.follower}>{follower.username}</div>
-          </Fade>
-        )}
-      </div>
-    </>
+      {usernameVisible && (
+        <Fade className={s['follower-container']} direction="bottom" delay={delay}>
+          <div className={s.follower}>{follower.username}</div>
+        </Fade>
+      )}
+    </div>
   );
 };
 

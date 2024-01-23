@@ -9,11 +9,9 @@ const Title = ({ className, children, element = 'h2', variant = 'title' }, ref) 
   const Component = element;
 
   return (
-    <>
-      <Component ref={ref} className={classNames}>
-        {children}
-      </Component>
-    </>
+    <Component ref={ref} className={classNames}>
+      {children}
+    </Component>
   );
 };
 

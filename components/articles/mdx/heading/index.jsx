@@ -12,23 +12,23 @@ const CopyToClipboard = ({ id, title, children }) => (
   <button
     className="hover:text-amber-700 hover:scale-105 transform transition-all duration-500 hover:underline text-amber-500"
     title={`Copy "${title}" to clipboard`}
-    onClick={(event) => {
-      const fullUrl = `${window.location.origin}${window.location.pathname}#${id}`;
-      navigator.clipboard.writeText(fullUrl);
+    // onClick={(event) => {
+    //   const fullUrl = `${window.location.origin}${window.location.pathname}#${id}`;
+    //   navigator.clipboard.writeText(fullUrl);
 
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-          inline: 'nearest',
-        });
-      }
+    //   const element = document.getElementById(id);
+    //   if (element) {
+    //     element.scrollIntoView({
+    //       behavior: 'smooth',
+    //       block: 'start',
+    //       inline: 'nearest',
+    //     });
+    //   }
 
-      window.history.pushState({}, '', `#${id}`);
+    //   window.history.pushState({}, '', `#${id}`);
 
-      event.preventDefault();
-    }}
+    //   event.preventDefault();
+    // }}
     tabIndex={-1}
     type="button"
   >

@@ -5,10 +5,8 @@ import * as components from 'components/articles/mdx';
 
 export default function ArticleContent({ source }) {
   return (
-    <>
-      <div className={s.root}>
-        <MDXRemote compiledSource={source} components={components} />
-      </div>
-    </>
+    <div className={s.root}>
+      <MDXRemote compiledSource={source} components={components} />
+    </div>
   );
 }
