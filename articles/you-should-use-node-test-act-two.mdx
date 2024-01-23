@@ -24,6 +24,33 @@ author:
   href="/blog/you-should-use-node-act-two"
 />
 
+Hey there! 👋
+
+I finally decided to finish this article. Obviously while I'm waiting for the plane to come home a bit (🇨🇴). The reason why I couldn't finish it earlier is because I was trying to fix some performance issues in my personal blog.
+
+<Row>
+  <Column>
+    <Image
+      src="/images/articles/you-should-use-node-test-act-two/blog-performance-issue.png"
+      width="1030"
+      height="594"
+      alt="Blog performance issue"
+    />
+  </Column>
+  <Column>
+    <Image
+      src="/images/articles/you-should-use-node-test-act-two/blog-performance-tweet.png"
+      width="1204"
+      height="644"
+      alt="Blog performance tweet"
+    />
+  </Column>
+</Row>
+
+I worked in a still wip [PR](https://github.com/mateonunez/website/pull/406), but Next.js and MDX are not helping me a lot. But the result is awesome, you can check it out [here](mateonunezx).
+
+Anyway, let's talk about the new Node Test Runner. In the [previous article](/blog/you-should-use-node-test-act-one) I introduced to the new Node Test Runner, and I explained why I think it's a good idea to use it. In this article I'm going to talk about some of the features that I think are really useful.
+
 ## Table of Contents
 
 - <a href="#mocks" alt="Mocks" target="_self">
@@ -35,9 +62,9 @@ author:
 
 ### Mocks
 
-One of the most intuitive features of `node-tap` is the ability to mock modules. This feature is very useful when you want to test a module that depends on other modules, edge cases, external services, etc.
+One of the most intuitive features of every test framework, is the ability to mock modules. This feature is very useful when you want to test a module that depends on other modules, external services, etc.
 
-Fortunately, the `node:test` has a similar feature that allows you to mock modules:
+Also the `node:test` has a similar feature that allows you to mock modules and assert the calls to the mocked functions. Let's see an example:
 
 ```js
 import { test, mock } from 'node:test';
@@ -76,7 +103,7 @@ test('should mock using the TestContext', async (t) => {
 });
 ```
 
-You can `mock` different types of modules, this is really useful to mock single methods, functions, classes, etc.
+You can `mock` different types of modules, this is really useful to mock single methods, functions, classes, and so on:
 
 **Mocking a single method of a Class:**
 
@@ -87,12 +114,12 @@ import { deepEqual } from 'node:assert/strict';
 class CustomNumber {
   #value;
 
-  constructor(value) {
+  constructor (value) {
     this.#value = value;
   }
 
-  add(a) {
-    return this.#value + a;
+  add (number) {
+    return this.#value + number;
   }
 }
 
@@ -232,7 +259,7 @@ node --test --test-reporter=./custom-reporter.mjs
 The second way to create a custom reporter is using a [generator function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*). This is useful when you want to create a reporter that is not based on the <a href="https://nodejs.org/api/stream.html#class-streamtransform" alt="stream.Transform">stream.Transform</a> class.
 
 ```js
-export default async function * customReporter(source) {
+export default async function * customReporter (source) {
   for await (const { type, data } of source) {
     switch (type) {
       case 'test:start':
@@ -254,3 +281,12 @@ Save the reporter in a file, for example `custom-reporter-generator.mjs`, and th
 ```bash
 node --test --test-reporter=./custom-reporter-generator.mjs
 ```
+
+---
+
+The **Act Two** is over. Spoiler here: I'm working on the **Act Three**, the most interesting part of this series (at least for me).
+
+## References
+
+- [Official Node Test Runner documentation](https://nodejs.org/api/test.html)
+- [A 2024 Wishlist for Node's Test Runner](https://cjihrig.com/test_runner_wishlist_2024)
