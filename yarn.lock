@@ -1064,6 +1064,11 @@ electron-to-chromium@^1.4.535:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.568.tgz#6ab444e120dd7fd9c3789eac54d3132b6cfcd0f9"
   integrity sha512-3TCOv8+BY6Ltpt1/CmGBMups2IdKOyfEmz4J8yIS4xLSeMm0Rf+psSaxLuswG9qMKt+XbNbmADybtXGpTFlbDg==
 
+entities@^4.4.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/entities/-/entities-4.5.0.tgz#5d268ea5e7113ec74c4d033b79ea5a35a488fb48"
+  integrity sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==
+
 esbuild@^0.12.9:
   version "0.12.29"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.12.29.tgz#be602db7c4dc78944a9dbde0d1ea19d36c1f882d"
@@ -1296,6 +1301,18 @@ hast-to-hyperscript@^9.0.0:
     unist-util-is "^4.0.0"
     web-namespaces "^1.0.0"
 
+hast-util-from-html@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/hast-util-from-html/-/hast-util-from-html-2.0.1.tgz#9cd38ee81bf40b2607368b92a04b0905fa987488"
+  integrity sha512-RXQBLMl9kjKVNkJTIO6bZyb2n+cUH8LFaSSzo82jiLT6Tfc+Pt7VQCS+/h3YwG4jaNE2TA2sdJisGWR+aJrp0g==
+  dependencies:
+    "@types/hast" "^3.0.0"
+    devlop "^1.1.0"
+    hast-util-from-parse5 "^8.0.0"
+    parse5 "^7.0.0"
+    vfile "^6.0.0"
+    vfile-message "^4.0.0"
+
 hast-util-from-parse5@^6.0.0:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/hast-util-from-parse5/-/hast-util-from-parse5-6.0.1.tgz#554e34abdeea25ac76f5bd950a1f0180e0b3bc2a"
@@ -1308,17 +1325,18 @@ hast-util-from-parse5@^6.0.0:
     vfile-location "^3.2.0"
     web-namespaces "^1.0.0"
 
-hast-util-from-parse5@^7.0.0:
-  version "7.1.2"
-  resolved "https://registry.yarnpkg.com/hast-util-from-parse5/-/hast-util-from-parse5-7.1.2.tgz#aecfef73e3ceafdfa4550716443e4eb7b02e22b0"
-  integrity sha512-Nz7FfPBuljzsN3tCQ4kCBKqdNhQE2l0Tn+X1ubgKBPRoiDIu1mL08Cfw4k7q71+Duyaw7DXDN+VTAp4Vh3oCOw==
+hast-util-from-parse5@^8.0.0:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/hast-util-from-parse5/-/hast-util-from-parse5-8.0.1.tgz#654a5676a41211e14ee80d1b1758c399a0327651"
+  integrity sha512-Er/Iixbc7IEa7r/XLtuG52zoqn/b3Xng/w6aZQ0xGVxzhw5xUFxcRqdPzP6yFi/4HBYRaifaI5fQ1RH8n0ZeOQ==
   dependencies:
-    "@types/hast" "^2.0.0"
-    "@types/unist" "^2.0.0"
-    hastscript "^7.0.0"
+    "@types/hast" "^3.0.0"
+    "@types/unist" "^3.0.0"
+    devlop "^1.0.0"
+    hastscript "^8.0.0"
     property-information "^6.0.0"
-    vfile "^5.0.0"
-    vfile-location "^4.0.0"
+    vfile "^6.0.0"
+    vfile-location "^5.0.0"
     web-namespaces "^2.0.0"
 
 hast-util-heading-rank@^3.0.0:
@@ -1339,6 +1357,13 @@ hast-util-parse-selector@^3.0.0:
   integrity sha512-jdlwBjEexy1oGz0aJ2f4GKMaVKkA9jwjr4MjAAI22E5fM/TXVZHuS5OpONtdeIkRKqAaryQ2E9xNQxijoThSZA==
   dependencies:
     "@types/hast" "^2.0.0"
+
+hast-util-parse-selector@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/hast-util-parse-selector/-/hast-util-parse-selector-4.0.0.tgz#352879fa86e25616036037dd8931fb5f34cb4a27"
+  integrity sha512-wkQCkSYoOGCRKERFWcxMVMOcYE2K1AaNLU8DXS9arxnLOUEWbOXKXiJUNzEpqZ3JOKpnha3jkFrumEjVliDe7A==
+  dependencies:
+    "@types/hast" "^3.0.0"
 
 hast-util-raw@6.0.1:
   version "6.0.1"
@@ -1404,13 +1429,6 @@ hast-util-to-parse5@^6.0.0:
     xtend "^4.0.0"
     zwitch "^1.0.0"
 
-hast-util-to-string@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/hast-util-to-string/-/hast-util-to-string-2.0.0.tgz#b008b0a4ea472bf34dd390b7eea1018726ae152a"
-  integrity sha512-02AQ3vLhuH3FisaMM+i/9sm4OXGSq1UhOOCpTLLQtHdL3tZt7qil69r8M8iDkZYyC0HCFylcYoP+8IO7ddta1A==
-  dependencies:
-    "@types/hast" "^2.0.0"
-
 hast-util-to-string@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/hast-util-to-string/-/hast-util-to-string-3.0.0.tgz#2a131948b4b1b26461a2c8ac876e2c88d02946bd"
@@ -1444,6 +1462,17 @@ hastscript@^7.0.0:
     "@types/hast" "^2.0.0"
     comma-separated-tokens "^2.0.0"
     hast-util-parse-selector "^3.0.0"
+    property-information "^6.0.0"
+    space-separated-tokens "^2.0.0"
+
+hastscript@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/hastscript/-/hastscript-8.0.0.tgz#4ef795ec8dee867101b9f23cc830d4baf4fd781a"
+  integrity sha512-dMOtzCEd3ABUeSIISmrETiKuyydk1w0pa+gE/uormcTpSYuaNJPbX1NU3JLyscSLjwAQM8bWMhhIlnCqnRvDTw==
+  dependencies:
+    "@types/hast" "^3.0.0"
+    comma-separated-tokens "^2.0.0"
+    hast-util-parse-selector "^4.0.0"
     property-information "^6.0.0"
     space-separated-tokens "^2.0.0"
 
@@ -2453,6 +2482,13 @@ parse5@^6.0.0:
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-6.0.1.tgz#e1a1c085c569b3dc08321184f19a39cc27f7c30b"
   integrity sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==
 
+parse5@^7.0.0:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/parse5/-/parse5-7.1.2.tgz#0736bebbfd77793823240a23b7fc5e010b7f8e32"
+  integrity sha512-Czj1WaSVpaoj0wbhMzLmWD69anp2WH7FXMB9n1Sy8/ZFF9jolSQVMu1Ij5WIyGmcBmhk7EOndpO4mIpihVqAXw==
+  dependencies:
+    entities "^4.4.0"
+
 path-exists@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/path-exists/-/path-exists-4.0.0.tgz#513bdbe2d3b95d7762e8c1137efa195c6c61b5b3"
@@ -2644,27 +2680,26 @@ refractor@^4.8.0:
     hastscript "^7.0.0"
     parse-entities "^4.0.0"
 
-rehype-parse@^8.0.2:
-  version "8.0.5"
-  resolved "https://registry.yarnpkg.com/rehype-parse/-/rehype-parse-8.0.5.tgz#ccffc21e08e288c7846614f8dc1dc23d603a4a80"
-  integrity sha512-Ds3RglaY/+clEX2U2mHflt7NlMA72KspZ0JLUJgBBLpRddBcEw3H8uYZQliQriku22NZpYMfjDdSgHcjxue24A==
+rehype-parse@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/rehype-parse/-/rehype-parse-9.0.0.tgz#3949faeec6f466ec57774215661e0d75469195d9"
+  integrity sha512-WG7nfvmWWkCR++KEkZevZb/uw41E8TsH4DsY9UxsTbIXCVGbAs4S+r8FrQ+OtH5EEQAs+5UxKC42VinkmpA1Yw==
   dependencies:
-    "@types/hast" "^2.0.0"
-    hast-util-from-parse5 "^7.0.0"
-    parse5 "^6.0.0"
-    unified "^10.0.0"
+    "@types/hast" "^3.0.0"
+    hast-util-from-html "^2.0.0"
+    unified "^11.0.0"
 
-rehype-prism-plus@^1.6.3:
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/rehype-prism-plus/-/rehype-prism-plus-1.6.3.tgz#8bf23a4cfc3419349770bb9064a91bdab04fae86"
-  integrity sha512-F6tn376zimnvy+xW0bSnryul+rvVL7NhDIkavc9kAuzDx5zIZW04A6jdXPkcFBhojcqZB8b6pHt6CLqiUx+Tbw==
+rehype-prism-plus@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/rehype-prism-plus/-/rehype-prism-plus-2.0.0.tgz#75b1e2d0dd7496125987a1732cb7d560de02a0fd"
+  integrity sha512-FeM/9V2N7EvDZVdR2dqhAzlw5YI49m9Tgn7ZrYJeYHIahM6gcXpH0K1y2gNnKanZCydOMluJvX2cB9z3lhY8XQ==
   dependencies:
-    hast-util-to-string "^2.0.0"
+    hast-util-to-string "^3.0.0"
     parse-numeric-range "^1.3.0"
     refractor "^4.8.0"
-    rehype-parse "^8.0.2"
-    unist-util-filter "^4.0.0"
-    unist-util-visit "^4.0.0"
+    rehype-parse "^9.0.0"
+    unist-util-filter "^5.0.0"
+    unist-util-visit "^5.0.0"
 
 rehype-slug@^6.0.0:
   version "6.0.0"
@@ -3095,19 +3130,6 @@ unified@9.2.0:
     trough "^1.0.0"
     vfile "^4.0.0"
 
-unified@^10.0.0:
-  version "10.1.2"
-  resolved "https://registry.yarnpkg.com/unified/-/unified-10.1.2.tgz#b1d64e55dafe1f0b98bb6c719881103ecf6c86df"
-  integrity sha512-pUSWAi/RAnVy1Pif2kAoeWNBa3JVrx0MId2LASj8G+7AiHWoKZNTomq6LG326T68U7/e263X6fTdcXIy7XnF7Q==
-  dependencies:
-    "@types/unist" "^2.0.0"
-    bail "^2.0.0"
-    extend "^3.0.0"
-    is-buffer "^2.0.0"
-    is-plain-obj "^4.0.0"
-    trough "^2.0.0"
-    vfile "^5.0.0"
-
 unified@^11.0.0:
   version "11.0.4"
   resolved "https://registry.yarnpkg.com/unified/-/unified-11.0.4.tgz#f4be0ac0fe4c88cb873687c07c64c49ed5969015"
@@ -3126,14 +3148,14 @@ unist-builder@2.0.3, unist-builder@^2.0.0:
   resolved "https://registry.yarnpkg.com/unist-builder/-/unist-builder-2.0.3.tgz#77648711b5d86af0942f334397a33c5e91516436"
   integrity sha512-f98yt5pnlMWlzP539tPc4grGMsFaQQlP/vM396b00jngsiINumNmsY8rkXjfoi1c6QaM8nQ3vaGDuoKWbe/1Uw==
 
-unist-util-filter@^4.0.0:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/unist-util-filter/-/unist-util-filter-4.0.1.tgz#fd885dd48adaad345de5f5dc706ec4ff44a8d074"
-  integrity sha512-RynicUM/vbOSTSiUK+BnaK9XMfmQUh6gyi7L6taNgc7FIf84GukXVV3ucGzEN/PhUUkdP5hb1MmXc+3cvPUm5Q==
+unist-util-filter@^5.0.0:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/unist-util-filter/-/unist-util-filter-5.0.1.tgz#f9f3a0bdee007e040964c274dda27bac663d0a39"
+  integrity sha512-pHx7D4Zt6+TsfwylH9+lYhBhzyhEnCXs/lbq/Hstxno5z4gVdyc2WEW0asfjGKPyG4pEKrnBv5hdkO6+aRnQJw==
   dependencies:
-    "@types/unist" "^2.0.0"
-    unist-util-is "^5.0.0"
-    unist-util-visit-parents "^5.0.0"
+    "@types/unist" "^3.0.0"
+    unist-util-is "^6.0.0"
+    unist-util-visit-parents "^6.0.0"
 
 unist-util-generated@^1.0.0:
   version "1.1.6"
@@ -3144,13 +3166,6 @@ unist-util-is@^4.0.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/unist-util-is/-/unist-util-is-4.1.0.tgz#976e5f462a7a5de73d94b706bac1b90671b57797"
   integrity sha512-ZOQSsnce92GrxSqlnEEseX0gi7GH9zTJZ0p9dtu87WRb/37mMPO2Ilx1s/t9vBHrFhbgweUwb+t7cIn5dxPhZg==
-
-unist-util-is@^5.0.0:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/unist-util-is/-/unist-util-is-5.2.1.tgz#b74960e145c18dcb6226bc57933597f5486deae9"
-  integrity sha512-u9njyyfEh43npf1M+yGKDGVPbY/JWEemg5nH05ncKPfi+kBbKBJoTdsogMu33uhytuLlv9y0O7GH7fEdwLdLQw==
-  dependencies:
-    "@types/unist" "^2.0.0"
 
 unist-util-is@^6.0.0:
   version "6.0.0"
@@ -3207,13 +3222,6 @@ unist-util-stringify-position@^2.0.0:
   dependencies:
     "@types/unist" "^2.0.2"
 
-unist-util-stringify-position@^3.0.0:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/unist-util-stringify-position/-/unist-util-stringify-position-3.0.3.tgz#03ad3348210c2d930772d64b489580c13a7db39d"
-  integrity sha512-k5GzIBZ/QatR8N5X2y+drfpWG8IDBzdnVj6OInRNWm1oXrzydiaAT2OQiA8DPRRZyAKb9b6I2a6PxYklZD0gKg==
-  dependencies:
-    "@types/unist" "^2.0.0"
-
 unist-util-stringify-position@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/unist-util-stringify-position/-/unist-util-stringify-position-4.0.0.tgz#449c6e21a880e0855bf5aabadeb3a740314abac2"
@@ -3228,14 +3236,6 @@ unist-util-visit-parents@^3.0.0:
   dependencies:
     "@types/unist" "^2.0.0"
     unist-util-is "^4.0.0"
-
-unist-util-visit-parents@^5.0.0, unist-util-visit-parents@^5.1.1:
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/unist-util-visit-parents/-/unist-util-visit-parents-5.1.3.tgz#b4520811b0ca34285633785045df7a8d6776cfeb"
-  integrity sha512-x6+y8g7wWMyQhL1iZfhIPhDAs7Xwbn9nRosDXl7qoPTSCy0yNxnKc+hWokFifWQIDGi154rdUqKvbCa4+1kLhg==
-  dependencies:
-    "@types/unist" "^2.0.0"
-    unist-util-is "^5.0.0"
 
 unist-util-visit-parents@^6.0.0:
   version "6.0.1"
@@ -3253,15 +3253,6 @@ unist-util-visit@2.0.3, unist-util-visit@^2.0.0:
     "@types/unist" "^2.0.0"
     unist-util-is "^4.0.0"
     unist-util-visit-parents "^3.0.0"
-
-unist-util-visit@^4.0.0:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/unist-util-visit/-/unist-util-visit-4.1.2.tgz#125a42d1eb876283715a3cb5cceaa531828c72e2"
-  integrity sha512-MSd8OUGISqHdVvfY9TPhyK2VdUrPgxkUtWSuMHF6XAAFuL4LokseigBnZtPnJMu+FbynTkFNnFlyjxpVKujMRg==
-  dependencies:
-    "@types/unist" "^2.0.0"
-    unist-util-is "^5.0.0"
-    unist-util-visit-parents "^5.1.1"
 
 unist-util-visit@^5.0.0:
   version "5.0.0"
@@ -3300,13 +3291,13 @@ vfile-location@^3.0.0, vfile-location@^3.2.0:
   resolved "https://registry.yarnpkg.com/vfile-location/-/vfile-location-3.2.0.tgz#d8e41fbcbd406063669ebf6c33d56ae8721d0f3c"
   integrity sha512-aLEIZKv/oxuCDZ8lkJGhuhztf/BW4M+iHdCwglA/eWc+vtuRFJj8EtgceYFX4LRjOhCAAiNHsKGssC6onJ+jbA==
 
-vfile-location@^4.0.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/vfile-location/-/vfile-location-4.1.0.tgz#69df82fb9ef0a38d0d02b90dd84620e120050dd0"
-  integrity sha512-YF23YMyASIIJXpktBa4vIGLJ5Gs88UB/XePgqPmTa7cDA+JeO3yclbpheQYCHjVHBn/yePzrXuygIL+xbvRYHw==
+vfile-location@^5.0.0:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/vfile-location/-/vfile-location-5.0.2.tgz#220d9ca1ab6f8b2504a4db398f7ebc149f9cb464"
+  integrity sha512-NXPYyxyBSH7zB5U6+3uDdd6Nybz6o6/od9rk8bp9H8GR3L+cm/fC0uUTbqBmUTnMCUDslAGBOIKNfvvb+gGlDg==
   dependencies:
-    "@types/unist" "^2.0.0"
-    vfile "^5.0.0"
+    "@types/unist" "^3.0.0"
+    vfile "^6.0.0"
 
 vfile-message@^2.0.0:
   version "2.0.4"
@@ -3315,14 +3306,6 @@ vfile-message@^2.0.0:
   dependencies:
     "@types/unist" "^2.0.0"
     unist-util-stringify-position "^2.0.0"
-
-vfile-message@^3.0.0:
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/vfile-message/-/vfile-message-3.1.4.tgz#15a50816ae7d7c2d1fa87090a7f9f96612b59dea"
-  integrity sha512-fa0Z6P8HUrQN4BZaX05SIVXic+7kE3b05PWAtPuYP9QLHsLKYR7/AlLW3NtOrpXRLeawpDLMsVkmk5DG0NXgWw==
-  dependencies:
-    "@types/unist" "^2.0.0"
-    unist-util-stringify-position "^3.0.0"
 
 vfile-message@^4.0.0:
   version "4.0.2"
@@ -3341,16 +3324,6 @@ vfile@^4.0.0:
     is-buffer "^2.0.0"
     unist-util-stringify-position "^2.0.0"
     vfile-message "^2.0.0"
-
-vfile@^5.0.0:
-  version "5.3.7"
-  resolved "https://registry.yarnpkg.com/vfile/-/vfile-5.3.7.tgz#de0677e6683e3380fafc46544cfe603118826ab7"
-  integrity sha512-r7qlzkgErKjobAmyNIkkSpizsFPYiUPuJb5pNW1RB4JcYVZhs4lIbVqk8XPk033CV/1z8ss5pkax8SuhGpcG8g==
-  dependencies:
-    "@types/unist" "^2.0.0"
-    is-buffer "^2.0.0"
-    unist-util-stringify-position "^3.0.0"
-    vfile-message "^3.0.0"
 
 vfile@^6.0.0:
   version "6.0.1"
