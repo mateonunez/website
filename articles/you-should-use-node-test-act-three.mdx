@@ -1,0 +1,380 @@
+---
+title: 'You should use `node:test` - Act Three'
+date: 2024-01-12T13:00:00.000Z
+updated: 2024-01-12T13:00:00.000Z
+description: >-
+  My personal experience moving from different testing frameworks to
+  the new Node Test Runner. Act Three.
+tags:
+  - node
+  - test
+  - tap
+image: '/images/articles/you-should-use-node-test/cover.png'
+author:
+  name: Mateo
+  image: '/images/profile.jpg'
+---
+
+<Image
+  src="/images/articles/you-should-use-node-test/cover.png"
+  width="1280"
+  height="720"
+  alt="You should use node:test"
+  href="/blog/you-should-use-node-test-act-three"
+/>
+
+## Table of Contents
+
+- <a href="#gems" alt="Gems" target="_self">
+    Gems
+  </a>
+- <a href="#conclusion" alt="Conclusion" target="_self">
+    Conclusion
+  </a>
+- <a href="#references" alt="References" target="_self">
+    References
+  </a>
+
+### Gems
+
+#### Watch mode
+
+> This feature is in [Stability 1](https://nodejs.org/api/documentation.html#stability-index) which means it is experimental and subject to change.
+
+The `node:test` module has a watch mode that allows you to run the tests in your application in a continuous way. This means that when you make a change to your code, the tests will be executed again.
+
+To use this feature, you must execute the following command:
+
+```bash
+node --test --watch
+```
+
+You can also combine this flag with arguments to run a pattern of tests:
+
+```bash
+node --test --watch ./test/**/*.test.js
+```
+
+#### Coverage
+
+> This feature is in [Stability 1](https://nodejs.org/api/documentation.html#stability-index) which means it is experimental and subject to change.
+
+I used to use [c8](https://github.com/bcoe/c8) to generate the coverage of my tests, created by [Ben Coe](https://twitter.com/benjamincoe). It uses the default `V8 coverage` to generate human-readable reports.
+
+The `node:test` module has a similar feature that allows you to generate the coverage of your tests. To use this feature, you must execute the following command:
+
+```bash
+node --test --experimental-test-coverage
+```
+
+Similar output:
+
+```bash
+❯ node --test --experimental-test-coverage
+✔ should use coverage (470.613459ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 40.613459
+ℹ start of coverage report
+ℹ --------------------------------------------------------------------
+ℹ file                | line % | branch % | funcs % | uncovered lines
+ℹ --------------------------------------------------------------------
+ℹ index.js            | 100.00 |   100.00 |  100.00 |
+ℹ --------------------------------------------------------------------
+ℹ all files           | 100.00 |   100.00 |  100.00 |
+ℹ --------------------------------------------------------------------
+ℹ end of coverage report
+  ~/code/node/test-runner
+❯
+```
+
+You can use the [coverage reporters](https://nodejs.org/api/test.html#coverage-reporters) to generate the coverage report in different formats.
+
+#### Keywords
+
+In the `node:test` module there are some keywords that you can use to **skip**, **only**, or **todo** tests. These keywords are available in the <a href="https://nodejs.org/api/test.html#class-testcontext" alt="TestContext">TestContext</a> object.
+
+You can use these keywords as an option in the `test`/`it` function or as a method in the <a href="https://nodejs.org/api/test.html#class-testcontext" alt="TestContext">TestContext</a> object.
+
+##### Skip
+
+```js
+import { test } from 'node:test';
+import { equal } from 'node:assert/strict';
+
+test('should skip the test', { skip: true }, () => {
+  equal(1, 1);
+});
+
+// or
+
+test.skip('should skip the test', (t) => {
+  equal(1, 1);
+});
+```
+
+##### Only
+
+```js
+import { test } from 'node:test';
+import { equal } from 'node:assert/strict';
+
+test('should only run this test', { only: true }, () => {
+  equal(1, 1);
+});
+
+// or
+
+test.only('should only run this test', (t) => {
+  equal(1, 1);
+});
+```
+
+Note: you can also use `only` with the CLI:
+
+```bash
+node --test --test-only
+```
+
+> You can find more information about the `only` option in the [official documentation](https://nodejs.org/api/test.html#only-tests).
+
+##### Todo
+
+```js
+import { test } from 'node:test';
+
+test('should todo the test', { todo: true }, () => {
+  // TODO: implement this test
+});
+
+// or
+
+test.todo('should todo the test', (t) => {
+  // TODO: implement this test
+});
+```
+
+#### Shard
+
+> This feature is available only on `>= v18.19.0` and `>= v20.5.0`.
+
+When you're using the CLI to run the tests, you can shard the test suite into multiple equal parts using the `--test-shard` flag and the `index`/`total` parameter, this is useful to horizontally parallelize test execution.
+
+```bash
+node --test --test-shard=1/2 # run the first half of the tests
+node --test --test-shard=2/2 # run the second half of the tests
+```
+
+#### Runners
+
+One of the most interesting features of the `node:test` module is the ability to create your own runner.
+
+The `node:test` module exposes a `run` function that allows you to run the tests in your application. This function returns a `TestStream` that you can use to compose with other streams.
+
+```js
+import { run } from 'node:test';
+import { tap } from 'node:test/reporters';
+import path from 'node:path';
+import { globSync } from 'glob';
+import { fileURLToPath } from 'url';
+
+const dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const files = [...globSync('**/*.test.{js,mjs}', { cwd: dirname })].map(file =>
+  path.join(dirname, file)
+);
+
+const stream = run({
+  files,
+  concurrency: 1,
+  timeout: 60_000
+  // more options here: https://github.com/nodejs/node/blob/main/doc/api/test.md#runoptions
+});
+
+stream.on('test:fail', () => {
+  process.exitCode = 1;
+});
+
+stream.compose(tap).pipe(process.stdout);
+```
+
+Now you can can save your runner in a file, for example `my-runner.js`, and then run it using the CLI.
+
+```bash
+node ./my-runner.js
+```
+
+> The runner must be run without the `--test` flag.
+
+#### Concurrency
+
+When you're testing your application, you may want to run the tests in parallel or in series. The Node Test Runner allows you to configure the concurrency of the tests using the `concurrency` option.
+
+By default, the concurrency is set to `os.availableParallelism() - 1`, this means that the tests will be executed in parallel, but not all of them at the same time.
+
+The concurrency can be configured in the following ways:
+
+- Using the `--test-concurrency` flag in the CLI. <small>Available only on `>= v18.19.0` and `>= v20.10.0`.</small>
+- Using the `concurrency` option in the `run` function.
+- Using the `concurrency` option in the `TestContext` object.
+
+In the runner:
+
+```js
+import { run } from 'node:test';
+
+const stream = run({
+  files: [/* */],
+  concurrency: 1
+});
+```
+
+or as an option in the test:
+
+```js
+import { test } from 'node:test';
+
+test('should use the concurrency option', { concurrency: 1 }, () => {
+  // ...
+});
+```
+
+or just using the CLI:
+
+```bash
+node --test --test-concurrency=1
+```
+
+> When you're working with external services, like a databases, you should be careful with the concurrency. Since the tests are executed in parallel by default, you may have problems with the connections to the database or the service. In this case, you should set the concurrency to **1**.
+
+#### Planner
+
+The first time I've tried `node-tap` I was surprised by the `planner` feature. This feature allows you to plan the number of tests that will be executed in your application, asserting that the number of tests that are executed is the same as the number of tests that you have planned. This kind of testing is useful when you're testing some operations over the time, or to assert that a function is called a specific number of times.
+
+Unfortunately, the `node:test` module does not have this feature. [Matteo Collina](https://x.com/matteocollina) has created a module that allows you to perform this type of testing: [tspl](https://github.com/mcollina/tspl).
+
+```js
+import { test } from 'node:test';
+import { tspl } from '@matteo.collina/tspl';
+
+test('should use tspl', (t) => {
+  const assert = tspl(t, { plan: 2 }); // the tspl function returns an assert object containing all assertions found in the node:assert module
+
+  assert.ok(true);
+  assert.ok(true);
+});
+```
+
+If the `plan` is not met, the test will fail with the following error:
+
+```bash
+> node --test
+
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 45.774375
+
+✖ failing tests:
+
+test at file:/Users/mateonunez/code/node/test-runner/tests/plan.test.mjs:4:1
+✖ should use tspl (1.321625ms)
+  AssertionError [ERR_ASSERTION]: The plan was not completed
+      at ... {}
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 2,
+    operator: 'strictEqual'
+  }
+```
+
+#### Snapshot
+
+This technique allows you to assert that the output of a function is the same as the output of a previous execution. This is useful when you want to assert that the output of a function is the same as the output of a previous execution.
+
+There is an [issue](https://github.com/nodejs/node/issues/48260) open to discuss this feature, but it is not yet available. You can use the [snap](https://github.com/mcollina/snap) module to perform snapshots.
+
+```js
+import { test } from 'node:test';
+import { deepEqual } from 'node:assert/strict';
+import Snap from '@matteo.collina/snap';
+
+const snap = Snap(import.meta.url);
+
+test('should use snap', async (t) => {
+  const actual = await (await fetch('https://example.com')).text();
+  const snap = await snap(actual);
+
+  deepEqual(actual, snap);
+});
+```
+
+If the snapshot does not match, the test will fail with the following error:
+
+```bash
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 560.828875
+
+✖ failing tests:
+
+test at file:/Users/mateonunez/code/node/test-runner/tests/snap.test.mjs:7:1
+✖ should use snap (456.958208ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  + 'actual'
+  - 'your snapshot here'
+      at ... {}
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'actual',
+    expected: 'your snapshot here',
+    operator: 'deepStrictEqual'
+  }
+  ~/code/node/test-runner
+❯
+```
+
+> To update the snapshot, run with the SNAP_UPDATE=1 env variable set.
+
+#### TypeScript
+
+You can also use the `node:test` module with TypeScript. To do this I used to use [tsx](https://github.com/privatenumber/tsx).
+
+```bash
+npx tsx --test ./test/**/*.test.ts
+# or
+node --import tsx --test ./test/**/*.test.ts # you need to install the tsx module in the dev-dependencies
+```
+
+> You can also use `ts-node` or any other loader with the `--loader` flag.
+
+In the [expirables](https://github.com/Cadienvan/expirables) module I used to use the `tsx` loader to run the tests in TypeScript. But I had some problems with the `tsx` loader, so I decided to use the `node:test` module directly.
+
+```bash
+
+### Conclusion
+
+
+### References
+
+- [Node.js Test Runner](https://nodejs.org/api/test.html) official documentation
+- [Writing a Node.js Test Reporter](https://www.nearform.com/blog/writing-a-node-js-test-reporter/) by [Rômulo Vitoi](https://github.com/RomuloVitoi)
+- [marco-ippolito/test-runner-workshop](https://github.com/marco-ippolito/test-runner-workshop)
+- [mcollina/tspl](https://github.com/mcollina/tspl)
+- [mcollina/snap](https://github.com/mcollina/snap)
