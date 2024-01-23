@@ -24,9 +24,9 @@ author:
   href="/blog/you-should-use-node-act-two"
 />
 
-Hey there! 👋
+Hi there! 👋
 
-I finally decided to finish this article. Obviously while I'm waiting for the plane to come home a bit (🇨🇴). The reason why I couldn't finish it earlier is because I was trying to fix some performance issues in my personal blog.
+I've finally decided to finish this article while waiting for my plane to come home (🇨🇴). The reason I couldn't complete it earlier is that I was addressing some performance issues on my personal blog.
 
 <Row>
   <Column>
@@ -47,7 +47,7 @@ I finally decided to finish this article. Obviously while I'm waiting for the pl
   </Column>
 </Row>
 
-I worked in a still wip [PR](https://github.com/mateonunez/website/pull/406), but Next.js and MDX are not helping me a lot. But the result is awesome, you can check it out [here](mateonunezx).
+I've been working on a still WIP [PR](https://github.com/mateonunez/website/pull/406), but Next.js and MDX aren't being very cooperative. However, the outcome is fantastic, and you can check it out [here](mateonunezx).
 
 Anyway, let's talk about the new Node Test Runner. In the [previous article](/blog/you-should-use-node-test-act-one) I introduced to the new Node Test Runner, and I explained why I think it's a good idea to use it. In this article I'm going to talk about some of the features that I think are really useful.
 
@@ -90,7 +90,7 @@ test('should mock the module', async (t) => {
 
 As you can see, the `mock` function allows you to mock a module. This function returns a `mockedFunction` that you can use to assert the calls to the mocked function.
 
-The same functionality it's also exposed in the [TextContext](https://nodejs.org/api/test.html#class-testcontext) object of each test, the benefit of mocking in this way is that the mocks are automatically reset after each test.
+The same functionality is also exposed in the [TextContext](https://nodejs.org/api/test.html#class-testcontext) object of each test. The benefit of mocking in this way is that the mocks are automatically reset after each test.
 
 ```js
 import { test } from 'node:test';
@@ -103,7 +103,7 @@ test('should mock using the TestContext', async (t) => {
 });
 ```
 
-You can `mock` different types of modules, this is really useful to mock single methods, functions, classes, and so on:
+You can `mock` different types of modules, which is really useful for mocking single methods, functions, classes, and so on:
 
 **Mocking a single method of a Class:**
 
@@ -189,9 +189,9 @@ node --test --test-reporter=tap
 
 > The default reporter is `spec` if the `stdout` is a TTY, otherwise it is `tap`.
 
-You can also use **multiple reporters** at the same time, please check the [official documentation](https://nodejs.org/api/test.html#multiple-reporters) for more information.
+You can also use **multiple reporters** at the same time. Please check the [official documentation](https://nodejs.org/api/test.html#multiple-reporters) for more information.
 
-The reporters are also available as modules. This is useful when you want to create your own reporter or you're creating your own <a href="#runners" alt="Runners" target="_self">runner</a>.
+The reporters are also available as modules. This is useful when you want to create your own reporter or if you're creating your own <a href="#runners" alt="Runners" target="_self">runner</a>.
 
 ```js
 import { tap, spec } from 'node:test/reporters';
@@ -215,7 +215,7 @@ As mentioned above, you can create your own reporter. You can do this in two dif
 - Using the [stream.Transform](https://nodejs.org/api/stream.html#class-streamtransform) class.
 - Using a [generator function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*).
 
-Before we start, you should keep in mind that the `node:test` emits events using the `TestStream` class. These are some of the events that you can listen to:
+Before we start, you should keep in mind that the `node:test` module emits events using the `TestStream` class. These are some of the events that you can listen to:
 
 - `test:coverage`: emitted when the code coverage is enabled and all the tests are finished.
 - `test:diagnotic`: emitted when the `"context".diagnotic()` method is called. <small>The `context` is the <a href="https://nodejs.org/api/test.html#class-testcontext" alt="TestContext">TestContext</a> object.</small>
@@ -248,7 +248,7 @@ const customReporter = new Transform({
 });
 ```
 
-To use this reporter, you must to save it in a file, for example `custom-reporter.mjs`, and then pass the path to the `--test-reporter` flag:
+To use this reporter, you must save it in a file, for example, `custom-reporter.mjs`, and then pass the path to the `--test-reporter` flag:
 
 ```bash
 node --test --test-reporter=./custom-reporter.mjs
@@ -284,9 +284,9 @@ node --test --test-reporter=./custom-reporter-generator.mjs
 
 ---
 
-The **Act Two** is over. Spoiler here: I'm working on the **Act Three**, the most interesting part of this series (at least for me).
+The **Act Two** is over. Spoiler alert: I'm working on **Act Three**, the most interesting part of this series (at least for me).
 
-If you haven't read the [Act One](/blog/you-should-use-node-test-act-one), I recommend you to do it before reading the next article.
+If you haven't read [Act One](/blog/you-should-use-node-test-act-one), I recommend doing so before reading the next article.
 
 ## References
 
