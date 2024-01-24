@@ -8,9 +8,5 @@ export default function Container({ className, children, element = 'div', clean 
 
   const Component = element;
 
-  return (
-    <>
-      <Component className={classNames}>{children}</Component>
-    </>
-  );
+  return <Component className={classNames}>{children}</Component>;
 }

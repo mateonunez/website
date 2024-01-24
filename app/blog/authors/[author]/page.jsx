@@ -19,19 +19,17 @@ export default async function BlogAuthor({ params }) {
   const articles = (await getAllArticles()).filter((article) => kebapCase(article.author.name) === author);
 
   return (
-    <>
-      <Container clean>
-        {/* Capitalize author */}
-        <Title>{author.at(0).toUpperCase() + author.slice(1)}</Title>
+    <Container clean>
+      {/* Capitalize author */}
+      <Title>{author.at(0).toUpperCase() + author.slice(1)}</Title>
 
-        <div className={s.root}>
-          <div className="container">
-            {articles.map((article) => (
-              <ArticlePreview key={article.slug} {...article} />
-            ))}
-          </div>
+      <div className={s.root}>
+        <div className="container">
+          {articles.map((article) => (
+            <ArticlePreview key={article.slug} {...article} />
+          ))}
         </div>
-      </Container>
-    </>
+      </div>
+    </Container>
   );
 }

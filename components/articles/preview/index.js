@@ -18,8 +18,6 @@ export default function ArticlePreview({
 }) {
   return (
     <div className={s.root}>
-
-
       <Link as={`/blog/${slug}`} rel="canonical" href={`/blog/${slug}`} title={title}>
         <div className={s.body}>
           <div className={s.imagePreview}>

@@ -9,14 +9,12 @@ export default function Eror({ error, reset }) {
   }, [error]);
 
   return (
-    <>
-      <div className={s.root}>
-        <h2 className="title">Error unexpected. Can you fix me?</h2>
+    <div className={s.root}>
+      <h2 className="title">Error unexpected. Can you fix me?</h2>
 
-        <button type="button" onClick={() => reset()}>
-          Try again
-        </button>
-      </div>
-    </>
+      <button type="button" onClick={() => reset()}>
+        Try again
+      </button>
+    </div>
   );
 }

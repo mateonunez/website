@@ -1,3 +1,8 @@
+import createMDX from '@next/mdx';
+import rehypePrism from 'rehype-prism-plus';
+import rehypeSlug from 'rehype-slug';
+import remarkGfm from 'remark-gfm';
+
 const contentSecurityPolicy = `
   default-src 'self' https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.vercel-insights.com https://vercel.live https://mateonunez.dev/;
   base-uri 'self';
@@ -46,7 +51,8 @@ const securityHeaders = [
   },
 ];
 
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -74,7 +80,19 @@ module.exports = {
       },
     ];
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+  outputFileTracing: false
 };
+
+// const remarkPlugins = [[remarkGfm]];
+// const rehypePlugins = [[rehypeSlug], [rehypePrism, { ignoreMissing: true }]];
+
+const withMDX = createMDX({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [[remarkGfm]],
+    rehypePlugins: [[rehypePrism]]
+  },
+});
+
+export default withMDX(nextConfig);
