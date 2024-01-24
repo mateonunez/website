@@ -1,3 +1,5 @@
+'use client';
+
 import s from './meta.module.css';
 
 import Link from 'next/link';
