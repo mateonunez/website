@@ -81,8 +81,7 @@ const nextConfig = {
     ];
   },
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
-  // outputFileTracing: false
-  output: 'standalone'
+  outputFileTracing: false
 };
 
 // const remarkPlugins = [[remarkGfm]];
