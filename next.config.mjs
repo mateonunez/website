@@ -51,6 +51,7 @@ const securityHeaders = [
   },
 ];
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -80,6 +81,8 @@ const nextConfig = {
     ];
   },
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+  // outputFileTracing: false
+  output: 'standalone'
 };
 
 // const remarkPlugins = [[remarkGfm]];
