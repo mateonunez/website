@@ -90,7 +90,7 @@ test('should mock the module', async (t) => {
 
 As you can see, the `mock` function allows you to mock a module. This function returns a `mockedFunction` that you can use to assert the calls to the mocked function.
 
-The same functionality is also exposed in the [TextContext](https://nodejs.org/api/test.html#class-testcontext) object of each test. The benefit of mocking in this way is that the mocks are automatically reset after each test.
+The same functionality is also exposed in the [TestContext](https://nodejs.org/api/test.html#class-testcontext) object of each test. The benefit of mocking in this way is that the mocks are automatically reset after each test.
 
 ```js
 import { test } from 'node:test';
@@ -173,7 +173,7 @@ test('spies on an object method', (t) => {
 
 The `node:test` module includes a set of reporters that allow you to format the output of the tests. This is very useful when you want to integrate the tests with other tools, processes, etc.
 
-Node Test Runner includes in the box the following reporters:
+Node Test Runner includes the following reporters out of the box:
 
 - tap
 - spec
@@ -191,7 +191,7 @@ node --test --test-reporter=tap
 
 You can also use **multiple reporters** at the same time. Please check the [official documentation](https://nodejs.org/api/test.html#multiple-reporters) for more information.
 
-The reporters are also available as modules. This is useful when you want to create your own reporter or if you're creating your own <a href="#runners" alt="Runners" target="_self">runner</a>.
+The reporters are also available as modules. This is useful when you want to create your own reporter or if you're creating your own runner.
 
 ```js
 import { tap, spec } from 'node:test/reporters';
@@ -254,7 +254,7 @@ To use this reporter, you must save it in a file, for example, `custom-reporter.
 node --test --test-reporter=./custom-reporter.mjs
 ```
 
-> The `.mjs` means that the file is an esm module.
+> The `.mjs` means that the file is an ESM module.
 
 The second way to create a custom reporter is using a [generator function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*). This is useful when you want to create a reporter that is not based on the <a href="https://nodejs.org/api/stream.html#class-streamtransform" alt="stream.Transform">stream.Transform</a> class.
 
