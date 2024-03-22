@@ -14,7 +14,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.4.1",
+    "@biomejs/biome": "1.6.2",
     "@elgorditosalsero/react-gtm-hook": "^2.7.2",
     "@mdx-js/loader": "^3.0.0",
     "@octokit/graphql": "^7.0.2",
