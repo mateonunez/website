@@ -637,7 +637,7 @@ __metadata:
     "@elgorditosalsero/react-gtm-hook": "npm:^2.7.2"
     "@mdx-js/loader": "npm:^3.0.0"
     "@octokit/graphql": "npm:^7.0.2"
-    "@tailwindcss/typography": "npm:^0.5.10"
+    "@tailwindcss/typography": "npm:^0.5.12"
     "@vercel/analytics": "npm:^1.1.1"
     autoprefixer: "npm:^10.4.16"
     classnames: "npm:^2.5.1"
@@ -943,9 +943,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tailwindcss/typography@npm:^0.5.10":
-  version: 0.5.10
-  resolution: "@tailwindcss/typography@npm:0.5.10"
+"@tailwindcss/typography@npm:^0.5.12":
+  version: 0.5.12
+  resolution: "@tailwindcss/typography@npm:0.5.12"
   dependencies:
     lodash.castarray: "npm:^4.4.0"
     lodash.isplainobject: "npm:^4.0.6"
@@ -953,7 +953,7 @@ __metadata:
     postcss-selector-parser: "npm:6.0.10"
   peerDependencies:
     tailwindcss: "*"
-  checksum: 10c0/0fa9c96bf091fb79fdc39a0244027b3891e9205f714197c8196e7ba2305523ce8695d14b912366de9b77d4b1d3a742fb7f9bc9bb633fddc7c7f13374b41075d2
+  checksum: 10c0/3410b06594b89b5650cd4c985e6b4f48d1ba2cfbe146bb5ea2a2cfc1c9b065cd3ca2215436a814f458936683836f9cf792a8d6341345feccf6fb9910c565c092
   languageName: node
   linkType: hard
 
