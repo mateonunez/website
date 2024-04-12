@@ -16,7 +16,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.6.4",
     "@elgorditosalsero/react-gtm-hook": "^2.7.2",
-    "@mdx-js/loader": "^3.0.0",
+    "@mdx-js/loader": "^3.0.1",
     "@octokit/graphql": "^7.0.2",
     "@tailwindcss/typography": "^0.5.10",
     "@vercel/analytics": "^1.1.1",

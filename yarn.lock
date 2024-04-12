@@ -635,7 +635,7 @@ __metadata:
   dependencies:
     "@biomejs/biome": "npm:1.6.4"
     "@elgorditosalsero/react-gtm-hook": "npm:^2.7.2"
-    "@mdx-js/loader": "npm:^3.0.0"
+    "@mdx-js/loader": "npm:^3.0.1"
     "@octokit/graphql": "npm:^7.0.2"
     "@tailwindcss/typography": "npm:^0.5.10"
     "@vercel/analytics": "npm:^1.1.1"
@@ -660,15 +660,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mdx-js/loader@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@mdx-js/loader@npm:3.0.0"
+"@mdx-js/loader@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@mdx-js/loader@npm:3.0.1"
   dependencies:
     "@mdx-js/mdx": "npm:^3.0.0"
     source-map: "npm:^0.7.0"
   peerDependencies:
     webpack: ">=5"
-  checksum: 10c0/47b36f76741953878b122a7902b56c8a2ed0d5b8f678aad59e633ee97dd9a0a1ff8fd93785d10e3c8d9dbc2540e6b784d1003895eb81c6b767bd38c580a36edf
+  checksum: 10c0/d60df6465872de4271617ffa53012ac5518094ed468fb13d7e9dc8c68efd983280611f50b519d752be4db8e9168a13dcb8a75c6ca883e052b3b3e1d42d6e7b45
   languageName: node
   linkType: hard
 
