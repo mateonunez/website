@@ -68,7 +68,7 @@ export default function RecentlyPlayed({ items }) {
               left: '10px',
             }}
           >
-            <ChevronUp className="w-6 h-6 font-black transition duration-500 transform -rotate-90" />
+            <ChevronUp className="-rotate-90 h-6 w-6 transform font-black transition duration-500" />
           </button>
 
           {/* <div
@@ -96,7 +96,7 @@ export default function RecentlyPlayed({ items }) {
               right: '10px',
             }}
           >
-            <ChevronUp className="w-6 h-6 transition duration-500 transform rotate-90 hover:scale-110" />
+            <ChevronUp className="h-6 w-6 rotate-90 transform transition duration-500 hover:scale-110" />
           </button>
         </div>
       )}

@@ -61,7 +61,7 @@ const About = ({ ...props }) => {
                       <div className={cn(s.profileQuote, 'text-right')}>”</div>
                     </div>
                     <div className="w-full">
-                      <p className="font-bold text-center text-amber-500 text-md">@mateonunez</p>
+                      <p className="text-center font-bold text-amber-500 text-md">@mateonunez</p>
                     </div>
                   </div>
                 </Fade>
@@ -79,8 +79,7 @@ const About = ({ ...props }) => {
                       </div>
                       <div className={s.bio}>
                         <span className={s.bioYear}>2009</span>
-                        Move to Milan, Italy. <br />
-                        I started a new life. Known new friends. Learned how to cook.
+                        Move to Milan, Italy. <br />I started a new life. Known new friends. Learned how to cook.
                       </div>
                       <div className={s.bio}>
                         <span className={s.bioYear}>2015</span>

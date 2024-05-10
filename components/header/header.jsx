@@ -17,7 +17,7 @@ const ActiveLink = ({ href, children, title }) => {
     <Link
       href={href}
       as={href}
-      className={`${s.link} ${pathname.split('/')[1] === href.split('/')[1] ? s.active : ''}`}
+      className={`${s.link}${pathname.split('/')[1] === href.split('/')[1] ? s.active : ''}`}
       rel="canonical"
       title={title}
     >
@@ -62,7 +62,7 @@ export default function Header() {
 
         <button
           type="button"
-          className={cn(s.toggle, 'transform ease-linear duration-300', mobileNavShown && 'rotate-90')}
+          className={cn(s.toggle, 'transform duration-300 ease-linear', mobileNavShown && 'rotate-90')}
           onClick={toggle}
           aria-label="Toggle Menu"
         >

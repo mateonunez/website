@@ -50,7 +50,7 @@ export default function RepositoryPreview({
                 title={`${name} stars`}
                 className="flex"
               >
-                <Star className="w-5 h-5" />
+                <Star className="h-5 w-5" />
                 <span className={s.starsCount}>{stars}</span>
               </Link>
             </div>
@@ -65,7 +65,7 @@ export default function RepositoryPreview({
                 title={`${name} forks`}
                 className="flex"
               >
-                <Fork className="w-5 h-5" />
+                <Fork className="h-5 w-5" />
                 <div className={s.forksCount}>{forks}</div>
               </Link>
             </div>

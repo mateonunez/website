@@ -1,7 +1,7 @@
 import s from './social-links.module.css';
 
 import Link from 'next/link';
-import { Github, LinkedIn, Instagram, Spotify, Twitter } from 'components/icons';
+import { Github, LinkedIn, Spotify, Twitter } from 'components/icons';
 
 export default function SocialLinks() {
   return (

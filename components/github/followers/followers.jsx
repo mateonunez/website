@@ -22,11 +22,11 @@ export default function Followers({ followers }) {
                 <Image
                   src={follower.avatar}
                   alt={follower.username}
-                  className="w-32 h-32 rounded-full shadow-lg"
+                  className="h-32 w-32 rounded-full shadow-lg"
                   width={128}
                   height={128}
                 />
-                <span className="mt-2 text-sm text-center text-caption">@{follower.username}</span>
+                <span className="mt-2 text-center text-caption text-sm">@{follower.username}</span>
               </Link>
             </div>
           ))}
@@ -37,10 +37,10 @@ export default function Followers({ followers }) {
             href="https://github.com/mateonunez?tab=followers"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-black text-center"
+            className="text-center font-black text-sm"
           >
             and {followers.length - followersShown.length} more...{' '}
-            <span className="text-xs text-emoji">(thank you ❤️)</span>
+            <span className="text-emoji text-xs">(thank you ❤️)</span>
           </a>
         </div>
 

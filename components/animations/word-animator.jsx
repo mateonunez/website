@@ -44,7 +44,7 @@ const WordAnimator = ({ words, clickable }, ref) => {
       <Wrapper {...wrapperProps} ref={ref}>
         <span
           ref={wordRef}
-          className={cn(s.wordAnimator, `transition-opacity duration-500 ${opacity}`, clickable && 'cursor-pointer')}
+          className={cn(s.wordAnimator, `transition-opacity duration-500${opacity}`, clickable && 'cursor-pointer')}
         >
           {currentWord}
         </span>

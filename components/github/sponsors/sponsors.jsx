@@ -22,7 +22,7 @@ export default function Sponsors({ sponsors }) {
                 <Image
                   src={sponsor.avatar}
                   alt={sponsor.username}
-                  className="w-64 h-64 rounded-full shadow-lg"
+                  className="h-64 w-64 rounded-full shadow-lg"
                   width={512}
                   height={512}
                 />
@@ -42,23 +42,23 @@ export default function Sponsors({ sponsors }) {
 
         {/* Consider sposoring me section */}
         <div className={s.considerSponsoringContainer}>
-          <h2 className="text-4xl font-bold text-center">You love my work?</h2>
+          <h2 className="text-center font-bold text-4xl">You love my work?</h2>
 
           <article className={s.description}>
             If you like my work and want to support me, consider sponsoring me on GitHub.
           </article>
 
-          <div className="flex flex-col items-center justify-center w-1/2 p-4 m-4" style={{ margin: 'auto' }}>
+          <div className="m-4 flex w-1/2 flex-col items-center justify-center p-4" style={{ margin: 'auto' }}>
             <Link
               href="https://github.com/sponsors/mateonunez"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 text-lg font-bold text-center"
+              className="mt-4 text-center font-bold text-lg"
             >
               <Image
                 src="https://github.githubassets.com/images/modules/site/sponsors/pixel-mona-heart.gif"
                 alt="Sponsor me"
-                className="w-24 h-24 shadow-lg"
+                className="h-24 w-24 shadow-lg"
                 width={128}
                 height={128}
               />

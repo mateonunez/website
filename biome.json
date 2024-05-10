@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.7.3/schema.json",
   "organizeImports": {
     "enabled": true
   },
@@ -9,11 +9,16 @@
       "recommended": true,
       "nursery": {
         "all": true,
-        "noDefaultExport": "off"
+        "noReactSpecificProps": "off",
+        "noUndeclaredDependencies": "off",
+        "noNodejsModules": "off"
       },
       "correctness": {
         "all": true,
         "useExhaustiveDependencies": "off"
+      },
+      "suspicious": {
+        "noArrayIndexKey": "off"
       }
     },
     "ignore": [".next/", "node_modules/", "./**/*.json"]

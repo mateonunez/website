@@ -2,8 +2,7 @@
 
 import s from './last-activity.module.css';
 
-export default function LastActivity({ contributions }) {
-  console.log({ contributions });
+export default function LastActivity() {
   return (
     <>
       <div className={s.root}>
