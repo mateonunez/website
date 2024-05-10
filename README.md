@@ -7,9 +7,21 @@
 
 ## Getting Started
 
-Run `yarn` to install the necessary dependencies and `yarn dev` to start the local server.
+Activate corepack:
+
+```bash
+corepack enable
+```
+
+Install dependencies:
+
+```bash
+yarn install
+```
 
 Open [http://localhost:3000/](http://localhost:3000/). Pages will live-refresh when source files are changed.
+
+> Note: remember to set your environment variables in a `.env.local` file.
 
 ## License
 

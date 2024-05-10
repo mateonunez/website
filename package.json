@@ -9,33 +9,33 @@
     "format": "biome format ./ --write"
   },
   "dependencies": {
-    "next": "^14.1.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "next": "^14.2.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.6.4",
+    "@biomejs/biome": "1.7.3",
     "@elgorditosalsero/react-gtm-hook": "^2.7.2",
-    "@mdx-js/loader": "^3.0.0",
-    "@octokit/graphql": "^7.0.2",
-    "@tailwindcss/typography": "^0.5.10",
-    "@vercel/analytics": "^1.1.1",
-    "autoprefixer": "^10.4.16",
+    "@mdx-js/loader": "^3.0.1",
+    "@octokit/graphql": "^8.1.1",
+    "@tailwindcss/typography": "^0.5.13",
+    "@vercel/analytics": "^1.2.2",
+    "autoprefixer": "^10.4.19",
     "classnames": "^2.5.1",
     "gray-matter": "^4.0.3",
-    "gsap": "^3.12.4",
+    "gsap": "^3.12.5",
     "next-mdx-remote": "^3.0.8",
-    "postcss": "^8.4.33",
+    "postcss": "^8.4.38",
     "react-lottie-player": "^1.5.6",
     "reading-time": "^1.5.0",
     "rehype-prism-plus": "^1.6.3",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.0",
     "remove-markdown": "^0.5.0",
-    "sharp": "^0.33.1",
-    "swr": "^2.2.4",
+    "sharp": "^0.33.3",
+    "swr": "^2.2.5",
     "tailwindcss": "^3.4.1"
   },
-  "packageManager": "yarn@1.22.22",
+  "packageManager": "yarn@4.2.2",
   "author": "mateonunez"
 }
