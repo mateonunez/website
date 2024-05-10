@@ -45,7 +45,7 @@ export default function Hero({ article, ...props }) {
           {/* Last Article */}
           <div className={s.lastArticle}>
             <Fade>
-              <h2 className="text-center subtitle">
+              <h2 className="subtitle text-center">
                 <Link href="/blog" title="Blog" aria-label="Blog" rel="canonical">
                   From the Blog
                 </Link>

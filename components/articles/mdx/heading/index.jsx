@@ -10,7 +10,7 @@ const extractName = (title) => {
 
 const CopyToClipboard = ({ id, title, children }) => (
   <button
-    className="hover:text-amber-700 hover:scale-105 transform transition-all duration-500 hover:underline text-amber-500"
+    className="transform text-amber-500 transition-all duration-500 hover:scale-105 hover:text-amber-700 hover:underline"
     title={`Copy "${title}" to clipboard`}
     onClick={(event) => {
       const fullUrl = `${window.location.origin}${window.location.pathname}#${id}`;

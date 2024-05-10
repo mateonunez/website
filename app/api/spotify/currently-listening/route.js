@@ -5,8 +5,6 @@ import { normalizeCurrentlyListening } from 'lib/utils/normalizers';
 export async function GET() {
   const response = await getCurrentlyListening();
 
-  console.log('response', response);
-
   if (!response) {
     return NextResponse.json({ error: 'Spotify not available' }, { status: 503 });
   }

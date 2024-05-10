@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function MDXImage({ src, width, height, alt, quality, priority, href, target = '_self', ...rest }) {
   const ImageWrapper = (
-    <div className="w-full h-full">
+    <div className="h-full w-full">
       <Image
         src={src}
         width={width}

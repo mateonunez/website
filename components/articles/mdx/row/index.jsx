@@ -1,3 +1,3 @@
-const Row = ({ children }) => <div className="flex flex-wrap -mx-4">{children}</div>;
+const Row = ({ children }) => <div className="-mx-4 flex flex-wrap">{children}</div>;
 
 export default Row;

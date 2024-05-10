@@ -1,6 +1,6 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import config from 'lib/config';
-import path from 'path';
+import path from 'node:path';
 
 function generateArticlesSitemap() {
   const result = [];

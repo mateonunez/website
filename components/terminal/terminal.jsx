@@ -102,7 +102,7 @@ const Terminal = () => {
 
   return (
     <div className={s.root}>
-      <div className={`${s.inner}${lineCount >= 8 ? ` ${s.amber}` : ''}`}>
+      <div className={`${s.inner}${lineCount >= 8 ? `${s.amber}` : ''}`}>
         <div className={s.header}>
           <span className={s.icon} />
           <span className={s.icon} />

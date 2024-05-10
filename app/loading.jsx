@@ -1,7 +1,7 @@
 export default function Loading() {
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="w-32 h-32 border-b-2 border-gray-300 rounded-full animate-spin" />
+    <div className="flex h-screen items-center justify-center">
+      <div className="h-32 w-32 animate-spin rounded-full border-gray-300 border-b-2" />
     </div>
   );
 }

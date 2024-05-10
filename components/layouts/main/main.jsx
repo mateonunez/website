@@ -11,9 +11,9 @@ export default function MainLayout({ children }) {
       <Footer />
 
       {/* TODO: refactor this */}
-      <div className="fixed bottom-0 right-0 z-50 mb-4 mr-4">
-        <a href="#top" className="text-white hover:scale-200 transform transition-all duration-300">
-          <ChevronUp className="w-8 h-8" />
+      <div className="fixed right-0 bottom-0 z-50 mr-4 mb-4">
+        <a href="#top" className="transform text-white transition-all duration-300 hover:scale-200">
+          <ChevronUp className="h-8 w-8" />
         </a>
       </div>
 
