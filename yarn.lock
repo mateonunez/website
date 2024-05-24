@@ -621,7 +621,7 @@ __metadata:
     "@mdx-js/loader": "npm:^3.0.1"
     "@octokit/graphql": "npm:^8.1.1"
     "@tailwindcss/typography": "npm:^0.5.13"
-    "@vercel/analytics": "npm:^1.2.2"
+    "@vercel/analytics": "npm:^1.3.0"
     autoprefixer: "npm:^10.4.19"
     classnames: "npm:^2.5.1"
     gray-matter: "npm:^4.0.3"
@@ -1063,9 +1063,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/analytics@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "@vercel/analytics@npm:1.2.2"
+"@vercel/analytics@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@vercel/analytics@npm:1.3.0"
   dependencies:
     server-only: "npm:^0.0.1"
   peerDependencies:
@@ -1076,7 +1076,7 @@ __metadata:
       optional: true
     react:
       optional: true
-  checksum: 10c0/82c89846356b370574414aa511d5a341535dcc7ba3b0a5eabfc7644df6d52a7b30253247627382faf4a0cc4192715cea718fe91027f7ba35efba80256064a005
+  checksum: 10c0/6f1f94a01330c9c50b81f8c3b1a68829fd1f0b2aedfbe1cc7e0dd5dac58039032c7b31d6b7be4c8928b859fbc02eddd1cc49258b9da346ff9e3361808893fb04
   languageName: node
   linkType: hard
 
