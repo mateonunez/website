@@ -12,9 +12,9 @@ import cn from 'classnames';
 
 const goals = [
   { title: 'First Node.js contribution', progress: 100 },
-  { title: 'Work fully remote', progress: 90 },
+  { title: 'Work fully remote', progress: 100 },
+  { title: 'Make my first public talk', progress: 50 },
   { title: 'Learn Rust as I know JavaScript', progress: 40 },
-  { title: 'Make my first public talk', progress: 30 },
 ];
 
 const About = ({ ...props }) => {
@@ -42,7 +42,7 @@ const About = ({ ...props }) => {
               {/* Intro  */}
               <Fade direction="left" distance={150} delay={0.5} trigger={introRef}>
                 <div className={s.introInner} ref={introRef}>
-                  <span>I&apos;m a Senior Developer based in Milan 🤌</span>
+                  <span>I&apos;m a Software Engineer based in Milan 🤌</span>
                 </div>
               </Fade>
               {/* Profile */}
@@ -61,7 +61,7 @@ const About = ({ ...props }) => {
                       <div className={cn(s.profileQuote, 'text-right')}>”</div>
                     </div>
                     <div className="w-full">
-                      <p className="text-center font-bold text-amber-500 text-md">@mateonunez</p>
+                      <p className="font-bold text-center text-amber-500 text-md">@mateonunez</p>
                     </div>
                   </div>
                 </Fade>
@@ -106,7 +106,7 @@ const About = ({ ...props }) => {
                           <Link href="https://hlpy.co" passHref alt="hlpy" target="_blank" rel="noreferrer">
                             hlpy
                           </Link>{' '}
-                          as a Senior Developer.
+                          as a Software Engineer.
                         </span>
                       </div>
                       <div className={s.bio}>
