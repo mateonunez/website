@@ -21,7 +21,14 @@ const Player = () => {
 
   const url = listening?.isPlaying ? listening.url : `${config.baseUrl}/spotify`;
 
-  const progress = useMemo(() => listening && (listening.progress / listening.duration) * 100, [listening]);
+  const progress = useMemo(() => {
+    if (listening?.isPlaying) {
+      const duration = listening.duration;
+      const progress = listening.progress;
+      return (progress / duration) * 100;
+    }
+    return 0;
+  }, [listening]);
 
   return (
     <>
@@ -36,12 +43,12 @@ const Player = () => {
             href={url}
           >
             {listening?.isPlaying ? (
-              <div className="h-auto w-auto">
+              <div className="w-auto h-auto">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img width="40" height="40" src={listening?.thumbnail} alt={listening?.album} />
               </div>
             ) : (
-              <Spotify className="h-10 w-10" color={'#1ED760'} />
+              <Spotify className="w-10 h-10" color={'#1ED760'} />
             )}
           </Link>
 
@@ -60,7 +67,7 @@ const Player = () => {
                   rel="noopener noreferer noreferrer"
                   title="Mateo Nunez on Spotify"
                 >
-                  <ChevronUp className="h-4 w-4 rotate-90" />
+                  <ChevronUp className="w-4 h-4 rotate-90" />
                 </Link>
               </div>
             </div>

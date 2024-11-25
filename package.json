@@ -9,7 +9,7 @@
     "format": "biome format ./ --write"
   },
   "dependencies": {
-    "next": "^14.2.3",
+    "next": "^15.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -18,7 +18,7 @@
     "@elgorditosalsero/react-gtm-hook": "^2.7.2",
     "@mdx-js/loader": "^3.0.1",
     "@octokit/graphql": "^8.1.1",
-    "@tailwindcss/typography": "^0.5.13",
+    "@tailwindcss/typography": "^0.5.15",
     "@vercel/analytics": "^1.2.2",
     "autoprefixer": "^10.4.19",
     "classnames": "^2.5.1",
@@ -36,6 +36,6 @@
     "swr": "^2.2.5",
     "tailwindcss": "^3.4.1"
   },
-  "packageManager": "yarn@4.2.2",
+  "packageManager": "yarn@4.5.3",
   "author": "mateonunez"
 }
