@@ -40,3 +40,5 @@ yarn-error.log*
 # Synk
 .dccache
 .yarn
+.pnp.cjs
+.pnp.loader.mjs
