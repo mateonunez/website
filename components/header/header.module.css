@@ -1,5 +1,5 @@
 .header {
-  composes: container from global;
+  /* composes: container from global; */
   height: 85px;
   display: grid;
   grid: auto-flow / repeat(3, 1fr);
@@ -40,7 +40,7 @@
 }
 
 .mobileNav {
-  composes: container from global;
+  /* composes: container from global; */
 }
 
 .toggle,

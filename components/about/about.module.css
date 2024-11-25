@@ -17,7 +17,6 @@
 .introInner {
   margin: auto;
   padding: 1rem;
-  background: #fff;
   border-radius: 0.5rem;
   width: 600px;
   background: var(--bg-secondary);
@@ -69,7 +68,7 @@
   width: fit-content;
   font-size: 2.5rem;
   font-weight: 600;
-  @apply text-transparent bg-clip-text leading-none font-bold;
+  @apply font-bold leading-none text-transparent bg-clip-text;
   @apply bg-gradient-to-b from-pink-500 to-blue-500 via-amber-500 animate-gradient-y;
 }
 

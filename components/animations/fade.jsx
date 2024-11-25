@@ -40,16 +40,24 @@ export default function Fade({
       ...(trigger?.current && { scrollTrigger: { trigger: trigger.current } }),
     });
 
-    const fadeDirection =
-      direction === 'top'
-        ? { y: distance }
-        : direction === 'right'
-          ? { x: distance }
-          : direction === 'bottom'
-            ? { y: -distance }
-            : direction === 'left'
-              ? { x: -distance }
-              : { x: 0 };
+    let fadeDirection = { x: 0, y: 0 };
+    switch (direction) {
+      case 'top':
+        fadeDirection = { y: distance };
+        break;
+      case 'right':
+        fadeDirection = { x: distance };
+        break;
+      case 'bottom':
+        fadeDirection = { y: -distance };
+        break;
+      case 'left':
+        fadeDirection = { x: -distance };
+        break;
+      default:
+        fadeDirection = { x: 0 };
+        break;
+    }
 
     timeline.fromTo(
       ref.current,
