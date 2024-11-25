@@ -72,17 +72,15 @@ const Player = () => {
               </div>
             </div>
             {listening?.isPlaying && (
-              <>
-                <div className={s.playingContainer}>
-                  <div className={s.progress}>
-                    <div className={s.listened} style={{ width: `${progress}%` }} />
-                  </div>
-
-                  <div className={s.animation}>
-                    <PlayerAnimation />
-                  </div>
+              <div className={s.playingContainer}>
+                <div className={s.progress}>
+                  <div className={s.listened} style={{ width: `${progress}%` }} />
                 </div>
-              </>
+
+                <div className={s.animation}>
+                  <PlayerAnimation />
+                </div>
+              </div>
             )}
           </div>
         </div>
