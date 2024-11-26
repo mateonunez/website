@@ -20,7 +20,7 @@
     "@octokit/graphql": "^8.1.1",
     "@tailwindcss/typography": "^0.5.15",
     "@vercel/analytics": "^1.2.2",
-    "autoprefixer": "^10.4.19",
+    "autoprefixer": "^10.4.20",
     "classnames": "^2.5.1",
     "gray-matter": "^4.0.3",
     "gsap": "^3.12.5",
