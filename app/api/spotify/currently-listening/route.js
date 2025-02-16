@@ -6,7 +6,6 @@ export async function GET() {
   const response = await getCurrentlyListening();
 
   if (!response) {
-    console.log(response);
     return NextResponse.json({ error: 'Spotify not available' }, { status: 503 });
   }
 

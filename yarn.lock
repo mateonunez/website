@@ -388,6 +388,8 @@ __metadata:
     "@biomejs/biome": "npm:1.9.4"
     "@elgorditosalsero/react-gtm-hook": "npm:^2.7.2"
     "@mdx-js/loader": "npm:^3.1.0"
+    "@mdx-js/react": "npm:^3.1.0"
+    "@next/mdx": "npm:^15.1.7"
     "@octokit/graphql": "npm:^8.2.1"
     "@tailwindcss/typography": "npm:^0.5.16"
     "@vercel/analytics": "npm:^1.5.0"
@@ -490,7 +492,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/react@npm:^3.0.1":
+"@mdx-js/react@npm:^3.0.1, @mdx-js/react@npm:^3.1.0":
   version: 3.1.0
   resolution: "@mdx-js/react@npm:3.1.0"
   dependencies:
@@ -506,6 +508,23 @@ __metadata:
   version: 15.1.7
   resolution: "@next/env@npm:15.1.7"
   checksum: 10c0/ad7761078552d8c88fe3c87224a3761d1bca82a15c747f417f561f92a4521898f227e3e7d2e8e65227a5ac8364ea8a2351c1febec5b5aa2ac1dcf016dd065edd
+  languageName: node
+  linkType: hard
+
+"@next/mdx@npm:^15.1.7":
+  version: 15.1.7
+  resolution: "@next/mdx@npm:15.1.7"
+  dependencies:
+    source-map: "npm:^0.7.0"
+  peerDependencies:
+    "@mdx-js/loader": ">=0.15.0"
+    "@mdx-js/react": ">=0.15.0"
+  peerDependenciesMeta:
+    "@mdx-js/loader":
+      optional: true
+    "@mdx-js/react":
+      optional: true
+  checksum: 10c0/15cbc59090944cad956b44b30ab457bf1c971306e697177b276c37638b158d5f9ae67c94b9ebf1f63a0fce3d3f9d65a64e3b3c89047148213b6c9946943b9fc8
   languageName: node
   linkType: hard
 

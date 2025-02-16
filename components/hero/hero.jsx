@@ -50,7 +50,7 @@ export default function Hero({ article, ...props }) {
                   From the Blog
                 </Link>
               </h2>
-              <ArticlePreview {...article} />
+              <ArticlePreview {...article.frontmatter} />
             </Fade>
           </div>
           {/* Start the BigBang */}

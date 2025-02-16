@@ -61,50 +61,93 @@
 .sections {
   display: flex;
   flex-direction: column;
-  margin: 2rem auto 0 auto;
+  margin: 2rem auto;
+  max-width: 800px;
+  width: 100%;
+  padding: 0 1rem;
 }
 
-.profileSectionTitle {
+.section {
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  margin: 1rem 0;
+}
+
+.sectionTitle {
   width: fit-content;
   font-size: 2.5rem;
   font-weight: 600;
+  margin-bottom: 1.5rem;
   @apply font-bold leading-none text-transparent bg-clip-text;
   @apply bg-gradient-to-b from-pink-500 to-blue-500 via-amber-500 animate-gradient-y;
 }
 
-.bio {
-  display: block;
-  margin: 0.3rem 0 0.3rem 0;
-  padding-left: 5rem;
-  text-indent: -3.3rem;
-}
-
-.bioYear {
-  font-weight: 800;
-  margin-right: 1rem;
-  width: 5px;
-  @apply leading-tight;
-}
-
-.bioText {
-  text-align: right;
+.sectionContent {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 1rem;
 }
 
 .paragraph {
-  padding: 0 1rem 0 1rem;
-  text-indent: 1rem;
+  padding: 0;
+  margin: 1rem 0;
+  line-height: 1.6;
+  color: var(--text-secondary);
 }
 
 .goalsList {
-  padding: 0 1rem 0 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
 }
 
 .goal {
-  margin: auto;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.goal:last-child {
+  border-bottom: none;
+}
+
+.bio {
+  display: flex;
+  align-items: baseline;
+  margin: 1.5rem 0;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.bioYear {
+  font-family: var(--font-mono);
+  font-weight: bold;
+  color: var(--amber);
+  min-width: 95px;
+  margin-right: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.bioLink {
+  color: var(--amber);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  font-weight: 500;
+}
+
+.bioLink:hover {
+  color: var(--amber-dark);
+  text-decoration: underline;
+}
+
+.bioItalic {
+  font-style: italic;
+  color: var(--gray-400);
+  font-weight: 500;
 }
 
 @media (max-width: 800px) {
@@ -115,7 +158,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .introInner,
   .profileQuoteContainer {
     min-width: 100%;
@@ -128,6 +171,28 @@
 
   .profileSectionTitle {
     font-size: 1.5rem;
+  }
+
+  .bio {
+    flex-direction: column;
+    margin-bottom: 2rem;
+  }
+
+  .bioYear {
+    margin-bottom: 0.5rem;
+  }
+
+  .sections {
+    padding: 0 1rem;
+  }
+
+  .section {
+    padding: 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
   }
 }
 

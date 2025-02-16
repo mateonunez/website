@@ -16,7 +16,8 @@
         "useComponentExportOnlyModules": "off",
         "noCommonJs": "off",
         "useSortedClasses": "off",
-        "noProcessEnv": "off"
+        "noProcessEnv": "off",
+        "useConsistentCurlyBraces": "off"
       },
       "correctness": {
         "all": true,
