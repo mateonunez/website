@@ -24,7 +24,7 @@ const TrackCard = ({ item, delay = 0, variant = 'default', currentIndex }, ref) 
   return (
     <>
       <div className={classNames} ref={ref}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* biome-ignore lint/nursery/noImgElement: refactor needed */}
         <img src={item.thumbnail} alt={item.title} className={s.image} />
 
         <Link

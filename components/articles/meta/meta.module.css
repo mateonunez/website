@@ -2,7 +2,7 @@
   margin: 0;
   display: inline-flex;
   flex-wrap: wrap;
-  fontsize: 0.8rem;
+  font-size: 0.8rem;
   line-height: 2;
   letter-spacing: 0.03rem;
   color: var(--text-secondary);
@@ -25,16 +25,16 @@
 }
 
 .tag {
-  @apply text-slate-400 font-mono;
+  @apply font-mono text-slate-400;
 }
 
 .author {
   margin-left: 0.5rem;
-  @apply text-amber-500 font-bold;
+  @apply font-bold text-amber-500;
 }
 
 .title {
-  @apply text-transparent text-5xl bg-clip-text font-incompleeta leading-none font-extrabold;
+  @apply text-5xl font-extrabold leading-none text-transparent bg-clip-text font-incompleeta;
   @apply bg-gradient-to-r from-amber-500 to-blue-500 via-rose-500 animate-gradient-xy;
   margin: 0 auto 0 auto;
   line-height: 1.5;

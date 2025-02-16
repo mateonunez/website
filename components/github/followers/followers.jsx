@@ -39,7 +39,7 @@ export default function Followers({ followers }) {
             rel="noopener noreferrer"
             className="text-center font-black text-sm"
           >
-            and {followers.length - followersShown.length} more...{' '}
+            and {followers.length - followersShown.length} more...
             <span className="text-emoji text-xs">(thank you ❤️)</span>
           </a>
         </div>

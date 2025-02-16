@@ -1,7 +1,11 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.7.3/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
   "organizeImports": {
     "enabled": true
+  },
+  "files": {
+    "ignore": ["node_modules", "dist", "coverage", ".next", ".yarn", "public", ".pnp.loader.mjs", ".pnp.cjs"],
+    "maxSize": 31457280
   },
   "linter": {
     "enabled": true,
@@ -9,13 +13,17 @@
       "recommended": true,
       "nursery": {
         "all": true,
-        "noReactSpecificProps": "off",
-        "noUndeclaredDependencies": "off",
-        "noNodejsModules": "off"
+        "useComponentExportOnlyModules": "off",
+        "noCommonJs": "off",
+        "useSortedClasses": "off",
+        "noProcessEnv": "off"
       },
       "correctness": {
         "all": true,
-        "useExhaustiveDependencies": "off"
+        "useExhaustiveDependencies": "off",
+        "noUndeclaredDependencies": "off",
+        "useImportExtensions": "off",
+        "noNodejsModules": "off"
       },
       "suspicious": {
         "noArrayIndexKey": "off"
@@ -28,8 +36,7 @@
     "formatWithErrors": false,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineWidth": 120,
-    "ignore": [".next/", "node_modules/"]
+    "lineWidth": 120
   },
   "javascript": {
     "formatter": {

@@ -84,17 +84,17 @@ const About = ({ ...props }) => {
                       <div className={s.bio}>
                         <span className={s.bioYear}>2015</span>
                         <span className={s.bioText}>
-                          Start working as a Telecommunication Technician. I learned different exchanges such as{' '}
+                          Start working as a Telecommunication Technician. I learned different exchanges such as
                           <i>UT</i>, <i>1240</i>, <i>MSAN</i> and others telephony protocols.
                         </span>
                       </div>
                       <div className={s.bio}>
                         <span className={s.bioYear}>2017 to 2022</span>
                         <span className={s.bioText}>
-                          Works on{' '}
+                          Works on
                           <Link href="https://sabicom.com" passHref alt="Sabicom SRL" target="_blank" rel="noreferrer">
                             Sabicom SRL
-                          </Link>{' '}
+                          </Link>
                           as a Developer. In these years I learned how to work with different technologies. I&apos;m
                           currently the <i>Team Leader</i>.
                         </span>
@@ -102,10 +102,10 @@ const About = ({ ...props }) => {
                       <div className={s.bio}>
                         <span className={s.bioYear}>2022 to 2023</span>
                         <span className={s.bioText}>
-                          Starting a new adventure in{' '}
+                          Starting a new adventure in
                           <Link href="https://hlpy.co" passHref alt="hlpy" target="_blank" rel="noreferrer">
                             hlpy
-                          </Link>{' '}
+                          </Link>
                           as a Software Engineer.
                         </span>
                       </div>

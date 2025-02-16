@@ -127,11 +127,9 @@ const Terminal = () => {
 
           {/* Last paragraph */}
           {isLastParagraph && (
-            <>
-              <p className="text-amber-500">
-                <Line text="See you." noPrompt noCaret />
-              </p>
-            </>
+            <p className="text-amber-500">
+              <Line text="See you." noPrompt noCaret />
+            </p>
           )}
         </div>
       </div>

@@ -5,6 +5,8 @@ import { WordAnimator } from 'components';
 import { profileFetcher } from 'lib/fetchers/open-source/fetcher';
 import meta from 'lib/config/metadata.js';
 
+export const dynamic = 'force-dynamic';
+
 // TODO: improve SEO
 export const metadata = {
   title: '> open source',
@@ -22,7 +24,7 @@ export default async function OpenSourcePage() {
   const words = ['Art', 'People', 'Code', 'Passion', 'You'];
 
   const profile = await profileFetcher();
-  const { sponsors = [], followers = [] } = profile;
+  const { sponsors = [], followers = [] } = profile || {};
 
   profile.repositories = undefined;
   profile.followers = undefined;
@@ -45,7 +47,7 @@ export default async function OpenSourcePage() {
       <Container clean name="you">
         <div className={s.thanksContainer}>
           <Fade direction="left" clean className="w-full">
-            <h2 className="text-center font-bold text-4xl">Thank you.</h2>
+            <h2 className="text-4xl font-bold text-center">Thank you.</h2>
 
             <Sponsors sponsors={sponsors} />
           </Fade>
@@ -56,7 +58,7 @@ export default async function OpenSourcePage() {
       <Container clean name="people">
         <div className={s.genericContainer}>
           <Fade direction="left" delay={0.5} className="w-full">
-            <h2 className="text-center font-bold text-4xl">Still You</h2>
+            <h2 className="text-4xl font-bold text-center">Still You</h2>
 
             <Followers followers={followers} />
           </Fade>
@@ -67,7 +69,7 @@ export default async function OpenSourcePage() {
       <Container clean name="passion">
         <div className={s.genericContainer}>
           <Fade direction="left" delay={0.5} className="w-full">
-            <h2 className="text-center font-bold text-4xl">About me</h2>
+            <h2 className="text-4xl font-bold text-center">About me</h2>
 
             <GitHubProfile {...profile} />
           </Fade>

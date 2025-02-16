@@ -6,7 +6,7 @@ export default function PostLayout({ meta, children }) {
       <h3>By {meta.author}</h3>
       <p>{meta.publishedAt}</p>
       <div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* biome-ignore lint/nursery/noImgElement: refactor needed */}
         <img src={meta.cover} alt={meta.title} loading="lazy" width="100%" />
       </div>
       {children}
