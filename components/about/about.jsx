@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { Fade, CircularProgress } from 'components';
 import cn from 'classnames';
 
-const goals = [{ title: 'AIt', progress: 10 }];
+const projects = [{ title: 'AIt', progress: 10 }];
 
 const About = ({ ...props }) => {
   const rootRef = useRef(null);
@@ -138,10 +138,10 @@ const About = ({ ...props }) => {
                 {/* Projects */}
                 <Fade className="m-0 mx-0" direction="left" distance={150} delay={1.8} clean trigger={sectionsRef}>
                   <article className={s.section}>
-                    <h2 className={s.sectionTitle}>Projects</h2>
+                    <h2 className={s.sectionTitle}>Active Projects</h2>
                     <div className={s.sectionContent}>
                       <ul className={s.goalsList}>
-                        {goals.map((goal) => (
+                        {projects.map((goal) => (
                           <li key={goal.title} className={s.goal}>
                             <span>{goal.title}</span>
                             <CircularProgress progress={goal.progress} />
