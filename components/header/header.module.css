@@ -1,8 +1,9 @@
 .header {
-  /* composes: container from global; */
   height: 85px;
   display: grid;
   grid: auto-flow / repeat(3, 1fr);
+  margin: 0 auto;
+  padding: 0 4rem;
 }
 
 .logo {

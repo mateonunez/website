@@ -8,9 +8,7 @@ import { MN, Menu, Close } from 'components/icons';
 import cn from 'classnames';
 import SocialLinks from 'components/common/social-links/social-links';
 
-// eslint-disable-next-line no-unused-vars
 const ActiveLink = ({ href, children, title }) => {
-  // const { pathname } = useRouter();
   const pathname = '/blog';
 
   return (
