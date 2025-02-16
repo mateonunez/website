@@ -130,8 +130,7 @@ const About = ({ ...props }) => {
                   <article className={s.section}>
                     <h2 className={s.sectionTitle}>What Drives Me</h2>
                     <p className={s.paragraph}>
-                      I'm a self-taught problem solver with an insatiable curiosity. Every challenge is a chance to
-                      innovate, learn, and grow.
+                      Knowledge, curiosity, and the need to push limits—that’s what keeps me going.
                     </p>
                   </article>
                 </Fade>
