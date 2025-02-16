@@ -44,11 +44,11 @@ const Player = () => {
           >
             {listening?.isPlaying ? (
               <div className="w-auto h-auto">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
+                {/* biome-ignore lint/nursery/noImgElement: refactor needed */}
                 <img width="40" height="40" src={listening?.thumbnail} alt={listening?.album} />
               </div>
             ) : (
-              <Spotify className="w-10 h-10" color={'#1ED760'} />
+              <Spotify className="w-10 h-10" color="#1ED760" />
             )}
           </Link>
 

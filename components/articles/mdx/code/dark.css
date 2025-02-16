@@ -166,6 +166,7 @@ pre[class*="language-"] {
   cursor: help;
 }
 
+/* biome-ignore lint/correctness/noUnknownMediaFeatureName: it's safe */
 @media screen and (-ms-high-contrast: active) {
   code[class*="language-"],
   pre[class*="language-"] {

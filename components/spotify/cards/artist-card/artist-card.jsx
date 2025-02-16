@@ -9,7 +9,7 @@ export default function ArtistCard({ item, delay = 0 }) {
   return (
     <>
       <div className={s.root}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* biome-ignore lint/nursery/noImgElement: refactor needed */}
         <img src={item.thumbnail} alt={item.title} className={s.image} />
 
         <Link

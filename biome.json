@@ -3,17 +3,27 @@
   "organizeImports": {
     "enabled": true
   },
+  "files": {
+    "ignore": ["node_modules", "dist", "coverage", ".next", ".yarn", "public", ".pnp.loader.mjs", ".pnp.cjs"],
+    "maxSize": 31457280
+  },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
       "nursery": {
-        "all": true
+        "all": true,
+        "useComponentExportOnlyModules": "off",
+        "noCommonJs": "off",
+        "useSortedClasses": "off",
+        "noProcessEnv": "off"
       },
       "correctness": {
         "all": true,
         "useExhaustiveDependencies": "off",
-        "noUndeclaredDependencies": "off"
+        "noUndeclaredDependencies": "off",
+        "useImportExtensions": "off",
+        "noNodejsModules": "off"
       },
       "suspicious": {
         "noArrayIndexKey": "off"
@@ -26,8 +36,7 @@
     "formatWithErrors": false,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineWidth": 120,
-    "ignore": [".next/", "node_modules/"]
+    "lineWidth": 120
   },
   "javascript": {
     "formatter": {
