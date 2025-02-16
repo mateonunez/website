@@ -21,18 +21,16 @@ export default async function BlogTag({ params }) {
   });
 
   return (
-    <>
-      <Container clean>
-        <Title>{tag}</Title>
+    <Container clean>
+      <Title>{tag}</Title>
 
-        <div className={s.root}>
-          <div className="container">
-            {articles.map((article) => (
-              <ArticlePreview key={article.slug} {...article} />
-            ))}
-          </div>
+      <div className={s.root}>
+        <div className="container">
+          {articles.map((article) => (
+            <ArticlePreview key={article.slug} {...article} />
+          ))}
         </div>
-      </Container>
-    </>
+      </div>
+    </Container>
   );
 }

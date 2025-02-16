@@ -1,3 +1,5 @@
+'use client';
+
 import s from './title.module.css';
 
 export default function ArticleTitle({ title }) {
