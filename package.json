@@ -22,6 +22,9 @@
     "@octokit/graphql": "^8.2.1",
     "@tailwindcss/postcss": "^4.0.7",
     "@tailwindcss/typography": "^0.5.16",
+    "@types/node": "^22.13.4",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
     "@vercel/analytics": "^1.5.0",
     "classnames": "^2.5.1",
     "gray-matter": "^4.0.3",
@@ -36,8 +39,10 @@
     "remove-markdown": "^0.6.0",
     "sharp": "^0.33.5",
     "swr": "^2.3.2",
-    "tailwindcss": "^4.0.7"
+    "tailwindcss": "^4.0.7",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
   },
   "author": "mateonunez",
-  "packageManager": "yarn@4.5.3+sha512.3003a14012e2987072d244c720506549c1aab73ee728208f1b2580a9fd67b92d61ba6b08fe93f6dce68fd771e3af1e59a0afa28dd242dd0940d73b95fedd4e90"
+  "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af"
 }

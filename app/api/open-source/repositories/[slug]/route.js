@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getRepository } from 'lib/github';
+import { getRepository } from '@/lib/github';
 
 export async function GET(_, { params }) {
   const { slug: repository } = params;

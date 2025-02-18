@@ -1,9 +1,9 @@
-import s from 'styles/pages/open-source/page.module.css';
+import s from '@/styles/pages/open-source/page.module.css';
 
-import { Container, Fade, Followers, GitHubProfile, Sponsors, Title } from 'components';
-import { WordAnimator } from 'components';
-import { profileFetcher } from 'lib/fetchers/open-source/fetcher';
-import meta from 'lib/config/metadata.js';
+import { Container, Fade, Followers, GitHubProfile, Sponsors, Title } from '@/components';
+import { WordAnimator } from '@/components';
+import { profileFetcher } from '@/lib/fetchers/open-source/fetcher';
+import meta from '@/lib/config/metadata.js';
 
 export const dynamic = 'force-dynamic';
 

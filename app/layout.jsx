@@ -1,11 +1,11 @@
-import 'styles/global.css';
-import 'components/articles/mdx/code/dark.css';
+import '@/styles/global.css';
+import '@/components/legacy/articles/mdx/code/dark.css';
 import Loading from './loading';
 
-import { MainLayout } from 'components';
-import { UIProvider } from 'components/ui/ui-context';
+import { MainLayout } from '@/components';
+import { UIProvider } from '@/components/legacy/ui/ui-context';
 import { Suspense } from 'react';
-import meta from 'lib/config/metadata.js';
+import meta from '@/lib/config/metadata.js';
 
 export const metadata = meta;
 

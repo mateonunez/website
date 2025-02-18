@@ -1,9 +1,9 @@
-import s from 'styles/pages/blog/tags/[tag].module.css';
+import s from '@/styles/pages/blog/tags/[tag].module.css';
 
-import { Container, Title } from 'components';
-import { getAllArticles } from 'lib/articles/parser';
-import { kebapCase } from 'lib/helpers/string';
-import ArticlePreview from 'components/articles/preview';
+import { Container, Title } from '@/components';
+import { getAllArticles } from '@/lib/articles/parser';
+import { kebapCase } from '@/lib/helpers/string';
+import ArticlePreview from '@/components/legacy/articles/preview';
 
 export function generateMetadata({ params }) {
   const { tag } = params;

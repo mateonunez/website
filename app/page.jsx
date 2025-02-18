@@ -1,7 +1,7 @@
-import s from 'styles/pages/home.module.css';
+import s from '@/styles/pages/home.module.css';
 
-import { Hero, About } from 'components';
-import { getLastArticle } from 'lib/articles/parser';
+import { Hero, About } from '@/components';
+import { getLastArticle } from '@/lib/articles/parser';
 
 export default async function HomePage() {
   const article = await getLastArticle();

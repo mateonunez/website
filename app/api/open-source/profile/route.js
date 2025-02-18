@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getProfile } from 'lib/github';
-import { normalizeGitHubProfile } from 'lib/utils/normalizers/normalizeGithub';
+import { getProfile } from '@/lib/github';
+import { normalizeGitHubProfile } from '@/lib/utils/normalizers/normalizeGithub';
 
 export async function GET() {
   const profile = await getProfile().catch((err) => {

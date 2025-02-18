@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getReadme } from 'lib/github';
+import { getReadme } from '@/lib/github';
 
 export async function GET() {
   const readme = await getReadme().catch((err) => {
