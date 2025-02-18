@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .welcomeContainer {
   min-height: calc(100vh - 260px);
   display: flex;

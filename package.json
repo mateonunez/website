@@ -20,9 +20,9 @@
     "@elgorditosalsero/react-gtm-hook": "^2.7.2",
     "@mdx-js/loader": "^3.1.0",
     "@octokit/graphql": "^8.2.1",
+    "@tailwindcss/postcss": "^4.0.7",
     "@tailwindcss/typography": "^0.5.16",
     "@vercel/analytics": "^1.5.0",
-    "autoprefixer": "^10.4.20",
     "classnames": "^2.5.1",
     "gray-matter": "^4.0.3",
     "gsap": "^3.12.7",
@@ -36,7 +36,7 @@
     "remove-markdown": "^0.6.0",
     "sharp": "^0.33.5",
     "swr": "^2.3.2",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^4.0.7"
   },
   "author": "mateonunez",
   "packageManager": "yarn@4.5.3+sha512.3003a14012e2987072d244c720506549c1aab73ee728208f1b2580a9fd67b92d61ba6b08fe93f6dce68fd771e3af1e59a0afa28dd242dd0940d73b95fedd4e90"

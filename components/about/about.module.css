@@ -1,10 +1,12 @@
+@reference "tailwindcss";
+
 .root {
   font-size: 14px;
 }
 
 .title {
-  @apply font-light text-transparent bg-clip-text font-incompleeta;
-  @apply bg-gradient-to-l from-amber-500 to-blue-500 via-rose-500 animate-gradient-x;
+  @apply font-light text-transparent bg-clip-text;
+  @apply bg-gradient-to-l;
   font-size: 10rem;
   line-height: 1.5;
 }
@@ -81,7 +83,7 @@
   font-weight: 600;
   margin-bottom: 1.5rem;
   @apply font-bold leading-none text-transparent bg-clip-text;
-  @apply bg-gradient-to-b from-pink-500 to-blue-500 via-amber-500 animate-gradient-y;
+  @apply bg-gradient-to-b from-pink-500 to-blue-500 via-amber-500;
 }
 
 .sectionContent {

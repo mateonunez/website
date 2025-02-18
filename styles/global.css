@@ -1,6 +1,66 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@plugin '@tailwindcss/typography';
+
+@theme {
+  --animate-gradient-x: gradient-x 5s ease infinite;
+  --animate-gradient-y: gradient-y 5s ease infinite;
+  --animate-gradient-xy: gradient-xy 5s ease infinite;
+
+  --font-incompleeta: Incompleeta, sans-serif;
+
+  @keyframes gradient-y {
+    0%,
+    100% {
+      background-size: 400% 400%;
+      background-position: center top;
+    }
+    50% {
+      background-size: 200% 200%;
+      background-position: center center;
+    }
+  }
+  @keyframes gradient-x {
+    0%,
+    100% {
+      background-size: 200% 200%;
+      background-position: left center;
+    }
+    50% {
+      background-size: 200% 200%;
+      background-position: right center;
+    }
+  }
+  @keyframes gradient-xy {
+    0%,
+    100% {
+      background-size: 400% 400%;
+      background-position: left center;
+    }
+    50% {
+      background-size: 200% 200%;
+      background-position: right center;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
 
 @font-face {
   font-family: "Inter";
@@ -75,15 +135,13 @@ button {
 }
 
 .title {
-  @apply font-extrabold leading-none text-transparent text-7xl bg-clip-text font-incompleeta;
-  @apply bg-gradient-to-r from-amber-500 to-blue-500 via-rose-500 animate-gradient-xy;
+  @apply font-extrabold leading-none text-transparent text-7xl bg-clip-text;
   margin: 0 auto 0 auto;
   line-height: 1.5;
 }
 
 .subtitle {
-  @apply font-bold leading-none text-transparent bg-clip-text font-incompleeta;
-  @apply bg-gradient-to-r from-amber-500 to-blue-500 via-rose-500 animate-gradient-x;
+  @apply font-bold leading-none text-transparent bg-clip-text;
   font-size: 2.5rem;
   font-weight: 400;
   line-height: 1.3;

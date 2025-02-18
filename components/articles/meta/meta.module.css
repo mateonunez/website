@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .root {
   margin: 0;
   display: inline-flex;
@@ -34,8 +36,7 @@
 }
 
 .title {
-  @apply text-5xl font-extrabold leading-none text-transparent bg-clip-text font-incompleeta;
-  @apply bg-gradient-to-r from-amber-500 to-blue-500 via-rose-500 animate-gradient-xy;
+  @apply text-5xl font-extrabold leading-none text-transparent bg-clip-text;
   margin: 0 auto 0 auto;
   line-height: 1.5;
 }
