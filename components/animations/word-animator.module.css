@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .wordAnimatorContainer {
   @apply flex flex-col items-center justify-center;
   word-break: break-all;
@@ -5,8 +7,8 @@
 }
 
 .wordAnimator {
-  @apply text-transparent bg-clip-text font-black leading-none text-9xl;
-  @apply bg-gradient-to-r from-teal-400 to-purple-500 via-pink-500 animate-gradient-x;
+  @apply font-black leading-none text-transparent bg-clip-text text-9xl;
+  @apply bg-gradient-to-r from-teal-400 to-purple-500 via-pink-500;
 }
 
 @media (max-width: 768px) {
@@ -15,6 +17,6 @@
   }
 
   .wordAnimator {
-    @apply text-transparent bg-clip-text font-black leading-none text-6xl;
+    @apply text-6xl font-black leading-none text-transparent bg-clip-text;
   }
 }

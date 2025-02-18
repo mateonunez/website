@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .root {
   margin: 2rem auto;
   width: 100%;
@@ -11,7 +13,7 @@
 }
 
 .navigator {
-  @apply transform transition duration-300 hover:scale-110;
+  @apply transition duration-300 transform hover:scale-110;
   position: absolute;
   top: 50%;
   z-index: 9;

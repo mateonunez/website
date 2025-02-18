@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .root {
   margin: 2rem auto 2rem auto;
   display: flex;
@@ -7,7 +9,7 @@
 }
 
 .container {
-  @apply border-slate-300 border rounded-sm;
+  @apply border rounded-sm border-slate-300;
   margin-top: 0.3rem;
   padding: 1rem;
   border-radius: 0.5rem;
@@ -69,10 +71,6 @@
 .forksCount {
   font-weight: bold;
   margin-left: 0.3rem;
-}
-
-.description {
-  @apply prose prose-invert;
 }
 
 @media (max-width: 600px) {

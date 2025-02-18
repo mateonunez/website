@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .root {
   width: 600px;
 }
@@ -42,7 +44,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  @apply rounded-full bg-gray-200 dark:bg-gray-700;
+  @apply bg-gray-200 rounded-full dark:bg-gray-700;
 }
 
 .animation {
