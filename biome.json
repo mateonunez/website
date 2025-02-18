@@ -17,14 +17,15 @@
         "noCommonJs": "off",
         "useSortedClasses": "off",
         "noProcessEnv": "off",
-        "useConsistentCurlyBraces": "off"
+        "useConsistentCurlyBraces": "off",
+        "useImportRestrictions": "off"
       },
       "correctness": {
         "all": true,
         "useExhaustiveDependencies": "off",
         "noUndeclaredDependencies": "off",
-        "useImportExtensions": "off",
-        "noNodejsModules": "off"
+        "noNodejsModules": "off",
+        "useImportExtensions": "off"
       },
       "suspicious": {
         "noArrayIndexKey": "off"

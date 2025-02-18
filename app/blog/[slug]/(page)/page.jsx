@@ -1,9 +1,9 @@
-import articleStyle from 'components/articles/article.module.css';
-import articleContentStyle from 'components/articles/content/content.module.css';
+import articleStyle from '@/components/legacy/articles/article.module.css';
+import articleContentStyle from '@/components/legacy/articles/content/content.module.css';
 import ArticlePageClient from './page-client';
-import meta from 'lib/config/metadata.js';
-import config from 'lib/config';
-import { getArticle } from 'lib/articles/parser';
+import meta from '@/lib/config/metadata.js';
+import config from '@/lib/config';
+import { getArticle } from '@/lib/articles/parser';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;

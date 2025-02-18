@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getCurrentlyListening } from 'lib/spotify';
-import { normalizeCurrentlyListening } from 'lib/utils/normalizers';
+import { getCurrentlyListening } from '@/lib/spotify';
+import { normalizeCurrentlyListening } from '@/lib/utils/normalizers';
 
 export async function GET() {
   const response = await getCurrentlyListening();

@@ -1,9 +1,9 @@
-import s from 'styles/pages/blog/authors/[author].module.css';
+import s from '@/styles/pages/blog/authors/[author].module.css';
 
-import { Container, Title } from 'components';
-import { getAllArticles } from 'lib/articles/parser';
-import ArticlePreview from 'components/articles/preview';
-import { kebapCase } from 'lib/helpers/string';
+import { Container, Title } from '@/components';
+import { getAllArticles } from '@/lib/articles/parser';
+import ArticlePreview from '@/components/legacy/articles/preview';
+import { kebapCase } from '@/lib/helpers/string';
 
 export function generateMetadata({ params }) {
   const { author } = params;

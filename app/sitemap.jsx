@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import config from 'lib/config';
+import config from '@/lib/config';
 import path from 'node:path';
 
 function generateArticlesSitemap() {

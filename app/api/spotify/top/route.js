@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getTopArtists, getTopTracks } from 'lib/spotify';
-import { normalizeArtists, normalizeTracks } from 'lib/utils/normalizers';
+import { getTopArtists, getTopTracks } from '@/lib/spotify';
+import { normalizeArtists, normalizeTracks } from '@/lib/utils/normalizers';
 
 export async function GET() {
   const artistsResponse = await getTopArtists().catch((err) => {

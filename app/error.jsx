@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import s from 'styles/pages/404.module.css';
+import s from '@/styles/pages/404.module.css';
 
 export default function Eror({ error, reset }) {
   useEffect(() => {}, [error]);

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getRecentlyPlayed } from 'lib/spotify';
-import { normalizeRecentlyPlayed } from 'lib/utils/normalizers';
+import { getRecentlyPlayed } from '@/lib/spotify';
+import { normalizeRecentlyPlayed } from '@/lib/utils/normalizers';
 
 export async function GET() {
   const response = await getRecentlyPlayed().catch((err) => {
