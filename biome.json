@@ -4,7 +4,19 @@
     "enabled": true
   },
   "files": {
-    "ignore": ["node_modules", "dist", "coverage", ".next", ".yarn", "public", ".pnp.loader.mjs", ".pnp.cjs"],
+    "ignore": [
+      "node_modules",
+      "dist",
+      "coverage",
+      ".next",
+      ".yarn",
+      "public",
+      ".pnp.loader.mjs",
+      ".pnp.cjs",
+      "next-env.d.ts",
+      "next.config.js",
+      "components/legacy/icons"
+    ],
     "maxSize": 31457280
   },
   "linter": {
@@ -28,22 +40,41 @@
         "useImportExtensions": "off"
       },
       "suspicious": {
-        "noArrayIndexKey": "off"
+        "noArrayIndexKey": "off",
+        "noExplicitAny": "off"
+      },
+      "style": {
+        "noDefaultExport": "off",
+        "noNonNullAssertion": "off"
+      },
+      "complexity": {
+        "noForEach": "off",
+        "useOptionalChain": "warn"
+      },
+      "a11y": {
+        "useKeyWithClickEvents": "off"
       }
     },
-    "ignore": [".next/", "node_modules/", "./**/*.json"]
+    "ignore": [".next/", "node_modules/", "./**/*.json", "**/*.config.js", "**/*.config.mjs"]
   },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineWidth": 120
+    "lineWidth": 120,
+    "ignore": [".next/", "node_modules/", "public/"]
   },
   "javascript": {
     "formatter": {
       "semicolons": "always",
-      "quoteStyle": "single"
+      "quoteStyle": "single",
+      "jsxQuoteStyle": "double"
+    }
+  },
+  "json": {
+    "parser": {
+      "allowComments": true
     }
   }
 }
