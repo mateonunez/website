@@ -4,8 +4,9 @@ import s from './about.module.css';
 
 import React, { useRef, type RefObject, type HTMLAttributes } from 'react';
 import Image from 'next/image';
-import { Fade, CircularProgress } from '@/components';
 import cn from 'classnames';
+import Fade from '@/components/legacy/animations/fade';
+import CircularProgress from '@/components/legacy/common/circular-progress/circular-progress';
 
 interface Project {
   title: string;

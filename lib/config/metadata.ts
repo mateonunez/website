@@ -7,9 +7,9 @@ const author = {
   website: 'https://mateonunez.dev',
 };
 
-const defaultTitle = '@mateonunez';
+const defaultTitle = "Hey, I'm Mateo 👋";
 const defaultDescription =
-  "Hi folks! I'm Mateo Nunez, a Software Engineer from Colombia based in Milan. I ❤️ Open Source, JavaScript, the music, the food, the challenges and the continous improvement.";
+  "Hey, I'm Mateo, a Software Engineer from Colombia based in Milan. I ❤️ Open Source, JavaScript, AI, and many other things.";
 
 const metadata = {
   title: {

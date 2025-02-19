@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 export interface ArticleAuthor {
   name: string;
   url: string;
@@ -19,6 +21,6 @@ export interface ArticleFrontmatter {
 }
 
 export interface Article {
-  compiledSource: string;
+  content: ReactNode;
   frontmatter: ArticleFrontmatter;
 }

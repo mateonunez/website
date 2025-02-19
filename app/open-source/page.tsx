@@ -1,10 +1,15 @@
 import s from '@/styles/pages/open-source/page.module.css';
 
-import { Container, Fade, Followers, GitHubProfile, Sponsors, Title } from '@/components';
-import { WordAnimator } from '@/components';
 import { fetchGitHubProfile } from '@/lib/fetchers/open-source/fetcher';
 import meta from '@/lib/config/metadata';
 import type { JSX } from 'react';
+import Container from '@/components/legacy/common/container/container';
+import Title from '@/components/legacy/common/title/title';
+// import WordAnimator from '@/components/legacy/animations/word-animator';
+import Fade from '@/components/legacy/animations/fade';
+import Followers from '@/components/legacy/github/followers/followers';
+import Sponsors from '@/components/legacy/github/sponsors/sponsors';
+import GitHubProfile from '@/components/legacy/github/cards/profile/profile';
 export const dynamic = 'force-dynamic';
 
 // TODO: improve SEO
@@ -15,7 +20,7 @@ export const metadata = {
 };
 
 export default async function OpenSourcePage(): Promise<JSX.Element> {
-  const words = ['Art', 'People', 'Code', 'Passion', 'You'];
+  const _words = ['Art', 'People', 'Code', 'Passion', 'You'];
 
   const profile = await fetchGitHubProfile();
 
@@ -26,7 +31,7 @@ export default async function OpenSourcePage(): Promise<JSX.Element> {
 
         <div className={s.welcomeContainer}>
           <div />
-          <WordAnimator words={words} clickable />
+          {/* <WordAnimator words={words} clickable /> */}
           <div />
         </div>
       </Container>

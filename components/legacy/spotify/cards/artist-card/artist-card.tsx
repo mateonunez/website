@@ -2,9 +2,10 @@ import s from './artist-card.module.css';
 
 import Link from 'next/link';
 
-import { Fade, Title } from '@/components';
 import config from '@/lib/config';
 import type { JSX } from 'react';
+import Fade from '@/components/legacy/animations/fade';
+import Title from '@/components/legacy/common/title/title';
 
 export default function ArtistCard({ item, delay = 0 }: { item: any; delay?: number }): JSX.Element {
   return (

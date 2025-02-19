@@ -2,13 +2,15 @@
 
 import s from './hero.module.css';
 
-import { Fade, Terminal, Player } from '@/components';
 import { useUI } from '@/components/legacy/ui/ui-context';
 import type { Article } from '@/types/article';
-import ArticlePreview from '@/components/legacy/articles/preview';
+// import ArticlePreview from '@/components/legacy/articles/preview/article.preview';
 import Link from 'next/link';
 import useSWR from 'swr';
 import type { HTMLAttributes, JSX } from 'react';
+import Fade from '@/components/legacy/animations/fade';
+import Terminal from '@/components/legacy/terminal/terminal';
+import Player from '@/components/legacy/spotify/player/player';
 
 interface HeroProps extends HTMLAttributes<HTMLDivElement> {
   article: Article;
@@ -55,7 +57,7 @@ export default function Hero({ article, ...props }: HeroProps): JSX.Element {
                   From the Blog
                 </Link>
               </h2>
-              <ArticlePreview {...article.frontmatter} />
+              {/* <ArticlePreview {...article.frontmatter} /> */}
             </Fade>
           </div>
           {/* Start the BigBang */}

@@ -1,9 +1,7 @@
-import articleStyle from '@/components/legacy/articles/article.module.css';
-import articleContentStyle from '@/components/legacy/articles/content/content.module.css';
-import ArticlePageClient from './page-client';
+import { getArticle } from '@/lib/articles/parser';
+import { ArticleLayout } from '@/components/mate/article-layout';
 import meta from '@/lib/config/metadata';
 import config from '@/lib/config';
-import { getArticle } from '@/lib/articles/parser';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
 
@@ -14,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const imagePath = frontmatter.image.startsWith('/') ? frontmatter.image : `/${frontmatter.image}`;
   const imageUrl = new URL(imagePath, baseUrl).toString();
 
-  const dynamicMetadata = {
+  return {
     ...meta,
     title: frontmatter.title,
     description: frontmatter.description,
@@ -24,32 +22,30 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: frontmatter.title,
       description: frontmatter.description,
       type: 'article',
+      // @ts-expect-error - article is not typed on OpenGraph
       article: {
         authors: [frontmatter.author.name],
         tags: frontmatter.tags,
         publishedTime: frontmatter.date,
         modifiedTime: frontmatter.date,
       },
-      images: [
-        {
-          url: imageUrl,
-          alt: frontmatter.title,
-        },
-      ],
+      images: [{ url: imageUrl, alt: frontmatter.title }],
     },
   };
-  return dynamicMetadata;
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }): Promise<JSX.Element> {
   const { slug } = await params;
-  const { compiledSource, frontmatter } = await getArticle({ slug });
+  const { content, frontmatter } = await getArticle({ slug });
 
   return (
-    <div className={articleStyle.root}>
-      <div className={articleContentStyle.root}>
-        <ArticlePageClient compiledSource={compiledSource} frontmatter={frontmatter} />
-      </div>
-    </div>
+    <ArticleLayout
+      title={frontmatter.title}
+      date={frontmatter.date}
+      readingTime={frontmatter.readingTime}
+      tags={frontmatter.tags}
+    >
+      {content}
+    </ArticleLayout>
   );
 }

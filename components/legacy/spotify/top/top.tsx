@@ -4,12 +4,19 @@ import s from './top.module.css';
 
 import config from '@/lib/config';
 
-import { ArtistCard, Container, Fade, Title, TrackCard } from '@/components';
 import { useRef } from 'react';
 import type { SpotifyArtist, SpotifyTrack } from '@/types/spotify';
 import type { JSX } from 'react';
+import Container from '@/components/legacy/common/container/container';
+import Fade from '@/components/legacy/animations/fade';
+import Title from '@/components/legacy/common/title/title';
+import TrackCard from '@/components/legacy/spotify/cards/track-card/track-card';
+import ArtistCard from '@/components/legacy/spotify/cards/artist-card/artist-card';
 
-export default function Top({ artists, tracks }: { artists: SpotifyArtist[]; tracks: SpotifyTrack[] }): JSX.Element {
+export default function SpotifyTop({
+  artists,
+  tracks,
+}: { artists: SpotifyArtist[]; tracks: SpotifyTrack[] }): JSX.Element {
   const sectionTitleRef = useRef(null);
   const artistTitleRef = useRef(null);
   const artistsRef = useRef(null);

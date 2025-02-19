@@ -3,10 +3,10 @@
 import s from './sponsors.module.css';
 
 import Image from 'next/image';
-import { RepositoryPreview } from '@/components';
 import Link from 'next/link';
 import type { JSX } from 'react';
 import type { GitHubSponsor } from '@/types/github';
+import RepositoryPreview from '@/components/legacy/github/repositories/preview/preview';
 
 export default function Sponsors({ sponsors }: { sponsors: GitHubSponsor[] }): JSX.Element {
   return (

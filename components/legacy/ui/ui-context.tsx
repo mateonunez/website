@@ -14,7 +14,7 @@ interface UIState {
   isTerminalCompleted: boolean;
   bigBang: boolean;
   listening: {
-    [key: string]: unknown;
+    [key: string]: any;
   };
 }
 
@@ -186,7 +186,7 @@ export const UIProvider = ({ children, ...props }: UIProviderProps): JSX.Element
   const setBigBang = useCallback((payload: boolean) => dispatch({ type: types.SET_BIG_BANG, payload }), []);
 
   const setSpotifyListening = useCallback(
-    (payload: { [key: string]: unknown }) => dispatch({ type: types.SET_SPOTIFY_LISTENING, payload }),
+    (payload: { [key: string]: any }) => dispatch({ type: types.SET_SPOTIFY_LISTENING, payload }),
     [],
   );
 

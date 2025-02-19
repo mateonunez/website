@@ -70,7 +70,7 @@ Personally, I prefer to store the `Client ID` and `Client Secret` in a `.env` fi
 
 > .env.local.example
 
-```env
+```
 # Spotify
 SPOTIFY_CLIENT_ID=
 SPOTIFY_CLIENT_SECRET=
@@ -108,7 +108,7 @@ Save that code.
 
 The following step is to encode the `${CLIENT_ID}:${CLIENT_SECRET}` variables in Base64.
 
-```bash
+```
 > echo -n "${CLIENT_ID}:${CLIENT_SECRET}" | base64
 ```
 
@@ -116,7 +116,7 @@ The following step is to encode the `${CLIENT_ID}:${CLIENT_SECRET}` variables in
 
 When you have encrypted the `${CLIENT_ID}` and the `${CLIENT_SECRET}`, sperated by `:`, you can compose the URL to request the authorization that we will use in the next step.
 
-```bash
+```
 curl -H "Authorization: Basic ${CLIENT_PARAMETERS_IN_BASE64}" -d grant_type=authorization_code -d code=${AUTHORIZATION_CODE} -d redirect_uri=http%3A%2F%2Flocalhost:3000 https://accounts.spotify.com/api/token
 ```
 
@@ -138,7 +138,7 @@ A simple example of how to use the `access_token` to get the current user's data
 
 **Request:**
 
-```bash
+```
 curl -X "GET" "https://api.spotify.com/v1/me/player/currently-playing" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer ${ACCESS_TOKEN}"
 ```
 
