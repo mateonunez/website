@@ -183,7 +183,7 @@ Node Test Runner includes the following reporters out of the box:
 
 To use a reporter, you must pass the `--test-reporter` flag to the `node` command:
 
-```bash
+```
 node --test --test-reporter=tap
 ```
 
@@ -250,7 +250,7 @@ const customReporter = new Transform({
 
 To use this reporter, you must save it in a file, for example, `custom-reporter.mjs`, and then pass the path to the `--test-reporter` flag:
 
-```bash
+```
 node --test --test-reporter=./custom-reporter.mjs
 ```
 
@@ -278,7 +278,7 @@ export default async function * customReporter (source) {
 
 Save the reporter in a file, for example `custom-reporter-generator.mjs`, and then pass the path to the `--test-reporter` flag:
 
-```bash
+```
 node --test --test-reporter=./custom-reporter-generator.mjs
 ```
 

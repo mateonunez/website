@@ -39,17 +39,18 @@ export const normalizeCurrentlyListening = (data: SpotifyCurrentlyPlaying): Norm
   progress: data.progress_ms,
   duration: data.item.duration_ms,
 });
-
-export const normalizeRecentlyPlayed = (data: SpotifyRecentlyPlayed['items'][0]): NormalizedRecentlyPlayed => ({
-  title: data.track.name,
-  artist: data.track.artists?.map(({ name }) => name).join(' - '),
-  album: data.track.album?.name,
-  thumbnail: data.track.album?.images[0]?.url,
-  url: data.track.external_urls?.spotify,
-  playedAt: data.played_at,
-  duration: data.track.duration_ms,
-  id: '',
-});
+export const normalizeRecentlyPlayed = (data: SpotifyRecentlyPlayed): NormalizedRecentlyPlayed[] => {
+  return data.items.map((item) => ({
+    id: item.track.id,
+    title: item.track.name,
+    artist: item.track.artists?.map(({ name }) => name).join(' - '),
+    album: item.track.album?.name,
+    playedAt: item.played_at,
+    url: item.track.external_urls?.spotify,
+    duration: item.track.duration_ms,
+    thumbnail: item.track.album?.images[0]?.url,
+  }));
+};
 
 export const normalizeArtists = (data: SpotifyArtist): NormalizedArtist => ({
   id: data.id,

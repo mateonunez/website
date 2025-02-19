@@ -1,4 +1,10 @@
-import type { SpotifyAccessToken } from '@/types/spotify';
+import type {
+  SpotifyAccessToken,
+  SpotifyCurrentlyPlaying,
+  SpotifyRecentlyPlayed,
+  SpotifyTopArtists,
+  SpotifyTopTracks,
+} from '@/types/spotify';
 
 const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } = process.env;
 const basicEncoded = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
@@ -31,23 +37,25 @@ const getAccessToken = async (): Promise<SpotifyAccessToken> => {
 /**
  * Consumer of the currently playing track
  */
-export const getCurrentlyListening = async (): Promise<Response | undefined> => {
+export const getCurrentlyListening = async (): Promise<SpotifyCurrentlyPlaying | undefined> => {
   const { access_token: accessToken } = await getAccessToken();
   if (!accessToken) {
     return;
   }
 
-  return fetch(`${baseEndpoint}/me/player/currently-playing`, {
+  const response = await fetch(`${baseEndpoint}/me/player/currently-playing`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
   });
+
+  return response.json();
 };
 
 /**
  * Consumer of the recently played API
  */
-export const getRecentlyPlayed = async (): Promise<Response | undefined> => {
+export const getRecentlyPlayed = async (): Promise<SpotifyRecentlyPlayed | undefined> => {
   const limit = 20;
   const before = new Date().getTime();
   const params = new URLSearchParams({
@@ -60,18 +68,20 @@ export const getRecentlyPlayed = async (): Promise<Response | undefined> => {
     return;
   }
 
-  return fetch(`${baseEndpoint}/me/player/recently-played?${params}`, {
+  const response = await fetch(`${baseEndpoint}/me/player/recently-played?${params}`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
     cache: 'no-cache',
   });
+
+  return response.json();
 };
 
 /**
  * Get top Artists
  */
-export const getTopArtists = async (): Promise<Response | undefined> => {
+export const getTopArtists = async (): Promise<SpotifyTopArtists | undefined> => {
   const limit = 5;
   const timeRange = 'short_term' as const;
   const params = new URLSearchParams({
@@ -84,18 +94,20 @@ export const getTopArtists = async (): Promise<Response | undefined> => {
     return;
   }
 
-  return fetch(`${baseEndpoint}/me/top/artists?${params}`, {
+  const response = await fetch(`${baseEndpoint}/me/top/artists?${params}`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
     cache: 'no-cache',
   });
+
+  return response.json();
 };
 
 /**
  * Get top Tracks
  */
-export const getTopTracks = async (): Promise<Response | undefined> => {
+export const getTopTracks = async (): Promise<SpotifyTopTracks | undefined> => {
   const limit = 5;
   const timeRange = 'short_term' as const;
   const params = new URLSearchParams({
@@ -108,10 +120,12 @@ export const getTopTracks = async (): Promise<Response | undefined> => {
     return;
   }
 
-  return fetch(`${baseEndpoint}/me/top/tracks?${params}`, {
+  const response = await fetch(`${baseEndpoint}/me/top/tracks?${params}`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
     cache: 'no-cache',
   });
+
+  return response.json();
 };

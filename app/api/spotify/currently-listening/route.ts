@@ -2,20 +2,29 @@ import { NextResponse } from 'next/server';
 import { getCurrentlyListening } from '@/lib/spotify';
 import { normalizeCurrentlyListening } from '@/lib/utils/normalizers';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+const BadResponse = {
+  isPlaying: false,
+  title: 'Not Playing',
+  artist: 'Spotify',
+  album: 'Spotify',
+  duration: 0,
+  progress: 0,
+  url: '/spotify',
+};
 export async function GET(): Promise<NextResponse> {
-  const response = await getCurrentlyListening();
+  try {
+    const currentlyPlaying = await getCurrentlyListening();
 
-  if (!response) {
-    return NextResponse.json({ error: 'Spotify not available' }, { status: 503 });
+    if (!currentlyPlaying) {
+      return NextResponse.json(BadResponse, { status: 200 });
+    }
+
+    return NextResponse.json(normalizeCurrentlyListening(currentlyPlaying), { status: 200 });
+  } catch (error) {
+    console.error('Error fetching currently playing:', error);
+    return NextResponse.json(BadResponse, { status: 200 });
   }
-
-  if (response.status === 204 || response.status > 400) {
-    return NextResponse.json({ is_playing: false }, { status: 200 });
-  }
-
-  const data = await response.json();
-
-  return NextResponse.json(normalizeCurrentlyListening(data), { status: 200 });
 }
-
-export const revalidate = 10;

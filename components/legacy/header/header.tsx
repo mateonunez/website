@@ -24,7 +24,7 @@ const ActiveLink = ({ href, children, title }: { href: string; children: ReactNo
   );
 };
 
-export default function Header(): JSX.Element {
+export function Header(): JSX.Element {
   const [mobileNavShown, setMobileNavShown] = useState(false);
 
   const toggle = (): void => setMobileNavShown(!mobileNavShown);

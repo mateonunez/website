@@ -2,6 +2,7 @@ import type { Options as MDXOptions } from '@mdx-js/loader';
 import type { NextConfig } from 'next';
 import createMDX from '@next/mdx';
 import rehypePrism from 'rehype-prism-plus';
+import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
 const contentSecurityPolicy = `
@@ -52,7 +53,10 @@ const securityHeaders: SecurityHeader[] = [
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  pageExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  experimental: {
+    mdxRs: true,
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
@@ -71,7 +75,7 @@ const nextConfig: NextConfig = {
     ],
     minimumCacheTTL: 60,
   },
-  // biome-ignore lint/nursery/useExplicitType: todo
+
   async headers() {
     return [
       {
@@ -86,8 +90,23 @@ const nextConfig: NextConfig = {
 };
 
 const mdxOptions: MDXOptions = {
-  remarkPlugins: [[remarkGfm]],
-  rehypePlugins: [[rehypePrism]],
+  remarkPlugins: [remarkGfm],
+  rehypePlugins: [
+    [
+      rehypePrism,
+      {
+        showLineNumbers: true,
+        ignoreMissing: true,
+        defaultLanguage: 'bash',
+        theme: {
+          dark: 'github-dark',
+          light: 'github-light',
+        },
+      },
+    ],
+    rehypeSlug,
+  ],
+  format: 'mdx',
 };
 
 const withMDX = createMDX({

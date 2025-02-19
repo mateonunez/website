@@ -2,10 +2,11 @@ import s from './track-card.module.css';
 import Link from 'next/link';
 import config from '@/lib/config';
 import cn from 'classnames';
-import { Fade, Title } from '@/components';
 import { forwardRef, useMemo, type RefObject } from 'react';
 import { dateFromNowForHumans } from '@/lib/helpers/date';
 import type { SpotifyTrack } from '@/types/spotify';
+import Fade from '@/components/legacy/animations/fade';
+import Title from '@/components/legacy/common/title/title';
 
 interface TrackCardProps {
   item: SpotifyTrack;

@@ -1,29 +1,50 @@
-import '@/styles/global.css';
-import '@/components/legacy/articles/mdx/code/dark.css';
-import Loading from './loading';
+import type * as React from 'react';
+import type { Metadata } from 'next';
+import { JetBrains_Mono } from 'next/font/google';
+import './../styles/global.css';
 
-import { MainLayout } from '@/components';
+import { ThemeProvider } from '@/components/theme-provider';
 import { UIProvider } from '@/components/legacy/ui/ui-context';
-import { type JSX, Suspense } from 'react';
+import { ChevronUp } from 'lucide-react';
+import Analytics from '@/components/legacy/analytics/analytics';
 import meta from '@/lib/config/metadata';
+import { ModeToggle } from '@/components/mode-toggle';
 
-export const metadata = meta;
+const jetBrainsSans = JetBrains_Mono({
+  variable: '--font-jetBrainsSans',
+  subsets: ['latin'],
+});
 
-export default function RootLayout({ children }: { children: JSX.Element }): JSX.Element {
+const jetBrainsMono = JetBrains_Mono({
+  variable: '--font-jetBrainsMono',
+  subsets: ['latin'],
+});
+
+export const metadata: Metadata = meta;
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>): React.JSX.Element {
   return (
-    <html lang="en">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="author" content="mateonunez" />
-        <meta name="theme-color" content="#F59E0B" />
-      </head>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${jetBrainsSans.variable} ${jetBrainsMono.variable} antialiased`}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <UIProvider>
+            <main>{children}</main>
 
-      <body className="antialiased">
-        <UIProvider>
-          <MainLayout>
-            <Suspense fallback={<Loading />}>{children}</Suspense>
-          </MainLayout>
-        </UIProvider>
+            <div className="fixed right-0 bottom-0 z-50 mr-4 mb-4">
+              <a href="#top" className="transform text-foreground transition-all duration-300 hover:scale-110">
+                <ChevronUp className="h-8 w-8" />
+              </a>
+
+              <ModeToggle />
+            </div>
+
+            <Analytics />
+          </UIProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

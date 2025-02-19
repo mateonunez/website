@@ -30,7 +30,8 @@
         "useSortedClasses": "off",
         "noProcessEnv": "off",
         "useConsistentCurlyBraces": "off",
-        "useImportRestrictions": "off"
+        "useImportRestrictions": "off",
+        "useExplicitType": "off"
       },
       "correctness": {
         "all": true,

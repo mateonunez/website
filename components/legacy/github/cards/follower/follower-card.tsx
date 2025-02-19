@@ -5,7 +5,7 @@ import { forwardRef, useState } from 'react';
 import cn from 'classnames';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Fade } from '@/components';
+import Fade from '@/components/legacy/animations/fade';
 
 interface Follower {
   url: string;

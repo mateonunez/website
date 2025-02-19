@@ -1,6 +1,5 @@
+import Container from '@/components/legacy/common/container/container';
 import s from './profile.module.css';
-
-import { Container } from '@/components';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,7 +13,7 @@ interface ProfileProps {
   url: string;
 }
 
-export default function Profile({ avatar, bio, company, username, url, ...rest }: ProfileProps): JSX.Element {
+export default function GitHubProfile({ avatar, bio, company, username, url, ...rest }: ProfileProps): JSX.Element {
   return (
     <>
       <Container clean {...rest}>

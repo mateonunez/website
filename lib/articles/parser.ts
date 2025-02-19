@@ -2,11 +2,12 @@ import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import readingTime from 'reading-time';
 import config from '@/lib/config';
-import { serialize } from 'next-mdx-remote/serialize';
-import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { compileMDX } from 'next-mdx-remote/rsc';
 import type { Article, ArticleFrontmatter } from '@/types/article';
 import remarkGfm from 'remark-gfm';
 import rehypePrism from 'rehype-prism-plus';
+import rehypeSlug from 'rehype-slug';
+import mdxComponents from '@/components/mdx';
 
 export async function getArticleSlugs(): Promise<string[]> {
   const fullPath = path.join(process.cwd(), './articles');
@@ -38,7 +39,7 @@ export function getRawArticle(slug: string): string {
 
 export async function getArticle({ slug }: { slug: string }): Promise<Article> {
   const rawArticle = getRawArticle(slug);
-  const { compiledSource, frontmatter } = await compile(rawArticle);
+  const { content, frontmatter } = await compile(rawArticle);
 
   const permalink = new URL(`/articles/${slug}`, config.baseUrl).toString();
   const timeToRead = readingTime(rawArticle);
@@ -50,7 +51,7 @@ export async function getArticle({ slug }: { slug: string }): Promise<Article> {
   };
 
   return {
-    compiledSource,
+    content,
     frontmatter: {
       title: frontmatter.title as string,
       description: frontmatter.description as string,
@@ -62,17 +63,22 @@ export async function getArticle({ slug }: { slug: string }): Promise<Article> {
       categories: (frontmatter.categories as string[]) || [],
       image: (frontmatter.image as string) || '/card.png',
       author: (frontmatter.author as ArticleFrontmatter['author']) || defaultAuthor,
-      ...frontmatter,
     },
   };
 }
 
-export function compile(articleRaw: string, options = { parseFrontmatter: true }): Promise<MDXRemoteSerializeResult> {
-  return serialize(articleRaw, {
-    ...options,
-    mdxOptions: {
-      remarkPlugins: [remarkGfm],
-      rehypePlugins: [[rehypePrism, { showLineNumbers: true, ignoreMissing: true }]],
+export async function compile(articleRaw: string) {
+  const { content, frontmatter } = await compileMDX({
+    source: articleRaw,
+    components: mdxComponents,
+    options: {
+      parseFrontmatter: true,
+      mdxOptions: {
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [[rehypePrism, { showLineNumbers: true }], rehypeSlug],
+      },
     },
   });
+
+  return { content, frontmatter };
 }
