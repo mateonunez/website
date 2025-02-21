@@ -26,7 +26,7 @@ export default async function HomePage(): Promise<JSX.Element> {
             </div>
           </div>
         </header>
-        <main className="flex-1 overflow-auto mx-auto max-w-screen-xl">
+        <main className="flex-1 overflow-auto mx-auto max-w-screen-lg">
           <div className="flex-none">
             <Player />
           </div>
