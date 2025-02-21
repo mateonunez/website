@@ -65,11 +65,13 @@ const data = {
       title: 'Spotify',
       url: '/spotify',
       icon: Music,
+      disabled: true,
     },
     {
       title: 'Settings',
       url: '/settings',
       icon: Settings2,
+      disabled: true,
       items: [
         {
           title: 'Profile',

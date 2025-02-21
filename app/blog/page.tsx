@@ -28,7 +28,7 @@ export default function BlogPage(): JSX.Element {
             </div>
           </div>
         </header>
-        <main className="flex-1 overflow-auto mx-auto max-w-screen-xl">
+        <main className="flex-1 overflow-auto mx-auto max-w-screen-lg">
           <div className="container mx-auto p-6">
             <div className="space-y-6">
               <Suspense
