@@ -19,6 +19,11 @@
   --neutral-800: hsl(0 0% 26%);
   --neutral-900: hsl(0 0% 13%);
   --neutral-950: hsl(0 0% 9%);
+  --neutral-1000: hsl(0 0% 8%);
+  --neutral-1100: hsl(0 0% 4%);
+  --neutral-1200: hsl(0 0% 2%);
+  --neutral-1300: hsl(0 0% 1.3%);
+  --neutral-1400: hsl(0 0% 0%);
 
   /* Accent colors - Warm Rose */
   --rose-100: hsl(355 100% 97%);
@@ -73,7 +78,7 @@
 }
 
 .dark {
-  --background: var(--neutral-950);
+  --background: var(--neutral-1300);
   --foreground: var(--neutral-50);
   --card: var(--neutral-950);
   --card-foreground: var(--neutral-50);

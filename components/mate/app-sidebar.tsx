@@ -16,6 +16,7 @@ import {
 import { NavMain } from '@/components/mate/nav-main';
 import { NavProjects } from '@/components/mate/nav-projects';
 import { NavUser } from '@/components/mate/nav-user';
+import { ModeToggle } from '@/components/mate/nav-mode-toggle';
 import {
   Sidebar,
   SidebarContent,
@@ -127,6 +128,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
+        <ModeToggle />
         {isMobile && (
           <div className="relative flex w-full min-w-0 flex-col p-2 mt-auto">
             <Button variant="ghost" size="sm" className="w-full justify-start" onClick={() => toggleSidebar()}>
