@@ -16,6 +16,7 @@ import { cn } from '@/lib/utils';
 
 export function NavMain({
   items,
+  className,
 }: {
   items: {
     title: string;
@@ -29,9 +30,10 @@ export function NavMain({
       disabled?: boolean;
     }[];
   }[];
+  className?: string;
 }) {
   return (
-    <SidebarGroup>
+    <SidebarGroup className={className}>
       <SidebarGroupLabel>Menu</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) =>

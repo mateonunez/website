@@ -2,7 +2,6 @@
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import config from '@/lib/config';
@@ -96,14 +95,12 @@ export function Player() {
               <Music className="h-3 w-3 text-muted-foreground" />
               <p className="text-xs text-muted-foreground">{spotifyData?.isPlaying ? spotifyData.artist : 'Spotify'}</p>
             </div>
+
             {spotifyData?.isPlaying && (
               <div className="flex flex-col gap-1.5">
-                <Progress value={simulatedProgress} className="h-1" />
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Button size="icon" variant="ghost" className="h-7 w-7 shrink-0" disabled={!spotifyData?.isPlaying}>
-                      {spotifyData?.isPlaying ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
-                    </Button>
+                    {spotifyData?.isPlaying ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
                     <Volume2 className="h-3 w-3 text-muted-foreground" />
                   </div>
                   <div className="flex items-center gap-1.5">
@@ -120,7 +117,7 @@ export function Player() {
         </div>
 
         {spotifyData?.isPlaying && (
-          <div className="absolute bottom-0 left-0 right-0">
+          <div className="absolute top-0 left-0 right-0">
             <div
               className="h-1 bg-gradient-to-r from-green-500/40 to-green-500/60"
               style={{

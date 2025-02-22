@@ -12,5 +12,5 @@ export function Code({ className, ...props }: CodeProps) {
     return <code className={cn('relative font-mono text-sm', className)} {...props} />;
   }
 
-  return <pre className={cn('overflow-x-auto  p-4', 'font-mono text-sm', className)} {...props} />;
+  return <pre className={cn('overflow-x-auto p-4', 'font-mono text-sm', className)} {...props} />;
 }

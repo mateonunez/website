@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 @plugin '@tailwindcss/typography';
 @plugin "tailwindcss-animate";
@@ -37,28 +38,30 @@
   --amber-800: hsl(43 96% 20%);
   --amber-900: hsl(43 96% 10%);
 
+  /* Theme variables */
   --background: var(--neutral-50);
   --foreground: var(--neutral-900);
   --card: var(--neutral-50);
   --card-foreground: var(--neutral-900);
   --popover: var(--neutral-50);
   --popover-foreground: var(--neutral-900);
-  --primary: var(--neutral-50); /* Changed */
-  --primary-foreground: var(--neutral-900); /* Changed */
+  --primary: var(--amber-500); /* Updated to use amber for primary */
+  --primary-foreground: var(--neutral-900);
   --secondary: var(--neutral-100);
   --secondary-foreground: var(--neutral-900);
   --muted: var(--neutral-100);
   --muted-foreground: var(--neutral-600);
-  --accent: var(--accent-100);
-  --accent-foreground: var(--accent-500);
+  --accent: var(--amber-100);
+  --accent-foreground: var(--amber-500);
   --destructive: hsl(0 84% 60%);
   --destructive-foreground: var(--neutral-50);
   --border: var(--neutral-200);
   --input: var(--neutral-200);
-  --ring: var(--neutral-900);
+  --ring: var(--amber-500); /* Updated to amber for better cohesion */
 
-  --radius: 0.6rem;
+  --radius: 0.3rem;
 
+  /* Sidebar variables */
   --sidebar: hsl(0 0% 98%);
   --sidebar-foreground: hsl(240 5.3% 26.1%);
   --sidebar-primary: hsl(240 5.9% 10%);
@@ -76,19 +79,21 @@
   --card-foreground: var(--neutral-50);
   --popover: var(--neutral-950);
   --popover-foreground: var(--neutral-50);
-  --primary: var(--neutral-950); /* Changed */
-  --primary-foreground: var(--neutral-50); /* Changed */
+  --primary: var(--amber-400); /* Lighter amber for dark mode */
+  --primary-foreground: var(--neutral-900);
   --secondary: var(--neutral-900);
   --secondary-foreground: var(--neutral-50);
   --muted: var(--neutral-900);
   --muted-foreground: var(--neutral-400);
-  --accent: var(--accent-500);
-  --accent-foreground: var(--accent-100);
+  --accent: var(--amber-500);
+  --accent-foreground: var(--amber-100);
   --destructive: hsl(0 63% 31%);
   --destructive-foreground: var(--neutral-50);
   --border: var(--neutral-800);
   --input: var(--neutral-800);
-  --ring: var(--neutral-300);
+  --ring: var(--amber-400); /* Adjusted for dark mode */
+
+  /* Sidebar variables for dark mode */
   --sidebar: hsl(240 5.9% 10%);
   --sidebar-foreground: hsl(240 4.8% 95.9%);
   --sidebar-primary: hsl(224.3 76.3% 48%);
@@ -119,11 +124,6 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -144,29 +144,73 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: "Inter", sans-serif;
   }
-}
-
-@layer components {
-  .custom-scrollbar {
-    @apply overflow-y-auto;
+  .prose {
+    font-size: 1rem;
   }
-
-  .custom-scrollbar::-webkit-scrollbar {
-    @apply w-2;
+  @media (min-width: 640px) {
+    .prose {
+      font-size: 1.125rem;
+    }
   }
-
-  .custom-scrollbar::-webkit-scrollbar-track {
-    @apply bg-muted;
+  .prose > * + * {
+    margin-top: 1.5em;
   }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground/50 rounded-full border-2 border-background;
+  .prose h1 {
+    font-weight: 700;
   }
-
-  /* Firefox */
-  .custom-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: var(--muted-foreground) var(--muted);
+  .prose h2 {
+    font-weight: 600;
+  }
+  .prose h3 {
+    font-weight: 500;
+  }
+  .sidebar {
+    border-right: 1px solid var(--sidebar-border);
+  }
+  a,
+  button {
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  .prose img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem; /* Rounded images for a modern look */
+  }
+  a:focus,
+  button:focus {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--background);
+  }
+  .button:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+  }
+  .skeleton {
+    background-color: var(--muted);
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 }
