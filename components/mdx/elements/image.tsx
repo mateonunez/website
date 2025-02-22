@@ -28,7 +28,7 @@ export function Image({ src, alt, className, width, height, ...props }: ImagePro
 
   // Handle local images
   return (
-    <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+    <div className="relative aspect-video w-full max-w-dvw overflow-hidden rounded-lg">
       <NextImage
         src={src}
         alt={alt}

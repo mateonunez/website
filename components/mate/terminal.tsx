@@ -27,14 +27,12 @@ const paragraphs: string[] = [
   "Hey there! I'm Mateo 👋",
   '',
   "👨‍💻 I'm a Senior Software Engineer at BonusX, and I code mostly in JavaScript, TypeScript, and Python.",
-  '',
   '☁️ The cloud is my sandbox: I poke around K8S, AWS, and CNCF tools just for fun.',
-  '',
   "🤖 As a good surfer, I'm diving into AI these days, working on tools and pipelines to learn new tricks.",
-  '',
   '⌨ My dev setup? VS Code + Vim, a tmux session always running, and the Colemak layout—no turning back now!',
-  '',
   '🚀 Always eager to learn, build, and share the next cool thing!',
+  '',
+  '👋 See you.',
   '',
 ];
 
@@ -118,11 +116,6 @@ export function Terminal(): JSX.Element {
         {!isComplete && typingLine.currentIndex > 0 && (
           <p>
             <Line text={typingLine.text} isTyping />
-          </p>
-        )}
-        {isComplete && (
-          <p>
-            <Line text="See you." noPrompt noCaret />
           </p>
         )}
       </div>
