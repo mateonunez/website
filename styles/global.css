@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 @plugin '@tailwindcss/typography';
 @plugin "tailwindcss-animate";
@@ -75,6 +74,11 @@
   --sidebar-accent-foreground: hsl(240 5.9% 10%);
   --sidebar-border: hsl(220 13% 91%);
   --sidebar-ring: hsl(217.2 91.2% 59.8%);
+
+  /* Font variables */
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-bungeeHairline: "Bungee Hairline", cursive;
 }
 
 .dark {
@@ -206,6 +210,11 @@
   .skeleton {
     background-color: var(--muted);
     animation: pulse 1.5s infinite;
+  }
+  .font-bungee {
+    font-family: var(--font-bungeeHairline), cursive;
+    font-weight: 400;
+    font-style: normal;
   }
   @keyframes pulse {
     0% {

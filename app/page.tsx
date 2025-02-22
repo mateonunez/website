@@ -16,7 +16,7 @@ export default async function HomePage(): Promise<JSX.Element> {
       <header className="flex h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
         <div className="flex items-center gap-2 px-4 w-full">
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold">@mateonunez</h1>
+            <h1 className="text-3xl font-bold font-bungee">Mateo Nunez</h1>
           </div>
         </div>
       </header>
@@ -31,7 +31,7 @@ export default async function HomePage(): Promise<JSX.Element> {
           </div>
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-12 md:col-span-7 lg:col-span-8 space-y-6">
-              <h2 className="text-xl font-semibold">Latest Articles</h2>
+              <h2 className="text-xl font-semibold">Few words</h2>
               <Suspense
                 fallback={
                   <div className="space-y-6">
@@ -44,11 +44,11 @@ export default async function HomePage(): Promise<JSX.Element> {
               </Suspense>
             </div>
             <div className="col-span-12 md:col-span-5 lg:col-span-4 space-y-6">
-              <h2 className="text-xl font-semibold">Recently Played</h2>
+              <h2 className="text-xl font-semibold">I've been playing</h2>
               <Suspense fallback={<RecentlyPlayedSkeleton />}>
                 <RecentlyPlayedWrapper />
               </Suspense>
-              <h2 className="text-xl font-semibold">GitHub Community</h2>
+              <h2 className="text-xl font-semibold font-bungee">Thank You 🫰</h2>
               <Suspense fallback={<GitHubCommunitySkeleton />}>
                 <GitHubCommunityWrapper />
               </Suspense>
