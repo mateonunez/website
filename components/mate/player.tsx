@@ -4,7 +4,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import config from '@/lib/config';
 import { ExternalLink, Music, Pause, Play, Radio, Volume2 } from 'lucide-react';
@@ -52,12 +51,8 @@ export function Player() {
     return () => clearInterval(interval);
   }, [spotifyData]);
 
-  if (isLoading || !spotifyData) {
-    return <PlayerSkeleton />;
-  }
-
   return (
-    <Card className="relative overflow-hidden bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-0 rounded-none">
+    <Card className="relative overflow-hidden bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-0 rounded-none max-w-dvw">
       <CardContent className="p-4">
         <div className="flex items-center space-x-4">
           <Link
@@ -135,27 +130,6 @@ export function Player() {
             />
           </div>
         )}
-      </CardContent>
-    </Card>
-  );
-}
-
-function PlayerSkeleton() {
-  return (
-    <Card className="overflow-hidden bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <CardContent className="p-4">
-        <div className="flex items-center space-x-4">
-          <Skeleton className="h-16 w-16 rounded-md" />
-          <div className="flex-1 space-y-2">
-            <Skeleton className="h-4 w-[200px]" />
-            <Skeleton className="h-3 w-[160px]" />
-            <Skeleton className="h-1 w-full" />
-            <div className="flex justify-between">
-              <Skeleton className="h-3 w-[100px]" />
-              <Skeleton className="h-3 w-[60px]" />
-            </div>
-          </div>
-        </div>
       </CardContent>
     </Card>
   );
