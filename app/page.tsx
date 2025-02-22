@@ -27,9 +27,9 @@ export default async function HomePage(): Promise<JSX.Element> {
             </div>
           </div>
         </header>
-          <div className="flex-none">
-            <Player />
-          </div>
+        <div className="flex-none">
+          <Player />
+        </div>
         <main className="flex-1 overflow-auto mx-auto max-w-screen-lg">
           <div className="container mx-auto p-6">
             <Toaster />

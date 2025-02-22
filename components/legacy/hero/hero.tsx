@@ -9,8 +9,8 @@ import Link from 'next/link';
 import useSWR from 'swr';
 import type { HTMLAttributes, JSX } from 'react';
 import Fade from '@/components/legacy/animations/fade';
-import Terminal from '@/components/legacy/terminal/terminal';
-import Player from '@/components/legacy/spotify/player/player';
+// import Terminal from '@/components/legacy/terminal/terminal';
+// import Player from '@/components/legacy/spotify/player/player';
 
 interface HeroProps extends HTMLAttributes<HTMLDivElement> {
   article: Article;
@@ -39,15 +39,11 @@ export default function Hero({ article, ...props }: HeroProps): JSX.Element {
           </Fade>
           {/* Terminal  */}
           <Fade direction="left">
-            <div className={s.terminal}>
-              <Terminal />
-            </div>
+            <div className={s.terminal}>{/* <Terminal /> */}</div>
           </Fade>
           {/* Listening */}
           <Fade direction="right">
-            <div className={s.listening}>
-              <Player />
-            </div>
+            <div className={s.listening}>{/* <Player /> */}</div>
           </Fade>
           {/* Last Article */}
           <div className={s.lastArticle}>

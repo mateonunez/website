@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import { useSpotify } from '@/lib/hooks/use-spotify';
 
 export function Player() {
-  const { data: spotifyData, isLoading } = useSpotify();
+  const { data: spotifyData } = useSpotify();
   const [simulatedProgress, setSimulatedProgress] = useState(0);
   const [simulatedTime, setSimulatedTime] = useState(0);
   const url = spotifyData?.isPlaying ? spotifyData.url : `${config.baseUrl}/spotify`;
