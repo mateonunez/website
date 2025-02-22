@@ -15,7 +15,7 @@ export function GitHubCommunity({ profile }: GitHubCommunityProps) {
   const { sponsors, followers } = profile;
 
   return (
-    <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 max-h-[600px] overflow-auto">
+    <Card className="w-full bg-transparent max-h-[600px] overflow-auto border-none shadow-none rounded-none">
       <CardHeader className="p-4 pb-0">
         <CardTitle className="text-lg">GitHub Community</CardTitle>
         <CardDescription className="text-xs">My amazing sponsors and followers on GitHub</CardDescription>
@@ -24,7 +24,7 @@ export function GitHubCommunity({ profile }: GitHubCommunityProps) {
         <Tabs defaultValue="sponsors" className="w-full">
           <TabsList className="w-full grid grid-cols-2 rounded-none bg-muted/50">
             <TabsTrigger value="sponsors" className="flex items-center gap-2">
-              <Heart className="h-4 w-4 text-red-500" />
+              <Heart className="h-4 w-4 text-rose-500" />
               <span>Sponsors ({sponsors.length})</span>
             </TabsTrigger>
             <TabsTrigger value="followers" className="flex items-center gap-2">
@@ -45,8 +45,8 @@ export function GitHubCommunity({ profile }: GitHubCommunityProps) {
                     aria-label={`View ${sponsor.login}'s GitHub profile`}
                   >
                     <div className="relative">
-                      <div className="absolute -inset-1 animate-pulse rounded-full bg-gradient-to-r from-red-500/20 to-pink-500/20 blur-sm" />
-                      <Avatar className="h-12 w-12 border-2 border-red-500/20 transition-transform group-hover:scale-110">
+                      <div className="absolute -inset-1 animate-pulse rounded-full bg-gradient-to-r from-rose-500/20 to-pink-500/20 blur-sm" />
+                      <Avatar className="h-12 w-12 border-2 border-rose-500/20 transition-transform group-hover:scale-110">
                         <AvatarImage src={sponsor.avatarUrl} alt={sponsor.login} />
                         <AvatarFallback>{sponsor.login[0].toUpperCase()}</AvatarFallback>
                       </Avatar>
@@ -57,6 +57,14 @@ export function GitHubCommunity({ profile }: GitHubCommunityProps) {
                     </div>
                   </a>
                 ))}
+              </div>
+              <div className="mt-4 flex justify-center">
+                <Button variant="outline" size="sm" className="gap-2 hover:text-rose-600 hover:bg-rose-100/10" asChild>
+                  <a href={`${profile.url}?tab=sponsors`} target="_blank" rel="noopener noreferrer">
+                    Become a sponsor
+                    <Heart className="h-4 w-4 text-rose-500" />
+                  </a>
+                </Button>
               </div>
             </TabsContent>
             <TabsContent value="followers" className="mt-0">

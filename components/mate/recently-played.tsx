@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import type { SpotifyRecentlyPlayed, SpotifyTrack } from '@/types/spotify';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Clock, Music } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
@@ -28,14 +28,14 @@ export default function RecentlyPlayed({ items }: RecentlyPlayedProps) {
   };
 
   return (
-    <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 max-h-[600px] overflow-auto">
-      <CardHeader className="p-4 pb-0">
+    <Card className="w-full bg-transparent max-h-[600px] overflow-auto border-none shadow-none rounded-none">
+      {/* <CardHeader className="p-4 pb-0">
         <CardTitle className="text-lg">Recently Played</CardTitle>
         <CardDescription className="text-xs">My recently played songs on Spotify</CardDescription>
-      </CardHeader>
+      </CardHeader> */}
       <CardContent className="p-0">
         {/* Card list for screens below sm (640px) */}
-        <div className="block sm:hidden p-4 space-y-4 overflow-auto">
+        <div className="block sm:hidden space-y-4 overflow-auto">
           {items.map((item, index) => (
             <Card key={`${item.track.id}-${index}`}>
               <CardContent className="p-4">
