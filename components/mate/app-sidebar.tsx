@@ -16,7 +16,6 @@ import {
 import { NavMain } from '@/components/mate/nav-main';
 import { NavProjects } from '@/components/mate/nav-projects';
 import { NavUser } from '@/components/mate/nav-user';
-import { TeamSwitcher } from '@/components/mate/team-switcher';
 import {
   Sidebar,
   SidebarContent,
@@ -26,7 +25,6 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 
 const data = {
   user: {
@@ -125,20 +123,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   return (
     <Sidebar {...props}>
-      <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
-      </SidebarHeader>
+      <SidebarHeader />
       <SidebarContent>
-        <>
-          <NavMain items={data.navMain} className={cn(isMobile && 'mt-auto')} />
-          <NavProjects projects={data.projects} />
-          <div className="relative flex w-full min-w-0 flex-col p-2">
+        <NavMain items={data.navMain} />
+        <NavProjects projects={data.projects} />
+        {isMobile && (
+          <div className="relative flex w-full min-w-0 flex-col p-2 mt-auto">
             <Button variant="ghost" size="sm" className="w-full justify-start" onClick={() => toggleSidebar()}>
               <SidebarCloseIcon />
               Close
             </Button>
           </div>
-        </>
+        )}
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
