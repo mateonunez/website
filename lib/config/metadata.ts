@@ -7,7 +7,7 @@ const author = {
   website: 'https://mateonunez.dev',
 };
 
-const defaultTitle = "Hey, I'm Mateo 👋";
+const defaultTitle = "Mateo Nunez's Website";
 const defaultDescription =
   "Hey, I'm Mateo, a Software Engineer from Colombia based in Milan. I ❤️ Open Source, JavaScript, AI, and many other things.";
 
