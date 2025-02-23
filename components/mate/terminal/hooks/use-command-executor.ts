@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
-import { getCommandMap } from '../commands';
 import type { DataSources, TerminalTools } from '../command-context';
 import type { TerminalStateActions } from './use-terminal-state';
+import { commandRegistry } from '../commands/index';
 
 interface CommandExecutorOptions {
   dataSources: DataSources;
@@ -10,7 +10,7 @@ interface CommandExecutorOptions {
 }
 
 export function useCommandExecutor({ dataSources, tools, actions }: CommandExecutorOptions) {
-  const commandMap = useMemo(() => getCommandMap(), []);
+  const commandMap = useMemo(() => commandRegistry.getCommandMap(), []);
 
   const executeCommand = useCallback(
     async (input: string) => {

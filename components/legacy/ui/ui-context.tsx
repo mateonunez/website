@@ -1,6 +1,6 @@
 'use client';
 
-import type { NormalizedCurrentlyPlaying } from '@/types/spotify';
+import type { NormalizedCurrentlyPlaying, NormalizedRecentlyPlayed } from '@/types/spotify';
 import type { NormalizedGitHubUser } from '@/types/github';
 import React, { useCallback, useMemo, useContext, useReducer, type ReactNode, type JSX } from 'react';
 
@@ -16,6 +16,7 @@ interface UIState {
   isTerminalCompleted: boolean;
   bigBang: boolean;
   listening: NormalizedCurrentlyPlaying | null;
+  recentlyPlayed: NormalizedRecentlyPlayed[] | null;
   githubProfile: NormalizedGitHubUser | null;
 }
 
@@ -30,6 +31,7 @@ export const initialState: UIState = {
   isTerminalCompleted: false,
   bigBang: false,
   listening: {},
+  recentlyPlayed: [],
   githubProfile: null,
 };
 
@@ -47,6 +49,7 @@ export const types = {
   COMPLETE_TERMINAL: 'COMPLETE_TERMINAL',
   SET_BIG_BANG: 'SET_BIG_BANG',
   SET_SPOTIFY_LISTENING: 'SET_SPOTIFY_LISTENING',
+  SET_SPOTIFY_RECENTLY_PLAYED: 'SET_SPOTIFY_RECENTLY_PLAYED',
   SET_GITHUB_PROFILE: 'SET_GITHUB_PROFILE',
 } as const;
 
@@ -132,6 +135,12 @@ export const reducer = (state: UIState, action: UIAction): UIState => {
         listening: action.payload as NormalizedCurrentlyPlaying,
       };
 
+    case types.SET_SPOTIFY_RECENTLY_PLAYED:
+      return {
+        ...state,
+        recentlyPlayed: action.payload as NormalizedRecentlyPlayed[],
+      };
+
     case types.SET_GITHUB_PROFILE:
       return {
         ...state,
@@ -157,6 +166,7 @@ interface UIContextType extends UIState {
   completeTerminal: () => void;
   setBigBang: (payload: boolean) => void;
   setSpotifyListening: (payload: NormalizedCurrentlyPlaying) => void;
+  setSpotifyRecentlyPlayed: (payload: NormalizedRecentlyPlayed[]) => void;
   setGithubProfile: (payload: NormalizedGitHubUser) => void;
 }
 
@@ -200,6 +210,11 @@ export const UIProvider = ({ children, ...props }: UIProviderProps): JSX.Element
     [],
   );
 
+  const setSpotifyRecentlyPlayed = useCallback(
+    (payload: NormalizedRecentlyPlayed[]) => dispatch({ type: types.SET_SPOTIFY_RECENTLY_PLAYED, payload }),
+    [],
+  );
+
   const setGithubProfile = useCallback(
     (payload: NormalizedGitHubUser) => dispatch({ type: types.SET_GITHUB_PROFILE, payload }),
     [],
@@ -221,6 +236,7 @@ export const UIProvider = ({ children, ...props }: UIProviderProps): JSX.Element
       completeTerminal,
       setBigBang,
       setSpotifyListening,
+      setSpotifyRecentlyPlayed,
       setGithubProfile,
     }),
     [
@@ -238,6 +254,7 @@ export const UIProvider = ({ children, ...props }: UIProviderProps): JSX.Element
       completeTerminal,
       setBigBang,
       setSpotifyListening,
+      setSpotifyRecentlyPlayed,
       setGithubProfile,
     ],
   );

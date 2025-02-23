@@ -3,12 +3,12 @@ import { Toaster } from '@/components/ui/sonner';
 import { Player } from '@/components/mate/player';
 import { Terminal } from '@/components/mate/terminal/terminal';
 import { LatestArticlesWrapper } from '@/components/mate/latest-articles.wrapper';
-import { RecentlyPlayedWrapper } from '@/components/mate/recently-played.wrapper';
 import { ArticlePreviewSkeleton } from '@/components/mate/article-preview.skeleton';
 import { RecentlyPlayedSkeleton } from '@/components/mate/recently-played.skeleton';
 import { GitHubCommunitySkeleton } from '@/components/mate/github-community.skeleton';
 import type { JSX } from 'react';
 import { GitHubCommunity } from '@/components/mate/github-community';
+import { RecentlyPlayed } from '@/components/mate/recently-played';
 
 export default async function HomePage(): Promise<JSX.Element> {
   return (
@@ -46,7 +46,7 @@ export default async function HomePage(): Promise<JSX.Element> {
             <div className="col-span-12 md:col-span-5 lg:col-span-4 space-y-6">
               <h2 className="text-xl font-semibold">I've been playing</h2>
               <Suspense fallback={<RecentlyPlayedSkeleton />}>
-                <RecentlyPlayedWrapper />
+                <RecentlyPlayed />
               </Suspense>
               <h2 className="text-xl font-semibold font-bungee">Thank You 🫰</h2>
               <Suspense fallback={<GitHubCommunitySkeleton />}>

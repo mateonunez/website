@@ -21,6 +21,8 @@ export function Terminal({
   const { data: spotifyData } = useSpotify();
   const { data: githubData } = useGithub();
 
+  console.log(spotifyData);
+
   const [state, actions] = useTerminalState(initialMessages);
   const { currentLine, typingLine, completedLines, isComplete, userInput } = state;
 
@@ -29,7 +31,13 @@ export function Terminal({
 
   const dataSources = useMemo<DataSources>(
     () => ({
-      spotify: { type: 'spotify' as const, data: spotifyData },
+      spotify: {
+        type: 'spotify' as const,
+        data: {
+          currentlyPlaying: spotifyData?.currentlyPlaying,
+          recentlyPlayed: spotifyData?.recentlyPlayed,
+        },
+      },
       github: { type: 'github' as const, data: githubData },
     }),
     [spotifyData, githubData],

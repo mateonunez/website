@@ -1,8 +1,13 @@
 import { createContext, type ReactNode, useContext } from 'react';
-import type { NormalizedCurrentlyPlaying } from '@/types/spotify';
+import type { NormalizedCurrentlyPlaying, NormalizedRecentlyPlayed } from '@/types/spotify';
 import type { NormalizedGitHubUser } from '@/types/github';
 
-export type SpotifyData = { data: NormalizedCurrentlyPlaying | null };
+export type SpotifyData = {
+  data: {
+    currentlyPlaying: NormalizedCurrentlyPlaying | null;
+    recentlyPlayed: NormalizedRecentlyPlayed[] | null;
+  } | null;
+};
 export type GitHubData = { data: NormalizedGitHubUser | null };
 
 export type DataSourceMap = {
