@@ -73,7 +73,7 @@ export function GitHubCommunity() {
     );
   }
 
-  if (isError || !githubData?.profile) {
+  if (isError || !githubData) {
     return (
       <Card className="w-full bg-transparent max-h-[600px] overflow-auto border-none shadow-none rounded-none">
         <CardContent className="flex items-center justify-center p-8 text-sm text-muted-foreground">
@@ -83,7 +83,7 @@ export function GitHubCommunity() {
     );
   }
 
-  const { sponsors, followers, url } = githubData.profile;
+  const { sponsors, followers, url } = githubData;
 
   return (
     <Card className="w-full bg-transparent max-h-[600px] overflow-auto border-none shadow-none rounded-none">

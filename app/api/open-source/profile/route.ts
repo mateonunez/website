@@ -9,5 +9,5 @@ export async function GET(): Promise<NextResponse> {
   }
   const profileNormalized = normalizeGitHubProfile(profile);
 
-  return NextResponse.json({ profile: profileNormalized });
+  return NextResponse.json(profileNormalized);
 }
