@@ -4,9 +4,10 @@ import { useUI } from '@/components/legacy/ui/ui-context';
 import useSWR from 'swr';
 
 export function useSpotify() {
-  const { setSpotifyListening, listening } = useUI();
+  const { setSpotifyListening, setSpotifyRecentlyPlayed, listening, recentlyPlayed } = useUI();
 
-  const { error, isLoading } = useSWR('/api/spotify/currently-listening', {
+  // Fetch currently playing
+  const { error: currentError, isLoading: currentLoading } = useSWR('/api/spotify/currently-listening', {
     fetcher: async (url: string) => {
       const res = await fetch(url);
       const data = await res.json();
@@ -18,9 +19,25 @@ export function useSpotify() {
     revalidateOnReconnect: true,
   });
 
+  // Fetch recently played
+  const { error: recentError, isLoading: recentLoading } = useSWR('/api/spotify/recently-played', {
+    fetcher: async (url: string) => {
+      const res = await fetch(url);
+      const data = await res.json();
+      setSpotifyRecentlyPlayed(data);
+      return data;
+    },
+    refreshInterval: 60 * 1000, // 1 minute - less frequent than currently playing
+    revalidateOnFocus: true,
+    revalidateOnReconnect: true,
+  });
+
   return {
-    data: listening,
-    isLoading: isLoading,
-    isError: error,
+    data: {
+      currentlyPlaying: listening,
+      recentlyPlayed: recentlyPlayed,
+    },
+    isLoading: currentLoading || recentLoading,
+    isError: currentError || recentError,
   };
 }

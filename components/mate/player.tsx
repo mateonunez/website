@@ -13,18 +13,18 @@ export function Player() {
   const { data: spotifyData } = useSpotify();
   const [simulatedProgress, setSimulatedProgress] = useState(0);
   const [simulatedTime, setSimulatedTime] = useState(0);
-  const url = spotifyData?.isPlaying ? spotifyData.url : `${config.baseUrl}/spotify`;
+  const url = spotifyData?.currentlyPlaying?.isPlaying ? spotifyData.currentlyPlaying.url : `${config.baseUrl}/spotify`;
 
   // Update simulated progress every second
   useEffect(() => {
-    if (!spotifyData?.isPlaying) {
+    if (!spotifyData?.currentlyPlaying?.isPlaying) {
       setSimulatedProgress(0);
       setSimulatedTime(0);
       return;
     }
 
-    const duration = Number(spotifyData.duration);
-    const currentProgress = Number(spotifyData.progress);
+    const duration = Number(spotifyData.currentlyPlaying.duration);
+    const currentProgress = Number(spotifyData.currentlyPlaying.progress);
     const shouldReset = simulatedTime === 0 || Math.abs(simulatedTime - currentProgress) > 2000;
 
     if (shouldReset) {
@@ -56,14 +56,14 @@ export function Player() {
         <div className="flex items-center space-x-4">
           <Link
             href={url}
-            target={spotifyData?.isPlaying ? '_blank' : '_self'}
+            target={spotifyData?.currentlyPlaying?.isPlaying ? '_blank' : '_self'}
             className="block shrink-0 group relative"
           >
             <Avatar className="h-16 w-16 rounded-md">
-              {spotifyData?.isPlaying ? (
+              {spotifyData?.currentlyPlaying?.isPlaying ? (
                 <AvatarImage
-                  src={spotifyData.thumbnail}
-                  alt={spotifyData.album}
+                  src={spotifyData.currentlyPlaying.thumbnail}
+                  alt={spotifyData.currentlyPlaying.album}
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               ) : (
@@ -84,30 +84,36 @@ export function Player() {
           <div className="flex flex-1 flex-col space-y-1 overflow-hidden">
             <Link
               href={url}
-              target={spotifyData?.isPlaying ? '_blank' : '_self'}
+              target={spotifyData?.currentlyPlaying?.isPlaying ? '_blank' : '_self'}
               className="inline-block overflow-hidden text-ellipsis whitespace-nowrap hover:underline"
             >
               <span className="text-sm font-medium leading-none">
-                {spotifyData?.isPlaying ? spotifyData.title : 'Not Playing'}
+                {spotifyData?.currentlyPlaying?.isPlaying ? spotifyData.currentlyPlaying.title : 'Not Playing'}
               </span>
             </Link>
             <div className="flex items-center gap-2">
               <Music className="h-3 w-3 text-muted-foreground" />
-              <p className="text-xs text-muted-foreground">{spotifyData?.isPlaying ? spotifyData.artist : 'Spotify'}</p>
+              <p className="text-xs text-muted-foreground">
+                {spotifyData?.currentlyPlaying?.isPlaying ? spotifyData.currentlyPlaying.artist : 'Spotify'}
+              </p>
             </div>
 
-            {spotifyData?.isPlaying && (
+            {spotifyData?.currentlyPlaying?.isPlaying && (
               <div className="flex flex-col gap-1.5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    {spotifyData?.isPlaying ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
+                    {spotifyData?.currentlyPlaying?.isPlaying ? (
+                      <Pause className="h-3 w-3" />
+                    ) : (
+                      <Play className="h-3 w-3" />
+                    )}
                     <Volume2 className="h-3 w-3 text-muted-foreground" />
                   </div>
                   <div className="flex items-center gap-1.5">
                     <div className="space-x-1 text-xs tabular-nums text-muted-foreground">
                       <span>{formatTime(simulatedTime)}</span>
                       <span>/</span>
-                      <span>{formatTime(spotifyData.duration)}</span>
+                      <span>{formatTime(spotifyData.currentlyPlaying.duration)}</span>
                     </div>
                   </div>
                 </div>
@@ -116,7 +122,7 @@ export function Player() {
           </div>
         </div>
 
-        {spotifyData?.isPlaying && (
+        {spotifyData?.currentlyPlaying?.isPlaying && (
           <div className="absolute top-0 left-0 right-0">
             <div
               className="h-1 bg-gradient-to-r from-green-500/40 to-green-500/60"

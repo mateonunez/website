@@ -86,3 +86,7 @@ export interface SpotifyData {
 export interface NormalizedCurrentlyPlaying {
   [key: string]: any;
 }
+
+export interface NormalizedRecentlyPlayed {
+  [key: string]: any;
+}
