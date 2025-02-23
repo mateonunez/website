@@ -18,7 +18,7 @@ export function ArticlePreview({ author, date, title, description, image, slug, 
   return (
     <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <Link href={`/blog/${slug}`}>
-        <div className="relative h-[100px] sm:h-[200px] lg:h-[300px] w-full overflow-hidden rounded-t-xl">
+        <div className="relative h-[200px] sm:h-[200px] lg:h-[300px] w-full overflow-hidden rounded-t-xl">
           <div className="absolute inset-0 z-10 bg-gradient-to-t from-gray-900/80 to-gray-900/20" />
           <Image
             src={image}
