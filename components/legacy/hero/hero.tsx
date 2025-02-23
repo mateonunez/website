@@ -35,7 +35,7 @@ export default function Hero({ article, ...props }: HeroProps): JSX.Element {
         <div className={s.root}>
           {/* Title  */}
           <Fade>
-            <h1 className="title">Mateo Nunez</h1>
+            <h1 className="text-3xl font-bold font-hanken animate-in fade-in duration-1000 delay-200">Mateo Nunez</h1>
           </Fade>
           {/* Terminal  */}
           <Fade direction="left">

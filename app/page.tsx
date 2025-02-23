@@ -16,7 +16,7 @@ export default async function HomePage(): Promise<JSX.Element> {
       <header className="flex h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
         <div className="flex items-center gap-2 px-4 w-full">
           <div className="flex items-center gap-2">
-            <h1 className="text-3xl font-bold font-bungee animate-in fade-in duration-1000 delay-200">Mateo Nunez</h1>
+            <h1 className="text-3xl font-bold font-hanken animate-in fade-in duration-1000 delay-200">Mateo Nunez</h1>
           </div>
         </div>
       </header>
