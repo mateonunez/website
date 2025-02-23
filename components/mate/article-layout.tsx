@@ -14,7 +14,9 @@ export function ArticleLayout({ title, date, readingTime, tags, children }: Arti
     <>
       <header className="flex h-auto min-h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear px-4 py-3 sm:py-4 md:h-16">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full">
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold break-words">{title}</h1>
+          <h1 className="text-3xl font-bold font-hanken animate-in fade-in duration-1000 delay-200 break-words">
+            {title}
+          </h1>
         </div>
       </header>
       <main className="flex-1 max-w-screen">

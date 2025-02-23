@@ -78,9 +78,7 @@
   /* Font variables */
   --font-sans: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
-  --font-bungeeHairline: "Bungee Hairline", cursive;
-  --font-robotoMono: "Roboto Mono", monospace;
-  --font-playfairDisplay: "Playfair Display", serif;
+  --font-hanken: "Hanken Grotesk";
 }
 
 .dark {
@@ -213,9 +211,9 @@
     background-color: var(--muted);
     animation: pulse 1.5s infinite;
   }
-  .font-bungee {
-    font-family: var(--font-bungeeHairline), cursive;
-    font-weight: 400;
+  .font-hanken {
+    font-family: var(--font-hanken);
+    font-weight: 500;
     font-style: normal;
   }
   @keyframes pulse {

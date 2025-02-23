@@ -16,7 +16,7 @@ export default function BlogPage(): JSX.Element {
     <>
       <header className="flex h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
         <div className="flex items-center gap-2 mx-auto">
-          <h1 className="text-2xl text-center font-bold">Blog</h1>
+          <h1 className="text-3xl font-bold font-hanken animate-in fade-in duration-1000 delay-200">Blog</h1>
         </div>
       </header>
       <main className="flex-1 overflow-auto mx-auto max-w-screen-lg">
