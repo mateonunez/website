@@ -171,8 +171,13 @@ const TerminalInput = memo(
       <input
         ref={ref}
         type="text"
-        className="flex-1 bg-transparent border-none outline-none text-white caret-amber-500 min-w-0"
+        className="flex-1 bg-transparent border-none outline-none text-white caret-amber-500 min-w-0 text-base md:text-sm"
         placeholder="Type a command..."
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="none"
+        inputMode="search"
+        enterKeyHint="send"
         {...props}
       />
     </div>
