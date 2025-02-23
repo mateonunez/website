@@ -29,40 +29,21 @@ export function Terminal({
 
   const dataSources = useMemo<DataSources>(
     () => ({
-      spotify: {
-        type: 'spotify' as const,
-        data: spotifyData,
-      },
-      github: {
-        type: 'github' as const,
-        data: githubData,
-      },
+      spotify: { type: 'spotify' as const, data: spotifyData },
+      github: { type: 'github' as const, data: githubData },
     }),
     [spotifyData, githubData],
   );
 
-  const tools = useMemo(
-    () => ({
-      clearLines: actions.clearCompletedLines,
-    }),
-    [actions],
-  );
+  const tools = useMemo(() => ({ clearLines: actions.clearCompletedLines }), [actions]);
 
   const { executeCommand, getMatchingCommands } = useCommandExecutor({
     dataSources,
     tools,
-    actions: {
-      addCompletedLines: actions.addCompletedLines,
-      addToHistory: actions.addToHistory,
-    },
+    actions: { addCompletedLines: actions.addCompletedLines, addToHistory: actions.addToHistory },
   });
 
-  const handleUserInput = useTerminalInput({
-    state,
-    actions,
-    executeCommand,
-    getMatchingCommands,
-  });
+  const handleUserInput = useTerminalInput({ state, actions, executeCommand, getMatchingCommands });
 
   useEffect(() => {
     const isLastParagraph = currentLine === initialMessages.length;
@@ -102,6 +83,7 @@ export function Terminal({
   useEffect(() => {
     if (isComplete && inputRef.current) {
       inputRef.current.focus();
+      inputRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }, [isComplete]);
 
@@ -124,6 +106,7 @@ export function Terminal({
   const handleTerminalClick = useCallback(() => {
     if (isComplete && inputRef.current) {
       inputRef.current.focus();
+      inputRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }, [isComplete]);
 
@@ -131,7 +114,7 @@ export function Terminal({
     <CommandContextProvider dataSources={dataSources} tools={tools}>
       <div className={cn('rounded-xl border bg-card text-card-foreground shadow', className)}>
         <TerminalHeader />
-        {/* biome-ignore lint/nursery/noStaticElementInteractions: it's the terminal */}
+        {/* biome-ignore lint/nursery/noStaticElementInteractions: terminal */}
         <div
           ref={terminalRef}
           style={{ height }}
@@ -163,7 +146,6 @@ export function Terminal({
   );
 }
 
-// Memoized components
 const MemoizedLine = memo(Line);
 const TerminalHeader = memo(function TerminalHeader() {
   return (
@@ -189,7 +171,7 @@ const TerminalInput = memo(
       <input
         ref={ref}
         type="text"
-        className="flex-1 bg-transparent border-none outline-none text-white caret-amber-500"
+        className="flex-1 bg-transparent border-none outline-none text-white caret-amber-500 min-w-0"
         placeholder="Type a command..."
         {...props}
       />
