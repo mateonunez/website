@@ -1,14 +1,14 @@
 import { Suspense } from 'react';
 import { Toaster } from '@/components/ui/sonner';
 import { Player } from '@/components/mate/player';
-import { Terminal } from '@/components/mate/terminal';
+import { Terminal } from '@/components/mate/terminal/terminal';
 import { LatestArticlesWrapper } from '@/components/mate/latest-articles.wrapper';
 import { RecentlyPlayedWrapper } from '@/components/mate/recently-played.wrapper';
-import { GitHubCommunityWrapper } from '@/components/mate/github-community.wrapper';
 import { ArticlePreviewSkeleton } from '@/components/mate/article-preview.skeleton';
 import { RecentlyPlayedSkeleton } from '@/components/mate/recently-played.skeleton';
 import { GitHubCommunitySkeleton } from '@/components/mate/github-community.skeleton';
 import type { JSX } from 'react';
+import { GitHubCommunity } from '@/components/mate/github-community';
 
 export default async function HomePage(): Promise<JSX.Element> {
   return (
@@ -16,7 +16,7 @@ export default async function HomePage(): Promise<JSX.Element> {
       <header className="flex h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
         <div className="flex items-center gap-2 px-4 w-full">
           <div className="flex items-center gap-2">
-            <h1 className="text-3xl font-bold font-bungee">Mateo Nunez</h1>
+            <h1 className="text-3xl font-bold font-bungee animate-in fade-in duration-1000 delay-200">Mateo Nunez</h1>
           </div>
         </div>
       </header>
@@ -50,7 +50,7 @@ export default async function HomePage(): Promise<JSX.Element> {
               </Suspense>
               <h2 className="text-xl font-semibold font-bungee">Thank You 🫰</h2>
               <Suspense fallback={<GitHubCommunitySkeleton />}>
-                <GitHubCommunityWrapper />
+                <GitHubCommunity />
               </Suspense>
             </div>
           </div>

@@ -7,8 +7,8 @@ import Container from '@/components/legacy/common/container/container';
 import Title from '@/components/legacy/common/title/title';
 // import WordAnimator from '@/components/legacy/animations/word-animator';
 import Fade from '@/components/legacy/animations/fade';
-import Followers from '@/components/legacy/github/followers/followers';
-import Sponsors from '@/components/legacy/github/sponsors/sponsors';
+// import Followers from '@/components/legacy/github/followers/followers';
+// import Sponsors from '@/components/legacy/github/sponsors/sponsors';
 import GitHubProfile from '@/components/legacy/github/cards/profile/profile';
 export const dynamic = 'force-dynamic';
 
@@ -42,7 +42,7 @@ export default async function OpenSourcePage(): Promise<JSX.Element> {
           <Fade direction="left" clean className="w-full">
             <h2 className="text-4xl font-bold text-center">Thank you.</h2>
 
-            <Sponsors sponsors={profile.sponsors} />
+            {/* <Sponsors sponsors={profile.sponsors} /> */}
           </Fade>
         </div>
       </Container>
@@ -53,7 +53,7 @@ export default async function OpenSourcePage(): Promise<JSX.Element> {
           <Fade direction="left" delay={0.5} className="w-full">
             <h2 className="text-4xl font-bold text-center">Still You</h2>
 
-            <Followers followers={profile.followers} />
+            {/* <Followers followers={profile.followers} /> */}
           </Fade>
         </div>
       </Container>

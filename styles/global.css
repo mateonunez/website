@@ -79,6 +79,8 @@
   --font-sans: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   --font-bungeeHairline: "Bungee Hairline", cursive;
+  --font-robotoMono: "Roboto Mono", monospace;
+  --font-playfairDisplay: "Playfair Display", serif;
 }
 
 .dark {

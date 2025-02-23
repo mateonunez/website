@@ -1,5 +1,7 @@
 'use client';
 
+import type { NormalizedCurrentlyPlaying } from '@/types/spotify';
+import type { NormalizedGitHubUser } from '@/types/github';
 import React, { useCallback, useMemo, useContext, useReducer, type ReactNode, type JSX } from 'react';
 
 interface UIState {
@@ -16,6 +18,7 @@ interface UIState {
   listening: {
     [key: string]: any;
   };
+  githubProfile: { profile: NormalizedGitHubUser } | null;
 }
 
 export const initialState: UIState = {
@@ -29,6 +32,7 @@ export const initialState: UIState = {
   isTerminalCompleted: false,
   bigBang: false,
   listening: {},
+  githubProfile: null,
 };
 
 export const types = {
@@ -45,6 +49,7 @@ export const types = {
   COMPLETE_TERMINAL: 'COMPLETE_TERMINAL',
   SET_BIG_BANG: 'SET_BIG_BANG',
   SET_SPOTIFY_LISTENING: 'SET_SPOTIFY_LISTENING',
+  SET_GITHUB_PROFILE: 'SET_GITHUB_PROFILE',
 } as const;
 
 type ActionType = (typeof types)[keyof typeof types];
@@ -129,6 +134,12 @@ export const reducer = (state: UIState, action: UIAction): UIState => {
         listening: action.payload as { [key: string]: unknown },
       };
 
+    case types.SET_GITHUB_PROFILE:
+      return {
+        ...state,
+        githubProfile: action.payload as { profile: NormalizedGitHubUser },
+      };
+
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
@@ -147,7 +158,8 @@ interface UIContextType extends UIState {
   setNavbarView: (payload: string) => void;
   completeTerminal: () => void;
   setBigBang: (payload: boolean) => void;
-  setSpotifyListening: (payload: { [key: string]: unknown }) => void;
+  setSpotifyListening: (payload: NormalizedCurrentlyPlaying) => void;
+  setGithubProfile: (payload: NormalizedGitHubUser) => void;
 }
 
 export const UIContext = React.createContext<UIContextType | undefined>(undefined);
@@ -186,7 +198,12 @@ export const UIProvider = ({ children, ...props }: UIProviderProps): JSX.Element
   const setBigBang = useCallback((payload: boolean) => dispatch({ type: types.SET_BIG_BANG, payload }), []);
 
   const setSpotifyListening = useCallback(
-    (payload: { [key: string]: any }) => dispatch({ type: types.SET_SPOTIFY_LISTENING, payload }),
+    (payload: NormalizedCurrentlyPlaying) => dispatch({ type: types.SET_SPOTIFY_LISTENING, payload }),
+    [],
+  );
+
+  const setGithubProfile = useCallback(
+    (payload: NormalizedGitHubUser) => dispatch({ type: types.SET_GITHUB_PROFILE, payload }),
     [],
   );
 
@@ -206,6 +223,7 @@ export const UIProvider = ({ children, ...props }: UIProviderProps): JSX.Element
       completeTerminal,
       setBigBang,
       setSpotifyListening,
+      setGithubProfile,
     }),
     [
       state,
@@ -222,6 +240,7 @@ export const UIProvider = ({ children, ...props }: UIProviderProps): JSX.Element
       completeTerminal,
       setBigBang,
       setSpotifyListening,
+      setGithubProfile,
     ],
   );
 
