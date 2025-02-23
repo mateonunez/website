@@ -1,29 +1,48 @@
-import { createContext, useContext, type ReactNode } from 'react';
+import { createContext, type ReactNode, useContext } from 'react';
 import type { NormalizedCurrentlyPlaying } from '@/types/spotify';
 import type { NormalizedGitHubUser } from '@/types/github';
 
-interface CommandContextType {
-  spotifyData: NormalizedCurrentlyPlaying | null;
-  githubData: { profile: NormalizedGitHubUser } | null;
+export type SpotifyData = { data: NormalizedCurrentlyPlaying | null };
+export type GitHubData = { data: { profile: NormalizedGitHubUser | null } };
+
+export type DataSourceMap = {
+  spotify: SpotifyData;
+  github: GitHubData;
+};
+
+export type DataSourceType = keyof DataSourceMap;
+
+export type DataSources = {
+  [K in DataSourceType]: DataSourceMap[K];
+};
+
+export interface TerminalTools {
+  clearLines: () => void;
 }
 
-const CommandContext = createContext<CommandContextType | undefined>(undefined);
-
-export function useCommandContext() {
-  const context = useContext(CommandContext);
-  if (context === undefined) {
-    // biome-ignore lint/nursery/noSecrets: falsy
-    throw new Error('useCommandContext must be used within a CommandContextProvider');
-  }
-  return context;
+export interface CommandContextType {
+  dataSources: DataSources;
+  tools: TerminalTools;
 }
 
-interface CommandContextProviderProps {
+const CommandContext = createContext<CommandContextType>({
+  dataSources: {
+    spotify: { data: null },
+    github: { data: { profile: null } },
+  } as DataSources,
+  tools: { clearLines: () => {} },
+});
+
+export const useCommandContext = () => useContext(CommandContext);
+
+export function CommandContextProvider({
+  children,
+  dataSources,
+  tools,
+}: {
   children: ReactNode;
-  spotifyData: NormalizedCurrentlyPlaying | null;
-  githubData: { profile: NormalizedGitHubUser } | null;
-}
-
-export function CommandContextProvider({ children, spotifyData, githubData }: CommandContextProviderProps) {
-  return <CommandContext.Provider value={{ spotifyData, githubData }}>{children}</CommandContext.Provider>;
+  dataSources: DataSources;
+  tools: TerminalTools;
+}) {
+  return <CommandContext.Provider value={{ dataSources, tools }}>{children}</CommandContext.Provider>;
 }

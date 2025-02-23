@@ -9,6 +9,7 @@ import {
   useCallback,
   type InputHTMLAttributes,
   forwardRef,
+  useMemo,
 } from 'react';
 import { cn } from '@/lib/utils';
 import { Line } from './line';
@@ -23,7 +24,7 @@ import {
 } from './constants';
 import { useSpotify } from '@/lib/hooks/use-spotify';
 import { useGithub } from '@/lib/hooks/use-github';
-import { CommandContextProvider } from './command-context';
+import { CommandContextProvider, type DataSources } from './command-context';
 
 interface TerminalProps {
   className?: string;
@@ -50,6 +51,8 @@ export function Terminal({
 }: Readonly<TerminalProps>): JSX.Element {
   const { data: spotifyData } = useSpotify();
   const { data: githubData } = useGithub();
+
+  console.log(githubData);
   // State
   const [currentLine, setCurrentLine] = useState<number>(0);
   const [typingLine, setTypingLine] = useState<TypingLineState>({ text: '', currentIndex: 0 });
@@ -65,23 +68,37 @@ export function Terminal({
 
   const isLastParagraph = currentLine === initialMessages.length;
 
-  // Command execution
+  const dataSources = useMemo<DataSources>(
+    () => ({
+      spotify: {
+        type: 'spotify' as const,
+        data: spotifyData,
+      },
+      github: {
+        type: 'github' as const,
+        data: githubData,
+      },
+    }),
+    [spotifyData, githubData],
+  );
+
+  const tools = useMemo(
+    () => ({
+      clearLines: () => setCompletedLines([]),
+    }),
+    [],
+  );
+
+  const commandMap = useMemo(() => getCommandMap(), []);
+
   const executeCommand = useCallback(
     async (input: string) => {
       const trimmedInput = input.trim().toLowerCase();
-      const commands = getCommandMap();
-
-      if (trimmedInput === 'clear') {
-        setCompletedLines([]);
-        return;
-      }
-
-      const command = commands.get(trimmedInput);
+      const command = commandMap.get(trimmedInput);
       let response: string;
-
       try {
         if (command) {
-          response = await command.handler({ spotifyData, githubData });
+          response = await command.handler({ dataSources, tools });
         } else {
           response = 'Unknown command. Type "help" for available commands.';
         }
@@ -89,21 +106,17 @@ export function Terminal({
         console.error('Error executing command:', error);
         response = 'An error occurred while executing the command.';
       }
-
       const newLines: TerminalLine[] = [{ text: input, showPrompt: true }];
-
       response.split('\n').forEach((line) => {
         newLines.push({ text: line, showPrompt: false });
       });
-
       setCompletedLines((prev) => [...prev, ...newLines]);
       setCommandHistory((prev) => [input, ...prev].slice(0, MAX_HISTORY));
       setHistoryIndex(-1);
     },
-    [spotifyData, githubData],
+    [dataSources, tools],
   );
 
-  // Handle typing animation
   useEffect(() => {
     if (isLastParagraph) {
       setIsComplete(true);
@@ -137,16 +150,17 @@ export function Terminal({
     return () => clearTimeout(timer);
   }, [currentLine, typingLine, isLastParagraph, initialMessages]);
 
-  // Focus input when complete
   useEffect(() => {
     if (isComplete && inputRef.current) {
       inputRef.current.focus();
     }
   }, [isComplete]);
 
-  // Handle user input
   const handleUserInput = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
+      const input = userInput.trim().toLowerCase();
+      const matchingCommands = Array.from(getCommandMap().keys()).filter((cmd) => cmd.startsWith(input));
+
       switch (e.key) {
         case 'Enter':
           if (userInput.trim()) {
@@ -175,28 +189,42 @@ export function Terminal({
           break;
         case 'Tab':
           e.preventDefault();
-          // TODO: Implement command completion
+          if (matchingCommands.length === 1) {
+            setUserInput(matchingCommands[0]);
+          } else if (matchingCommands.length > 1) {
+            setCompletedLines((prev) => [
+              ...prev,
+              { text: `Possible completions: ${matchingCommands.join(', ')}`, showPrompt: false },
+            ]);
+          }
           break;
       }
     },
     [userInput, executeCommand, commandHistory, historyIndex],
   );
 
-  // Auto-scroll to bottom
   useEffect(() => {
     if (terminalRef.current) {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
   }, [completedLines, typingLine]);
 
+  const handleTerminalClick = useCallback(() => {
+    if (isComplete && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isComplete]);
+
   return (
-    <CommandContextProvider spotifyData={spotifyData} githubData={githubData}>
+    <CommandContextProvider dataSources={dataSources} tools={tools}>
       <div className={cn('rounded-xl border bg-card text-card-foreground shadow', className)}>
         <TerminalHeader />
+        {/* biome-ignore lint/nursery/noStaticElementInteractions: This is a terminal */}
         <div
           ref={terminalRef}
           style={{ height }}
           className="space-y-2 overflow-y-auto p-4 font-mono text-sm bg-black text-neutral-50 rounded-b-xl"
+          onClick={handleTerminalClick}
         >
           {completedLines.map((line, index) => (
             <p key={index} className="transition-colors">

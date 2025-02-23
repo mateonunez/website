@@ -1,10 +1,12 @@
 import { ABOUT_MESSAGES } from './constants';
-import type { NormalizedCurrentlyPlaying } from '@/types/spotify';
-import type { NormalizedGitHubUser } from '@/types/github';
+import type {
+  DataSources,
+  TerminalTools,
+} from './command-context';
 
 interface CommandContext {
-  spotifyData: NormalizedCurrentlyPlaying | null;
-  githubData: { profile: NormalizedGitHubUser } | null;
+  dataSources: DataSources;
+  tools: TerminalTools;
 }
 
 export interface Command {
@@ -23,8 +25,11 @@ const systemCommands: Command[] = [
   {
     name: 'clear',
     description: 'Clear the terminal screen',
-    handler: () => '',
-    aliases: ['cls'],
+    handler: ({ tools }) => {
+      tools.clearLines();
+      return '';
+    },
+    aliases: ['c', 'cls'],
   },
   {
     name: 'help',
@@ -33,40 +38,30 @@ const systemCommands: Command[] = [
       const formatGroup = (group: CommandGroup): string => {
         const commands = group.commands
           .map((cmd) => {
-            const aliasText = cmd.aliases?.length ? ` (aka ${cmd.aliases.join(', ')})` : '';
-            return `  ${cmd.name.padEnd(10)}${aliasText} — ${cmd.description}`;
+            const aliasText = cmd.aliases?.length ? ` (aliases: ${cmd.aliases.join(', ')})` : '';
+            return `  • ${cmd.name.padEnd(15)} ${cmd.description}${aliasText}`;
           })
           .join('\n');
-        return `\n${group.name.toUpperCase()} COMMANDS:\n${commands}`;
+        return `\n=== ${group.name} Commands ===\n${commands}`;
       };
 
       return [
-        '🌌 Terminal Commands 🌌',
-        '-------------------------',
+        '🌟 Welcome to the Terminal 🌟',
+        'Here are the available commands:\n',
         ...commandGroups.map(formatGroup),
-        '-------------------------',
-        'Type a command and hit Enter to dive in!',
+        '\n💡 Tip: Type a command and press Enter to execute it, or press Tab to autocomplete.',
       ].join('\n');
     },
+    aliases: ['h'],
   },
 ];
 
 const personalCommands: Command[] = [
   {
     name: 'whoami',
-    description: 'Peek into my digital soul',
+    description: 'More about me',
     handler: () => [...ABOUT_MESSAGES].join('\n'),
     aliases: ['about'],
-  },
-  {
-    name: 'were',
-    description: 'Unravel the WERE enigma',
-    handler: () => "WERE? A mystery living between the lines. AIt knows, but won't tell... yet.",
-  },
-  {
-    name: 'secret',
-    description: 'Unlock a hidden whisper',
-    handler: () => 'Welcome to the dark side. Here, bits dance to the rhythm of chaos. 🌀',
   },
 ];
 
@@ -74,20 +69,23 @@ const socialCommands: Command[] = [
   {
     name: 'music',
     description: 'Catch my current vibe',
-    handler: ({ spotifyData }) => {
+    handler: ({ dataSources }) => {
+      const { data: spotifyData } = dataSources.spotify;
       if (!spotifyData) return 'No music data available at the moment.';
-      if (spotifyData.isPlaying) {
-        return `Now playing: "${spotifyData.title}" by ${spotifyData.artist} from ${spotifyData.album}`;
-      }
-      return 'Not currently playing any music.';
+
+      return spotifyData.isPlaying
+        ? `Now playing: "${spotifyData.title}" by ${spotifyData.artist} from ${spotifyData.album}"`
+        : 'Not currently playing any music.';
     },
     aliases: ['spotify', 'np'],
   },
   {
     name: 'community',
     description: 'Meet my GitHub crew',
-    handler: ({ githubData }) => {
+    handler: ({ dataSources }) => {
+      const { data: githubData } = dataSources.github;
       if (!githubData?.profile) return 'No GitHub data available at the moment.';
+
       const { sponsors, followers, url } = githubData.profile;
       const sponsorCount = sponsors.length;
       const followerCount = followers.length;
@@ -107,10 +105,20 @@ const socialCommands: Command[] = [
   },
 ];
 
+const aiCommands: Command[] = [
+  {
+    name: 'ait',
+    description: 'Play with AIt',
+    handler: () =>
+      `Hey there! I'm _AIt_ (acts like "alt" /ɔːlt/, but also pronounced as "eight" /eɪt/). It depends. 🤷‍♂️`,
+  },
+];
+
 export const commandGroups: CommandGroup[] = [
   { name: 'System', commands: systemCommands },
   { name: 'Personal', commands: personalCommands },
   { name: 'Social', commands: socialCommands },
+  { name: 'AI', commands: aiCommands },
 ];
 
 export const getAllCommands = (): Command[] => {
@@ -122,8 +130,8 @@ export const getCommandMap = (): Map<string, Command> => {
   const commands = getAllCommands();
 
   for (const command of commands) {
-    map.set(command.name, command);
-    command.aliases?.forEach((alias) => map.set(alias, command));
+    map.set(command.name.toLowerCase().trim(), command);
+    command.aliases?.forEach((alias) => map.set(alias.toLowerCase().trim(), command));
   }
 
   return map;

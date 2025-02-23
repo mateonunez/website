@@ -15,9 +15,7 @@ interface UIState {
   sidebarView?: string;
   isTerminalCompleted: boolean;
   bigBang: boolean;
-  listening: {
-    [key: string]: any;
-  };
+  listening: NormalizedCurrentlyPlaying | null;
   githubProfile: { profile: NormalizedGitHubUser } | null;
 }
 
@@ -131,7 +129,7 @@ export const reducer = (state: UIState, action: UIAction): UIState => {
     case types.SET_SPOTIFY_LISTENING:
       return {
         ...state,
-        listening: action.payload as { [key: string]: unknown },
+        listening: action.payload as NormalizedCurrentlyPlaying,
       };
 
     case types.SET_GITHUB_PROFILE:
