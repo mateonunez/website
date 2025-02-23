@@ -3,7 +3,6 @@
 import { type JSX, useEffect, useRef, useCallback, type InputHTMLAttributes, forwardRef, useMemo, memo } from 'react';
 import { cn } from '@/lib/utils';
 import { Line } from './line';
-import { getCommandMap } from './commands';
 import { DEFAULT_HEIGHT, DEFAULT_MESSAGES, DEFAULT_PROMPT, SLEEP_DURATION, getTypingDuration } from './constants';
 import { useSpotify } from '@/lib/hooks/use-spotify';
 import { useGithub } from '@/lib/hooks/use-github';
