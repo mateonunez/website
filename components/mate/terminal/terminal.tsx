@@ -1,47 +1,17 @@
 'use client';
 
-import {
-  type JSX,
-  useEffect,
-  useRef,
-  useState,
-  type KeyboardEvent,
-  useCallback,
-  type InputHTMLAttributes,
-  forwardRef,
-  useMemo,
-} from 'react';
+import { type JSX, useEffect, useRef, useCallback, type InputHTMLAttributes, forwardRef, useMemo, memo } from 'react';
 import { cn } from '@/lib/utils';
 import { Line } from './line';
 import { getCommandMap } from './commands';
-import {
-  DEFAULT_HEIGHT,
-  DEFAULT_MESSAGES,
-  DEFAULT_PROMPT,
-  MAX_HISTORY,
-  SLEEP_DURATION,
-  getTypingDuration,
-} from './constants';
+import { DEFAULT_HEIGHT, DEFAULT_MESSAGES, DEFAULT_PROMPT, SLEEP_DURATION, getTypingDuration } from './constants';
 import { useSpotify } from '@/lib/hooks/use-spotify';
 import { useGithub } from '@/lib/hooks/use-github';
 import { CommandContextProvider, type DataSources } from './command-context';
-
-interface TerminalProps {
-  className?: string;
-  initialMessages?: string[];
-  prompt?: string;
-  height?: string;
-}
-
-interface TerminalLine {
-  text: string;
-  showPrompt: boolean;
-}
-
-interface TypingLineState {
-  text: string;
-  currentIndex: number;
-}
+import { useTerminalState } from './hooks/use-terminal-state';
+import { useCommandExecutor } from './hooks/use-command-executor';
+import { useTerminalInput } from './hooks/use-terminal-input';
+import type { TerminalProps } from './types';
 
 export function Terminal({
   className,
@@ -52,21 +22,11 @@ export function Terminal({
   const { data: spotifyData } = useSpotify();
   const { data: githubData } = useGithub();
 
-  console.log(githubData);
-  // State
-  const [currentLine, setCurrentLine] = useState<number>(0);
-  const [typingLine, setTypingLine] = useState<TypingLineState>({ text: '', currentIndex: 0 });
-  const [completedLines, setCompletedLines] = useState<TerminalLine[]>([]);
-  const [isComplete, setIsComplete] = useState(false);
-  const [userInput, setUserInput] = useState<string>('');
-  const [commandHistory, setCommandHistory] = useState<string[]>([]);
-  const [historyIndex, setHistoryIndex] = useState<number>(-1);
+  const [state, actions] = useTerminalState(initialMessages);
+  const { currentLine, typingLine, completedLines, isComplete, userInput } = state;
 
-  // Refs
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const isLastParagraph = currentLine === initialMessages.length;
 
   const dataSources = useMemo<DataSources>(
     () => ({
@@ -84,42 +44,32 @@ export function Terminal({
 
   const tools = useMemo(
     () => ({
-      clearLines: () => setCompletedLines([]),
+      clearLines: actions.clearCompletedLines,
     }),
-    [],
+    [actions],
   );
 
-  const commandMap = useMemo(() => getCommandMap(), []);
-
-  const executeCommand = useCallback(
-    async (input: string) => {
-      const trimmedInput = input.trim().toLowerCase();
-      const command = commandMap.get(trimmedInput);
-      let response: string;
-      try {
-        if (command) {
-          response = await command.handler({ dataSources, tools });
-        } else {
-          response = 'Unknown command. Type "help" for available commands.';
-        }
-      } catch (error) {
-        console.error('Error executing command:', error);
-        response = 'An error occurred while executing the command.';
-      }
-      const newLines: TerminalLine[] = [{ text: input, showPrompt: true }];
-      response.split('\n').forEach((line) => {
-        newLines.push({ text: line, showPrompt: false });
-      });
-      setCompletedLines((prev) => [...prev, ...newLines]);
-      setCommandHistory((prev) => [input, ...prev].slice(0, MAX_HISTORY));
-      setHistoryIndex(-1);
+  const { executeCommand, getMatchingCommands } = useCommandExecutor({
+    dataSources,
+    tools,
+    actions: {
+      addCompletedLines: actions.addCompletedLines,
+      addToHistory: actions.addToHistory,
     },
-    [dataSources, tools],
-  );
+  });
+
+  const handleUserInput = useTerminalInput({
+    state,
+    actions,
+    executeCommand,
+    getMatchingCommands,
+  });
 
   useEffect(() => {
+    const isLastParagraph = currentLine === initialMessages.length;
+
     if (isLastParagraph) {
-      setIsComplete(true);
+      actions.setIsComplete(true);
       return;
     }
 
@@ -127,14 +77,14 @@ export function Terminal({
 
     if (typingLine.currentIndex === 0) {
       const timer = setTimeout(() => {
-        setTypingLine({ text: '', currentIndex: 1 });
+        actions.setTypingLine({ text: '', currentIndex: 1 });
       }, SLEEP_DURATION);
       return () => clearTimeout(timer);
     }
 
     if (typingLine.currentIndex <= currentText.length) {
       const timer = setTimeout(() => {
-        setTypingLine({
+        actions.setTypingLine({
           text: currentText.slice(0, typingLine.currentIndex),
           currentIndex: typingLine.currentIndex + 1,
         });
@@ -143,12 +93,12 @@ export function Terminal({
     }
 
     const timer = setTimeout(() => {
-      setCompletedLines((prev) => [...prev, { text: currentText, showPrompt: false }]);
-      setCurrentLine((prev) => prev + 1);
-      setTypingLine({ text: '', currentIndex: 0 });
+      actions.addCompletedLine({ text: currentText, showPrompt: false });
+      actions.setCurrentLine(currentLine + 1);
+      actions.setTypingLine({ text: '', currentIndex: 0 });
     }, SLEEP_DURATION);
     return () => clearTimeout(timer);
-  }, [currentLine, typingLine, isLastParagraph, initialMessages]);
+  }, [currentLine, typingLine, initialMessages, actions]);
 
   useEffect(() => {
     if (isComplete && inputRef.current) {
@@ -156,58 +106,21 @@ export function Terminal({
     }
   }, [isComplete]);
 
-  const handleUserInput = useCallback(
-    (e: KeyboardEvent<HTMLInputElement>) => {
-      const input = userInput.trim().toLowerCase();
-      const matchingCommands = Array.from(getCommandMap().keys()).filter((cmd) => cmd.startsWith(input));
-
-      switch (e.key) {
-        case 'Enter':
-          if (userInput.trim()) {
-            void executeCommand(userInput);
-          } else {
-            // For empty input, just add a blank line with prompt
-            setCompletedLines((prev) => [...prev, { text: '', showPrompt: true }]);
-          }
-          setUserInput('');
-          break;
-        case 'ArrowUp':
-          e.preventDefault();
-          if (historyIndex < commandHistory.length - 1) {
-            const newIndex = historyIndex + 1;
-            setHistoryIndex(newIndex);
-            setUserInput(commandHistory[newIndex]);
-          }
-          break;
-        case 'ArrowDown':
-          e.preventDefault();
-          if (historyIndex > -1) {
-            const newIndex = historyIndex - 1;
-            setHistoryIndex(newIndex);
-            setUserInput(newIndex === -1 ? '' : commandHistory[newIndex]);
-          }
-          break;
-        case 'Tab':
-          e.preventDefault();
-          if (matchingCommands.length === 1) {
-            setUserInput(matchingCommands[0]);
-          } else if (matchingCommands.length > 1) {
-            setCompletedLines((prev) => [
-              ...prev,
-              { text: `Possible completions: ${matchingCommands.join(', ')}`, showPrompt: false },
-            ]);
-          }
-          break;
-      }
-    },
-    [userInput, executeCommand, commandHistory, historyIndex],
-  );
-
-  useEffect(() => {
+  const scrollToBottom = useCallback(() => {
     if (terminalRef.current) {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
-  }, [completedLines, typingLine]);
+  }, []);
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    const debouncedScroll = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(scrollToBottom, 100);
+    };
+    debouncedScroll();
+    return () => clearTimeout(timeoutId);
+  }, [completedLines, typingLine, scrollToBottom]);
 
   const handleTerminalClick = useCallback(() => {
     if (isComplete && inputRef.current) {
@@ -219,7 +132,7 @@ export function Terminal({
     <CommandContextProvider dataSources={dataSources} tools={tools}>
       <div className={cn('rounded-xl border bg-card text-card-foreground shadow', className)}>
         <TerminalHeader />
-        {/* biome-ignore lint/nursery/noStaticElementInteractions: This is a terminal */}
+        {/* biome-ignore lint/nursery/noStaticElementInteractions: it's the terminal */}
         <div
           ref={terminalRef}
           style={{ height }}
@@ -228,19 +141,19 @@ export function Terminal({
         >
           {completedLines.map((line, index) => (
             <p key={index} className="transition-colors">
-              <Line text={line.text} noPrompt={!line.showPrompt} noCaret prompt={prompt} />
+              <MemoizedLine text={line.text} noPrompt={!line.showPrompt} noCaret prompt={prompt} />
             </p>
           ))}
           {!isComplete && typingLine.currentIndex > 0 && (
             <p>
-              <Line text={typingLine.text} isTyping prompt={prompt} />
+              <MemoizedLine text={typingLine.text} isTyping prompt={prompt} />
             </p>
           )}
           {isComplete && (
             <TerminalInput
               ref={inputRef}
               value={userInput}
-              onChange={(e) => setUserInput(e.target.value)}
+              onChange={(e) => actions.setUserInput(e.target.value)}
               onKeyDown={handleUserInput}
               prompt={prompt}
             />
@@ -251,7 +164,9 @@ export function Terminal({
   );
 }
 
-function TerminalHeader() {
+// Memoized components
+const MemoizedLine = memo(Line);
+const TerminalHeader = memo(function TerminalHeader() {
   return (
     <div className="flex items-center justify-between border-b px-4 py-2">
       <div className="flex items-center gap-2">
@@ -262,21 +177,23 @@ function TerminalHeader() {
       <div className="text-sm text-muted-foreground">Terminal</div>
     </div>
   );
-}
+});
 
 interface TerminalInputProps extends InputHTMLAttributes<HTMLInputElement> {
   prompt: string;
 }
 
-const TerminalInput = forwardRef<HTMLInputElement, TerminalInputProps>(({ prompt, ...props }, ref) => (
-  <div className="flex items-center gap-1">
-    <span className="font-black text-amber-500">{prompt} </span>
-    <input
-      ref={ref}
-      type="text"
-      className="flex-1 bg-transparent border-none outline-none text-white caret-amber-500"
-      placeholder="Type a command..."
-      {...props}
-    />
-  </div>
-));
+const TerminalInput = memo(
+  forwardRef<HTMLInputElement, TerminalInputProps>(({ prompt, ...props }, ref) => (
+    <div className="flex items-center gap-1">
+      <span className="font-black text-amber-500">{prompt} </span>
+      <input
+        ref={ref}
+        type="text"
+        className="flex-1 bg-transparent border-none outline-none text-white caret-amber-500"
+        placeholder="Type a command..."
+        {...props}
+      />
+    </div>
+  )),
+);

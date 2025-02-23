@@ -3,7 +3,7 @@ import type { NormalizedCurrentlyPlaying } from '@/types/spotify';
 import type { NormalizedGitHubUser } from '@/types/github';
 
 export type SpotifyData = { data: NormalizedCurrentlyPlaying | null };
-export type GitHubData = { data: { profile: NormalizedGitHubUser | null } };
+export type GitHubData = { data: NormalizedGitHubUser | null };
 
 export type DataSourceMap = {
   spotify: SpotifyData;
@@ -28,7 +28,7 @@ export interface CommandContextType {
 const CommandContext = createContext<CommandContextType>({
   dataSources: {
     spotify: { data: null },
-    github: { data: { profile: null } },
+    github: { data: null },
   } as DataSources,
   tools: { clearLines: () => {} },
 });

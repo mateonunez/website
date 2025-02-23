@@ -1,8 +1,5 @@
 import { ABOUT_MESSAGES } from './constants';
-import type {
-  DataSources,
-  TerminalTools,
-} from './command-context';
+import type { DataSources, TerminalTools } from './command-context';
 
 interface CommandContext {
   dataSources: DataSources;
@@ -52,7 +49,7 @@ const systemCommands: Command[] = [
         '\n💡 Tip: Type a command and press Enter to execute it, or press Tab to autocomplete.',
       ].join('\n');
     },
-    aliases: ['h'],
+    aliases: ['h', '?'],
   },
 ];
 
@@ -84,9 +81,9 @@ const socialCommands: Command[] = [
     description: 'Meet my GitHub crew',
     handler: ({ dataSources }) => {
       const { data: githubData } = dataSources.github;
-      if (!githubData?.profile) return 'No GitHub data available at the moment.';
+      if (!githubData) return 'No GitHub data available at the moment.';
 
-      const { sponsors, followers, url } = githubData.profile;
+      const { sponsors, followers, url } = githubData;
       const sponsorCount = sponsors.length;
       const followerCount = followers.length;
       const sponsorsList = sponsors

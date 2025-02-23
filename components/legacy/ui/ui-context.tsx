@@ -16,7 +16,7 @@ interface UIState {
   isTerminalCompleted: boolean;
   bigBang: boolean;
   listening: NormalizedCurrentlyPlaying | null;
-  githubProfile: { profile: NormalizedGitHubUser } | null;
+  githubProfile: NormalizedGitHubUser | null;
 }
 
 export const initialState: UIState = {
@@ -135,7 +135,7 @@ export const reducer = (state: UIState, action: UIAction): UIState => {
     case types.SET_GITHUB_PROFILE:
       return {
         ...state,
-        githubProfile: action.payload as { profile: NormalizedGitHubUser },
+        githubProfile: action.payload as NormalizedGitHubUser,
       };
 
     default:
