@@ -5,6 +5,8 @@ import type {
   GitHubRepositoryContribution,
   NormalizedGitHubUser,
   NormalizedGitHubRepository,
+  GitHubSponsor,
+  NormalizedGitHubSponsor,
 } from '@/types/github';
 
 interface NormalizedFollower {
@@ -172,13 +174,13 @@ export function normalizeGitHubUser(user: GitHubUser): NormalizedGitHubUser {
     avatar: user.avatarUrl,
     bio: user.bio,
     company: user.company,
-    followers: user.followers,
+    followers: normalizeFollowers(user.followers),
     email: user.email,
     login: user.login,
     username: user.login,
     location: user.location,
     url: user.url,
-    sponsors: user.sponsorshipsAsMaintainer.edges.map((edge) => edge.node.sponsor),
+    sponsors: user.sponsorshipsAsMaintainer.edges.map((edge) => normalizeSponsor(edge.node.sponsor)),
     repositories: user.repositories.edges.map((edge) => normalizeRepository(edge.node)),
     contributions: {
       total: user.contributionsCollection.contributionCalendar.totalContributions,
@@ -192,6 +194,16 @@ export function normalizeGitHubUser(user: GitHubUser): NormalizedGitHubUser {
   };
 }
 
+function normalizeSponsor(sponsor: GitHubSponsor): NormalizedGitHubSponsor {
+  return {
+    avatar: sponsor.avatarUrl,
+    bio: sponsor.bio,
+    login: sponsor.login,
+    url: sponsor.url,
+    repositories: sponsor.repositories.edges.map((edge) => normalizeRepository(edge.node)),
+  };
+}
+
 export {
   normalizeGitHubProfile,
   normalizeFollower,
@@ -200,4 +212,5 @@ export {
   normalizeContributions,
   normalizeWeekContributions,
   normalizeActivity,
+  normalizeSponsor,
 };

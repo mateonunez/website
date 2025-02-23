@@ -44,6 +44,7 @@ export interface GitHubRepositoryContribution {
   };
 }
 
+// Base interfaces for raw GitHub API responses
 export interface GitHubFollower {
   avatarUrl: string;
   login: string;
@@ -118,22 +119,33 @@ export interface NormalizedGitHubRepository {
   languageColor: string | null;
 }
 
+// Normalized types for followers and sponsors as used in the UI
+export interface NormalizedGitHubFollower {
+  avatar: string;
+  username: string;
+  url: string;
+}
+
+export interface NormalizedGitHubSponsor {
+  avatar: string;
+  bio: string | null;
+  login: string;
+  url: string;
+  repositories: NormalizedGitHubRepository[];
+}
+
 export interface NormalizedGitHubUser {
   avatar: string;
   bio: string | null;
   company: string | null;
-  followers: {
-    edges: Array<{
-      node: GitHubFollower;
-    }>;
-  };
   email: string | null;
-  login: string;
   username: string;
   location: string | null;
   url: string;
-  sponsors: GitHubSponsor[];
+  sponsors: NormalizedGitHubSponsor[];
+  followers: NormalizedGitHubFollower[];
   repositories: NormalizedGitHubRepository[];
+  login: string;
   contributions: {
     total: number;
     calendar: GitHubContributionCalendar;

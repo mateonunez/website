@@ -75,3 +75,14 @@ export interface SpotifyTopTracks {
   limit: number;
   offset: number;
 }
+
+export interface SpotifyData {
+  currentlyPlaying: SpotifyCurrentlyPlaying | null;
+  recentlyPlayed: SpotifyRecentlyPlayed | null;
+  topArtists: SpotifyTopArtists | null;
+  topTracks: SpotifyTopTracks | null;
+}
+
+export interface NormalizedCurrentlyPlaying {
+  [key: string]: any;
+}
