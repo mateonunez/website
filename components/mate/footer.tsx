@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { getFooterSocialLinks, getSocialLinkUrl } from '@/lib/config/social';
 import Link from 'next/link';

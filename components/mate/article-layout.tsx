@@ -1,3 +1,5 @@
+'use client';
+
 import { MDXLayout } from '@/components/mdx/layout';
 import type { ReactNode } from 'react';
 

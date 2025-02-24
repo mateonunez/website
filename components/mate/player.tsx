@@ -89,6 +89,9 @@ export function Player() {
                 </AvatarFallback>
               )}
             </Avatar>
+          </Link>
+
+          {spotifyData?.currentlyPlaying?.isPlaying && (
             <div className="absolute -right-1 -top-1 opacity-0 transition-opacity group-hover:opacity-100">
               <Button size="icon" variant="secondary" className="h-6 w-6 rounded-full" asChild>
                 <Link href={url} target="_blank">
@@ -96,7 +99,7 @@ export function Player() {
                 </Link>
               </Button>
             </div>
-          </Link>
+          )}
 
           <div className="flex flex-1 flex-col space-y-1 overflow-hidden">
             <Link
