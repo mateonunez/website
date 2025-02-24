@@ -44,7 +44,6 @@ export interface GitHubRepositoryContribution {
   };
 }
 
-// Base interfaces for raw GitHub API responses
 export interface GitHubFollower {
   avatarUrl: string;
   login: string;
@@ -107,7 +106,6 @@ export interface GitHubRepositoryResponse {
   repository: GitHubRepository | null;
 }
 
-// Normalized types for the UI
 export interface NormalizedGitHubRepository {
   name: string;
   url: string;
@@ -119,7 +117,6 @@ export interface NormalizedGitHubRepository {
   languageColor: string | null;
 }
 
-// Normalized types for followers and sponsors as used in the UI
 export interface NormalizedGitHubFollower {
   avatar: string;
   username: string;

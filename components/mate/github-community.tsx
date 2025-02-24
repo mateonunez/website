@@ -7,6 +7,9 @@ import { Button } from '@/components/ui/button';
 import { Users, Heart, ExternalLink, Loader2 } from 'lucide-react';
 import { useGithub } from '@/lib/hooks/use-github';
 import type { NormalizedGitHubFollower, NormalizedGitHubSponsor } from '@/types/github';
+import { useState } from 'react';
+
+const ITEMS_PER_PAGE = 10;
 
 interface SponsorCardProps {
   sponsor: NormalizedGitHubSponsor;
@@ -62,10 +65,20 @@ function FollowerCard({ follower }: FollowerCardProps) {
 
 export function GitHubCommunity() {
   const { data: githubData, isLoading, isError } = useGithub();
+  const [visibleSponsors, setVisibleSponsors] = useState(ITEMS_PER_PAGE);
+  const [visibleFollowers, setVisibleFollowers] = useState(ITEMS_PER_PAGE);
+
+  const loadMoreSponsors = () => {
+    setVisibleSponsors((prev) => prev + ITEMS_PER_PAGE);
+  };
+
+  const loadMoreFollowers = () => {
+    setVisibleFollowers((prev) => prev + ITEMS_PER_PAGE);
+  };
 
   if (isLoading) {
     return (
-      <Card className="w-full bg-transparent max-h-[600px] overflow-auto border-none shadow-none rounded-none">
+      <Card className="w-full bg-transparent border-none shadow-none rounded-none">
         <CardContent className="flex items-center justify-center p-8">
           <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
         </CardContent>
@@ -75,7 +88,7 @@ export function GitHubCommunity() {
 
   if (isError || !githubData) {
     return (
-      <Card className="w-full bg-transparent max-h-[600px] overflow-auto border-none shadow-none rounded-none">
+      <Card className="w-full bg-transparent border-none shadow-none rounded-none">
         <CardContent className="flex items-center justify-center p-8 text-sm text-muted-foreground">
           Unable to load GitHub data
         </CardContent>
@@ -84,9 +97,13 @@ export function GitHubCommunity() {
   }
 
   const { sponsors, followers, url } = githubData;
+  const displayedSponsors = sponsors.slice(0, visibleSponsors);
+  const displayedFollowers = followers.slice(0, visibleFollowers);
+  const hasMoreSponsors = visibleSponsors < sponsors.length;
+  const hasMoreFollowers = visibleFollowers < followers.length;
 
   return (
-    <Card className="w-full bg-transparent max-h-[600px] overflow-auto border-none shadow-none rounded-none">
+    <Card className="w-full bg-transparent border-none shadow-none rounded-none">
       <CardHeader className="p-4 pb-0">
         <CardTitle className="text-lg">GitHub Community</CardTitle>
         <CardDescription className="text-xs">My amazing sponsors and followers on GitHub</CardDescription>
@@ -106,11 +123,16 @@ export function GitHubCommunity() {
           <div className="p-4">
             <TabsContent value="sponsors" className="mt-0">
               <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
-                {sponsors.map((sponsor) => (
+                {displayedSponsors.map((sponsor) => (
                   <SponsorCard key={sponsor.login} sponsor={sponsor} />
                 ))}
               </div>
-              <div className="mt-4 flex justify-center">
+              <div className="mt-4 flex justify-center gap-4">
+                {hasMoreSponsors && (
+                  <Button variant="outline" size="sm" onClick={loadMoreSponsors}>
+                    Load More
+                  </Button>
+                )}
                 <Button variant="outline" size="sm" className="gap-2 hover:text-rose-600 hover:bg-rose-100/10" asChild>
                   <a href={`${url}?tab=sponsors`} target="_blank" rel="noopener noreferrer">
                     Become a sponsor
@@ -121,11 +143,16 @@ export function GitHubCommunity() {
             </TabsContent>
             <TabsContent value="followers" className="mt-0">
               <div className="flex flex-wrap justify-center gap-2">
-                {followers.map((follower) => (
+                {displayedFollowers.map((follower) => (
                   <FollowerCard key={follower.username} follower={follower} />
                 ))}
               </div>
-              <div className="mt-4 flex justify-center">
+              <div className="mt-4 flex justify-center gap-4">
+                {hasMoreFollowers && (
+                  <Button variant="outline" size="sm" onClick={loadMoreFollowers}>
+                    Load More
+                  </Button>
+                )}
                 <Button variant="outline" size="sm" className="gap-2" asChild>
                   <a href={`${url}?tab=followers`} target="_blank" rel="noopener noreferrer">
                     View all followers

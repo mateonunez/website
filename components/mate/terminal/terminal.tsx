@@ -21,8 +21,6 @@ export function Terminal({
   const { data: spotifyData } = useSpotify();
   const { data: githubData } = useGithub();
 
-  console.log(spotifyData);
-
   const [state, actions] = useTerminalState(initialMessages);
   const { currentLine, typingLine, completedLines, isComplete, userInput } = state;
 
@@ -88,13 +86,6 @@ export function Terminal({
     return () => clearTimeout(timer);
   }, [currentLine, typingLine, initialMessages, actions]);
 
-  useEffect(() => {
-    if (isComplete && inputRef.current) {
-      inputRef.current.focus();
-      inputRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }, [isComplete]);
-
   const scrollToBottom = useCallback(() => {
     if (terminalRef.current) {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
@@ -130,14 +121,10 @@ export function Terminal({
           onClick={handleTerminalClick}
         >
           {completedLines.map((line, index) => (
-            <p key={index} className="transition-colors">
-              <MemoizedLine text={line.text} noPrompt={!line.showPrompt} noCaret prompt={prompt} />
-            </p>
+            <MemoizedLine key={index} text={line.text} noPrompt={!line.showPrompt} noCaret prompt={prompt} />
           ))}
           {!isComplete && typingLine.currentIndex > 0 && (
-            <p>
-              <MemoizedLine text={typingLine.text} isTyping prompt={prompt} />
-            </p>
+            <MemoizedLine text={typingLine.text} isTyping prompt={prompt} />
           )}
           {isComplete && (
             <TerminalInput

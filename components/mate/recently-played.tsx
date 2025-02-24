@@ -7,6 +7,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Clock, Music } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { useSpotify } from '@/lib/hooks/use-spotify';
+import { Button } from '@/components/ui/button';
 
 const formatDuration = (ms: number): string => {
   const minutes = Math.floor(ms / 60000);
@@ -14,23 +15,33 @@ const formatDuration = (ms: number): string => {
   return `${minutes}:${Number(seconds) < 10 ? '0' : ''}${seconds}`;
 };
 
+const ITEMS_PER_PAGE = 10;
+
 export function RecentlyPlayed() {
   const [mounted, setMounted] = useState(false);
+  const [visibleItems, setVisibleItems] = useState(ITEMS_PER_PAGE);
   const { data: spotifyData, isLoading } = useSpotify();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  const loadMore = () => {
+    setVisibleItems((prev) => prev + ITEMS_PER_PAGE);
+  };
+
   if (!mounted) return null;
   if (isLoading) return null;
   if (!spotifyData?.recentlyPlayed?.length) return null;
 
+  const displayedItems = spotifyData.recentlyPlayed.slice(0, visibleItems);
+  const hasMore = visibleItems < spotifyData.recentlyPlayed.length;
+
   return (
-    <Card className="w-full bg-transparent max-h-[600px] overflow-auto border-none shadow-none rounded-none">
+    <Card className="w-full bg-transparent border-none shadow-none rounded-none">
       <CardContent className="p-0">
-        <div className="block sm:hidden space-y-4 overflow-auto">
-          {spotifyData.recentlyPlayed.map((item, index) => (
+        <div className="block sm:hidden space-y-4">
+          {displayedItems.map((item, index) => (
             <Card key={`${item.id}-${index}`}>
               <CardContent className="p-4">
                 <div className="flex items-center space-x-4">
@@ -79,7 +90,7 @@ export function RecentlyPlayed() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {spotifyData.recentlyPlayed.map((item, index) => (
+              {displayedItems.map((item, index) => (
                 <TableRow key={`${item.id}-${index}`} className="group hover:bg-muted/50 border-b last:border-b-0">
                   <TableCell className="p-2">
                     <Avatar className="h-8 w-8">
@@ -113,6 +124,14 @@ export function RecentlyPlayed() {
             </TableBody>
           </Table>
         </div>
+
+        {hasMore && (
+          <div className="mt-4 flex justify-center">
+            <Button variant="outline" onClick={loadMore} className="text-sm">
+              Load More
+            </Button>
+          </div>
+        )}
       </CardContent>
     </Card>
   );

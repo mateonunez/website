@@ -9,46 +9,63 @@ import { ExternalLink, Music, Pause, Play, Radio, Volume2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useSpotify } from '@/lib/hooks/use-spotify';
 
+const PROGRESS_DELTA_THRESHOLD = 20000;
+
 export function Player() {
   const { data: spotifyData } = useSpotify();
   const [simulatedProgress, setSimulatedProgress] = useState(0);
   const [simulatedTime, setSimulatedTime] = useState(0);
+  const [currentSongId, setCurrentSongId] = useState<string | null>(null);
+  const [lastUpdateTime, setLastUpdateTime] = useState(Date.now());
+
   const url = spotifyData?.currentlyPlaying?.isPlaying ? spotifyData.currentlyPlaying.url : `${config.baseUrl}/spotify`;
 
-  // Update simulated progress every second
   useEffect(() => {
     if (!spotifyData?.currentlyPlaying?.isPlaying) {
       setSimulatedProgress(0);
       setSimulatedTime(0);
+      setCurrentSongId(null);
+      setLastUpdateTime(Date.now());
       return;
     }
 
+    const songId = spotifyData.currentlyPlaying.id;
     const duration = Number(spotifyData.currentlyPlaying.duration);
-    const currentProgress = Number(spotifyData.currentlyPlaying.progress);
-    const shouldReset = simulatedTime === 0 || Math.abs(simulatedTime - currentProgress) > 2000;
+    const actualProgress = Number(spotifyData.currentlyPlaying.progress);
 
-    if (shouldReset) {
-      setSimulatedProgress((currentProgress / duration) * 100);
-      setSimulatedTime(currentProgress);
+    if (currentSongId !== songId) {
+      setCurrentSongId(songId);
+      setSimulatedTime(actualProgress);
+      setSimulatedProgress((actualProgress / duration) * 100);
+      setLastUpdateTime(Date.now());
+      return;
     }
 
-    const progressIncrement = (100 / duration) * 1000;
-    const timeIncrement = 1000;
+    const delta = Math.abs(simulatedTime - actualProgress);
+    if (delta > PROGRESS_DELTA_THRESHOLD) {
+      setSimulatedTime(actualProgress);
+      setSimulatedProgress((actualProgress / duration) * 100);
+      setLastUpdateTime(Date.now());
+    }
 
     const interval = setInterval(() => {
-      setSimulatedProgress((prev) => {
-        if (prev >= 100) return 0;
-        return prev + progressIncrement;
-      });
+      const now = Date.now();
+      const elapsed = now - lastUpdateTime;
+      setLastUpdateTime(now);
 
       setSimulatedTime((prev) => {
-        if (prev >= duration) return 0;
-        return prev + timeIncrement;
+        const newTime = prev + elapsed;
+        return newTime >= duration ? duration : newTime;
+      });
+
+      setSimulatedProgress((_prev) => {
+        const newProgress = (simulatedTime / duration) * 100;
+        return newProgress >= 100 ? 100 : newProgress;
       });
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [spotifyData]);
+  }, [spotifyData, currentSongId, simulatedTime]);
 
   return (
     <Card className="relative overflow-hidden bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-0 rounded-none max-w-dvw">

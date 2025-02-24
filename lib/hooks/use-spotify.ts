@@ -6,7 +6,6 @@ import useSWR from 'swr';
 export function useSpotify() {
   const { setSpotifyListening, setSpotifyRecentlyPlayed, listening, recentlyPlayed } = useUI();
 
-  // Fetch currently playing
   const { error: currentError, isLoading: currentLoading } = useSWR('/api/spotify/currently-listening', {
     fetcher: async (url: string) => {
       const res = await fetch(url);
@@ -19,7 +18,6 @@ export function useSpotify() {
     revalidateOnReconnect: true,
   });
 
-  // Fetch recently played
   const { error: recentError, isLoading: recentLoading } = useSWR('/api/spotify/recently-played', {
     fetcher: async (url: string) => {
       const res = await fetch(url);
@@ -27,7 +25,7 @@ export function useSpotify() {
       setSpotifyRecentlyPlayed(data);
       return data;
     },
-    refreshInterval: 60 * 1000, // 1 minute - less frequent than currently playing
+    refreshInterval: 60 * 1000, // 1 minute
     revalidateOnFocus: true,
     revalidateOnReconnect: true,
   });
