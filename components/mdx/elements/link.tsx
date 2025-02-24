@@ -9,14 +9,21 @@ export function Link({ href = '', className, children, ...props }: AnchorHTMLAtt
 
   if (isExternal) {
     return (
-      <a href={href} className={classes} target="_blank" rel="noopener noreferrer" {...props}>
+      <a
+        href={href}
+        className={classes}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Visit ${href}`}
+        {...props}
+      >
         {children}
       </a>
     );
   }
 
   return (
-    <NextLink href={href} className={classes} {...props}>
+    <NextLink href={href} className={classes} {...props} aria-label={`Visit ${href}`}>
       {children}
     </NextLink>
   );

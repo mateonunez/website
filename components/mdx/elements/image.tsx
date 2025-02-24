@@ -10,7 +10,6 @@ interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 }
 
 export function Image({ src, alt, className, width, height, ...props }: ImageProps) {
-  // Handle external images
   if (src.startsWith('http')) {
     return (
       <div className="relative aspect-video w-full overflow-hidden rounded-lg">
@@ -26,7 +25,6 @@ export function Image({ src, alt, className, width, height, ...props }: ImagePro
     );
   }
 
-  // Handle local images
   return (
     <div className="relative aspect-video w-full max-w-dvw overflow-hidden rounded-lg">
       <NextImage

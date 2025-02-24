@@ -9,17 +9,10 @@ interface ArticleLayoutProps {
   children: ReactNode;
 }
 
-export function ArticleLayout({ title, date, readingTime, tags, children }: ArticleLayoutProps) {
+export function ArticleLayout({ date, readingTime, tags, children }: ArticleLayoutProps) {
   return (
     <>
-      <header className="flex h-auto min-h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear px-4 py-3 sm:py-4 md:h-16">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full">
-          <h1 className="text-3xl font-bold font-hanken animate-in fade-in duration-1000 delay-200 break-words">
-            {title}
-          </h1>
-        </div>
-      </header>
-      <main className="flex-1 max-w-screen-lg mx-auto">
+      <main className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg">
         <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6">
           <div className="space-y-4 sm:space-y-6">
             {(date || readingTime || tags) && (

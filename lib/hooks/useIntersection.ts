@@ -22,7 +22,6 @@ export default function useIntersection(ref: RefObject<HTMLElement>, rootMargin 
     return (): void => {
       observer.unobserve(current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return isIntersecting;

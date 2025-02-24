@@ -55,13 +55,11 @@ export function Column({
   width = { default: 'full', md: '1/2' },
   offset,
 }: ColumnProps): JSX.Element {
-  // Generate responsive width classes
   const widthClasses = Object.entries(width).map(([breakpoint, size]) => {
     const prefix = breakpoint === 'default' ? '' : `${breakpoint}:`;
     return `${prefix}${widthStyles[size]}`;
   });
 
-  // Generate responsive offset classes if provided
   const offsetClasses = offset
     ? Object.entries(offset).map(([breakpoint, size]) => {
         const prefix = breakpoint === 'default' ? '' : `${breakpoint}:`;

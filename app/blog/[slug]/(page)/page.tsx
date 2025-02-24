@@ -1,9 +1,11 @@
+import { Suspense, memo } from 'react';
 import { getArticle } from '@/lib/articles/parser';
 import { ArticleLayout } from '@/components/mate/article-layout';
 import meta from '@/lib/config/metadata';
 import config from '@/lib/config';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
+import type { Article } from '@/types/article';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -34,18 +36,36 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+const ArticleContent = memo(({ content, frontmatter }: Article) => (
+  <ArticleLayout
+    title={frontmatter.title}
+    date={frontmatter.date}
+    readingTime={frontmatter.readingTime}
+    tags={frontmatter.tags}
+  >
+    {content}
+  </ArticleLayout>
+));
+
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }): Promise<JSX.Element> {
   const { slug } = await params;
   const { content, frontmatter } = await getArticle({ slug });
 
   return (
-    <ArticleLayout
-      title={frontmatter.title}
-      date={frontmatter.date}
-      readingTime={frontmatter.readingTime}
-      tags={frontmatter.tags}
+    <Suspense
+      fallback={
+        <div className="animate-pulse space-y-4">
+          <div className="h-8 bg-gray-200 rounded w-3/4" />
+          <div className="h-4 bg-gray-200 rounded w-1/4" />
+          <div className="space-y-3">
+            <div className="h-4 bg-gray-200 rounded" />
+            <div className="h-4 bg-gray-200 rounded" />
+            <div className="h-4 bg-gray-200 rounded w-5/6" />
+          </div>
+        </div>
+      }
     >
-      {content}
-    </ArticleLayout>
+      <ArticleContent content={content} frontmatter={frontmatter} />
+    </Suspense>
   );
 }

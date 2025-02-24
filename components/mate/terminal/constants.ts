@@ -12,11 +12,6 @@ export const ABOUT_MESSAGES = [
   '🚀 Always building, always learning. "He who fights with monsters..."',
 ] as const;
 
-export const DEFAULT_MESSAGES = [
-  "Welcome to AIt's terminal.",
-  '',
-  "Type 'help' to see available commands.",
-  '',
-] as const;
+export const DEFAULT_MESSAGES = ['Welcome to my terminal.', '', "Type 'help' to see available commands.", ''] as const;
 
 export const getTypingDuration = (): number => 80 + 80 * (Math.random() - 0.5);
