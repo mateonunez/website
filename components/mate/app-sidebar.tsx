@@ -67,11 +67,15 @@ const data = {
       title: 'Open Source',
       url: '/open-source',
       icon: Code2,
-      disabled: true,
+      disabled: false,
       items: [
         {
-          title: 'Projects',
+          title: 'Overview',
           url: '/open-source',
+        },
+        {
+          title: 'Projects',
+          url: '/open-source/projects',
         },
         {
           title: 'Contributions',

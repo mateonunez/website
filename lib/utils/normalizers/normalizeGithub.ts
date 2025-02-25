@@ -42,6 +42,7 @@ interface NormalizedContributions {
     private: boolean;
   }>;
   total: number;
+  calendar: GitHubContributionCalendar;
 }
 
 interface NormalizedSponsor {
@@ -146,6 +147,7 @@ function normalizeContributions(contributions: GitHubUser['contributionsCollecti
     lastWeek,
     activity,
     total,
+    calendar: contributions.contributionCalendar,
   };
 }
 
