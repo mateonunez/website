@@ -1,9 +1,0 @@
-.personalLink {
-  margin-left: 0.5rem;
-}
-
-@media (max-width: 768px) {
-  .personalLink {
-    margin: 0;
-  }
-}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useUI } from '@/components/legacy/ui/ui-context';
+import { useUI } from '@/components/providers/ui-provider';
 import useSWR from 'swr';
 
 export function useSpotify() {

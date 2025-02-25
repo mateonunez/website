@@ -5,6 +5,7 @@ import PlayerWrapper from '@/components/mate/player.wrapper';
 import RecentlyPlayedWrapper from '@/components/mate/recently-played.wrapper';
 import GitHubCommunityWrapper from '@/components/mate/github-community.wrapper';
 import LatestArticlesWrapper from '@/components/mate/latest-articles.wrapper';
+import LastActivityWrapper from '@/components/mate/last-activity.wrapper';
 
 const Header = memo(() => (
   <header className="flex h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
@@ -32,6 +33,13 @@ const MainContent = memo(() => (
   </div>
 ));
 
+const BottomContent = memo(() => (
+  <div className="col-span-12 md:col-span-7 lg:col-span-8 space-y-6">
+    <h2 className="text-xl font-semibold mb-2">Open Source Activity</h2>
+    <LastActivityWrapper />
+  </div>
+));
+
 export default async function HomePage(): Promise<JSX.Element> {
   return (
     <>
@@ -39,7 +47,7 @@ export default async function HomePage(): Promise<JSX.Element> {
       <div className="flex-none">
         <PlayerWrapper />
       </div>
-      <main className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg max-w-dvw">
+      <div className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg max-w-dvw">
         <div className="container mx-auto p-6">
           <Toaster />
           <div className="mb-8">
@@ -49,8 +57,9 @@ export default async function HomePage(): Promise<JSX.Element> {
             <MainContent />
             <SidebarContent />
           </div>
+          <BottomContent />
         </div>
-      </main>
+      </div>
     </>
   );
 }

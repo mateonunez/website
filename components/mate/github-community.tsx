@@ -96,7 +96,7 @@ export function GitHubCommunity() {
     );
   }
 
-  const { sponsors, followers, url } = githubData;
+  const { sponsors, followers, url } = githubData.profile;
   const displayedSponsors = sponsors.slice(0, visibleSponsors);
   const displayedFollowers = followers.slice(0, visibleFollowers);
   const hasMoreSponsors = visibleSponsors < sponsors.length;

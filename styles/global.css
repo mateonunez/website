@@ -245,13 +245,37 @@
   }
   @keyframes pulse {
     0% {
-      opacity: 1;
-    }
-    50% {
       opacity: 0.5;
     }
     100% {
       opacity: 1;
     }
+  }
+}
+
+/* Custom scrollbar styles for tabs */
+.tabs-scrollbar {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.tabs-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.tabs-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tabs-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.2);
+  border-radius: 20px;
+}
+
+/* Firefox scrollbar styles */
+@supports (scrollbar-width: thin) {
+  .tabs-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(100, 100, 100, 0.2) transparent;
   }
 }

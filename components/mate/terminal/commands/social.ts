@@ -8,7 +8,10 @@ export const communityCommand: Command = {
     const { data: githubData } = dataSources.github;
     if (!githubData) return 'No GitHub data available at the moment.';
 
-    const { sponsors, followers, url } = githubData;
+    const { profile } = githubData;
+    if (!profile) return 'No GitHub profile data available at the moment.';
+
+    const { sponsors, followers, url } = profile;
     const sponsorCount = sponsors.length;
     const followerCount = followers.length;
     const sponsorsList = sponsors
@@ -66,4 +69,57 @@ export const recentlyPlayedCommand: Command = {
   aliases: ['rp'],
 };
 
-export const socialCommands: Command[] = [musicCommand, recentlyPlayedCommand, communityCommand];
+export const lastActivityCommand: Command = {
+  name: 'last-activity',
+  description: 'Check my recent GitHub activity',
+  handler: ({ dataSources }) => {
+    const { data: githubData } = dataSources.github;
+    if (!githubData) return 'No GitHub data available at the moment.';
+
+    const { activities } = githubData;
+    if (!activities) return 'No GitHub activity data available at the moment.';
+
+    const { activities: activityList } = activities;
+    if (!activityList || activityList.length === 0) return 'No recent GitHub activities found.';
+
+    const recentActivities = activityList.slice(0, 5); // Show only 5 most recent
+
+    const activityEmojis = {
+      commit: '📝',
+      pull_request: '🔄',
+      issue: '🐛',
+      review: '👀',
+      star: '⭐',
+      fork: '🍴',
+      release: '🚀',
+      other: '🔧',
+    };
+
+    const activitiesList = recentActivities
+      .map((activity) => {
+        const date = new Date(activity.date).toLocaleDateString('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+        });
+        const emoji = activityEmojis[activity.type] || activityEmojis.other;
+        return `  ${emoji} ${activity.title} (${activity.repo.fullName}) - ${date}`;
+      })
+      .join('\n');
+
+    return [
+      // biome-ignore lint/nursery/noSecrets: it's not a secret
+      '─────────────────────────────',
+      '🚀 Recent GitHub Activity',
+      // biome-ignore lint/nursery/noSecrets: it's not a secret
+      '─────────────────────────────',
+      activitiesList || 'No recent activity',
+      'View more on GitHub',
+      // biome-ignore lint/nursery/noSecrets: it's not a secret
+      '─────────────────────────────',
+    ].join('\n');
+  },
+  aliases: ['activity', 'recent'],
+};
+
+export const socialCommands: Command[] = [musicCommand, recentlyPlayedCommand, communityCommand, lastActivityCommand];

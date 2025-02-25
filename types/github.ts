@@ -12,6 +12,9 @@ export interface GitHubRepository {
   forkCount: number;
   isPrivate?: boolean;
   primaryLanguage: GitHubLanguage | null;
+  owner: {
+    login: string;
+  };
   readme?: {
     text: string;
   };
@@ -152,4 +155,112 @@ export interface NormalizedGitHubUser {
       commits: GitHubContribution[];
     }>;
   };
+}
+
+export interface GitHubActivityType {
+  name: string;
+  color?: string;
+  icon?: string;
+}
+
+export interface GitHubActivity {
+  id: string;
+  type: 'commit' | 'pull_request' | 'issue' | 'review' | 'fork' | 'star' | 'release' | 'other';
+  title: string;
+  description?: string;
+  repo: {
+    name: string;
+    url: string;
+    owner: string;
+  };
+  createdAt: string;
+  url: string;
+  actor?: {
+    login: string;
+    avatarUrl: string;
+    url: string;
+  };
+}
+
+export interface GitHubActivitiesResponse {
+  viewer: {
+    login: string;
+    contributionsCollection: {
+      commitContributionsByRepository: GitHubRepositoryContribution[];
+    };
+    pullRequests: {
+      nodes: Array<{
+        id: string;
+        title: string;
+        url: string;
+        createdAt: string;
+        closed: boolean;
+        merged: boolean;
+        state: string;
+        repository: {
+          name: string;
+          url: string;
+          isPrivate: boolean;
+        };
+      }>;
+    };
+    issues: {
+      nodes: Array<{
+        id: string;
+        title: string;
+        url: string;
+        createdAt: string;
+        closed: boolean;
+        state: string;
+        repository: {
+          name: string;
+          url: string;
+          isPrivate: boolean;
+        };
+      }>;
+    };
+    starredRepositories: {
+      edges: Array<{
+        starredAt: string;
+        node: {
+          id: string;
+          name: string;
+          url: string;
+          isPrivate: boolean;
+          owner: {
+            login: string;
+          };
+          stargazers: {
+            totalCount: number;
+          };
+          description: string;
+          createdAt: string;
+        };
+      }>;
+    };
+  };
+}
+
+export interface NormalizedGitHubActivity {
+  id: string;
+  type: GitHubActivity['type'];
+  title: string;
+  description?: string;
+  repo: {
+    name: string;
+    fullName: string;
+    url: string;
+  };
+  date: string;
+  url: string;
+  actor?: {
+    username: string;
+    avatar: string;
+    url: string;
+  };
+}
+
+export interface LastActivitiesData {
+  activities: NormalizedGitHubActivity[];
+  activeRepositories: string[];
 }

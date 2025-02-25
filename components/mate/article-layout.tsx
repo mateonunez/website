@@ -14,7 +14,7 @@ interface ArticleLayoutProps {
 export function ArticleLayout({ date, readingTime, tags, children }: ArticleLayoutProps) {
   return (
     <>
-      <main className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg">
+      <div className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg">
         <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6">
           <div className="space-y-4 sm:space-y-6">
             {(date || readingTime || tags) && (
@@ -57,7 +57,7 @@ export function ArticleLayout({ date, readingTime, tags, children }: ArticleLayo
             <MDXLayout>{children}</MDXLayout>
           </div>
         </div>
-      </main>
+      </div>
     </>
   );
 }
