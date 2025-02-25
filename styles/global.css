@@ -155,6 +155,10 @@
     @apply bg-background text-foreground;
     font-family: "Inter", sans-serif;
   }
+  body.overflow-hidden {
+    overflow: hidden;
+    touch-action: none;
+  }
   [data-slot="sidebar-wrapper"] {
     position: relative;
     width: 100%;
@@ -165,6 +169,13 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+  }
+  [data-slot="sidebar-inset"][data-sidebar-open="true"] {
+    overflow: hidden;
+    pointer-events: none;
+  }
+  [data-slot="sidebar-inset"][data-sidebar-open="true"] > * {
+    pointer-events: auto;
   }
   [data-slot="sidebar"] {
     position: fixed;
