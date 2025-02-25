@@ -1,4 +1,4 @@
-import type { Command, CommandGroup, CommandRegistry } from '../types/commands';
+import type { Command, CommandGroup, CommandRegistry } from './types/commands';
 
 class CommandRegistryImpl implements CommandRegistry {
   groups: CommandGroup[] = [];
