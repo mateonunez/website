@@ -7,6 +7,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import React from 'react';
 
 interface IBreadcrumbItem {
   label: string;
@@ -35,14 +36,14 @@ export function BlogBreadcrumb({ items }: BlogBreadcrumbProps) {
           const truncatedLabel = item.label.length > 25 ? `${item.label.substring(0, 22)}...` : item.label;
 
           return (
-            <BreadcrumbItem key={item.label}>
-              {isLast ? (
-                <BreadcrumbPage className="max-w-[200px] md:max-w-none truncate md:text-clip">
-                  <span className="hidden md:inline">{fullLabel}</span>
-                  <span className="inline md:hidden">{truncatedLabel}</span>
-                </BreadcrumbPage>
-              ) : (
-                <>
+            <React.Fragment key={item.label}>
+              <BreadcrumbItem>
+                {isLast ? (
+                  <BreadcrumbPage className="max-w-[200px] md:max-w-none truncate md:text-clip">
+                    <span className="hidden md:inline">{fullLabel}</span>
+                    <span className="inline md:hidden">{truncatedLabel}</span>
+                  </BreadcrumbPage>
+                ) : (
                   <BreadcrumbLink asChild>
                     <Link
                       href={item.href ?? '#'}
@@ -52,10 +53,10 @@ export function BlogBreadcrumb({ items }: BlogBreadcrumbProps) {
                       <span className="inline md:hidden">{truncatedLabel}</span>
                     </Link>
                   </BreadcrumbLink>
-                  <BreadcrumbSeparator />
-                </>
-              )}
-            </BreadcrumbItem>
+                )}
+              </BreadcrumbItem>
+              {!isLast && <BreadcrumbSeparator />}
+            </React.Fragment>
           );
         })}
       </BreadcrumbList>

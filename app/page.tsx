@@ -3,10 +3,10 @@ import { Toaster } from '@/components/ui/sonner';
 import TerminalWrapper from '@/components/mate/terminal/terminal.wrapper';
 import PlayerWrapper from '@/components/mate/player.wrapper';
 import RecentlyPlayedWrapper from '@/components/mate/recently-played.wrapper';
-import GitHubCommunityWrapper from '@/components/mate/github-community.wrapper';
 import LatestArticlesWrapper from '@/components/mate/latest-articles.wrapper';
-import LastActivityWrapper from '@/components/mate/last-activity.wrapper';
 import { Separator } from '@/components/ui/separator';
+import GitHubCommunityWrapper from '@/components/mate/open-source/github-community.wrapper';
+import LastActivityWrapper from '@/components/mate/open-source/last-activity.wrapper';
 
 const Header = memo(() => (
   <header className="flex h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
