@@ -1,7 +1,7 @@
-import { useCallback, useMemo } from 'react';
-import type { DataSources, TerminalTools } from '../command-context';
+import { useCallback } from 'react';
 import type { TerminalStateActions } from './use-terminal-state';
-import { commandRegistry } from '../commands/index';
+import { useCommandRunner } from './use-command-runner';
+import type { DataSources, TerminalTools } from '../command-context';
 
 interface CommandExecutorOptions {
   dataSources: DataSources;
@@ -10,45 +10,20 @@ interface CommandExecutorOptions {
 }
 
 export function useCommandExecutor({ dataSources, tools, actions }: CommandExecutorOptions) {
-  const commandMap = useMemo(() => commandRegistry.getCommandMap(), []);
+  const { runCommand, getMatchingCommands } = useCommandRunner({ dataSources, tools });
 
   const executeCommand = useCallback(
     async (input: string) => {
-      const trimmedInput = input.trim().toLowerCase();
-      const command = commandMap.get(trimmedInput);
-      let response: string;
-
-      try {
-        if (command) {
-          response = await command.handler({ dataSources, tools });
-        } else {
-          response = 'Unknown command. Type "help" for available commands.';
-        }
-      } catch (error) {
-        console.error('Error executing command:', error);
-        response = 'An error occurred while executing the command.';
-      }
-
+      const result = await runCommand(input);
       const newLines = [
         { text: input, showPrompt: true },
-        ...response.split('\n').map((text) => ({ text, showPrompt: false })),
+        ...result.output.split('\n').map((text) => ({ text, showPrompt: false })),
       ];
-
       actions.addCompletedLines(newLines);
       actions.addToHistory(input);
     },
-    [commandMap, dataSources, tools, actions],
+    [runCommand, actions],
   );
 
-  const getMatchingCommands = useCallback(
-    (input: string) => {
-      return Array.from(commandMap.keys()).filter((cmd) => cmd.startsWith(input.trim().toLowerCase()));
-    },
-    [commandMap],
-  );
-
-  return {
-    executeCommand,
-    getMatchingCommands,
-  };
+  return { executeCommand, getMatchingCommands };
 }

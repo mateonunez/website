@@ -1,4 +1,4 @@
-import { registry } from '../registry/command-registry';
+import { registry } from '../command-registry';
 import type { Command } from '../types/commands';
 import { formatCommandGroup } from '../utils/formatting';
 

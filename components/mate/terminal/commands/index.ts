@@ -1,5 +1,5 @@
 // biome-ignore lint/nursery/noExportedImports: it's ok
-import { registry } from '../registry/command-registry';
+import { registry } from '../command-registry';
 import { systemCommands } from './system';
 import { personalCommands } from './personal';
 import { socialCommands } from './social';

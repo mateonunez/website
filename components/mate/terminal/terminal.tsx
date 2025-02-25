@@ -1,6 +1,6 @@
 'use client';
 
-import { type JSX, useEffect, useRef, useCallback, type InputHTMLAttributes, forwardRef, useMemo, memo } from 'react';
+import { type JSX, useEffect, useRef, useCallback, useMemo, memo } from 'react';
 import { cn } from '@/lib/utils';
 import { Line } from './line';
 import { DEFAULT_HEIGHT, DEFAULT_MESSAGES, DEFAULT_PROMPT, SLEEP_DURATION, getTypingDuration } from './constants';
@@ -10,6 +10,7 @@ import { CommandContextProvider, type DataSources } from './command-context';
 import { useTerminalState } from './hooks/use-terminal-state';
 import { useCommandExecutor } from './hooks/use-command-executor';
 import { useTerminalInput } from './hooks/use-terminal-input';
+import { TerminalInput } from './terminal-input';
 import type { TerminalProps } from './types';
 
 export function Terminal({
@@ -55,39 +56,41 @@ export function Terminal({
   const handleUserInput = useTerminalInput({ state, actions, executeCommand, getMatchingCommands });
 
   useEffect(() => {
-    const isLastParagraph = currentLine === initialMessages.length;
-
-    if (isLastParagraph) {
-      actions.setIsComplete(true);
-      return;
-    }
+    if (isComplete) return;
 
     const currentText = initialMessages[currentLine];
+    let index = typingLine.currentIndex;
+    let startTime: number | null = null;
 
-    if (typingLine.currentIndex === 0) {
-      const timer = setTimeout(() => {
-        actions.setTypingLine({ text: '', currentIndex: 1 });
-      }, SLEEP_DURATION);
-      return () => clearTimeout(timer);
-    }
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
 
-    if (typingLine.currentIndex <= currentText.length) {
-      const timer = setTimeout(() => {
-        actions.setTypingLine({
-          text: currentText.slice(0, typingLine.currentIndex),
-          currentIndex: typingLine.currentIndex + 1,
-        });
-      }, getTypingDuration());
-      return () => clearTimeout(timer);
-    }
+      if (elapsed >= getTypingDuration()) {
+        if (index <= currentText.length) {
+          actions.setTypingLine({ text: currentText.slice(0, index), currentIndex: index });
+          index++;
+          startTime = timestamp;
+        } else {
+          actions.addCompletedLine({ text: currentText, showPrompt: false });
+          actions.setCurrentLine(currentLine + 1);
+          actions.setTypingLine({ text: '', currentIndex: 0 });
+          if (currentLine + 1 === initialMessages.length) {
+            actions.setIsComplete(true);
+          }
+          return;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    };
 
     const timer = setTimeout(() => {
-      actions.addCompletedLine({ text: currentText, showPrompt: false });
-      actions.setCurrentLine(currentLine + 1);
-      actions.setTypingLine({ text: '', currentIndex: 0 });
+      requestAnimationFrame(animate);
     }, SLEEP_DURATION);
+
     return () => clearTimeout(timer);
-  }, [currentLine, typingLine, initialMessages, actions]);
+  }, [currentLine, initialMessages, actions, isComplete, typingLine.currentIndex]);
 
   const scrollToBottom = useCallback(() => {
     if (terminalRef.current) {
@@ -157,27 +160,3 @@ const TerminalHeader = memo(function TerminalHeader() {
     </div>
   );
 });
-
-interface TerminalInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  prompt: string;
-}
-
-const TerminalInput = memo(
-  forwardRef<HTMLInputElement, TerminalInputProps>(({ prompt, ...props }, ref) => (
-    <div className="flex items-center gap-1">
-      <span className="font-black text-amber-500">{prompt} </span>
-      <input
-        ref={ref}
-        type="text"
-        className="flex-1 bg-transparent border-none outline-none text-white caret-amber-500 min-w-0 text-base md:text-sm"
-        placeholder="Type a command..."
-        autoComplete="off"
-        autoCorrect="off"
-        autoCapitalize="none"
-        inputMode="search"
-        enterKeyHint="send"
-        {...props}
-      />
-    </div>
-  )),
-);
