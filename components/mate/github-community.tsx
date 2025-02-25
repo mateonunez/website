@@ -58,7 +58,7 @@ function FollowerCard({ follower }: FollowerCardProps) {
         <AvatarImage src={follower.avatar} alt={follower.username} />
         <AvatarFallback>{follower.username[0].toUpperCase()}</AvatarFallback>
       </Avatar>
-      <span className="text-[10px] font-medium truncate w-full">{follower.username}</span>
+      <span className="text-xs font-medium truncate w-full">{follower.username}</span>
     </a>
   );
 }
@@ -103,24 +103,32 @@ export function GitHubCommunity() {
   const hasMoreFollowers = visibleFollowers < followers.length;
 
   return (
-    <Card className="w-full bg-transparent border-none shadow-none rounded-none">
-      <CardHeader className="p-4 pb-0">
-        <CardTitle className="text-lg">GitHub Community</CardTitle>
+    <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-none">
+      <CardHeader className="p-0">
+        <CardTitle className="text-base sm:text-lg flex items-center gap-1.5 sm:gap-2 font-hanken">
+          <Users className="h-4 w-4 sm:h-5 sm:w-5 text-amber-500" />
+          GitHub Community
+        </CardTitle>
         <CardDescription className="text-xs">My amazing sponsors and followers on GitHub</CardDescription>
       </CardHeader>
+
       <CardContent className="p-0">
         <Tabs defaultValue="sponsors" className="w-full">
-          <TabsList className="w-full grid grid-cols-2 rounded-none bg-muted/50">
-            <TabsTrigger value="sponsors" className="flex items-center gap-2">
-              <Heart className="h-4 w-4 text-rose-500" />
-              <span>Sponsors ({sponsors.length})</span>
-            </TabsTrigger>
-            <TabsTrigger value="followers" className="flex items-center gap-2">
-              <Users className="h-4 w-4" />
-              <span>Followers ({followers.length})</span>
-            </TabsTrigger>
-          </TabsList>
-          <div className="p-4">
+          <div className="overflow-x-auto overflow-y-hidden">
+            <TabsList className="w-full flex justify-start bg-muted/30 p-1.5 tabs-scrollbar mt-4">
+              <div className="flex min-w-max gap-1.5 sm:gap-2 px-1.5 sm:px-2 pb-0.5">
+                <TabsTrigger value="sponsors" className="flex items-center gap-2 text-xs sm:text-sm py-1.5 sm:py-2">
+                  <Heart className="h-3 w-3 sm:h-4 sm:w-4 text-rose-500" />
+                  <span>Sponsors ({sponsors.length})</span>
+                </TabsTrigger>
+                <TabsTrigger value="followers" className="flex items-center gap-2 text-xs sm:text-sm py-1.5 sm:py-2">
+                  <Users className="h-3 w-3 sm:h-4 sm:w-4" />
+                  <span>Followers ({followers.length})</span>
+                </TabsTrigger>
+              </div>
+            </TabsList>
+          </div>
+          <div className="p-2 sm:p-4">
             <TabsContent value="sponsors" className="mt-0">
               <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
                 {displayedSponsors.map((sponsor) => (
@@ -129,14 +137,24 @@ export function GitHubCommunity() {
               </div>
               <div className="mt-4 flex justify-center gap-4">
                 {hasMoreSponsors && (
-                  <Button variant="outline" size="sm" onClick={loadMoreSponsors}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={loadMoreSponsors}
+                    className="text-xs sm:text-sm h-8 sm:h-9"
+                  >
                     Load More
                   </Button>
                 )}
-                <Button variant="outline" size="sm" className="gap-2 hover:text-rose-600 hover:bg-rose-100/10" asChild>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="gap-2 hover:text-rose-600 hover:bg-rose-100/10 text-xs sm:text-sm h-8 sm:h-9"
+                  asChild
+                >
                   <a href={`${url}?tab=sponsors`} target="_blank" rel="noopener noreferrer">
                     Become a sponsor
-                    <Heart className="h-4 w-4 text-rose-500" />
+                    <Heart className="h-3 w-3 sm:h-4 sm:w-4 text-rose-500" />
                   </a>
                 </Button>
               </div>
@@ -149,14 +167,19 @@ export function GitHubCommunity() {
               </div>
               <div className="mt-4 flex justify-center gap-4">
                 {hasMoreFollowers && (
-                  <Button variant="outline" size="sm" onClick={loadMoreFollowers}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={loadMoreFollowers}
+                    className="text-xs sm:text-sm h-8 sm:h-9"
+                  >
                     Load More
                   </Button>
                 )}
-                <Button variant="outline" size="sm" className="gap-2" asChild>
+                <Button variant="outline" size="sm" className="gap-2 text-xs sm:text-sm h-8 sm:h-9" asChild>
                   <a href={`${url}?tab=followers`} target="_blank" rel="noopener noreferrer">
                     View all followers
-                    <ExternalLink className="h-4 w-4" />
+                    <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4" />
                   </a>
                 </Button>
               </div>

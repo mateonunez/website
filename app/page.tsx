@@ -6,6 +6,7 @@ import RecentlyPlayedWrapper from '@/components/mate/recently-played.wrapper';
 import GitHubCommunityWrapper from '@/components/mate/github-community.wrapper';
 import LatestArticlesWrapper from '@/components/mate/latest-articles.wrapper';
 import LastActivityWrapper from '@/components/mate/last-activity.wrapper';
+import { Separator } from '@/components/ui/separator';
 
 const Header = memo(() => (
   <header className="flex h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
@@ -21,7 +22,9 @@ const SidebarContent = memo(() => (
   <div className="col-span-12 md:col-span-5 lg:col-span-4 space-y-6">
     <h2 className="text-xl font-semibold">I've been playing</h2>
     <RecentlyPlayedWrapper />
+
     <h2 className="text-xl font-semibold font-bungee">Thank You 🫰</h2>
+    <Separator className="my-4" />
     <GitHubCommunityWrapper />
   </div>
 ));
