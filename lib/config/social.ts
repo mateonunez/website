@@ -13,7 +13,7 @@ export type SocialLinkName = 'Email' | 'GitHub' | 'Twitter' | 'LinkedIn' | 'Inst
 export const socialLinks: SocialLink[] = [
   {
     name: 'Email',
-    href: 'mailto:mateonunez@protonmail.com',
+    href: 'mailto:mateonunez95@gmail.com',
     icon: Mail,
     showInFooter: false,
   },

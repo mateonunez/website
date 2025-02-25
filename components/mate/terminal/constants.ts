@@ -5,11 +5,12 @@ export const DEFAULT_PROMPT = 'MN >';
 
 export const ABOUT_MESSAGES = [
   "Hey there! I'm Mateo 👋",
-  '👨‍💻 Senior Software Engineer at BonusX. I code in JS, TS, Python—and sometimes in riddles.',
-  '☁️ The cloud is my playground: K8S, AWS, CNCF tools. I build castles in the sky.',
-  '🤖 Surfing the AI wave, crafting tools like AIt—my digital shadow.',
-  '⌨ VS Code + Vim, tmux always open, Colemak keys. Efficiency is an art.',
-  '🚀 Always building, always learning. "He who fights with monsters..."',
+  '',
+  '👨‍💻 Senior Software Engineer at BonusX, originally from Colombia and now based in Milan.',
+  '💻 Passionate about crafting modern web experiences with JavaScript, Next.js, and AI.',
+  '🌟 Diving deep into open-source projects on GitHub when not creating MIT bugs!',
+  "🎵 When not coding, you'll find me jamming to music on Spotify or exploring Milan's food scene.",
+  '🚀 Always building, always learning with a chill vibe. Welcome to my digital playground!',
 ] as const;
 
 export const DEFAULT_MESSAGES = ['Welcome to my terminal.', '', "Type 'help' to see available commands.", ''] as const;

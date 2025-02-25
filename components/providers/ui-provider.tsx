@@ -1,7 +1,7 @@
 'use client';
 
 import type { NormalizedCurrentlyPlaying, NormalizedRecentlyPlayed } from '@/types/spotify';
-import type { NormalizedGitHubUser } from '@/types/github';
+import type { NormalizedGitHubUser, LastActivitiesData } from '@/types/github';
 import React, { useCallback, useMemo, useContext, useReducer, type ReactNode, type JSX } from 'react';
 
 interface UIState {
@@ -18,6 +18,7 @@ interface UIState {
   listening: NormalizedCurrentlyPlaying | null;
   recentlyPlayed: NormalizedRecentlyPlayed[] | null;
   githubProfile: NormalizedGitHubUser | null;
+  lastActivities: LastActivitiesData | null;
 }
 
 export const initialState: UIState = {
@@ -33,6 +34,7 @@ export const initialState: UIState = {
   listening: {},
   recentlyPlayed: [],
   githubProfile: null,
+  lastActivities: null,
 };
 
 export const types = {
@@ -51,6 +53,7 @@ export const types = {
   SET_SPOTIFY_LISTENING: 'SET_SPOTIFY_LISTENING',
   SET_SPOTIFY_RECENTLY_PLAYED: 'SET_SPOTIFY_RECENTLY_PLAYED',
   SET_GITHUB_PROFILE: 'SET_GITHUB_PROFILE',
+  SET_LAST_ACTIVITIES: 'SET_LAST_ACTIVITIES',
 } as const;
 
 type ActionType = (typeof types)[keyof typeof types];
@@ -147,6 +150,12 @@ export const reducer = (state: UIState, action: UIAction): UIState => {
         githubProfile: action.payload as NormalizedGitHubUser,
       };
 
+    case types.SET_LAST_ACTIVITIES:
+      return {
+        ...state,
+        lastActivities: action.payload as LastActivitiesData,
+      };
+
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
@@ -168,6 +177,7 @@ interface UIContextType extends UIState {
   setSpotifyListening: (payload: NormalizedCurrentlyPlaying) => void;
   setSpotifyRecentlyPlayed: (payload: NormalizedRecentlyPlayed[]) => void;
   setGithubProfile: (payload: NormalizedGitHubUser) => void;
+  setLastActivities: (payload: LastActivitiesData) => void;
 }
 
 export const UIContext = React.createContext<UIContextType | undefined>(undefined);
@@ -220,6 +230,11 @@ export const UIProvider = ({ children, ...props }: UIProviderProps): JSX.Element
     [],
   );
 
+  const setLastActivities = useCallback(
+    (payload: LastActivitiesData) => dispatch({ type: types.SET_LAST_ACTIVITIES, payload }),
+    [],
+  );
+
   const value = useMemo(
     () => ({
       ...state,
@@ -238,6 +253,7 @@ export const UIProvider = ({ children, ...props }: UIProviderProps): JSX.Element
       setSpotifyListening,
       setSpotifyRecentlyPlayed,
       setGithubProfile,
+      setLastActivities,
     }),
     [
       state,
@@ -256,6 +272,7 @@ export const UIProvider = ({ children, ...props }: UIProviderProps): JSX.Element
       setSpotifyListening,
       setSpotifyRecentlyPlayed,
       setGithubProfile,
+      setLastActivities,
     ],
   );
 

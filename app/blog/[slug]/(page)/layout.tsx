@@ -13,7 +13,7 @@ export default async function ArticleLayout({
   const { frontmatter } = await getArticle({ slug });
 
   return (
-    <main className="flex-1 overflow-auto mx-auto max-w-dvw">
+    <div className="flex-1 overflow-auto mx-auto max-w-dvw">
       <PageHeader
         title={frontmatter.title}
         breadcrumbItems={[
@@ -27,6 +27,6 @@ export default async function ArticleLayout({
         ]}
       />
       {children}
-    </main>
+    </div>
   );
 }

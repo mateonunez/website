@@ -36,7 +36,10 @@ export function Terminal({
           recentlyPlayed: spotifyData?.recentlyPlayed,
         },
       },
-      github: { type: 'github' as const, data: githubData },
+      github: {
+        type: 'github' as const,
+        data: githubData,
+      },
     }),
     [spotifyData, githubData],
   );

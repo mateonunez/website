@@ -1,11 +1,13 @@
 import { graphql } from '@octokit/graphql';
-import type { GitHubUser, GitHubReadmeResponse, GitHubRepositoryResponse } from '@/types/github';
+import type {
+  GitHubUser,
+  GitHubReadmeResponse,
+  GitHubRepositoryResponse,
+  GitHubActivitiesResponse,
+} from '@/types/github';
 
 const { GITHUB_TOKEN } = process.env;
 
-/**
- * Get user and repository using GraphQL
- */
 export const getProfile = async (): Promise<GitHubUser> => {
   const { user } = await graphql<{ user: GitHubUser }>(
     `
@@ -126,13 +128,9 @@ export const getProfile = async (): Promise<GitHubUser> => {
       },
     },
   );
-
   return user;
 };
 
-/**
- * Get readme repository content
- */
 export const getReadme = async (): Promise<GitHubReadmeResponse['repository']['readme']> => {
   const { repository } = await graphql<GitHubReadmeResponse>(
     `
@@ -200,4 +198,123 @@ export const getRepository = async (repository: string): Promise<GitHubRepositor
   }
 
   return repositoryFetched;
+};
+
+export const getLastActivities = async (): Promise<GitHubActivitiesResponse['viewer']> => {
+  try {
+    const { viewer } = await graphql<GitHubActivitiesResponse>(
+      `
+        query {
+          viewer {
+            login
+            contributionsCollection {
+              commitContributionsByRepository(maxRepositories: 10) {
+                repository {
+                  name
+                  url
+                  description
+                  pushedAt
+                  stargazerCount
+                  forkCount
+                  isPrivate
+                  owner {
+                    login
+                  }
+                  primaryLanguage {
+                    name
+                    color
+                  }
+                }
+                contributions(first: 10) {
+                  totalCount
+                  nodes {
+                    occurredAt
+                    commitCount
+                    repository {
+                      name
+                      url
+                    }
+                  }
+                }
+              }
+            }
+            pullRequests(
+              first: 10
+              orderBy: {field: CREATED_AT, direction: DESC}
+              states: [OPEN, CLOSED, MERGED]
+            ) {
+              nodes {
+                id
+                title
+                url
+                createdAt
+                closed
+                merged
+                state
+                repository {
+                  name
+                  url
+                  isPrivate
+                  owner {
+                    login
+                  }
+                }
+              }
+            }
+            issues(
+              first: 10
+              orderBy: {field: CREATED_AT, direction: DESC}
+              states: [OPEN, CLOSED]
+            ) {
+              nodes {
+                id
+                title
+                url
+                createdAt
+                closed
+                state
+                repository {
+                  name
+                  url
+                  isPrivate
+                  owner {
+                    login
+                  }
+                }
+              }
+            }
+            starredRepositories(first: 10, orderBy: {field: STARRED_AT, direction: DESC}) {
+              edges {
+                starredAt
+                node {
+                  id
+                  name
+                  url
+                  isPrivate
+                  owner {
+                    login
+                  }
+                  stargazers {
+                    totalCount
+                  }
+                  description
+                  createdAt
+                }
+              }
+            }
+          }
+        }
+      `,
+      {
+        headers: {
+          accept: 'application/vnd.github.v3.raw+json',
+          authorization: `Bearer ${GITHUB_TOKEN}`,
+        },
+      },
+    );
+    return viewer;
+  } catch (error) {
+    console.error('Error fetching GitHub activities:', error);
+    throw new Error('Failed to fetch GitHub activities');
+  }
 };
