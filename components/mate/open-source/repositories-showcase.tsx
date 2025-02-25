@@ -9,6 +9,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Star, GitFork, Code, ExternalLink, Search, Clock, ArrowUpDown, Loader2 } from 'lucide-react';
 import { useGithub } from '@/lib/hooks/use-github';
+import { getTimeAgo, formatDate } from '@/lib/helpers/date';
 import type { NormalizedGitHubRepository } from '@/types/github';
 
 interface RepositoriesShowcaseProps {
@@ -19,19 +20,18 @@ interface RepositoriesShowcaseProps {
 type SortOption = 'stars' | 'forks' | 'recent' | 'name';
 
 const RepositoryCard = memo(({ repository }: { repository: NormalizedGitHubRepository }) => {
-  const formattedDate = new Date(repository.pushedAt).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-
+  const formattedDate = formatDate(new Date(repository.pushedAt));
   const timeAgo = getTimeAgo(new Date(repository.pushedAt));
 
   return (
-    <Card className="flex flex-col h-full transition-all duration-300 hover:shadow-md hover:border-amber-500/30 hover:bg-amber-500/5">
+    <Card className="flex flex-col h-full w-full transition-all duration-300 hover:shadow-md hover:border-amber-500/30 hover:bg-amber-500/5">
       <CardHeader className="pb-2">
         <div className="flex justify-between items-start gap-2">
-          <CardTitle className="text-lg font-medium truncate">{repository.name}</CardTitle>
+          <div className="min-w-0 flex-1">
+            <CardTitle className="text-lg font-medium truncate" title={repository.name}>
+              {repository.name}
+            </CardTitle>
+          </div>
           <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0" asChild>
             <a
               href={repository.url}
@@ -57,8 +57,8 @@ const RepositoryCard = memo(({ repository }: { repository: NormalizedGitHubRepos
           </div>
         )}
       </CardContent>
-      <CardFooter className="pt-0 flex items-center justify-between">
-        <div className="flex items-center gap-2 sm:gap-3 text-sm text-muted-foreground">
+      <CardFooter className="pt-0 flex items-center justify-center flex-wrap gap-3">
+        <div className="flex items-center gap-3 text-sm text-muted-foreground">
           <div className="flex items-center gap-1">
             <Star className="h-3.5 w-3.5 text-amber-500" />
             <span className="text-xs">{repository.stars}</span>
@@ -68,12 +68,10 @@ const RepositoryCard = memo(({ repository }: { repository: NormalizedGitHubRepos
             <span className="text-xs">{repository.forks}</span>
           </div>
         </div>
-        <div className="flex items-center">
-          <Badge variant="outline" className="text-xs gap-1 whitespace-nowrap">
-            <Clock className="h-3 w-3" />
-            <span title={formattedDate}>{timeAgo}</span>
-          </Badge>
-        </div>
+        <Badge variant="outline" className="text-xs gap-1 whitespace-nowrap px-2">
+          <Clock className="h-3 w-3" />
+          <span title={formattedDate}>{timeAgo}</span>
+        </Badge>
       </CardFooter>
     </Card>
   );
@@ -81,47 +79,10 @@ const RepositoryCard = memo(({ repository }: { repository: NormalizedGitHubRepos
 
 RepositoryCard.displayName = 'RepositoryCard';
 
-function getTimeAgo(date: Date): string {
-  const now = new Date();
-  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
-
-  if (diffInSeconds < 60) {
-    return 'just now';
-  }
-
-  const diffInMinutes = Math.floor(diffInSeconds / 60);
-  if (diffInMinutes < 60) {
-    return `${diffInMinutes}m ago`;
-  }
-
-  const diffInHours = Math.floor(diffInMinutes / 60);
-  if (diffInHours < 24) {
-    return `${diffInHours}h ago`;
-  }
-
-  const diffInDays = Math.floor(diffInHours / 24);
-  if (diffInDays < 7) {
-    return `${diffInDays}d ago`;
-  }
-
-  const diffInWeeks = Math.floor(diffInDays / 7);
-  if (diffInWeeks < 4) {
-    return `${diffInWeeks}w ago`;
-  }
-
-  const diffInMonths = Math.floor(diffInDays / 30);
-  if (diffInMonths < 12) {
-    return `${diffInMonths}mo ago`;
-  }
-
-  const diffInYears = Math.floor(diffInDays / 365);
-  return `${diffInYears}y ago`;
-}
-
 export function RepositoriesShowcase({ featured = false, limit = featured ? 6 : 12 }: RepositoriesShowcaseProps) {
   const { data, isLoading, isError } = useGithub();
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortBy, setSortBy] = useState<SortOption>('stars');
+  const [sortBy, setSortBy] = useState<SortOption>('recent');
   const [currentTab, setCurrentTab] = useState('all');
 
   if (isLoading) {
@@ -154,10 +115,8 @@ export function RepositoriesShowcase({ featured = false, limit = featured ? 6 : 
     );
   }
 
-  // Extract unique languages from repositories
   const languages = Array.from(new Set(repositories.map((repo) => repo.language).filter(Boolean) as string[]));
 
-  // Filter repositories based on search term and selected language only
   const filteredRepos = repositories.filter((repo) => {
     const matchesSearch =
       repo.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -167,7 +126,6 @@ export function RepositoriesShowcase({ featured = false, limit = featured ? 6 : 
     return matchesSearch && matchesLanguage;
   });
 
-  // Sort repositories based on selected sort option
   const sortedRepos = [...filteredRepos].sort((a, b) => {
     switch (sortBy) {
       case 'stars':
@@ -183,10 +141,8 @@ export function RepositoriesShowcase({ featured = false, limit = featured ? 6 : 
     }
   });
 
-  // Limit the number of repositories to display
   const displayedRepos = sortedRepos.slice(0, limit);
 
-  // If no repos match filters, show a message
   if (displayedRepos.length === 0) {
     return (
       <Card className="w-full border border-border/50">
@@ -254,7 +210,12 @@ export function RepositoriesShowcase({ featured = false, limit = featured ? 6 : 
         </Tabs>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
+      <div
+        className="w-full grid gap-3 sm:gap-4"
+        style={{
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))',
+        }}
+      >
         {displayedRepos.map((repo) => (
           <RepositoryCard key={repo.url} repository={repo} />
         ))}
