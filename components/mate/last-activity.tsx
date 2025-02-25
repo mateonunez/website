@@ -63,15 +63,15 @@ const ActivityItem = memo(({ activity }: ActivityItemProps) => {
             <Badge variant="secondary" className="hidden sm:inline-flex text-xs font-mono">
               {activity.type.replace('_', ' ')}
             </Badge>
-            <Badge variant="outline" className="inline-flex sm:hidden text-[10px] px-1 py-0 h-4 font-mono">
+            <Badge variant="outline" className="inline-flex sm:hidden text-xs px-1 py-0 h-4 font-mono">
               {activity.type.replace('_', ' ')}
             </Badge>
           </div>
-          <time dateTime={activity.date} className="text-[10px] sm:text-xs text-muted-foreground whitespace-nowrap">
+          <time dateTime={activity.date} className="text-xs text-muted-foreground whitespace-nowrap">
             {timeAgo}
           </time>
         </div>
-        <p className="text-[10px] sm:text-xs text-muted-foreground flex flex-wrap items-center gap-1 sm:gap-1.5">
+        <p className="text-xs text-muted-foreground flex flex-wrap items-center gap-1 sm:gap-1.5">
           <span className="font-medium text-foreground/80 truncate max-w-[120px] sm:max-w-none">
             {activity.repo.fullName}
           </span>
@@ -79,20 +79,18 @@ const ActivityItem = memo(({ activity }: ActivityItemProps) => {
           <span>{formattedDate}</span>
         </p>
         {activity.description && (
-          <p className="text-[10px] sm:text-xs text-muted-foreground line-clamp-2 mt-1 sm:mt-1.5">
-            {activity.description}
-          </p>
+          <p className="text-xs text-muted-foreground line-clamp-2 mt-1 sm:mt-1.5">{activity.description}</p>
         )}
         <div className="pt-1 sm:pt-2">
           <a
             href={activity.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] sm:text-xs inline-flex items-center gap-1 sm:gap-1.5 text-muted-foreground hover:text-primary transition-colors group-hover:underline"
+            className="text-xs inline-flex items-center gap-1 sm:gap-1.5 text-muted-foreground hover:text-primary transition-colors group-hover:underline"
             aria-label={`View ${activity.title} on GitHub`}
           >
             View on GitHub
-            <ExternalLink className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
+            <ExternalLink className="h-3 w-3" />
           </a>
         </div>
       </div>
@@ -215,7 +213,7 @@ export function LastActivity() {
           <Github className="h-4 w-4 sm:h-5 sm:w-5 text-amber-500" />
           Latest GitHub Activity
         </CardTitle>
-        <CardDescription className="text-[10px] sm:text-xs">
+        <CardDescription className="text-xs">
           Contributing to {repositories.length} repositories with {activityList.length} activities
         </CardDescription>
       </CardHeader>
@@ -226,7 +224,7 @@ export function LastActivity() {
               <div className="flex min-w-max gap-1.5 sm:gap-2 px-1.5 sm:px-2 pb-0.5">
                 <TabsTrigger
                   value="all"
-                  className="flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 h-9 sm:h-10 text-[10px] sm:text-xs font-medium transition-all duration-200 hover:bg-muted/50 data-[state=active]:bg-background data-[state=active]:text-amber-500 data-[state=active]:font-semibold data-[state=active]:border-amber-500/50"
+                  className="flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 h-9 sm:h-10 text-xs font-medium transition-all duration-200 hover:bg-muted/50 data-[state=active]:bg-background data-[state=active]:text-amber-500 data-[state=active]:font-semibold data-[state=active]:border-amber-500/50"
                 >
                   <Github className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                   <span className="truncate">All</span>
@@ -236,7 +234,7 @@ export function LastActivity() {
                   <TabsTrigger
                     key={type}
                     value={type}
-                    className="flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 h-9 sm:h-10 text-[10px] sm:text-xs font-medium transition-all duration-200 hover:bg-muted/50 data-[state=active]:bg-background data-[state=active]:text-amber-500 data-[state=active]:font-semibold data-[state=active]:border-amber-500/50"
+                    className="flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 h-9 sm:h-10 text-xs font-medium transition-all duration-200 hover:bg-muted/50 data-[state=active]:bg-background data-[state=active]:text-amber-500 data-[state=active]:font-semibold data-[state=active]:border-amber-500/50"
                   >
                     <span className="flex items-center justify-center w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0">
                       {ACTIVITY_ICONS[type]}
