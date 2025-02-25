@@ -77,10 +77,6 @@ const data = {
           title: 'Projects',
           url: '/open-source/projects',
         },
-        {
-          title: 'Contributions',
-          url: '/open-source/contributions',
-        },
       ],
     },
     {
