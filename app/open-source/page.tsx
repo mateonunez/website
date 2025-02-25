@@ -54,7 +54,7 @@ const FeaturedRepositories = memo(() => (
       Featured Projects
     </h2>
     <Suspense fallback={<RepositoriesShowcaseSkeleton />}>
-      <RepositoriesShowcaseWrapper featured />
+      <RepositoriesShowcaseWrapper featured limit={4} />
     </Suspense>
   </div>
 ));
