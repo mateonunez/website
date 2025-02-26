@@ -64,7 +64,6 @@ interface NormalizedGitHubProfile {
   url: string;
   sponsors: NormalizedSponsor[];
   repositories: NormalizedRepository[];
-  contributions: NormalizedContributions;
 }
 
 function normalizeGitHubProfile({
@@ -78,7 +77,6 @@ function normalizeGitHubProfile({
   url,
   sponsorshipsAsMaintainer: sponsors,
   repositories,
-  contributionsCollection: contributions,
 }: GitHubUser): NormalizedGitHubProfile {
   return {
     avatar: avatarUrl,
@@ -97,7 +95,6 @@ function normalizeGitHubProfile({
       repositories: normalizeRepositories(sponsor.node.sponsor.repositories.edges.map((repo) => repo.node)),
     })),
     repositories: normalizeRepositories(repositories.edges.map((repo) => repo.node)),
-    contributions: normalizeContributions(contributions),
   };
 }
 
@@ -187,15 +184,6 @@ export function normalizeGitHubUser(user: GitHubUser): NormalizedGitHubUser {
     url: user.url,
     sponsors: user.sponsorshipsAsMaintainer.edges.map((edge) => normalizeSponsor(edge.node.sponsor)),
     repositories: user.repositories.edges.map((edge) => normalizeRepository(edge.node)),
-    contributions: {
-      total: user.contributionsCollection.contributionCalendar.totalContributions,
-      calendar: user.contributionsCollection.contributionCalendar,
-      byRepository: user.contributionsCollection.commitContributionsByRepository.map((contribution) => ({
-        repository: normalizeRepository(contribution.repository),
-        total: contribution.contributions.totalCount,
-        commits: contribution.contributions.nodes,
-      })),
-    },
   };
 }
 
