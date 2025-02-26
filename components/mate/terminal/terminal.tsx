@@ -127,7 +127,7 @@ export function Terminal({
         <div
           ref={terminalRef}
           style={{ height }}
-          className="space-y-2 overflow-y-auto p-4 font-mono text-sm bg-black text-neutral-50 rounded-b-xl"
+          className="space-y-2 overflow-y-auto overflow-x-hidden p-4 font-mono text-sm bg-black text-neutral-50 rounded-b-xl whitespace-pre-wrap"
           onClick={handleTerminalClick}
         >
           {completedLines.map((line, index) => (
