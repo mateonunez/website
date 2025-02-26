@@ -6,8 +6,6 @@ import {
   Code2,
   Home,
   Bot,
-  Settings2,
-  Sparkles,
   Music,
   GalleryVerticalEnd,
   SidebarCloseIcon,
@@ -85,22 +83,6 @@ const data = {
       icon: Music,
       disabled: false,
     },
-    {
-      title: 'Settings',
-      url: '/settings',
-      icon: Settings2,
-      disabled: true,
-      items: [
-        {
-          title: 'Profile',
-          url: '/settings/profile',
-        },
-        {
-          title: 'Preferences',
-          url: '/settings/preferences',
-        },
-      ],
-    },
   ],
   projects: [
     {
@@ -108,12 +90,6 @@ const data = {
       description: 'AI-powered terminal companion',
       url: 'https://github.com/mateonunez/ait',
       icon: Bot,
-    },
-    {
-      name: 'Playground',
-      description: 'Code experiments & demos',
-      url: '/playground',
-      icon: Sparkles,
       disabled: true,
     },
   ],
