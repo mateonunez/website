@@ -1,65 +1,93 @@
+import { cn } from '@/lib/utils';
+import { ChevronRight, Home } from 'lucide-react';
 import Link from 'next/link';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
 import React from 'react';
 
-interface IBreadcrumbItem {
-  label: string;
-  href?: string;
-}
+export type BlogBreadcrumbProps = React.HTMLAttributes<HTMLElement> & {
+  items: {
+    label: string;
+    href?: string;
+  }[];
+  separator?: React.ReactNode;
+  isCompact?: boolean;
+};
 
-interface BlogBreadcrumbProps {
-  items: IBreadcrumbItem[];
-}
+const defaultSeparator = <ChevronRight className="h-4 w-4 text-muted-foreground" aria-hidden="true" />;
 
-export function BlogBreadcrumb({ items }: BlogBreadcrumbProps) {
-  return (
-    <Breadcrumb className="px-4 sm:px-6 md:px-8 py-2 sm:py-3 border-b whitespace-nowrap">
-      <BreadcrumbList className="flex-nowrap">
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href="/" className="hover:underline">
-              Home
+export function BlogBreadcrumb({
+  items,
+  separator = defaultSeparator,
+  className,
+  isCompact = false,
+  ...props
+}: BlogBreadcrumbProps) {
+  const listItems = [
+    {
+      label: 'Home',
+      href: '/',
+    },
+    ...items,
+  ];
+
+  if (isCompact && listItems.length > 2) {
+    const firstItem = listItems[0];
+    const lastItem = listItems.at(-1);
+    return (
+      <nav aria-label="Breadcrumb" className={cn('flex w-full items-center overflow-x-auto', className)} {...props}>
+        <ol className="flex w-full items-center">
+          <li className="flex items-center">
+            <Link
+              href={firstItem.href ?? '/'}
+              className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1"
+            >
+              <Home className="h-4 w-4" aria-hidden="true" />
+              <span className="sr-only sm:not-sr-only">{firstItem.label}</span>
             </Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        {items.map((item, index) => {
-          const isLast = index === items.length - 1;
-          const fullLabel = item.label;
-          const truncatedLabel = item.label.length > 25 ? `${item.label.substring(0, 22)}...` : item.label;
+          </li>
+          <li className="flex items-center mx-2" aria-hidden="true">
+            {separator}
+          </li>
+          <li className="flex items-center">
+            <span className="text-sm font-medium truncate">{lastItem.label}</span>
+          </li>
+        </ol>
+      </nav>
+    );
+  }
 
+  return (
+    <nav
+      aria-label="Breadcrumb"
+      className={cn('flex w-full items-center overflow-x-auto scrollbar-hide', className)}
+      {...props}
+    >
+      <ol className="flex w-full items-center space-x-2">
+        {listItems.map((item, index) => {
+          const isLast = index === listItems.length - 1;
           return (
             <React.Fragment key={item.label}>
-              <BreadcrumbItem>
-                {isLast ? (
-                  <BreadcrumbPage className="max-w-[200px] md:max-w-none truncate md:text-clip">
-                    <span className="hidden md:inline">{fullLabel}</span>
-                    <span className="inline md:hidden">{truncatedLabel}</span>
-                  </BreadcrumbPage>
+              <li className="flex items-center">
+                {!isLast && item.href ? (
+                  <Link
+                    href={item.href}
+                    className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1.5"
+                  >
+                    {index === 0 && <Home className="h-3 w-3 sm:h-4 sm:w-4" aria-hidden="true" />}
+                    <span className={index === 0 ? 'sr-only sm:not-sr-only' : ''}>{item.label}</span>
+                  </Link>
                 ) : (
-                  <BreadcrumbLink asChild>
-                    <Link
-                      href={item.href ?? '#'}
-                      className="hover:underline max-w-[150px] md:max-w-none truncate md:text-clip inline-block"
-                    >
-                      <span className="hidden md:inline">{fullLabel}</span>
-                      <span className="inline md:hidden">{truncatedLabel}</span>
-                    </Link>
-                  </BreadcrumbLink>
+                  <span className="text-sm font-medium">{item.label}</span>
                 )}
-              </BreadcrumbItem>
-              {!isLast && <BreadcrumbSeparator />}
+              </li>
+              {!isLast && (
+                <li className="flex items-center" aria-hidden="true">
+                  {separator}
+                </li>
+              )}
             </React.Fragment>
           );
         })}
-      </BreadcrumbList>
-    </Breadcrumb>
+      </ol>
+    </nav>
   );
 }
