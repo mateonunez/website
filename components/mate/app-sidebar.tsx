@@ -93,14 +93,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarHeader />
-      <SidebarContent>
+      <SidebarContent className="space-y-4">
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
         <ModeToggle />
         {isMobile && (
-          <div className="relative flex w-full min-w-0 flex-col p-2 mt-auto">
+          <div className="relative flex w-full min-w-0 flex-col p-4 mt-auto">
             <Button variant="ghost" size="sm" className="w-full justify-start" onClick={() => toggleSidebar()}>
-              <SidebarCloseIcon />
+              <SidebarCloseIcon className="mr-2 h-4 w-4" />
               Close
             </Button>
           </div>
