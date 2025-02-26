@@ -3,11 +3,11 @@ import { registry } from '../command-registry';
 import { systemCommands } from './system';
 import { personalCommands } from './personal';
 import { socialCommands } from './social';
-import { aitCommand } from './ait';
+// import { aiCommands } from './ai';
 
 registry.registerGroup('System', systemCommands);
 registry.registerGroup('Personal', personalCommands);
 registry.registerGroup('Social', socialCommands);
-registry.registerGroup('AI', [aitCommand]);
+// registry.registerGroup('AI', aiCommands);
 
 export { registry as commandRegistry };

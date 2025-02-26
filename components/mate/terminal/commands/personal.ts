@@ -1,11 +1,11 @@
 import { ABOUT_MESSAGES } from '../constants';
 import type { Command } from '../types/commands';
 
-export const whoamiCommand: Command = {
-  name: 'whoami',
-  description: 'More about me',
+export const profileCommand: Command = {
+  name: 'profile',
+  description: 'Display information about me and my background',
   handler: () => [...ABOUT_MESSAGES].join('\n'),
-  aliases: ['about'],
+  aliases: ['whoami', 'about', 'bio', 'me', 'info'],
 };
 
-export const personalCommands: Command[] = [whoamiCommand];
+export const personalCommands: Command[] = [profileCommand];

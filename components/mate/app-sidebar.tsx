@@ -83,7 +83,7 @@ const data = {
       title: 'Spotify',
       url: '/spotify',
       icon: Music,
-      disabled: true,
+      disabled: false,
     },
     {
       title: 'Settings',

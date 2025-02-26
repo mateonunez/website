@@ -1,6 +1,6 @@
 'use client';
 
-import type { NormalizedCurrentlyPlaying, NormalizedRecentlyPlayed } from '@/types/spotify';
+import type { NormalizedCurrentlyPlaying, NormalizedRecentlyPlayed, TopArtist, TopTrack } from '@/types/spotify';
 import type { NormalizedGitHubUser, LastActivitiesData } from '@/types/github';
 import React, { useCallback, useMemo, useContext, useReducer, type ReactNode, type JSX } from 'react';
 
@@ -17,6 +17,8 @@ interface UIState {
   bigBang: boolean;
   listening: NormalizedCurrentlyPlaying | null;
   recentlyPlayed: NormalizedRecentlyPlayed[] | null;
+  topArtists: TopArtist[] | null;
+  topTracks: TopTrack[] | null;
   githubProfile: NormalizedGitHubUser | null;
   lastActivities: LastActivitiesData | null;
 }
@@ -33,6 +35,8 @@ export const initialState: UIState = {
   bigBang: false,
   listening: {},
   recentlyPlayed: [],
+  topArtists: [],
+  topTracks: [],
   githubProfile: null,
   lastActivities: null,
 };
@@ -52,6 +56,8 @@ export const types = {
   SET_BIG_BANG: 'SET_BIG_BANG',
   SET_SPOTIFY_LISTENING: 'SET_SPOTIFY_LISTENING',
   SET_SPOTIFY_RECENTLY_PLAYED: 'SET_SPOTIFY_RECENTLY_PLAYED',
+  SET_SPOTIFY_TOP_ARTISTS: 'SET_SPOTIFY_TOP_ARTISTS',
+  SET_SPOTIFY_TOP_TRACKS: 'SET_SPOTIFY_TOP_TRACKS',
   SET_GITHUB_PROFILE: 'SET_GITHUB_PROFILE',
   SET_LAST_ACTIVITIES: 'SET_LAST_ACTIVITIES',
 } as const;
@@ -144,6 +150,18 @@ export const reducer = (state: UIState, action: UIAction): UIState => {
         recentlyPlayed: action.payload as NormalizedRecentlyPlayed[],
       };
 
+    case types.SET_SPOTIFY_TOP_ARTISTS:
+      return {
+        ...state,
+        topArtists: action.payload as TopArtist[],
+      };
+
+    case types.SET_SPOTIFY_TOP_TRACKS:
+      return {
+        ...state,
+        topTracks: action.payload as TopTrack[],
+      };
+
     case types.SET_GITHUB_PROFILE:
       return {
         ...state,
@@ -176,6 +194,8 @@ interface UIContextType extends UIState {
   setBigBang: (payload: boolean) => void;
   setSpotifyListening: (payload: NormalizedCurrentlyPlaying) => void;
   setSpotifyRecentlyPlayed: (payload: NormalizedRecentlyPlayed[]) => void;
+  setSpotifyTopArtists: (payload: TopArtist[]) => void;
+  setSpotifyTopTracks: (payload: TopTrack[]) => void;
   setGithubProfile: (payload: NormalizedGitHubUser) => void;
   setLastActivities: (payload: LastActivitiesData) => void;
 }
@@ -225,6 +245,16 @@ export const UIProvider = ({ children, ...props }: UIProviderProps): JSX.Element
     [],
   );
 
+  const setSpotifyTopArtists = useCallback(
+    (payload: TopArtist[]) => dispatch({ type: types.SET_SPOTIFY_TOP_ARTISTS, payload }),
+    [],
+  );
+
+  const setSpotifyTopTracks = useCallback(
+    (payload: TopTrack[]) => dispatch({ type: types.SET_SPOTIFY_TOP_TRACKS, payload }),
+    [],
+  );
+
   const setGithubProfile = useCallback(
     (payload: NormalizedGitHubUser) => dispatch({ type: types.SET_GITHUB_PROFILE, payload }),
     [],
@@ -252,6 +282,8 @@ export const UIProvider = ({ children, ...props }: UIProviderProps): JSX.Element
       setBigBang,
       setSpotifyListening,
       setSpotifyRecentlyPlayed,
+      setSpotifyTopArtists,
+      setSpotifyTopTracks,
       setGithubProfile,
       setLastActivities,
     }),
@@ -271,6 +303,8 @@ export const UIProvider = ({ children, ...props }: UIProviderProps): JSX.Element
       setBigBang,
       setSpotifyListening,
       setSpotifyRecentlyPlayed,
+      setSpotifyTopArtists,
+      setSpotifyTopTracks,
       setGithubProfile,
       setLastActivities,
     ],

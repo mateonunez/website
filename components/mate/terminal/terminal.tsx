@@ -6,6 +6,7 @@ import { Line } from './line';
 import { DEFAULT_HEIGHT, DEFAULT_MESSAGES, DEFAULT_PROMPT, SLEEP_DURATION, getTypingDuration } from './constants';
 import { useSpotify } from '@/lib/hooks/use-spotify';
 import { useGithub } from '@/lib/hooks/use-github';
+import { useSpotifyTop } from '@/lib/hooks/use-spotify-top';
 import { CommandContextProvider, type DataSources } from './command-context';
 import { useTerminalState } from './hooks/use-terminal-state';
 import { useCommandExecutor } from './hooks/use-command-executor';
@@ -21,6 +22,7 @@ export function Terminal({
 }: Readonly<TerminalProps>): JSX.Element {
   const { data: spotifyData } = useSpotify();
   const { data: githubData } = useGithub();
+  const { data: spotifyTopData } = useSpotifyTop();
 
   const [state, actions] = useTerminalState(initialMessages);
   const { currentLine, typingLine, completedLines, isComplete, userInput } = state;
@@ -35,6 +37,8 @@ export function Terminal({
         data: {
           currentlyPlaying: spotifyData?.currentlyPlaying,
           recentlyPlayed: spotifyData?.recentlyPlayed,
+          topTracks: spotifyTopData?.tracks || [],
+          topArtists: spotifyTopData?.artists || [],
         },
       },
       github: {
@@ -42,7 +46,7 @@ export function Terminal({
         data: githubData,
       },
     }),
-    [spotifyData, githubData],
+    [spotifyData, githubData, spotifyTopData],
   );
 
   const tools = useMemo(() => ({ clearLines: actions.clearCompletedLines }), [actions]);

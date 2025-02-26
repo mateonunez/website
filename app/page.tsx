@@ -1,8 +1,8 @@
 import { memo, type JSX } from 'react';
 import { Toaster } from '@/components/ui/sonner';
 import TerminalWrapper from '@/components/mate/terminal/terminal.wrapper';
-import PlayerWrapper from '@/components/mate/player.wrapper';
-import RecentlyPlayedWrapper from '@/components/mate/recently-played.wrapper';
+import PlayerWrapper from '@/components/mate/spotify/player.wrapper';
+import RecentlyPlayedWrapper from '@/components/mate/spotify/recently-played.wrapper';
 import LatestArticlesWrapper from '@/components/mate/latest-articles.wrapper';
 import { Separator } from '@/components/ui/separator';
 import GitHubCommunityWrapper from '@/components/mate/open-source/github-community.wrapper';
