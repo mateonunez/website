@@ -13,7 +13,7 @@ export interface SpotifyImage {
 
 export interface SpotifyArtist {
   popularity: number;
-  genres: any;
+  genres: string[];
   id: string;
   name: string;
   type: string;
@@ -22,6 +22,9 @@ export interface SpotifyArtist {
     spotify: string;
   };
   images?: SpotifyImage[];
+  followers?: {
+    total: number;
+  };
 }
 
 export interface SpotifyTrack {
@@ -84,9 +87,51 @@ export interface SpotifyData {
 }
 
 export interface NormalizedCurrentlyPlaying {
-  [key: string]: any;
+  id?: string;
+  isPlaying?: boolean;
+  title?: string;
+  artist?: string;
+  album?: string;
+  thumbnail?: string;
+  url?: string;
+  progress?: number;
+  duration?: number;
 }
 
 export interface NormalizedRecentlyPlayed {
-  [key: string]: any;
+  id: string;
+  title: string;
+  artist: string;
+  album: string;
+  playedAt: string;
+  url: string;
+  duration: number;
+  thumbnail: string;
+}
+
+export interface TopArtist {
+  id: string;
+  name: string;
+  popularity: number;
+  genres: string[];
+  url: string;
+  image: string;
+  followers: number;
+}
+
+export interface TopTrack {
+  id: string;
+  title: string;
+  artist: string;
+  album: string;
+  url: string;
+  thumbnail: string;
+  duration: number;
+  popularity: number;
+  preview_url: string | null;
+}
+
+export interface TopData {
+  artists: TopArtist[];
+  tracks: TopTrack[];
 }

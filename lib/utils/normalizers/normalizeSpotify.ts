@@ -1,32 +1,13 @@
-import type { SpotifyTrack, SpotifyArtist, SpotifyCurrentlyPlaying, SpotifyRecentlyPlayed } from '@/types/spotify';
-
-interface NormalizedSpotifyTrack {
-  id: string;
-  title: string;
-  artist: string;
-  album: string;
-  thumbnail: string;
-  url: string;
-  duration: number;
-}
-
-interface NormalizedCurrentlyPlaying extends NormalizedSpotifyTrack {
-  isPlaying: boolean;
-  progress: number;
-}
-
-interface NormalizedRecentlyPlayed extends NormalizedSpotifyTrack {
-  playedAt: string;
-}
-
-interface NormalizedArtist {
-  id: string;
-  name: string;
-  popularity: number;
-  genres: string;
-  url: string;
-  thumbnail: string;
-}
+import type {
+  SpotifyTrack,
+  SpotifyArtist,
+  SpotifyCurrentlyPlaying,
+  SpotifyRecentlyPlayed,
+  NormalizedCurrentlyPlaying,
+  NormalizedRecentlyPlayed,
+  TopArtist,
+  TopTrack,
+} from '@/types/spotify';
 
 export const normalizeCurrentlyListening = (data: SpotifyCurrentlyPlaying): NormalizedCurrentlyPlaying => ({
   id: data.item.id,
@@ -39,6 +20,7 @@ export const normalizeCurrentlyListening = (data: SpotifyCurrentlyPlaying): Norm
   progress: data.progress_ms,
   duration: data.item.duration_ms,
 });
+
 export const normalizeRecentlyPlayed = (data: SpotifyRecentlyPlayed): NormalizedRecentlyPlayed[] => {
   return data.items.map((item) => ({
     id: item.track.id,
@@ -52,16 +34,17 @@ export const normalizeRecentlyPlayed = (data: SpotifyRecentlyPlayed): Normalized
   }));
 };
 
-export const normalizeArtists = (data: SpotifyArtist): NormalizedArtist => ({
+export const normalizeArtists = (data: SpotifyArtist): TopArtist => ({
   id: data.id,
   name: data.name,
   popularity: data.popularity,
-  genres: data.genres?.join(' '),
+  genres: data.genres || [],
   url: data.external_urls?.spotify,
-  thumbnail: data.images[0].url,
+  image: data.images[0].url,
+  followers: data.followers?.total || 0,
 });
 
-export const normalizeTracks = (data: SpotifyTrack): NormalizedSpotifyTrack => ({
+export const normalizeTracks = (data: SpotifyTrack): TopTrack => ({
   id: data.id,
   title: data.name,
   artist: data.artists?.map(({ name }) => name).join(' - '),
@@ -69,4 +52,6 @@ export const normalizeTracks = (data: SpotifyTrack): NormalizedSpotifyTrack => (
   thumbnail: data.album?.images[0]?.url,
   url: data.external_urls?.spotify,
   duration: data.duration_ms,
+  popularity: data.popularity,
+  preview_url: data.preview_url,
 });
