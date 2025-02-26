@@ -146,15 +146,6 @@ export interface NormalizedGitHubUser {
   followers: NormalizedGitHubFollower[];
   repositories: NormalizedGitHubRepository[];
   login: string;
-  contributions: {
-    total: number;
-    calendar: GitHubContributionCalendar;
-    byRepository: Array<{
-      repository: NormalizedGitHubRepository;
-      total: number;
-      commits: GitHubContribution[];
-    }>;
-  };
 }
 
 export interface GitHubActivityType {

@@ -82,15 +82,6 @@ export const getProfile = async (): Promise<GitHubUser> => {
             }
           }
           contributionsCollection {
-            contributionCalendar {
-              totalContributions
-              weeks {
-                contributionDays {
-                  date
-                  contributionCount
-                }
-              }
-            }
             commitContributionsByRepository {
               repository {
                 name
