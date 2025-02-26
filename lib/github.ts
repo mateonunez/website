@@ -6,50 +6,68 @@ import type {
   GitHubActivitiesResponse,
 } from '@/types/github';
 
-const { GITHUB_TOKEN } = process.env;
+if (!process.env.GITHUB_TOKEN) {
+  throw new Error('GITHUB_TOKEN environment variable is not set');
+}
+
+const graphqlWithAuth = graphql.defaults({
+  headers: {
+    authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+    accept: 'application/vnd.github.v3.raw+json',
+  },
+});
+
+const repositoryFields = `
+  fragment RepositoryFields on Repository {
+    name
+    url
+    description
+    pushedAt
+    stargazerCount
+    forkCount
+    primaryLanguage {
+      name
+      color
+    }
+  }
+`;
 
 export const getProfile = async (): Promise<GitHubUser> => {
-  const { user } = await graphql<{ user: GitHubUser }>(
-    `
-      query ($username: String!, $sort: RepositoryOrderField!, $limit: Int) {
-        user(login: $username) {
-          avatarUrl(size: 333)
-          bio
-          company
-          followers(last: 100) {
-            edges {
-              node {
-                avatarUrl(size: 333)
-                login
-                url
-              }
-            }
-          }
-          email
-          login
-          location
-          url
-          sponsorshipsAsMaintainer(first: 100) {
-            totalCount
-            edges {
-              node {
-                sponsor {
+  try {
+    const { user } = await graphqlWithAuth<{ user: GitHubUser }>(
+      `
+        ${repositoryFields}
+        query ($username: String!, $sort: RepositoryOrderField!, $limit: Int) {
+          user(login: $username) {
+            avatarUrl(size: 333)
+            bio
+            company
+            followers(last: 100) {
+              edges {
+                node {
                   avatarUrl(size: 333)
-                  bio
                   login
                   url
-                  repositories(first: 3, orderBy: { field: STARGAZERS, direction: DESC }) {
-                    edges {
-                      node {
-                        name
-                        url
-                        description
-                        pushedAt
-                        stargazerCount
-                        forkCount
-                        primaryLanguage {
-                          name
-                          color
+                }
+              }
+            }
+            email
+            login
+            location
+            url
+            sponsorshipsAsMaintainer(first: 100) {
+              totalCount
+              edges {
+                node {
+                  sponsor {
+                    avatarUrl(size: 333)
+                    bio
+                    login
+                    url
+                    repositories(first: 3, orderBy: { field: STARGAZERS, direction: DESC }) {
+                      edges {
+                        node {
+                          ...RepositoryFields
                         }
                       }
                     }
@@ -57,163 +75,126 @@ export const getProfile = async (): Promise<GitHubUser> => {
                 }
               }
             }
-          }
-          repositories(
-            first: $limit
-            isLocked: false
-            isFork: false
-            ownerAffiliations: OWNER
-            privacy: PUBLIC
-            orderBy: { field: $sort, direction: DESC }
-          ) {
-            edges {
-              node {
-                name
-                url
-                description
-                pushedAt
-                stargazerCount
-                forkCount
-                primaryLanguage {
-                  name
-                  color
+            repositories(
+              first: $limit
+              isLocked: false
+              isFork: false
+              ownerAffiliations: OWNER
+              privacy: PUBLIC
+              orderBy: { field: $sort, direction: DESC }
+            ) {
+              edges {
+                node {
+                  ...RepositoryFields
                 }
               }
             }
-          }
-          contributionsCollection {
-            commitContributionsByRepository {
-              repository {
-                name
-                url
-                description
-                pushedAt
-                stargazerCount
-                forkCount
-                primaryLanguage {
-                  name
-                  color
+            contributionsCollection {
+              commitContributionsByRepository {
+                repository {
+                  ...RepositoryFields
+                  isPrivate
                 }
-                isPrivate
-              }
-              contributions(first: 100) {
-                totalCount
-                nodes {
-                  occurredAt
-                  commitCount
+                contributions(first: 100) {
+                  totalCount
+                  nodes {
+                    occurredAt
+                    commitCount
+                  }
                 }
               }
             }
           }
         }
-      }
-    `,
-    {
-      username: 'mateonunez',
-      sort: 'STARGAZERS',
-      limit: 50,
-      headers: {
-        accept: 'application/vnd.github.v3.raw+json',
-        authorization: `Bearer ${GITHUB_TOKEN}`,
-        encoding: 'utf-8',
+      `,
+      {
+        username: 'mateonunez',
+        sort: 'STARGAZERS',
+        limit: 50,
       },
-    },
-  );
-  return user;
+    );
+    return user;
+  } catch (error) {
+    console.error('Error fetching GitHub profile:', error);
+    throw new Error('Failed to fetch GitHub profile');
+  }
 };
 
 export const getReadme = async (): Promise<GitHubReadmeResponse['repository']['readme']> => {
-  const { repository } = await graphql<GitHubReadmeResponse>(
-    `
-      query ($username: String!, $repo: String!) {
-        repository(owner: $username, name: $repo) {
-          readme: object(expression: "main:README.md") {
-            ... on Blob {
-              text
+  try {
+    const { repository } = await graphqlWithAuth<GitHubReadmeResponse>(
+      `
+        query ($username: String!, $repo: String!) {
+          repository(owner: $username, name: $repo) {
+            readme: object(expression: "main:README.md") {
+              ... on Blob {
+                text
+              }
             }
           }
         }
-      }
-    `,
-    {
-      username: 'mateonunez',
-      repo: 'mateonunez',
-      headers: {
-        accept: 'application/vnd.github.v3.raw+json',
-        authorization: `Bearer ${GITHUB_TOKEN}`,
+      `,
+      {
+        username: 'mateonunez',
+        repo: 'mateonunez',
       },
-    },
-  );
-
-  const { readme } = repository;
-
-  return readme;
+    );
+    return repository.readme;
+  } catch (error) {
+    console.error('Error fetching GitHub README:', error);
+    throw new Error('Failed to fetch GitHub README');
+  }
 };
 
 export const getRepository = async (repository: string): Promise<GitHubRepositoryResponse['repository']> => {
-  const { repository: repositoryFetched } = await graphql<GitHubRepositoryResponse>(
-    `
-      query ($username: String!, $repo: String!) {
-        repository(owner: $username, name: $repo) {
-          name
-          url
-          description
-          pushedAt
-          stargazerCount
-          forkCount
-          isPrivate
-          primaryLanguage {
-            name
-            color
-          }
-          readme: object(expression: "main:README.md") {
-            ... on Blob {
-              text
+  try {
+    const { repository: repositoryFetched } = await graphqlWithAuth<GitHubRepositoryResponse>(
+      `
+        ${repositoryFields}
+        query ($username: String!, $repo: String!) {
+          repository(owner: $username, name: $repo) {
+            ...RepositoryFields
+            isPrivate
+            readme: object(expression: "main:README.md") {
+              ... on Blob {
+                text
+              }
             }
           }
         }
-      }
-    `,
-    {
-      username: 'mateonunez',
-      repo: repository,
-      headers: {
-        accept: 'application/vnd.github.v3.raw+json',
-        authorization: `Bearer ${GITHUB_TOKEN}`,
+      `,
+      {
+        username: 'mateonunez',
+        repo: repository,
       },
-    },
-  );
+    );
 
-  if (!repositoryFetched || repositoryFetched.isPrivate) {
-    return null;
+    if (!repositoryFetched || repositoryFetched.isPrivate) {
+      return null;
+    }
+
+    return repositoryFetched;
+  } catch (error) {
+    console.error('Error fetching GitHub repository:', error);
+    throw new Error('Failed to fetch GitHub repository');
   }
-
-  return repositoryFetched;
 };
 
 export const getLastActivities = async (): Promise<GitHubActivitiesResponse['viewer']> => {
   try {
-    const { viewer } = await graphql<GitHubActivitiesResponse>(
+    const { viewer } = await graphqlWithAuth<GitHubActivitiesResponse>(
       `
+        ${repositoryFields}
         query {
           viewer {
             login
             contributionsCollection {
               commitContributionsByRepository(maxRepositories: 10) {
                 repository {
-                  name
-                  url
-                  description
-                  pushedAt
-                  stargazerCount
-                  forkCount
+                  ...RepositoryFields
                   isPrivate
                   owner {
                     login
-                  }
-                  primaryLanguage {
-                    name
-                    color
                   }
                 }
                 contributions(first: 10) {
@@ -296,12 +277,6 @@ export const getLastActivities = async (): Promise<GitHubActivitiesResponse['vie
           }
         }
       `,
-      {
-        headers: {
-          accept: 'application/vnd.github.v3.raw+json',
-          authorization: `Bearer ${GITHUB_TOKEN}`,
-        },
-      },
     );
     return viewer;
   } catch (error) {
