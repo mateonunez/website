@@ -1,15 +1,7 @@
 'use client';
 
 import type * as React from 'react';
-import {
-  BookText,
-  Code2,
-  Home,
-  Bot,
-  Music,
-  GalleryVerticalEnd,
-  SidebarCloseIcon,
-} from 'lucide-react';
+import { BookText, Code2, Home, Bot, Music, GalleryVerticalEnd, SidebarCloseIcon } from 'lucide-react';
 
 import { NavMain } from '@/components/mate/nav-main';
 import { NavProjects } from '@/components/mate/nav-projects';
