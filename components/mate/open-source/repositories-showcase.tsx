@@ -25,51 +25,56 @@ const RepositoryCard = memo(({ repository }: { repository: NormalizedGitHubRepos
 
   return (
     <Card className="flex flex-col h-full w-full transition-all duration-300 hover:shadow-md hover:border-amber-500/30 hover:bg-amber-500/5">
-      <CardHeader className="pb-2">
+      <CardHeader className="p-3 sm:p-4 pb-2">
         <div className="flex justify-between items-start gap-2">
           <div className="min-w-0 flex-1">
-            <CardTitle className="text-lg font-medium truncate" title={repository.name}>
+            <CardTitle className="text-sm sm:text-base font-medium truncate" title={repository.name}>
               {repository.name}
             </CardTitle>
           </div>
-          <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0" asChild>
+          <Button variant="ghost" size="icon" className="h-7 w-7 shrink-0" asChild>
             <a
               href={repository.url}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View ${repository.name} on GitHub`}
             >
-              <ExternalLink className="h-4 w-4" />
+              <ExternalLink className="h-3.5 w-3.5" />
             </a>
           </Button>
         </div>
-        {repository.description && (
-          <CardDescription className="line-clamp-2 h-10 text-sm sm:text-base">{repository.description}</CardDescription>
-        )}
+        <div className="min-h-[2.5rem] mt-1">
+          {repository.description && (
+            <CardDescription className="line-clamp-2 text-xs">{repository.description}</CardDescription>
+          )}
+        </div>
       </CardHeader>
-      <CardContent className="flex-grow pb-2">
+      <CardContent className="flex-grow p-3 sm:p-4 pt-0 pb-2">
         {repository.language && (
-          <div className="flex flex-wrap items-center gap-2 mb-2">
-            <div className="flex items-center gap-1.5">
-              <div className="h-3 w-3 rounded-full" style={{ backgroundColor: repository.languageColor || '#ccc' }} />
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center gap-1">
+              <div
+                className="h-2.5 w-2.5 rounded-full"
+                style={{ backgroundColor: repository.languageColor || '#ccc' }}
+              />
               <span className="text-xs text-muted-foreground">{repository.language}</span>
             </div>
           </div>
         )}
       </CardContent>
-      <CardFooter className="pt-0 flex items-center justify-center flex-wrap gap-3">
-        <div className="flex items-center gap-3 text-sm text-muted-foreground">
+      <CardFooter className="p-3 sm:p-4 pt-1 flex items-center justify-between">
+        <div className="flex items-center gap-3">
           <div className="flex items-center gap-1">
-            <Star className="h-3.5 w-3.5 text-amber-500" />
-            <span className="text-xs">{repository.stars}</span>
+            <Star className="h-3 w-3 text-amber-500" />
+            <span className="text-xs text-muted-foreground">{repository.stars}</span>
           </div>
           <div className="flex items-center gap-1">
-            <GitFork className="h-3.5 w-3.5" />
-            <span className="text-xs">{repository.forks}</span>
+            <GitFork className="h-3 w-3" />
+            <span className="text-xs text-muted-foreground">{repository.forks}</span>
           </div>
         </div>
-        <Badge variant="outline" className="text-xs gap-1 whitespace-nowrap px-2">
-          <Clock className="h-3 w-3" />
+        <Badge variant="outline" className="text-xs gap-1 whitespace-nowrap px-1.5 py-0.5 h-5">
+          <Clock className="h-2.5 w-2.5" />
           <span title={formattedDate}>{timeAgo}</span>
         </Badge>
       </CardFooter>
@@ -87,15 +92,17 @@ export function RepositoriesShowcase({ featured = false, limit = featured ? 6 : 
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center p-8">
-        <Loader2 className="h-6 w-6 animate-spin text-amber-500" />
-      </div>
+      <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/50">
+        <CardContent className="flex items-center justify-center p-8">
+          <Loader2 className="h-6 w-6 animate-spin text-amber-500" />
+        </CardContent>
+      </Card>
     );
   }
 
   if (isError || !data?.profile) {
     return (
-      <Card className="w-full">
+      <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/50">
         <CardContent className="flex items-center justify-center p-8 text-sm text-muted-foreground">
           Unable to load repositories
         </CardContent>
@@ -107,7 +114,7 @@ export function RepositoriesShowcase({ featured = false, limit = featured ? 6 : 
 
   if (!repositories || repositories.length === 0) {
     return (
-      <Card className="w-full">
+      <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/50">
         <CardContent className="flex items-center justify-center p-8 text-sm text-muted-foreground">
           No repositories available
         </CardContent>
@@ -145,7 +152,7 @@ export function RepositoriesShowcase({ featured = false, limit = featured ? 6 : 
 
   if (displayedRepos.length === 0) {
     return (
-      <Card className="w-full border border-border/50">
+      <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/50">
         <CardContent className="flex flex-col items-center justify-center p-8 text-sm text-muted-foreground">
           <p>No repositories match your filters</p>
           {searchTerm && (
@@ -159,78 +166,103 @@ export function RepositoriesShowcase({ featured = false, limit = featured ? 6 : 
   }
 
   return (
-    <div className="space-y-4">
-      {!featured && (
-        <div className="flex flex-col sm:flex-row flex-wrap gap-3 items-start sm:items-center justify-between">
-          <div className="relative w-full sm:w-auto sm:flex-grow sm:max-w-xs">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search repositories..."
-              className="pl-9 h-9 w-full"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-          <div className="flex items-center gap-2 w-full sm:w-auto">
-            <Select defaultValue={sortBy} onValueChange={(value) => setSortBy(value as SortOption)}>
-              <SelectTrigger className="h-9 w-full sm:w-[180px] gap-1">
-                <ArrowUpDown className="h-3.5 w-3.5 text-muted-foreground" />
-                <SelectValue placeholder="Sort by" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="stars">Most Stars</SelectItem>
-                <SelectItem value="forks">Most Forks</SelectItem>
-                <SelectItem value="recent">Recently Updated</SelectItem>
-                <SelectItem value="name">Name (A-Z)</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-      )}
+    <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/50">
+      <CardHeader className="p-3 sm:p-4 pb-0">
+        <CardTitle className="text-base sm:text-lg flex items-center gap-1.5 sm:gap-2 font-hanken">
+          <Code className="h-4 w-4 sm:h-5 sm:w-5 text-amber-500" />
+          GitHub Repositories
+        </CardTitle>
+        <CardDescription className="text-xs">
+          {featured ? 'Featured open source projects on GitHub' : `${repositories.length} repositories available`}
+        </CardDescription>
+      </CardHeader>
 
-      {!featured && languages.length > 0 && (
-        <Tabs defaultValue="all" className="w-full" onValueChange={setCurrentTab}>
-          <TabsList className="flex overflow-x-auto pb-px h-auto tabs-scrollbar w-full">
-            <div className="flex min-w-max gap-1 p-0.5">
-              <TabsTrigger value="all" className="rounded-md px-2 sm:px-3 py-1 sm:py-1.5 text-xs h-7 sm:h-8">
-                All
-              </TabsTrigger>
-              {languages.map((language) => (
-                <TabsTrigger
-                  key={language}
-                  value={language}
-                  className="rounded-md px-2 sm:px-3 py-1 sm:py-1.5 text-xs h-7 sm:h-8"
-                >
-                  {language}
-                </TabsTrigger>
-              ))}
+      <CardContent className="p-0">
+        <div className="p-2 sm:p-4 space-y-3 sm:space-y-4">
+          {!featured && (
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 items-start sm:items-center justify-between">
+              <div className="relative w-full sm:w-auto sm:flex-grow sm:max-w-xs">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input
+                  type="search"
+                  placeholder="Search repositories..."
+                  className="pl-9 h-9 w-full"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                <Select defaultValue={sortBy} onValueChange={(value) => setSortBy(value as SortOption)}>
+                  <SelectTrigger className="h-9 w-full sm:w-[180px] gap-1">
+                    <ArrowUpDown className="h-3.5 w-3.5 text-muted-foreground" />
+                    <SelectValue placeholder="Sort by" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="stars">Most Stars</SelectItem>
+                    <SelectItem value="forks">Most Forks</SelectItem>
+                    <SelectItem value="recent">Recently Updated</SelectItem>
+                    <SelectItem value="name">Name (A-Z)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-          </TabsList>
-        </Tabs>
-      )}
+          )}
 
-      <div
-        className="w-full grid gap-3 sm:gap-4"
-        style={{
-          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))',
-        }}
-      >
-        {displayedRepos.map((repo) => (
-          <RepositoryCard key={repo.url} repository={repo} />
-        ))}
-      </div>
+          {!featured && languages.length > 0 && (
+            <Tabs defaultValue="all" className="w-full" onValueChange={setCurrentTab}>
+              <div className="overflow-x-auto overflow-y-hidden">
+                <TabsList className="w-full flex justify-start bg-muted/30 p-1.5 tabs-scrollbar">
+                  <div className="flex min-w-max gap-1.5 sm:gap-2 px-1.5 sm:px-2 pb-0.5">
+                    <TabsTrigger
+                      value="all"
+                      className="flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 h-9 sm:h-10 text-xs font-medium transition-all duration-200 hover:bg-muted/50 data-[state=active]:bg-background data-[state=active]:text-amber-500 data-[state=active]:font-semibold data-[state=active]:border-amber-500/50"
+                    >
+                      <Code className="h-3 w-3 sm:h-4 sm:w-4" />
+                      <span className="truncate">All</span>
+                    </TabsTrigger>
+                    {languages.map((language) => (
+                      <TabsTrigger
+                        key={language}
+                        value={language}
+                        className="flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 h-9 sm:h-10 text-xs font-medium transition-all duration-200 hover:bg-muted/50 data-[state=active]:bg-background data-[state=active]:text-amber-500 data-[state=active]:font-semibold data-[state=active]:border-amber-500/50"
+                      >
+                        <span className="truncate">{language}</span>
+                      </TabsTrigger>
+                    ))}
+                  </div>
+                </TabsList>
+              </div>
+            </Tabs>
+          )}
 
-      {featured && repositories.length > limit && (
-        <div className="flex justify-center mt-4 sm:mt-6">
-          <Button variant="outline" className="gap-2 w-full sm:w-auto" asChild>
-            <a href="/open-source/projects">
-              <span>View all projects</span>
-              <Code className="h-4 w-4" />
-            </a>
-          </Button>
+          <div
+            className="w-full grid gap-3 sm:gap-4"
+            style={{
+              gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 250px), 1fr))',
+            }}
+          >
+            {displayedRepos.map((repo) => (
+              <RepositoryCard key={repo.url} repository={repo} />
+            ))}
+          </div>
+
+          {featured && repositories.length > limit && (
+            <div className="pt-2 sm:pt-4 flex justify-center">
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full sm:w-auto gap-2 text-xs sm:text-sm h-8 sm:h-9 transition-all hover:bg-amber-500/10 hover:text-amber-700 dark:hover:text-amber-300 hover:border-amber-500/30"
+                asChild
+              >
+                <a href="/open-source/projects">
+                  <span>View all projects</span>
+                  <Code className="h-3 w-3 sm:h-4 sm:w-4" />
+                </a>
+              </Button>
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      </CardContent>
+    </Card>
   );
 }
