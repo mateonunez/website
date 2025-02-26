@@ -9,9 +9,9 @@ export function Footer(): JSX.Element {
   const footerSocialLinks = getFooterSocialLinks();
 
   return (
-    <footer className="w-full border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto p-4 md:p-6">
-        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+    <footer className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="w-full px-4 md:px-6 py-4 md:py-6">
+        <div className="flex flex-col items-center justify-between gap-4 md:flex-row md:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row">
             <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
               Source code{' '}
@@ -46,7 +46,7 @@ export function Footer(): JSX.Element {
             })}
           </div>
         </div>
-        <div className="mt-4 md:mt-6 border-t pt-4 md:pt-6 text-center md:text-left">
+        <div className="mt-4 md:mt-6 border-t pt-4 md:pt-6 text-center md:text-left md:px-6 lg:px-8">
           <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} Mateo Nunez</p>
         </div>
       </div>
