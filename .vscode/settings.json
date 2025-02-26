@@ -7,7 +7,9 @@
   "files.trimTrailingWhitespace": true,
   "search.exclude": {
     "**/.next": true,
-    "**/node_modules": true
+    "**/node_modules": true,
+    "**/.yarn": true,
+    "**/.pnp.*": true
   },
   "prettier.requireConfig": true,
   "prettier.configPath": ".prettierrc.json",

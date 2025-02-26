@@ -9,13 +9,13 @@
 
 Activate corepack:
 
-```bash
+```
 corepack enable
 ```
 
 Install dependencies:
 
-```bash
+```
 yarn install
 ```
 
