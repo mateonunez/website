@@ -37,14 +37,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 const ArticleContent = memo(({ content, frontmatter }: Article) => (
-  <ArticleLayout
-    title={frontmatter.title}
-    date={frontmatter.date}
-    readingTime={frontmatter.readingTime}
-    tags={frontmatter.tags}
-  >
-    {content}
-  </ArticleLayout>
+  <main className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg">
+    <div className="container mx-auto p-6">
+      <ArticleLayout
+        title={frontmatter.title}
+        date={frontmatter.date}
+        readingTime={frontmatter.readingTime}
+        tags={frontmatter.tags}
+      >
+        {content}
+      </ArticleLayout>
+    </div>
+  </main>
 ));
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }): Promise<JSX.Element> {
@@ -54,15 +58,19 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   return (
     <Suspense
       fallback={
-        <div className="animate-pulse space-y-4">
-          <div className="h-8 bg-gray-200 rounded w-3/4" />
-          <div className="h-4 bg-gray-200 rounded w-1/4" />
-          <div className="space-y-3">
-            <div className="h-4 bg-gray-200 rounded" />
-            <div className="h-4 bg-gray-200 rounded" />
-            <div className="h-4 bg-gray-200 rounded w-5/6" />
+        <main className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg">
+          <div className="container mx-auto p-6">
+            <div className="animate-pulse space-y-4">
+              <div className="h-8 bg-gray-200 rounded w-3/4" />
+              <div className="h-4 bg-gray-200 rounded w-1/4" />
+              <div className="space-y-3">
+                <div className="h-4 bg-gray-200 rounded" />
+                <div className="h-4 bg-gray-200 rounded" />
+                <div className="h-4 bg-gray-200 rounded w-5/6" />
+              </div>
+            </div>
           </div>
-        </div>
+        </main>
       }
     >
       <ArticleContent content={content} frontmatter={frontmatter} />

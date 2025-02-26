@@ -76,10 +76,12 @@ export default function SpotifyPage(): JSX.Element {
     <>
       <Header />
       <main className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg">
-        <div className="container mx-auto p-6 space-y-8">
-          <CurrentlyListening />
-          <TopItems />
-          <RecentlyPlayed />
+        <div className="container mx-auto p-6">
+          <div className="space-y-8">
+            <CurrentlyListening />
+            <TopItems />
+            <RecentlyPlayed />
+          </div>
         </div>
       </main>
     </>

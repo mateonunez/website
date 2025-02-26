@@ -12,16 +12,16 @@ export interface PageHeaderProps {
 export function PageHeader({ title, subtitle, icon, breadcrumbItems, children }: PageHeaderProps) {
   return (
     <header className="flex flex-col">
-      <div className="flex h-12 sm:h-14 md:h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-10 sm:group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
-        <div className="flex items-center gap-2 w-full px-4 sm:px-6 md:px-8">
-          <div className="flex items-center gap-3">
+      <div className="flex h-14 sm:h-16 md:h-20 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 sm:group-has-data-[collapsible=icon]/sidebar-wrapper:h-14">
+        <div className="flex items-center gap-4 w-full px-4 sm:px-6 md:px-8">
+          <div className="flex items-center gap-4">
             {icon && <div className="flex-shrink-0">{icon}</div>}
             <div>
-              <h1 className="text-lg md:text-2xl lg:text-3xl font-bold font-hanken animate-in fade-in duration-1000 delay-200">
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-bold font-hanken animate-in fade-in duration-1000 delay-200">
                 {title}
               </h1>
               {subtitle && (
-                <p className="text-sm text-muted-foreground md:text-base mt-0.5 animate-in fade-in duration-1000 delay-300">
+                <p className="text-sm text-muted-foreground md:text-base mt-2 animate-in fade-in duration-1000 delay-300">
                   {subtitle}
                 </p>
               )}
@@ -29,7 +29,11 @@ export function PageHeader({ title, subtitle, icon, breadcrumbItems, children }:
           </div>
         </div>
       </div>
-      {breadcrumbItems && <BlogBreadcrumb items={breadcrumbItems} />}
+      {breadcrumbItems && (
+        <div className="px-4 sm:px-6 md:px-8 py-2 sm:py-3 border-b">
+          <BlogBreadcrumb items={breadcrumbItems} className="whitespace-nowrap" />
+        </div>
+      )}
       {children}
     </header>
   );

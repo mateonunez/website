@@ -20,10 +20,10 @@ const SectionTitle = memo(({ title, fontClass = '' }: { title: string; fontClass
 SectionTitle.displayName = 'SectionTitle';
 
 const SidebarContent = memo(() => (
-  <div className="col-span-12 md:col-span-5 lg:col-span-4 space-y-4">
+  <div className="col-span-12 md:col-span-5 lg:col-span-4 space-y-8">
     <SectionTitle title="I've been playing" />
     <RecentlyPlayedWrapper />
-    <div className="mt-6">
+    <div className="mt-8">
       <SectionTitle title="Thank You 🫰" fontClass="font-bungee" />
       <GitHubCommunityWrapper />
     </div>
@@ -31,14 +31,14 @@ const SidebarContent = memo(() => (
 ));
 
 const MainContent = memo(() => (
-  <div className="col-span-12 md:col-span-7 lg:col-span-8 space-y-4">
+  <div className="col-span-12 md:col-span-7 lg:col-span-8 space-y-8">
     <SectionTitle title="Few words" />
     <LatestArticlesWrapper />
   </div>
 ));
 
 const BottomContent = memo(() => (
-  <div className="col-span-12 space-y-4 mt-6">
+  <div className="col-span-12 space-y-8 mt-8">
     <SectionTitle title="Open Source Activity" />
     <LastActivityWrapper />
   </div>
@@ -54,14 +54,16 @@ export default async function HomePage(): Promise<JSX.Element> {
       <div className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg max-w-dvw">
         <div className="container mx-auto p-6">
           <Toaster />
-          <div className="mb-8">
-            <TerminalWrapper />
+          <div className="space-y-8">
+            <div className="mb-8">
+              <TerminalWrapper />
+            </div>
+            <div className="grid grid-cols-12 gap-6">
+              <MainContent />
+              <SidebarContent />
+            </div>
+            <BottomContent />
           </div>
-          <div className="grid grid-cols-12 gap-6">
-            <MainContent />
-            <SidebarContent />
-          </div>
-          <BottomContent />
         </div>
       </div>
     </>
