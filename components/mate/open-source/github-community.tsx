@@ -78,9 +78,9 @@ export function GitHubCommunity() {
 
   if (isLoading) {
     return (
-      <Card className="w-full bg-transparent border-none shadow-none rounded-none">
+      <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/50">
         <CardContent className="flex items-center justify-center p-8">
-          <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+          <Loader2 className="h-6 w-6 animate-spin text-amber-500" />
         </CardContent>
       </Card>
     );
@@ -88,7 +88,7 @@ export function GitHubCommunity() {
 
   if (isError || !githubData) {
     return (
-      <Card className="w-full bg-transparent border-none shadow-none rounded-none">
+      <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/50">
         <CardContent className="flex items-center justify-center p-8 text-sm text-muted-foreground">
           Unable to load GitHub data
         </CardContent>
@@ -103,8 +103,8 @@ export function GitHubCommunity() {
   const hasMoreFollowers = visibleFollowers < followers.length;
 
   return (
-    <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-none">
-      <CardHeader className="p-0">
+    <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/50">
+      <CardHeader className="p-3 sm:p-4 pb-0">
         <CardTitle className="text-base sm:text-lg flex items-center gap-1.5 sm:gap-2 font-hanken">
           <Users className="h-4 w-4 sm:h-5 sm:w-5 text-amber-500" />
           GitHub Community
@@ -115,41 +115,49 @@ export function GitHubCommunity() {
       <CardContent className="p-0">
         <Tabs defaultValue="sponsors" className="w-full">
           <div className="overflow-x-auto overflow-y-hidden">
-            <TabsList className="w-full flex justify-start bg-muted/30 p-1.5 tabs-scrollbar mt-4">
+            <TabsList className="w-full flex justify-start bg-muted/30 p-1.5 tabs-scrollbar">
               <div className="flex min-w-max gap-1.5 sm:gap-2 px-1.5 sm:px-2 pb-0.5">
-                <TabsTrigger value="sponsors" className="flex items-center gap-2 text-xs sm:text-sm py-1.5 sm:py-2">
+                <TabsTrigger
+                  value="sponsors"
+                  className="flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 h-9 sm:h-10 text-xs font-medium transition-all duration-200 hover:bg-muted/50 data-[state=active]:bg-background data-[state=active]:text-amber-500 data-[state=active]:font-semibold data-[state=active]:border-amber-500/50"
+                >
                   <Heart className="h-3 w-3 sm:h-4 sm:w-4 text-rose-500" />
-                  <span>Sponsors ({sponsors.length})</span>
+                  <span className="truncate">Sponsors ({sponsors.length})</span>
                 </TabsTrigger>
-                <TabsTrigger value="followers" className="flex items-center gap-2 text-xs sm:text-sm py-1.5 sm:py-2">
+                <TabsTrigger
+                  value="followers"
+                  className="flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 h-9 sm:h-10 text-xs font-medium transition-all duration-200 hover:bg-muted/50 data-[state=active]:bg-background data-[state=active]:text-amber-500 data-[state=active]:font-semibold data-[state=active]:border-amber-500/50"
+                >
                   <Users className="h-3 w-3 sm:h-4 sm:w-4" />
-                  <span>Followers ({followers.length})</span>
+                  <span className="truncate">Followers ({followers.length})</span>
                 </TabsTrigger>
               </div>
             </TabsList>
           </div>
           <div className="p-2 sm:p-4">
-            <TabsContent value="sponsors" className="mt-0">
+            <TabsContent value="sponsors" className="mt-0 space-y-1 sm:space-y-2">
               <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
                 {displayedSponsors.map((sponsor) => (
                   <SponsorCard key={sponsor.login} sponsor={sponsor} />
                 ))}
               </div>
-              <div className="mt-4 flex justify-center gap-4">
-                {hasMoreSponsors && (
+              {hasMoreSponsors && (
+                <div className="pt-2 sm:pt-4 flex justify-center">
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={loadMoreSponsors}
-                    className="text-xs sm:text-sm h-8 sm:h-9"
+                    className="w-full sm:w-auto text-xs sm:text-sm h-8 sm:h-9 transition-all hover:bg-amber-500/10 hover:text-amber-700 dark:hover:text-amber-300 hover:border-amber-500/30"
                   >
                     Load More
                   </Button>
-                )}
+                </div>
+              )}
+              <div className="pt-2 sm:pt-4 flex justify-center">
                 <Button
                   variant="outline"
                   size="sm"
-                  className="gap-2 hover:text-rose-600 hover:bg-rose-100/10 text-xs sm:text-sm h-8 sm:h-9"
+                  className="w-full sm:w-auto gap-2 text-xs sm:text-sm h-8 sm:h-9 transition-all hover:bg-rose-500/10 hover:text-rose-700 dark:hover:text-rose-300 hover:border-rose-500/30"
                   asChild
                 >
                   <a href={`${url}?tab=sponsors`} target="_blank" rel="noopener noreferrer">
@@ -159,24 +167,31 @@ export function GitHubCommunity() {
                 </Button>
               </div>
             </TabsContent>
-            <TabsContent value="followers" className="mt-0">
+            <TabsContent value="followers" className="mt-0 space-y-1 sm:space-y-2">
               <div className="flex flex-wrap justify-center gap-2">
                 {displayedFollowers.map((follower) => (
                   <FollowerCard key={follower.username} follower={follower} />
                 ))}
               </div>
-              <div className="mt-4 flex justify-center gap-4">
-                {hasMoreFollowers && (
+              {hasMoreFollowers && (
+                <div className="pt-2 sm:pt-4 flex justify-center">
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={loadMoreFollowers}
-                    className="text-xs sm:text-sm h-8 sm:h-9"
+                    className="w-full sm:w-auto text-xs sm:text-sm h-8 sm:h-9 transition-all hover:bg-amber-500/10 hover:text-amber-700 dark:hover:text-amber-300 hover:border-amber-500/30"
                   >
                     Load More
                   </Button>
-                )}
-                <Button variant="outline" size="sm" className="gap-2 text-xs sm:text-sm h-8 sm:h-9" asChild>
+                </div>
+              )}
+              <div className="pt-2 sm:pt-4 flex justify-center">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full sm:w-auto gap-2 text-xs sm:text-sm h-8 sm:h-9 transition-all hover:bg-amber-500/10 hover:text-amber-700 dark:hover:text-amber-300 hover:border-amber-500/30"
+                  asChild
+                >
                   <a href={`${url}?tab=followers`} target="_blank" rel="noopener noreferrer">
                     View all followers
                     <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4" />

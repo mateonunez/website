@@ -18,27 +18,37 @@ const Header = memo(() => (
   </header>
 ));
 
+const SectionTitle = memo(({ title, fontClass = '' }: { title: string; fontClass?: string }) => (
+  <>
+    <h2 className={`text-xl font-semibold ${fontClass}`}>{title}</h2>
+    <Separator className="my-4" />
+  </>
+));
+
+SectionTitle.displayName = 'SectionTitle';
+
 const SidebarContent = memo(() => (
-  <div className="col-span-12 md:col-span-5 lg:col-span-4 space-y-6">
-    <h2 className="text-xl font-semibold">I've been playing</h2>
+  <div className="col-span-12 md:col-span-5 lg:col-span-4 space-y-4">
+    <SectionTitle title="I've been playing" />
     <RecentlyPlayedWrapper />
 
-    <h2 className="text-xl font-semibold font-bungee">Thank You 🫰</h2>
-    <Separator className="my-4" />
-    <GitHubCommunityWrapper />
+    <div className="mt-6">
+      <SectionTitle title="Thank You 🫰" fontClass="font-bungee" />
+      <GitHubCommunityWrapper />
+    </div>
   </div>
 ));
 
 const MainContent = memo(() => (
-  <div className="col-span-12 md:col-span-7 lg:col-span-8 space-y-6">
-    <h2 className="text-xl font-semibold">Few words</h2>
+  <div className="col-span-12 md:col-span-7 lg:col-span-8 space-y-4">
+    <SectionTitle title="Few words" />
     <LatestArticlesWrapper />
   </div>
 ));
 
 const BottomContent = memo(() => (
-  <div className="col-span-12 md:col-span-7 lg:col-span-8 space-y-6">
-    <h2 className="text-xl font-semibold mb-2">Open Source Activity</h2>
+  <div className="col-span-12 space-y-4 mt-6">
+    <SectionTitle title="Open Source Activity" />
     <LastActivityWrapper />
   </div>
 ));
