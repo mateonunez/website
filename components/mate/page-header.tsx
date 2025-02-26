@@ -17,7 +17,7 @@ export function PageHeader({ title, subtitle, icon, breadcrumbItems, children }:
           <div className="flex items-center gap-3">
             {icon && <div className="flex-shrink-0">{icon}</div>}
             <div>
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold font-hanken animate-in fade-in duration-1000 delay-200">
+              <h1 className="text-lg md:text-2xl lg:text-3xl font-bold font-hanken animate-in fade-in duration-1000 delay-200">
                 {title}
               </h1>
               {subtitle && (
