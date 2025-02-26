@@ -389,7 +389,7 @@ __metadata:
     "@elgorditosalsero/react-gtm-hook": "npm:^2.7.2"
     "@mdx-js/loader": "npm:^3.1.0"
     "@mdx-js/react": "npm:^3.1.0"
-    "@next/mdx": "npm:^15.1.7"
+    "@next/mdx": "npm:^15.2.0"
     "@octokit/graphql": "npm:^8.2.1"
     "@tailwindcss/typography": "npm:^0.5.16"
     "@vercel/analytics": "npm:^1.5.0"
@@ -511,9 +511,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/mdx@npm:^15.1.7":
-  version: 15.1.7
-  resolution: "@next/mdx@npm:15.1.7"
+"@next/mdx@npm:^15.2.0":
+  version: 15.2.0
+  resolution: "@next/mdx@npm:15.2.0"
   dependencies:
     source-map: "npm:^0.7.0"
   peerDependencies:
@@ -524,7 +524,7 @@ __metadata:
       optional: true
     "@mdx-js/react":
       optional: true
-  checksum: 10c0/15cbc59090944cad956b44b30ab457bf1c971306e697177b276c37638b158d5f9ae67c94b9ebf1f63a0fce3d3f9d65a64e3b3c89047148213b6c9946943b9fc8
+  checksum: 10c0/4e1c047fe3e32a2d75c64b16cfad24237e74dc23b1d224e26ecd2fd3de9ed6e8aa6664d58dd6ab1706d050a06c484c6cc5a416888e2df67c7b73ad0e502e0cc1
   languageName: node
   linkType: hard
 
