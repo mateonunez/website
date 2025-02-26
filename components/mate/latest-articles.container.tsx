@@ -19,7 +19,7 @@ export async function LatestArticlesContainer() {
           tags={article.frontmatter.tags}
         />
       ))}
-      <div className="mt-6 text-center">
+      <div className="flex justify-center mt-6">
         <Button variant="outline" size="sm" asChild>
           <Link href="/blog">View all articles</Link>
         </Button>

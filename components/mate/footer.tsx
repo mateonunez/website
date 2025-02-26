@@ -10,8 +10,8 @@ export function Footer(): JSX.Element {
 
   return (
     <footer className="w-full border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto p-6">
-        <div className="flex flex-col items-center justify-between gap-6 sm:gap-8 md:flex-row">
+      <div className="container mx-auto p-4 md:p-6">
+        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="flex flex-col md:flex-row">
             <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
               Source code{' '}
@@ -34,7 +34,7 @@ export function Footer(): JSX.Element {
                   key={link.name}
                   variant="ghost"
                   size="icon"
-                  className="h-9 w-9 rounded-full hover:bg-muted"
+                  className="h-9 w-9 rounded-md hover:bg-muted"
                   asChild
                 >
                   <Link href={link.href} target="_blank" rel="noreferrer" aria-label={`Visit ${link.name}`}>
@@ -46,7 +46,7 @@ export function Footer(): JSX.Element {
             })}
           </div>
         </div>
-        <div className="mt-6 border-t pt-6 text-center md:text-left">
+        <div className="mt-4 md:mt-6 border-t pt-4 md:pt-6 text-center md:text-left">
           <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} Mateo Nunez</p>
         </div>
       </div>

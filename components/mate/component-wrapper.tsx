@@ -9,10 +9,10 @@ export function ComponentWrapper({
 }: ComponentPropsWithoutRef<'div'> & { name: string }) {
   return (
     <div className={cn('flex flex-col rounded-lg border', className)} {...props}>
-      <div className="border-b px-4 py-3 sm:px-6 sm:py-4">
+      <div className="border-b px-4 py-3 md:px-6 md:py-4">
         <div className="text-sm font-medium">{name}</div>
       </div>
-      <div className="flex flex-1 flex-col items-center justify-center gap-4 p-4 sm:p-6 [&>div]:max-w-full">
+      <div className="flex flex-1 flex-col items-center justify-center gap-4 p-4 md:p-6 [&>div]:max-w-full">
         {children}
       </div>
     </div>

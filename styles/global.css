@@ -228,7 +228,7 @@
   .prose img {
     max-width: 100%;
     height: auto;
-    border-radius: 0.5rem; /* Rounded images for a modern look */
+    border-radius: 0.375rem; /* Using 0.375rem which is equivalent to rounded-md in Tailwind */
   }
   a:focus,
   button:focus {
@@ -280,7 +280,7 @@
 
 .tabs-scrollbar::-webkit-scrollbar-thumb {
   background-color: rgba(100, 100, 100, 0.2);
-  border-radius: 20px;
+  border-radius: 0.375rem;
 }
 
 /* Firefox scrollbar styles */
