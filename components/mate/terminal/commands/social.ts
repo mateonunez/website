@@ -20,16 +20,13 @@ export const githubCommunityCommand: Command = {
       .join('\n');
 
     return [
-      // biome-ignore lint/nursery/noSecrets: it's not a secret
       '─────────────────────────────',
       '🌟 GitHub Community Stats',
-      // biome-ignore lint/nursery/noSecrets: it's not a secret
       '─────────────────────────────',
       `Sponsors (${sponsorCount}):`,
       sponsorsList,
       `Followers: ${followerCount}+`,
       `View more at: ${url}`,
-      // biome-ignore lint/nursery/noSecrets: it's not a secret
       '─────────────────────────────',
     ].join('\n');
   },
@@ -112,15 +109,12 @@ export const spotifyTopCommand: Command = {
         : ['No top artists data available.'];
 
     return [
-      // biome-ignore lint/nursery/noSecrets: it's not a secret
       '─────────────────────────────',
       '🎸 My Spotify Favorites',
-      // biome-ignore lint/nursery/noSecrets: it's not a secret
       '─────────────────────────────',
       ...tracksSection,
       '',
       ...artistsSection,
-      // biome-ignore lint/nursery/noSecrets: it's not a secret
       '─────────────────────────────',
     ].join('\n');
   },
@@ -166,14 +160,11 @@ export const githubActivityCommand: Command = {
       .join('\n');
 
     return [
-      // biome-ignore lint/nursery/noSecrets: it's not a secret
       '─────────────────────────────',
       '🚀 Recent GitHub Activity',
-      // biome-ignore lint/nursery/noSecrets: it's not a secret
       '─────────────────────────────',
       activitiesList || 'No recent activity',
       'View more on GitHub',
-      // biome-ignore lint/nursery/noSecrets: it's not a secret
       '─────────────────────────────',
     ].join('\n');
   },

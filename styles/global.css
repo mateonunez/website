@@ -79,6 +79,8 @@
   --font-sans: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   --font-hanken: "Hanken Grotesk";
+  --font-jua: "Jua";
+  --font-prompt: "Prompt";
 }
 
 .dark {
@@ -254,6 +256,19 @@
     font-weight: 500;
     font-style: normal;
   }
+
+  .font-jua {
+    font-family: var(--font-jua);
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .font-prompt {
+    font-family: var(--font-prompt);
+    font-weight: 400;
+    font-style: normal;
+  }
+
   @keyframes pulse {
     0% {
       opacity: 0.5;

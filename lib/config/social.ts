@@ -43,7 +43,6 @@ export const socialLinks: SocialLink[] = [
   },
   {
     name: 'Spotify',
-    // biome-ignore lint/nursery/noSecrets: falsy
     href: 'https://open.spotify.com/user/ltstcqtg2k6q3a17xzdbmcd8q',
     icon: Music,
     showInFooter: true,

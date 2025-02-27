@@ -7,6 +7,7 @@ import LatestArticlesWrapper from '@/components/mate/latest-articles.wrapper';
 import { Separator } from '@/components/ui/separator';
 import GitHubCommunityWrapper from '@/components/mate/open-source/github-community.wrapper';
 import LastActivityWrapper from '@/components/mate/open-source/last-activity.wrapper';
+import AboutMeWrapper from '@/components/mate/about-me.wrapper';
 import metadata from '@/lib/config/metadata';
 import { PageHeader } from '@/components/mate/page-header';
 
@@ -44,10 +45,12 @@ const BottomContent = memo(() => (
   </div>
 ));
 
+const title = metadata.title.default.toLowerCase();
+
 export default async function HomePage(): Promise<JSX.Element> {
   return (
     <>
-      <PageHeader title={metadata.title.default} />
+      <PageHeader title={title} />
       <div className="flex-none">
         <PlayerWrapper />
       </div>
@@ -57,6 +60,9 @@ export default async function HomePage(): Promise<JSX.Element> {
           <div className="space-y-6">
             <div className="mb-6">
               <TerminalWrapper />
+            </div>
+            <div className="mb-6">
+              <AboutMeWrapper />
             </div>
             <div className="grid grid-cols-12 gap-6">
               <MainContent />

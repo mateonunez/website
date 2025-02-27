@@ -21,9 +21,9 @@ export function LoadingState({ variant }: LoadingStateProps) {
     );
   }
   return (
-    <Card className="relative overflow-hidden bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-0 rounded-none max-w-dvw">
+    <Card className="relative flex items-center justify-center overflow-hidden bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-0 rounded-none max-w-dvw h-22">
       <CardContent className="p-4">
-        <div className="flex items-center justify-center">
+        <div className="flex">
           <Headphones className="h-6 w-6 text-amber-500" />
           <span className="ml-2 text-sm text-muted-foreground">Loading...</span>
         </div>
