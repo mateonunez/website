@@ -1,5 +1,6 @@
 import { Github, Twitter, LinkedinIcon, Music, Mail, Instagram } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import personal from './personal';
 
 export interface SocialLink {
   name: string;
@@ -13,37 +14,37 @@ export type SocialLinkName = 'Email' | 'GitHub' | 'Twitter' | 'LinkedIn' | 'Inst
 export const socialLinks: SocialLink[] = [
   {
     name: 'Email',
-    href: 'mailto:mateonunez95@gmail.com',
+    href: `mailto:${personal.email}`,
     icon: Mail,
     showInFooter: false,
   },
   {
     name: 'GitHub',
-    href: 'https://github.com/mateonunez',
+    href: `https://github.com/${personal.social.github}`,
     icon: Github,
     showInFooter: true,
   },
   {
     name: 'Twitter',
-    href: 'https://twitter.com/mmateonunez',
+    href: `https://twitter.com/${personal.social.twitter}`,
     icon: Twitter,
     showInFooter: true,
   },
   {
     name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/mateo-nunez',
+    href: `https://www.linkedin.com/in/${personal.social.linkedin}`,
     icon: LinkedinIcon,
     showInFooter: true,
   },
   {
     name: 'Instagram',
-    href: 'https://www.instagram.com/mmateonunez',
+    href: `https://www.instagram.com/${personal.social.instagram}`,
     icon: Instagram,
     showInFooter: false,
   },
   {
     name: 'Spotify',
-    href: 'https://open.spotify.com/user/ltstcqtg2k6q3a17xzdbmcd8q',
+    href: `https://open.spotify.com/user/${personal.social.spotify}`,
     icon: Music,
     showInFooter: true,
   },

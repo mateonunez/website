@@ -8,6 +8,7 @@ import remarkGfm from 'remark-gfm';
 import rehypePrism from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
 import mdxComponents from '@/components/mdx';
+import personal from '@/lib/config/personal';
 
 export async function getArticleSlugs(): Promise<string[]> {
   const fullPath = path.join(process.cwd(), './articles');
@@ -45,9 +46,9 @@ export async function getArticle({ slug }: { slug: string }): Promise<Article> {
   const timeToRead = readingTime(rawArticle);
 
   const defaultAuthor = {
-    name: 'Mateo Nunez',
-    url: 'https://github.com/mateonunez',
-    image: 'https://github.com/mateonunez.png',
+    name: personal.name,
+    url: `https://github.com/${personal.social.github}`,
+    image: `https://github.com/${personal.social.github}.png`,
   };
 
   return {

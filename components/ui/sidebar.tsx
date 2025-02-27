@@ -27,6 +27,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '
 import { Skeleton } from '@/components/ui/skeleton';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { PageHeader } from '@/components/mate/page-header';
+import personal from '@/lib/config/personal';
 
 const SIDEBAR_WIDTH = '16rem';
 const SIDEBAR_WIDTH_ICON = '3rem';
@@ -238,7 +239,11 @@ function Sidebar({
           hideCloseButton={true}
         >
           {isMobile && (
-            <PageHeader title="mateonunez" icon={<Code className="h-5 w-5 text-primary" />} className="border-b-0">
+            <PageHeader
+              title={personal.social.github}
+              icon={<Code className="h-5 w-5 text-primary" />}
+              className="border-b-0"
+            >
               <Button
                 onClick={() => setOpenMobile(false)}
                 variant="ghost"
@@ -306,7 +311,11 @@ function Sidebar({
             className="bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm"
           >
             {isMobile && (
-              <PageHeader title="mateonunez" icon={<Code className="h-5 w-5 text-primary" />} className="border-b-0">
+              <PageHeader
+                title={personal.social.github}
+                icon={<Code className="h-5 w-5 text-primary" />}
+                className="border-b-0"
+              >
                 <Button
                   onClick={() => setOpenMobile(false)}
                   variant="ghost"
