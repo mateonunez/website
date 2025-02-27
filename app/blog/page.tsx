@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 const Header = memo(() => (
   <PageHeader
     title="Articles"
+    subtitle="Articles written with ❤️ by me and the Community."
     breadcrumbItems={[
       {
         label: 'Blog',

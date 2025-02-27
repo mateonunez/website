@@ -38,7 +38,7 @@ export function BlogBreadcrumb({
           <li className="flex items-center">
             <Link
               href={firstItem.href ?? '/'}
-              className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1"
+              className="text-sm text-muted-foreground hover:text-primary flex items-center gap-1 transition-colors duration-200"
             >
               <Home className="h-4 w-4" aria-hidden="true" />
               <span className="sr-only sm:not-sr-only">{firstItem.label}</span>
@@ -70,7 +70,7 @@ export function BlogBreadcrumb({
                 {!isLast && item.href ? (
                   <Link
                     href={item.href}
-                    className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1.5"
+                    className="text-sm text-muted-foreground hover:text-primary flex items-center gap-1.5 transition-colors duration-200 hover:underline"
                   >
                     {index === 0 && <Home className="h-3 w-3 sm:h-4 sm:w-4" aria-hidden="true" />}
                     <span className={index === 0 ? 'sr-only sm:not-sr-only' : ''}>{item.label}</span>

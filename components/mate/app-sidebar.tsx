@@ -1,21 +1,13 @@
 'use client';
 
 import type * as React from 'react';
-import { BookText, Code2, Home, Bot, Music, GalleryVerticalEnd, SidebarCloseIcon } from 'lucide-react';
+import { BookText, Code2, Home, Bot, Music, Code } from 'lucide-react';
 
 import { NavMain } from '@/components/mate/nav-main';
 import { NavProjects } from '@/components/mate/nav-projects';
 import { NavUser } from '@/components/mate/nav-user';
 import { ModeToggle } from '@/components/mate/nav-mode-toggle';
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarRail,
-  useSidebar,
-} from '@/components/ui/sidebar';
-import { Button } from '@/components/ui/button';
+import { Sidebar, SidebarContent, SidebarFooter, SidebarRail } from '@/components/ui/sidebar';
 
 const data = {
   user: {
@@ -26,7 +18,7 @@ const data = {
   teams: [
     {
       name: '@mateonunez',
-      logo: GalleryVerticalEnd,
+      logo: Code,
       plan: 'Personal',
     },
   ],
@@ -88,23 +80,12 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { toggleSidebar, isMobile } = useSidebar();
-
   return (
     <Sidebar {...props}>
-      <SidebarHeader />
       <SidebarContent className="space-y-4">
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
         <ModeToggle />
-        {isMobile && (
-          <div className="relative flex w-full min-w-0 flex-col p-4 mt-auto">
-            <Button variant="ghost" size="sm" className="w-full justify-start" onClick={() => toggleSidebar()}>
-              <SidebarCloseIcon className="mr-2 h-4 w-4" />
-              Close
-            </Button>
-          </div>
-        )}
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />

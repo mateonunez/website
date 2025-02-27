@@ -7,10 +7,11 @@ import { ThemeProvider } from '@/components/providers/theme-provider';
 import { UIProvider } from '@/components/providers/ui-provider';
 import { AnalyticsProvider } from '@/components/providers/analytics-provider';
 import meta from '@/lib/config/metadata';
-import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/mate/app-sidebar';
 import { cn } from '@/lib/utils';
 import { Footer } from '@/components/mate/footer';
+import { TopNavbar } from '@/components/mate/top-navbar';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -61,13 +62,12 @@ export default function RootLayout({
           <AnalyticsProvider>
             <SidebarProvider>
               <AppSidebar />
+
               <UIProvider>
                 <SidebarInset className="flex flex-col">
-                  {children}
+                  <TopNavbar />
 
-                  <div className="fixed right-0 bottom-0 z-50 mr-4 mb-4 flex flex-col gap-2">
-                    <SidebarTrigger />
-                  </div>
+                  <main className="flex-1">{children}</main>
 
                   <Footer />
                 </SidebarInset>

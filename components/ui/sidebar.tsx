@@ -16,6 +16,7 @@ import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
 import { PanelRightIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { Code, X } from 'lucide-react';
 
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
@@ -25,10 +26,9 @@ import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { DropdownMenu, DropdownMenuTrigger } from './dropdown-menu';
+import { PageHeader } from '@/components/mate/page-header';
 
 const SIDEBAR_WIDTH = '16rem';
-const SIDEBAR_WIDTH_MOBILE = '18rem';
 const SIDEBAR_WIDTH_ICON = '3rem';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
 
@@ -104,6 +104,24 @@ const SidebarProvider = forwardRef<
       }
     }, [pathname, isMobile, setOpenProp]);
 
+    // Handle mobile state changes
+    useEffect(() => {
+      const handleResize = () => {
+        if (isMobile && open) {
+          // If transitioning to mobile and sidebar is open, close it and open mobile sidebar
+          if (setOpenProp) {
+            setOpenProp(false);
+          } else {
+            _setOpen(false);
+          }
+          setOpenMobile(true);
+        }
+      };
+
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, [isMobile, setOpenProp, setOpenMobile]);
+
     const open = openProp ?? _open;
     const setOpen = useCallback(
       (value: boolean | ((value: boolean) => boolean)) => {
@@ -123,7 +141,11 @@ const SidebarProvider = forwardRef<
 
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.key === SIDEBAR_KEYBOARD_SHORTCUT && (event.metaKey || event.ctrlKey)) {
+        // Only trigger if not in an input, textarea, or contentEditable element
+        const target = event.target as HTMLElement;
+        const isInputElement = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable;
+
+        if (!isInputElement && event.key === SIDEBAR_KEYBOARD_SHORTCUT && (event.metaKey || event.ctrlKey)) {
           event.preventDefault();
           toggleSidebar();
         }
@@ -210,15 +232,26 @@ function Sidebar({
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden"
-          style={
-            {
-              '--sidebar-width': SIDEBAR_WIDTH_MOBILE,
-            } as CSSProperties
-          }
+          className="bg-sidebar text-sidebar-foreground w-full max-w-full p-0"
+          style={{} as CSSProperties}
           side={side}
+          hideCloseButton={true}
         >
-          <div className="flex h-full w-full flex-col">{children}</div>
+          {isMobile && (
+            <PageHeader title="mateonunez" icon={<Code className="h-5 w-5 text-primary" />} className="border-b-0">
+              <Button
+                onClick={() => setOpen(false)}
+                variant="ghost"
+                size="icon"
+                className="h-9 w-9 rounded-md opacity-70 transition-opacity hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 relative z-30"
+                aria-label="Close sidebar"
+              >
+                <X className="h-4 w-4" />
+                <span className="sr-only">Close</span>
+              </Button>
+            </PageHeader>
+          )}
+          <div className="flex h-full w-full flex-col pt-2">{children}</div>
         </SheetContent>
       </Sheet>
     );
@@ -228,7 +261,14 @@ function Sidebar({
     <>
       {open && (
         // biome-ignore lint/nursery/noStaticElementInteractions: <explanation>
-        <div className="fixed inset-0 z-10 bg-black/50" onClick={() => setOpen(false)} aria-label="Close sidebar" />
+        <div
+          className="fixed inset-0 z-20 bg-black/50"
+          onClick={(e) => {
+            e.stopPropagation();
+            setOpen(false);
+          }}
+          aria-label="Close sidebar"
+        />
       )}
       <div
         className="group peer text-sidebar-foreground hidden md:block"
@@ -250,12 +290,12 @@ function Sidebar({
         />
         <div
           className={cn(
-            'fixed inset-y-0 z-20 hidden h-svh w-(--sidebar-width) md:flex',
+            'fixed inset-y-0 z-100 hidden h-svh w-(--sidebar-width) md:flex pt-16',
             side === 'left'
               ? 'left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]'
               : 'right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]',
             variant === 'floating' || variant === 'inset'
-              ? 'p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]'
+              ? 'p-2 pt-16 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]'
               : 'group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l',
             className,
           )}
@@ -265,7 +305,21 @@ function Sidebar({
             data-sidebar="sidebar"
             className="bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm"
           >
-            {children}
+            {isMobile && (
+              <PageHeader title="mateonunez" icon={<Code className="h-5 w-5 text-primary" />} className="border-b-0">
+                <Button
+                  onClick={() => setOpen(false)}
+                  variant="ghost"
+                  size="icon"
+                  className="h-9 w-9 rounded-md opacity-70 transition-opacity hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 relative z-30"
+                  aria-label="Close sidebar"
+                >
+                  <X className="h-4 w-4" />
+                  <span className="sr-only">Close</span>
+                </Button>
+              </PageHeader>
+            )}
+            <div className="flex h-full w-full flex-col pt-2">{children}</div>
           </div>
         </div>
       </div>
@@ -274,46 +328,51 @@ function Sidebar({
 }
 
 function SidebarTrigger({ className, onClick, ...props }: ComponentProps<typeof Button>) {
-  const { toggleSidebar } = useSidebar();
+  const { toggleSidebar, state } = useSidebar();
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          data-sidebar="trigger"
-          data-slot="sidebar-trigger"
-          variant="outline"
-          size="icon"
-          className={cn('size-8 rounded-full', className)}
-          onClick={(event) => {
-            onClick?.(event);
-            toggleSidebar();
-          }}
-          {...props}
-        >
-          <PanelRightIcon className="h-[1.2rem] w-[1.2rem] transition-all" />
-          <span className="sr-only">Toggle Sidebar</span>
-        </Button>
-      </DropdownMenuTrigger>
-    </DropdownMenu>
+    <TooltipProvider delayDuration={0}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            data-sidebar="trigger"
+            data-slot="sidebar-trigger"
+            data-state={state}
+            variant="outline"
+            size="icon"
+            className={cn('size-8 rounded-full', className)}
+            onClick={(event) => {
+              onClick?.(event);
+              toggleSidebar();
+            }}
+            aria-label="Toggle Sidebar"
+            {...props}
+          >
+            <PanelRightIcon className="h-[1.2rem] w-[1.2rem] transition-all" />
+            <span className="sr-only">Toggle Sidebar</span>
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent side="right">{state === 'expanded' ? 'Collapse Sidebar' : 'Expand Sidebar'}</TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 }
 
 function SidebarRail({ className, ...props }: ComponentProps<'button'>) {
-  const { toggleSidebar } = useSidebar();
+  const { toggleSidebar, state } = useSidebar();
 
   return (
     <button
       data-sidebar="rail"
       data-slot="sidebar-rail"
-      aria-label="Toggle Sidebar"
-      tabIndex={-1}
+      data-state={state}
+      aria-label={state === 'expanded' ? 'Collapse Sidebar' : 'Expand Sidebar'}
+      tabIndex={0}
       onClick={toggleSidebar}
-      title="Toggle Sidebar"
+      title={state === 'expanded' ? 'Collapse Sidebar' : 'Expand Sidebar'}
       className={cn(
         'hover:after:bg-sidebar-border absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:left-1/2 after:w-[2px] sm:flex',
-        'in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize',
-        '[[data-side=left][data-state=collapsed]_&]:cursor-e-resize [[data-side=right][data-state=collapsed]_&]:cursor-w-resize',
+        'group-data-[side=left][data-state=collapsed]:cursor-e-resize group-data-[side=right][data-state=collapsed]:cursor-w-resize',
         'hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full',
         '[[data-side=left][data-collapsible=offcanvas]_&]:-right-2',
         '[[data-side=right][data-collapsible=offcanvas]_&]:-left-2',
@@ -523,6 +582,7 @@ function SidebarMenuButton({
       data-sidebar="menu-button"
       data-size={size}
       data-active={isActive}
+      aria-current={isActive ? 'page' : undefined}
       className={cn(sidebarMenuButtonVariants({ variant, size }), className)}
       {...props}
     />
@@ -532,16 +592,12 @@ function SidebarMenuButton({
     return button;
   }
 
-  if (typeof tooltip === 'string') {
-    tooltip = {
-      children: tooltip,
-    };
-  }
+  const tooltipContent = typeof tooltip === 'string' ? { children: tooltip } : tooltip;
 
   return (
     <Tooltip>
       <TooltipTrigger asChild>{button}</TooltipTrigger>
-      <TooltipContent side="right" align="center" hidden={state !== 'collapsed' || isMobile} {...tooltip} />
+      <TooltipContent side="right" align="center" hidden={state !== 'collapsed' || isMobile} {...tooltipContent} />
     </Tooltip>
   );
 }
@@ -550,10 +606,12 @@ function SidebarMenuAction({
   className,
   asChild = false,
   showOnHover = false,
+  title,
   ...props
 }: ComponentProps<'button'> & {
   asChild?: boolean;
   showOnHover?: boolean;
+  title?: string;
 }) {
   const Comp = asChild ? Slot : 'button';
 
@@ -561,6 +619,8 @@ function SidebarMenuAction({
     <Comp
       data-slot="sidebar-menu-action"
       data-sidebar="menu-action"
+      title={title}
+      aria-label={title}
       className={cn(
         'text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer-hover/menu-button:text-sidebar-accent-foreground absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',
         'after:absolute after:-inset-2 md:after:hidden',
@@ -577,11 +637,13 @@ function SidebarMenuAction({
   );
 }
 
-function SidebarMenuBadge({ className, ...props }: ComponentProps<'div'>) {
+function SidebarMenuBadge({ className, title, ...props }: ComponentProps<'div'> & { title?: string }) {
   return (
     <div
       data-slot="sidebar-menu-badge"
       data-sidebar="menu-badge"
+      aria-label={title}
+      title={title}
       className={cn(
         'text-sidebar-foreground pointer-events-none absolute right-1 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums select-none',
         'peer-hover/menu-button:text-sidebar-accent-foreground peer-data-[active=true]/menu-button:text-sidebar-accent-foreground',
@@ -673,9 +735,10 @@ function SidebarMenuSubButton({
       data-sidebar="menu-sub-button"
       data-size={size}
       data-active={isActive}
+      aria-current={isActive ? 'page' : undefined}
       className={cn(
         'text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground active:bg-sidebar-accent active:text-sidebar-accent-foreground [&>svg]:text-sidebar-accent-foreground flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 outline-hidden focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0',
-        'data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground',
+        'data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground data-[active=true]:font-medium',
         size === 'sm' && 'text-xs',
         size === 'md' && 'text-sm',
         'group-data-[collapsible=icon]:hidden',
