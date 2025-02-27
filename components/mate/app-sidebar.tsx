@@ -72,7 +72,7 @@ const data = {
   projects: [
     {
       name: 'AIt',
-      description: 'AI-powered terminal companion',
+      description: `Hey there! I'm AIt (acts like "alt" /ɔːlt/, but also pronounced as "eight" /eɪt/). It depends. 🤷‍♂️`,
       url: `https://github.com/${personal.social.github}/ait`,
       icon: Bot,
       disabled: true,
