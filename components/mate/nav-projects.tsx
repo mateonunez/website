@@ -1,6 +1,6 @@
 'use client';
 
-import { Folder, MoreHorizontal, type LucideIcon } from 'lucide-react';
+import { ExternalLink, Folder, MoreHorizontal, type LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {
   DropdownMenu,
@@ -23,6 +23,7 @@ export function NavProjects({
 }: {
   projects: {
     name: string;
+    description?: string;
     url: string;
     icon: LucideIcon;
     disabled?: boolean;
@@ -35,11 +36,22 @@ export function NavProjects({
       <SidebarGroupLabel>Projects</SidebarGroupLabel>
       <SidebarMenu>
         {projects.map((item) => (
-          <SidebarMenuItem key={item.name} className={cn(item.disabled && 'opacity-50 pointer-events-none')}>
+          <SidebarMenuItem key={item.name} className={cn(item.disabled && 'opacity-50 pointer-events-none', 'mb-1.5')}>
             <SidebarMenuButton asChild>
-              <a href={item.url}>
-                <item.icon />
-                <span>{item.name}</span>
+              <a
+                href={item.url}
+                className="flex items-start gap-3 min-h-[48px] py-2"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="flex shrink-0 pt-0.5">
+                  <item.icon className="h-4 w-4" />
+                </span>
+                <div className="flex flex-col gap-1 text-sm">
+                  <span className="font-medium">{item.name}</span>
+                  {item.description && <span className="text-xs text-muted-foreground">{item.description}</span>}
+                </div>
+                <ExternalLink className="ml-auto h-3 w-3 shrink-0 text-muted-foreground opacity-70" />
               </a>
             </SidebarMenuButton>
             {!item.disabled && (
