@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { getFooterSocialLinks, getSocialLinkUrl } from '@/lib/config/social';
+import personal from '@/lib/config/personal';
 import Link from 'next/link';
 import type { JSX } from 'react';
 
@@ -47,7 +48,9 @@ export function Footer(): JSX.Element {
           </div>
         </div>
         <div className="mt-4 md:mt-6 border-t pt-4 md:pt-6 text-center md:text-left md:px-6 lg:px-8">
-          <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} Mateo Nunez</p>
+          <p className="text-sm text-muted-foreground">
+            &copy; {new Date().getFullYear()} {personal.name}
+          </p>
         </div>
       </div>
     </footer>

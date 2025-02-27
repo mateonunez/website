@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { useSidebar } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import personal from '@/lib/config/personal';
 
 const navItems = [
   {
@@ -64,7 +65,7 @@ export function TopNavbar() {
         <div className="flex items-center gap-10">
           <Link href="/" className="font-bold text-xl flex items-center">
             <Code className="h-5 w-5 mr-2 text-primary" />
-            <span className="font-prompt">mateonunez</span>
+            <span className="font-prompt">{personal.social.github}</span>
           </Link>
 
           {/* Desktop Navigation */}

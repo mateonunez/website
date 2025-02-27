@@ -5,6 +5,7 @@ import type {
   GitHubRepositoryResponse,
   GitHubActivitiesResponse,
 } from '@/types/github';
+import personal from '@/lib/config/personal';
 
 if (!process.env.GITHUB_TOKEN) {
   throw new Error('GITHUB_TOKEN environment variable is not set');
@@ -108,7 +109,7 @@ export const getProfile = async (): Promise<GitHubUser> => {
         }
       `,
       {
-        username: 'mateonunez',
+        username: personal.social.github,
         sort: 'STARGAZERS',
         limit: 50,
       },
@@ -135,8 +136,8 @@ export const getReadme = async (): Promise<GitHubReadmeResponse['repository']['r
         }
       `,
       {
-        username: 'mateonunez',
-        repo: 'mateonunez',
+        username: personal.social.github,
+        repo: personal.social.github,
       },
     );
     return repository.readme;
@@ -164,7 +165,7 @@ export const getRepository = async (repository: string): Promise<GitHubRepositor
         }
       `,
       {
-        username: 'mateonunez',
+        username: personal.social.github,
         repo: repository,
       },
     );

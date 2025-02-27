@@ -10,45 +10,39 @@ import { Button } from '@/components/ui/button';
 import { User, Code, Globe, Github, Twitter, Linkedin, Mail, Briefcase, Coffee, Music } from 'lucide-react';
 import { AnimatedContainer, AnimatedItem } from '@/components/ui/animated-container';
 import { useAnimations } from '@/lib/hooks/use-animations';
-import metadata from '@/lib/config/metadata';
+import personal from '@/lib/config/personal';
+
+const iconMap = {
+  Code,
+  Github,
+  Globe,
+  User,
+};
 
 const author = {
-  name: metadata.author.name, // "Mateo Nunez"
-  title: 'Senior Software Engineer @ BonusX',
-  email: metadata.author.email,
-  location: 'Colombia roots, Milan vibes',
-  avatar: '/images/profile.jpg', // Assuming this is your pic
-  bio: "Hey, I'm Mateo Nunez, a Senior Software Engineer at BonusX who's been coding dope shit for over a decade. I'm all about open-source, tweaking my site (mateonunez.dev), and sipping coffee while blasting tunes. Right now, I'm cooking an AI side project that'll drop soon—stay tuned, fam!",
+  name: personal.name,
+  title: personal.title,
+  email: personal.email,
+  location: personal.location.display,
+  avatar: personal.assets.avatar,
+  bio: personal.bio.full,
 };
 
 const socialLinks = [
-  { icon: Github, href: 'https://github.com/mateonunez', label: 'GitHub' },
-  { icon: Twitter, href: 'https://twitter.com/mmateonunez', label: 'Twitter' },
-  { icon: Linkedin, href: 'https://linkedin.com/in/mateo-nunez', label: 'LinkedIn' },
-  { icon: Mail, href: `mailto:${author.email}`, label: 'Email' },
+  { icon: Github, href: `https://github.com/${personal.social.github}`, label: 'GitHub' },
+  { icon: Twitter, href: `https://twitter.com/${personal.social.twitter}`, label: 'Twitter' },
+  { icon: Linkedin, href: `https://linkedin.com/in/${personal.social.linkedin}`, label: 'LinkedIn' },
+  { icon: Mail, href: `mailto:${personal.email}`, label: 'Email' },
 ];
 
-// Skills - your tech stack, no fluff
-const skills = {
-  languages: ['JavaScript', 'TypeScript', 'Python'],
-  frameworks: ['React', 'Next.js', 'Node.js'],
-  tools: ['Git', 'Docker', 'AWS'],
-};
+const skills = personal.skills;
 
-// What you're up to - straight from your X post
-const currentWork = [
-  'Cooking an AI side project (open-source soon)',
-  'Refactoring mateonunez.dev',
-  'Keeping legacy code alive',
-  "Chillin' with coffee and tunes",
-];
+const currentWork = personal.currentWork;
 
-// Badges - simple and to the point
-const profileBadges = [
-  { label: 'Web Dev', icon: Code },
-  { label: 'Open Source', icon: Github },
-  { label: 'Full Stack', icon: Globe },
-];
+const profileBadges = personal.profileBadges.map((badge) => ({
+  ...badge,
+  icon: iconMap[badge.icon as keyof typeof iconMap],
+}));
 
 export function AboutMe() {
   const [mounted, setMounted] = useState(false);
@@ -60,8 +54,7 @@ export function AboutMe() {
 
   if (!mounted) return null;
 
-  // Summarized bio - short and sweet, your style
-  const summarizedBio = `${author.bio.split('. ')[0]}. I dig crafting slick web apps and jamming to Spotify while I code.`;
+  const summarizedBio = personal.bio.short;
 
   return (
     <AnimatedContainer animation="staggerContainer">
@@ -99,15 +92,19 @@ export function AboutMe() {
               </h2>
 
               <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-6 w-full">
-                {profileBadges.map((badge, index) => (
-                  <Badge
-                    key={index}
-                    variant="outline"
-                    className="bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30 hover:bg-amber-500/20"
-                  >
-                    {badge.label}
-                  </Badge>
-                ))}
+                {profileBadges.map((badge, index) => {
+                  const BadgeIcon = badge.icon;
+                  return (
+                    <Badge
+                      key={index}
+                      variant="outline"
+                      className="bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30 hover:bg-amber-500/20 py-1.5"
+                    >
+                      <BadgeIcon className="h-3.5 w-3.5" />
+                      {badge.label}
+                    </Badge>
+                  );
+                })}
               </div>
 
               <div className="mb-5 w-full">

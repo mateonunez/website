@@ -8,16 +8,17 @@ import { NavProjects } from '@/components/mate/nav-projects';
 import { NavUser } from '@/components/mate/nav-user';
 import { ModeToggle } from '@/components/mate/nav-mode-toggle';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarRail } from '@/components/ui/sidebar';
+import personal from '@/lib/config/personal';
 
 const data = {
   user: {
-    name: 'mateonunez',
-    email: 'mateonunez95@gmail.com',
-    avatar: '/images/profile.jpg',
+    name: personal.social.github,
+    email: personal.email,
+    avatar: personal.assets.avatar,
   },
   teams: [
     {
-      name: '@mateonunez',
+      name: `@${personal.social.github}`,
       logo: Code,
       plan: 'Personal',
     },
@@ -72,7 +73,7 @@ const data = {
     {
       name: 'AIt',
       description: 'AI-powered terminal companion',
-      url: 'https://github.com/mateonunez/ait',
+      url: `https://github.com/${personal.social.github}/ait`,
       icon: Bot,
       disabled: true,
     },
