@@ -240,10 +240,10 @@ function Sidebar({
           {isMobile && (
             <PageHeader title="mateonunez" icon={<Code className="h-5 w-5 text-primary" />} className="border-b-0">
               <Button
-                onClick={() => setOpen(false)}
+                onClick={() => setOpenMobile(false)}
                 variant="ghost"
                 size="icon"
-                className="h-9 w-9 rounded-md opacity-70 transition-opacity hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 relative z-30"
+                className="h-9 w-9 rounded-md opacity-80 hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 relative z-30"
                 aria-label="Close sidebar"
               >
                 <X className="h-4 w-4" />
@@ -308,10 +308,10 @@ function Sidebar({
             {isMobile && (
               <PageHeader title="mateonunez" icon={<Code className="h-5 w-5 text-primary" />} className="border-b-0">
                 <Button
-                  onClick={() => setOpen(false)}
+                  onClick={() => setOpenMobile(false)}
                   variant="ghost"
                   size="icon"
-                  className="h-9 w-9 rounded-md opacity-70 transition-opacity hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 relative z-30"
+                  className="h-9 w-9 rounded-md opacity-80 hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 relative z-30"
                   aria-label="Close sidebar"
                 >
                   <X className="h-4 w-4" />

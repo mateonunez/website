@@ -62,20 +62,22 @@ export function PageHeader({ title, subtitle, icon, breadcrumbItems, className, 
       )}
       <div className="flex h-16 md:h-20 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-14">
         <div className="flex items-center justify-between w-full px-4 md:px-8">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 max-w-[calc(100%-3rem)]">
             <AnimatedItem delay={0.1}>
               <Link href="/" className="flex items-center gap-2">
                 {displayIcon}
-                <span className="text-xl font-bold font-prompt transition-colors hover:text-primary">{title}</span>
+                <span className="text-xl font-bold font-prompt transition-colors hover:text-primary truncate">
+                  {title}
+                </span>
               </Link>
             </AnimatedItem>
             {tempSubtitle && (
-              <AnimatedItem delay={0.2}>
-                <p className="text-sm md:text-base text-muted-foreground mt-2">{tempSubtitle}</p>
+              <AnimatedItem delay={0.2} className="hidden sm:block">
+                <p className="text-sm md:text-base text-muted-foreground">{tempSubtitle}</p>
               </AnimatedItem>
             )}
           </div>
-          {children}
+          <div className="flex items-center">{children}</div>
         </div>
       </div>
     </AnimatedContainer>

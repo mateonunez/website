@@ -35,7 +35,7 @@ const navItems = [
 export function TopNavbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
-  const { toggleSidebar, open: isSidebarOpen } = useSidebar();
+  const { toggleSidebar, open: isSidebarOpen, openMobile } = useSidebar();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -91,6 +91,7 @@ export function TopNavbar() {
         </div>
 
         <div className="flex items-center gap-3">
+          {/* Desktop Sidebar Toggle */}
           <TooltipProvider delayDuration={300}>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -99,6 +100,7 @@ export function TopNavbar() {
                   variant={isSidebarOpen ? 'default' : 'outline'}
                   size="sm"
                   onClick={(e) => {
+                    e.preventDefault();
                     e.stopPropagation();
                     toggleSidebar();
                   }}
@@ -116,18 +118,21 @@ export function TopNavbar() {
             </Tooltip>
           </TooltipProvider>
 
+          {/* Mobile Sidebar Toggle */}
           <Button
             type="button"
-            variant="ghost"
+            variant={openMobile ? 'default' : 'ghost'}
             size="icon"
             onClick={(e) => {
+              e.preventDefault();
               e.stopPropagation();
               toggleSidebar();
             }}
             className="md:hidden flex items-center justify-center h-9 w-9 rounded-md relative z-50"
-            aria-label="Toggle mobile menu"
+            aria-label="Toggle sidebar"
+            aria-expanded={openMobile}
           >
-            {isSidebarOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            {openMobile ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </Button>
         </div>
       </div>
