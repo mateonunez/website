@@ -1,6 +1,6 @@
 import type * as React from 'react';
 import type { Metadata } from 'next';
-import { Inter, Hanken_Grotesk } from 'next/font/google';
+import { Inter, Hanken_Grotesk, Jua, Prompt } from 'next/font/google';
 import './../styles/global.css';
 
 import { ThemeProvider } from '@/components/providers/theme-provider';
@@ -24,6 +24,20 @@ const hankenGrotesk = Hanken_Grotesk({
   display: 'swap',
 });
 
+const jua = Jua({
+  subsets: ['latin'],
+  variable: '--font-jua',
+  display: 'swap',
+  weight: '400',
+});
+
+const prompt = Prompt({
+  subsets: ['latin'],
+  variable: '--font-prompt',
+  display: 'swap',
+  weight: '400',
+});
+
 export const metadata: Metadata = meta;
 
 export default function RootLayout({
@@ -33,7 +47,16 @@ export default function RootLayout({
 }>): React.JSX.Element {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(inter.variable, hankenGrotesk.variable, 'font-sans', 'antialiased')}>
+      <body
+        className={cn(
+          inter.variable,
+          hankenGrotesk.variable,
+          jua.variable,
+          prompt.variable,
+          'font-sans',
+          'antialiased',
+        )}
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <AnalyticsProvider>
             <SidebarProvider>

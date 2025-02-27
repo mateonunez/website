@@ -31,7 +31,8 @@
         "noProcessEnv": "off",
         "useConsistentCurlyBraces": "off",
         "useImportRestrictions": "off",
-        "useExplicitType": "off"
+        "useExplicitType": "off",
+        "noSecrets": "off"
       },
       "correctness": {
         "all": true,
