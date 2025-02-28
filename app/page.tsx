@@ -8,6 +8,7 @@ import { Separator } from '@/components/ui/separator';
 import GitHubCommunityWrapper from '@/components/mate/open-source/github-community.wrapper';
 import LastActivityWrapper from '@/components/mate/open-source/last-activity.wrapper';
 import AboutMeWrapper from '@/components/mate/about-me.wrapper';
+import NameHeadingWrapper from '@/components/mate/name-heading.wrapper';
 
 const SectionTitle = memo(({ title, fontClass = '' }: { title: string; fontClass?: string }) => (
   <>
@@ -53,6 +54,7 @@ export default async function HomePage(): Promise<JSX.Element> {
         <div className="container mx-auto p-4 md:p-6">
           <Toaster />
           <div className="space-y-6">
+            <NameHeadingWrapper />
             <div className="mb-6">
               <TerminalWrapper />
             </div>

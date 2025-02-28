@@ -4,6 +4,7 @@ export const personal = {
   shortName: 'Mateo',
 
   title: 'Senior Software Engineer @ BonusX',
+  alternativeTitle: 'A Chill Software Engineer',
   jobTitle: 'Senior Software Engineer',
   company: 'BonusX',
 
