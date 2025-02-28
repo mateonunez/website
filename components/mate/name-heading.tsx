@@ -13,16 +13,14 @@ const GradientHeading = memo(
     return (
       <h1
         className={cn(
+          'mt-2 sm:mt-4 md:mt-6 lg:mt-8',
           'font-prompt cursor-pointer',
-          'font-bold tracking-[-0.02em] leading-[1.1]',
-          'text-4xl',
-          'md:text-5xl',
-          'lg:text-6xl',
-          'xl:text-7xl',
-          '2xl:text-8xl',
-          'transition-transform will-change-transform duration-700 ease-in-out',
-          'hover:transform hover:rotate-x-3 hover:rotate-y-3 hover:translate-z-3',
-          'hover:text-shadow-xl',
+          'font-bold',
+          'text-5xl',
+          'md:text-6xl',
+          'lg:text-8xl',
+          'drop-shadow-md hover:drop-shadow-lg transition-all duration-700 ease-in-out',
+          'relative z-10 text-foreground/80 opacity-0 translate-y-4 animate-[fadeIn_0.8s_ease-out_0.2s_forwards]',
           'text-amber-500',
           className,
         )}
