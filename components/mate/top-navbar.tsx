@@ -65,7 +65,7 @@ export function TopNavbar() {
         <div className="flex items-center gap-10">
           <Link href="/" className="font-bold text-xl flex items-center">
             <Code className="h-5 w-5 mr-2 text-primary" />
-            <span className="font-prompt">{personal.social.github}</span>
+            <span className="font-prompt">{pathname === '/' ? 'Home' : personal.social.github}</span>
           </Link>
 
           {/* Desktop Navigation */}

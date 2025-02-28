@@ -190,7 +190,7 @@ export const getLastActivities = async (): Promise<GitHubActivitiesResponse['vie
           viewer {
             login
             contributionsCollection {
-              commitContributionsByRepository(maxRepositories: 10) {
+              commitContributionsByRepository(maxRepositories: 33) {
                 repository {
                   ...RepositoryFields
                   isPrivate
@@ -198,7 +198,7 @@ export const getLastActivities = async (): Promise<GitHubActivitiesResponse['vie
                     login
                   }
                 }
-                contributions(first: 10) {
+                contributions(first: 33) {
                   totalCount
                   nodes {
                     occurredAt
@@ -212,7 +212,7 @@ export const getLastActivities = async (): Promise<GitHubActivitiesResponse['vie
               }
             }
             pullRequests(
-              first: 10
+              first: 33
               orderBy: {field: CREATED_AT, direction: DESC}
               states: [OPEN, CLOSED, MERGED]
             ) {

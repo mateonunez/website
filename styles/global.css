@@ -305,3 +305,36 @@
     scrollbar-color: rgba(100, 100, 100, 0.2) transparent;
   }
 }
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    translate: 0 10px;
+  }
+}

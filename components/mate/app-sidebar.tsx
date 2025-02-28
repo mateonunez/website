@@ -34,17 +34,6 @@ const data = {
       title: 'Blog',
       url: '/blog',
       icon: BookText,
-      items: [
-        {
-          title: 'Latest Articles',
-          url: '/blog',
-        },
-        {
-          title: 'Tags',
-          url: '/blog/tags',
-          disabled: true,
-        },
-      ],
     },
     {
       title: 'Open Source',
