@@ -49,12 +49,12 @@ export default async function HomePage(): Promise<JSX.Element> {
     <>
       <div className="flex-none">
         <PlayerWrapper />
+        <NameHeadingWrapper />
       </div>
       <div className="flex-1 overflow-auto mx-auto max-w-7xl">
         <div className="container mx-auto p-4 md:p-6">
           <Toaster />
           <div className="space-y-6">
-            <NameHeadingWrapper />
             <div className="mb-6">
               <TerminalWrapper />
             </div>

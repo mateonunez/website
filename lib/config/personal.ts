@@ -9,7 +9,7 @@ export const personal = {
   company: 'BonusX',
 
   email: 'mateonunez95@gmail.com',
-  website: 'https://mateonunez.dev',
+  website: 'https://mateonunez.dev', // Corrected from CV's 'mateonunezdev' assuming a typo
 
   location: {
     origin: 'Colombia',
@@ -42,9 +42,9 @@ export const personal = {
     name: 'Mateo Nunez - A Chill Software Engineer',
     shortName: 'Mateo Nunez',
     description:
-      "Hey, I'm Mateo Nunez, a Senior Software Engineer at BonusX, originally from Colombia and now based in Milan. I'm passionate about crafting modern web experiences with JavaScript, Next.js, and AI, while diving deep into open-source projects on GitHub. When I'm not coding, you'll find me jamming to music on Spotify, exploring Milan's food scene, or tackling challenges with a chill vibe—because, let's be real, I also create MIT bugs! This site is my digital playground, featuring an interactive terminal, my latest open-source contributions, and a glimpse into my life as a developer who loves technology, creativity, and continuous improvement.",
+      "Hey, I'm Mateo Nunez, a Senior Software Engineer at BonusX, originally from Colombia and now based in Milan. I'm passionate about crafting modern web experiences with JavaScript, Next.js, Node.js, and AI, while diving deep into open-source projects on GitHub. When I'm not coding, you'll find me jamming to music on Spotify, exploring amazing places, or tackling challenges with a chill vibe—because, let's be real, I also create MIT bugs! This site is my digital playground, featuring an interactive terminal, my latest open-source contributions, and a brief glimpse into my life as a developer who loves technology, creativity, and continuous improvement.",
     shortDescription:
-      "Hey, I'm Mateo Nunez, a Senior Software Engineer at BonusX, originally from Colombia and now based in Milan. I'm passionate about crafting modern web experiences with JavaScript, Next.js, and AI.",
+      "Hey, I'm Mateo Nunez, a Senior Software Engineer at BonusX, originally from Colombia and now based in Milan. I'm passionate about crafting modern web experiences with JavaScript, Next.js, Node.js, and AI.",
     keywords: [
       'mateo nunez',
       'mmateonunez',
@@ -76,7 +76,7 @@ export const personal = {
   },
 
   terminal: {
-    prompt: 'MN >',
+    prompt: 'AIt >',
     about: [
       "Hey there! I'm Mateo 👋",
       '',
@@ -89,22 +89,51 @@ export const personal = {
   },
 
   skills: {
-    languages: ['JavaScript', 'TypeScript', 'Python'],
-    frameworks: ['React', 'Next.js', 'Node.js'],
-    tools: ['Git', 'Docker', 'AWS'],
+    languages: ['JavaScript', 'TypeScript', 'Python', 'Rust', 'Go', 'C++'],
+    frameworks: [
+      'Next.js',
+      'Nuxt.js',
+      'Astro',
+      'Nest.js',
+      'Laravel',
+      'Fastify',
+      'ReactNative',
+      'Flutter',
+      'LangChain',
+      'LangGraph',
+    ],
+    cloud: ['Docker', 'Kubernetes', 'AWS', 'GCP', 'Vercel', 'Kong', 'RabbitMQ', 'MQTT', 'Nginx'],
+    databases: ['PostgreSQL', 'Redis', 'MongoDB', 'QDrant', 'Pinecone'],
+    ai: ['LangChain', 'Ollama', 'RAG', 'CAG', 'Prompt Engineering', 'Fine-Tuning', 'LLMs'],
   },
 
-  currentWork: [
-    'Cooking an AI side project (open-source soon)',
-    'Refactoring mateonunez.dev',
-    'Keeping legacy code alive',
-    "Chillin' with coffee and tunes",
-  ],
+  languagesSpoken: ['Italian', 'Spanish', 'English'],
+
+  currentWork: ['AIt', 'Refactoring mateonunez.dev', 'Keeping legacy code alive', "Chillin' with coffee and tunes"],
 
   profileBadges: [
-    { label: 'Web Dev', icon: 'Code' },
-    { label: 'Open Source', icon: 'Github' },
-    { label: 'Full Stack', icon: 'Globe' },
+    { label: 'Code Crafter', icon: 'Code', description: 'Full-stack wizard with a chill twist' },
+    { label: 'Open Source Soul', icon: 'Github', description: 'Living for community and coffee' },
+    { label: 'AI Alchemist', icon: 'Brain', description: 'Brewing smart solutions' },
+    { label: 'Music & Code', icon: 'Music', description: 'Jamming while I code' },
+    { label: 'Global Dev', icon: 'Globe', description: 'Colombia roots, Milan vibes' },
+  ],
+
+  bookshelf: [
+    { label: 'AI Engineering', description: 'Building Applications with Foundation Models', author: 'Chip Huyen' },
+    {
+      label: 'Essential Math for AI',
+      description: 'Building Applications with Foundation Models',
+      author: 'Chip Huyen',
+    },
+    {
+      label: 'Building LLMs for Production',
+      description:
+        'Building LLMs for Production: Enhancing LLM Abilities and Reliability with Prompting, Fine-Tuning, and RAG',
+      author: 'Louis-François Bouchard',
+    },
+    { label: 'Ecce Homo', description: 'How One Becomes What One Is', author: 'Friedrich Nietzsche' },
+    { label: 'Siddhartha', description: 'A Novel About the True Value of Happiness', author: 'Hermann Hesse' },
   ],
 };
 
