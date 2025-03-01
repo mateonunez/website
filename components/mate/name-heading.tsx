@@ -28,7 +28,8 @@ const GradientHeading = memo(
     return (
       <h1
         className={cn(
-          'mt-2 sm:mt-4 md:mt-6 lg:mt-8',
+          'mt-4 sm:mt-6 md:mt-8 lg:mt-10',
+          'pb-2 sm:pb-3 md:pb-4 lg:pb-5',
           'font-incompleeta font-bold cursor-pointer',
           'text-5xl md:text-6xl lg:text-9xl',
           'drop-shadow-md hover:drop-shadow-lg transition-all duration-700 ease-in-out',
@@ -69,11 +70,8 @@ const Subtitle = memo(
   }: { children: string; className?: string } & HTMLAttributes<HTMLParagraphElement>) => (
     <p
       className={cn(
-        'mt-2 sm:mt-4 md:mt-6 lg:mt-8',
-        'text-sm',
-        'sm:text-md',
-        'md:text-lg',
-        'lg:text-xl',
+        'mt-2 sm:mt-3 md:mt-4 lg:mt-5',
+        'text-sm sm:text-md md:text-lg lg:text-xl',
         'font-medium tracking-wide',
         'drop-shadow-md hover:drop-shadow-lg transition-all duration-700 ease-in-out',
         'relative z-10 text-foreground/80 opacity-0 translate-y-4 animate-[fadeIn_0.8s_ease-out_0.2s_forwards]',
@@ -100,7 +98,7 @@ const NameHeading = memo(({ name = personal.name, title = personal.alternativeTi
   return (
     <div
       className={cn(
-        'text-center mb-12 md:mb-16 lg:mb-20 xl:mb-24 relative group transition-transform duration-500 ease-in-out group-hover:scale-[1.01]',
+        'text-center mb-8 sm:mb-12 md:mb-16 lg:mb-20 relative group transition-transform duration-500 ease-in-out group-hover:scale-[1.01]',
         className,
       )}
     >
