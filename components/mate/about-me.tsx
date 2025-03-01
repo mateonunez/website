@@ -7,9 +7,24 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
-import { User, Code, Globe, Github, Twitter, Linkedin, Mail, Briefcase, Coffee, Music } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import {
+  User,
+  Code,
+  Globe,
+  Github,
+  Twitter,
+  Linkedin,
+  Mail,
+  Briefcase,
+  Coffee,
+  Music,
+  Brain,
+  Book,
+} from 'lucide-react';
 import { AnimatedContainer, AnimatedItem } from '@/components/ui/animated-container';
 import { useAnimations } from '@/lib/hooks/use-animations';
+import { trimText } from '@/lib/utils';
 import personal from '@/lib/config/personal';
 
 const iconMap = {
@@ -17,6 +32,8 @@ const iconMap = {
   Github,
   Globe,
   User,
+  Music,
+  Brain,
 };
 
 const author = {
@@ -36,9 +53,8 @@ const socialLinks = [
 ];
 
 const skills = personal.skills;
-
 const currentWork = personal.currentWork;
-
+const bookshelf = personal.bookshelf;
 const profileBadges = personal.profileBadges.map((badge) => ({
   ...badge,
   icon: iconMap[badge.icon as keyof typeof iconMap],
@@ -95,14 +111,20 @@ export function AboutMe() {
                 {profileBadges.map((badge, index) => {
                   const BadgeIcon = badge.icon;
                   return (
-                    <Badge
-                      key={index}
-                      variant="outline"
-                      className="bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30 hover:bg-amber-500/20 py-1.5"
-                    >
-                      <BadgeIcon className="h-3.5 w-3.5" />
-                      {badge.label}
-                    </Badge>
+                    <Tooltip key={index}>
+                      <TooltipTrigger asChild>
+                        <Badge
+                          variant="outline"
+                          className="bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30 hover:bg-amber-500/20 py-1.5"
+                        >
+                          <BadgeIcon className="h-3.5 w-3.5" />
+                          {badge.label}
+                        </Badge>
+                      </TooltipTrigger>
+                      <TooltipContent className="bg-amber-500/90 text-white border-amber-500/30">
+                        {badge.description}
+                      </TooltipContent>
+                    </Tooltip>
                   );
                 })}
               </div>
@@ -115,6 +137,38 @@ export function AboutMe() {
                 <p className="text-xs text-muted-foreground">
                   Catch my latest jams down in the "I've been playing" section.
                 </p>
+              </div>
+
+              <div className="mb-5 w-full">
+                <h3 className="text-sm font-medium flex items-center gap-2 mb-2">
+                  <Book className="h-3.5 w-3.5 text-amber-500" />
+                  Bookshelf
+                </h3>
+                <p className="text-xs text-muted-foreground">I'm a bookworm. Here are some of my favorite books.</p>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {bookshelf.map((book, index) => (
+                    <Tooltip key={index}>
+                      <TooltipTrigger asChild>
+                        <Badge
+                          variant="outline"
+                          className="bg-indigo-500/10 text-rose-700 dark:text-rose-300 border-rose-500/30 hover:bg-rose-500/20 py-1.5"
+                        >
+                          {trimText(book.label)}
+                          <span className="text-xs text-muted-foreground ml-1">- {trimText(book.author, 10)}</span>
+                        </Badge>
+                      </TooltipTrigger>
+                      <TooltipContent className="bg-rose-500/90 text-white border-rose-500/30 max-w-[250px]">
+                        <p className="text-xs text-muted-foreground">
+                          <strong>
+                            {book.label} - {book.author}
+                          </strong>
+                          <br />
+                          <span className="text-xs text-muted-foreground">{book.description}</span>
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  ))}
+                </div>
               </div>
 
               <div className="flex gap-3 mt-auto pt-4">

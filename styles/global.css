@@ -263,12 +263,6 @@
     font-style: normal;
   }
 
-  .font-jua {
-    font-family: var(--font-jua);
-    font-weight: 400;
-    font-style: normal;
-  }
-
   .font-prompt {
     font-family: var(--font-prompt);
     font-weight: 400;
@@ -291,7 +285,6 @@
   }
 }
 
-/* Custom scrollbar styles for tabs */
 .tabs-scrollbar {
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
