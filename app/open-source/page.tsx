@@ -41,7 +41,11 @@ const OpenSourceIntro = memo(() => (
     </CardHeader>
     <CardContent className="p-4 md:p-6 pt-0">
       <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none">
-        <p>WIP</p>
+        <p className="text-base text-muted-foreground leading-relaxed mb-6">
+          Open source isn’t just about code for me—it's about community, creativity, and the pure joy of helping others.
+          I've contributed to and maintained a bunch of projects that scratch my own itch and (hopefully) help others,
+          too. Check out some of my favorite contributions below—feel free to star, fork, or open a PR. 🚀
+        </p>
       </div>
     </CardContent>
   </Card>

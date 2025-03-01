@@ -3,8 +3,7 @@ import type { Metadata } from 'next';
 import type { JSX } from 'react';
 import meta from '@/lib/config/metadata';
 import { PageHeader } from '@/components/mate/page-header';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Code, Github } from 'lucide-react';
+import { Code } from 'lucide-react';
 import RepositoriesShowcaseWrapper from '@/components/mate/open-source/repositories-showcase.wrapper';
 import { RepositoriesShowcaseSkeleton } from '@/components/mate/open-source/repositories-showcase.skeleton';
 
@@ -32,22 +31,6 @@ const Header = memo(() => (
   />
 ));
 
-const ProjectsIntro = memo(() => (
-  <Card className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/50">
-    <CardHeader className="p-4 md:p-6">
-      <CardTitle className="text-xl md:text-2xl flex items-center gap-2 font-hanken">
-        <Github className="h-5 w-5 md:h-6 md:w-6 text-amber-500" />
-        Open Source Projects
-      </CardTitle>
-    </CardHeader>
-    <CardContent className="p-4 md:p-6 pt-0">
-      <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none">
-        <p>WIP</p>
-      </div>
-    </CardContent>
-  </Card>
-));
-
 const AllRepositories = memo(() => (
   <div className="space-y-4">
     <h2 className="text-xl font-semibold flex items-center gap-2 font-hanken">
@@ -67,7 +50,6 @@ export default function ProjectsPage(): JSX.Element {
       <main className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg">
         <div className="container mx-auto p-6">
           <div className="space-y-8">
-            <ProjectsIntro />
             <div className="grid grid-cols-1 gap-6">
               <div className="space-y-8">
                 <AllRepositories />

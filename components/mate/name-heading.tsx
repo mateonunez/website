@@ -29,10 +29,9 @@ const GradientHeading = memo(
       <h1
         className={cn(
           'pt-2 pb-4',
-          'font-incompleeta font-bold leading-none cursor-none',
+          'font-incompleeta font-bold leading-none cursor-none select-none',
           'text-5xl md:text-6xl lg:text-9xl',
           'animate-[fadeIn_0.8s_ease-out_0.2s_forwards]',
-          'text-amber-500',
           className,
         )}
         style={
@@ -40,11 +39,11 @@ const GradientHeading = memo(
             '--x': `${position.x}px`,
             '--y': `${position.y}px`,
             background: isHovered
-              ? 'radial-gradient(circle 150px at var(--x) var(--y), var(--amber-500), transparent 50%)'
+              ? 'radial-gradient(circle var(--heading-gradient-size) at var(--x) var(--y), var(--heading-gradient-color), transparent var(--heading-gradient-opacity))'
               : 'none',
             backgroundClip: isHovered ? 'text' : 'none',
             WebkitBackgroundClip: isHovered ? 'text' : 'none',
-            color: isHovered ? 'transparent' : 'var(--amber-500)',
+            color: isHovered ? 'transparent' : 'var(--heading-text-color)',
             transition: 'color 0.5s ease-in-out, background 0.5s ease-in-out',
           } as CSSProperties
         }
@@ -87,7 +86,6 @@ interface NameHeadingProps {
   title?: string;
   className?: string;
 }
-
 const NameHeading = memo(({ name = personal.name, title = personal.alternativeTitle, className }: NameHeadingProps) => {
   return (
     <div className={cn('text-center', className)}>

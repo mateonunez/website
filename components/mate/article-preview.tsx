@@ -16,9 +16,9 @@ type ArticlePreviewProps = Pick<
 
 export function ArticlePreview({ author, date, title, description, image, slug, tags }: ArticlePreviewProps) {
   return (
-    <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300 hover:shadow-md rounded-t-xl">
+    <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300 hover:shadow-md rounded-t-xl rounded-b-xl">
       <Link href={`/blog/${slug}`} className="block">
-        <div className="relative h-[200px] md:h-[260px] w-full overflow-hidden rounded-t-xl">
+        <div className="relative h-[200px] md:h-[260px] w-full overflow-hidden rounded-t-xl rounded-b-xl">
           <div className="absolute inset-0 z-10 bg-gradient-to-t from-gray-900/80 to-gray-900/20" />
           <Image
             src={image}

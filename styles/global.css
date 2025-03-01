@@ -48,6 +48,12 @@
   --amber-800: hsl(43 96% 20%);
   --amber-900: hsl(43 96% 10%);
 
+  /* Gradient heading variables */
+  --heading-text-color: var(--amber-500);
+  --heading-gradient-color: var(--amber-500);
+  --heading-gradient-size: 150px;
+  --heading-gradient-opacity: 50%;
+
   /* Theme variables */
   --background: var(--neutral-50);
   --foreground: var(--neutral-900);
@@ -55,7 +61,7 @@
   --card-foreground: var(--neutral-900);
   --popover: var(--neutral-50);
   --popover-foreground: var(--neutral-900);
-  --primary: var(--amber-500); /* Updated to use amber for primary */
+  --primary: var(--amber-500);
   --primary-foreground: var(--neutral-900);
   --secondary: var(--neutral-100);
   --secondary-foreground: var(--neutral-900);
@@ -63,13 +69,13 @@
   --muted-foreground: var(--neutral-600);
   --accent: var(--amber-100);
   --accent-foreground: var(--amber-500);
-  --destructive: hsl(0 84% 60%);
+  --destructive: var(--rose-500);
   --destructive-foreground: var(--neutral-50);
   --border: var(--neutral-200);
   --input: var(--neutral-200);
-  --ring: var(--amber-500); /* Updated to amber for better cohesion */
+  --ring: var(--amber-500);
 
-  --radius: 0.3rem;
+  --radius: 0.7rem;
 
   /* Sidebar variables */
   --sidebar: hsl(0 0% 98%);
@@ -96,7 +102,7 @@
   --card-foreground: var(--neutral-50);
   --popover: var(--neutral-950);
   --popover-foreground: var(--neutral-50);
-  --primary: var(--amber-400); /* Lighter amber for dark mode */
+  --primary: var(--amber-400);
   --primary-foreground: var(--neutral-900);
   --secondary: var(--neutral-900);
   --secondary-foreground: var(--neutral-50);
@@ -104,11 +110,11 @@
   --muted-foreground: var(--neutral-400);
   --accent: var(--amber-500);
   --accent-foreground: var(--amber-100);
-  --destructive: hsl(0 63% 31%);
+  --destructive: var(--rose-500);
   --destructive-foreground: var(--neutral-50);
   --border: var(--neutral-800);
   --input: var(--neutral-800);
-  --ring: var(--amber-400); /* Adjusted for dark mode */
+  --ring: var(--amber-400);
 
   /* Sidebar variables for dark mode */
   --sidebar: hsl(240 5.9% 10%);
@@ -143,7 +149,7 @@
   --color-ring: var(--ring);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
   --radius-xl: calc(var(--radius) + 4px);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
