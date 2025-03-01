@@ -121,7 +121,7 @@ export function Terminal({
 
   return (
     <CommandContextProvider dataSources={dataSources} tools={tools}>
-      <div className={cn('rounded-xl border bg-card text-card-foreground shadow', className)}>
+      <div className={cn('rounded-md border bg-card text-card-foreground shadow', className)}>
         <TerminalHeader />
         {/* biome-ignore lint/nursery/noStaticElementInteractions: terminal */}
         <div

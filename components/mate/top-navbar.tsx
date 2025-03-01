@@ -58,7 +58,8 @@ export function TopNavbar() {
     <header
       className={cn(
         'w-full sticky top-0 z-50 transition-all duration-200 bg-background',
-        isScrolled && 'shadow-sm border-b',
+        'shadow-sm border-b',
+        isScrolled && 'border-b-primary/20',
       )}
     >
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
