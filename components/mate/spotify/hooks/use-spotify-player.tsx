@@ -1,6 +1,5 @@
 'use client';
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSpotify } from '@/lib/hooks/use-spotify';
 import config from '@/lib/config';
 
@@ -11,31 +10,35 @@ export function useSpotifyPlayer() {
   const [progress, setProgress] = useState(0);
   const [simulatedTime, setSimulatedTime] = useState(0);
   const [currentSongId, setCurrentSongId] = useState<string | null>(null);
-  const [lastUpdateTime, setLastUpdateTime] = useState(Date.now());
+  const lastUpdateTimeRef = useRef<number>(Date.now());
 
   const { data: spotifyData, isLoading } = useSpotify();
   const currentlyPlaying = spotifyData?.currentlyPlaying;
 
   useEffect(() => {
     setMounted(true);
+    lastUpdateTimeRef.current = Date.now();
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
 
     if (!currentlyPlaying?.isPlaying) {
       setProgress(0);
       setSimulatedTime(0);
       setCurrentSongId(null);
-      setLastUpdateTime(Date.now());
+      lastUpdateTimeRef.current = Date.now();
       return;
     }
 
-    const songId = currentlyPlaying.id;
     const duration = Number(currentlyPlaying.duration);
     const actualProgress = Number(currentlyPlaying.progress);
 
-    if (currentSongId !== songId) {
-      setCurrentSongId(songId);
+    if (currentSongId !== currentlyPlaying.id) {
+      setCurrentSongId(currentlyPlaying.id);
       setSimulatedTime(actualProgress);
       setProgress((actualProgress / duration) * 100);
-      setLastUpdateTime(Date.now());
+      lastUpdateTimeRef.current = Date.now();
       return;
     }
 
@@ -43,26 +46,29 @@ export function useSpotifyPlayer() {
     if (delta > PROGRESS_DELTA_THRESHOLD) {
       setSimulatedTime(actualProgress);
       setProgress((actualProgress / duration) * 100);
-      setLastUpdateTime(Date.now());
+      lastUpdateTimeRef.current = Date.now();
     }
+  }, [mounted, currentlyPlaying, currentSongId, simulatedTime]);
 
+  useEffect(() => {
+    if (!mounted || !currentlyPlaying?.isPlaying) return;
+
+    const duration = Number(currentlyPlaying.duration);
     const interval = setInterval(() => {
-      if (!currentlyPlaying.isPlaying) return;
-
       const now = Date.now();
-      const elapsed = now - lastUpdateTime;
-      setLastUpdateTime(now);
+      const elapsed = now - lastUpdateTimeRef.current;
+      lastUpdateTimeRef.current = now;
 
-      setSimulatedTime((prev) => {
-        const newTime = prev + elapsed;
-        return newTime >= duration ? duration : newTime;
+      setSimulatedTime((prevSimulatedTime) => {
+        const newSimulatedTime = prevSimulatedTime + elapsed;
+        const clampedTime = newSimulatedTime > duration ? duration : newSimulatedTime;
+        setProgress((clampedTime / duration) * 100);
+        return clampedTime;
       });
-
-      setProgress((simulatedTime / duration) * 100);
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [currentlyPlaying, currentSongId, simulatedTime, lastUpdateTime]);
+  }, [mounted, currentlyPlaying]);
 
   return {
     mounted,

@@ -52,7 +52,8 @@
   --heading-text-color: var(--amber-500);
   --heading-gradient-color: var(--amber-500);
   --heading-gradient-size: 150px;
-  --heading-gradient-opacity: 50%;
+  --heading-gradient-opacity: 80%;
+  --heading-gradient-size-mobile: 70px;
 
   /* Theme variables */
   --background: var(--neutral-50);
