@@ -2,8 +2,7 @@
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Music, Pause, Volume2, ExternalLink } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Music, Pause, Volume2 } from 'lucide-react';
 import Link from 'next/link';
 import { formatDuration } from '@/lib/helpers/date';
 
@@ -30,14 +29,6 @@ export function CompactPlayer({ currentlyPlaying, progress, simulatedTime, url }
                 <Music className="h-8 w-8" />
               </AvatarFallback>
             </Avatar>
-
-            <div className="absolute -right-1 -top-1 opacity-0 transition-opacity group-hover:opacity-100">
-              <Button size="icon" variant="secondary" className="h-6 w-6 rounded-full" asChild>
-                <Link href={url} target="_blank">
-                  <ExternalLink className="h-3 w-3" />
-                </Link>
-              </Button>
-            </div>
           </Link>
 
           <div className="flex flex-1 flex-col space-y-1 overflow-hidden">
