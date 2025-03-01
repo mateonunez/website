@@ -16,7 +16,7 @@ corepack enable
 Install dependencies:
 
 ```
-yarn install
+pnpm install
 ```
 
 Open [http://localhost:3000/](http://localhost:3000/). Pages will live-refresh when source files are changed.
