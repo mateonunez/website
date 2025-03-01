@@ -13,7 +13,7 @@ export function useSpotify() {
       setSpotifyListening(data);
       return data;
     },
-    refreshInterval: 10 * 1000, // 10 seconds
+    refreshInterval: 20 * 1000, // 20 seconds
     revalidateOnFocus: true,
     revalidateOnReconnect: true,
   });
@@ -25,7 +25,7 @@ export function useSpotify() {
       setSpotifyRecentlyPlayed(data);
       return data;
     },
-    refreshInterval: 60 * 1000, // 1 minute
+    refreshInterval: 10 * 60 * 1000, // 10 minute
     revalidateOnFocus: true,
     revalidateOnReconnect: true,
   });

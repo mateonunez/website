@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* import local fonts */
+@font-face {
+  font-family: "Incompleeta";
+  src: url("/fonts/IncompleetaRegular.woff2") format("woff2");
+}
+
 @plugin '@tailwindcss/typography';
 @plugin "tailwindcss-animate";
 
@@ -79,8 +85,8 @@
   --font-sans: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   --font-hanken: "Hanken Grotesk";
-  --font-jua: "Jua";
   --font-prompt: "Prompt";
+  --font-incompleeta: "Incompleeta";
 }
 
 .dark {
@@ -269,6 +275,12 @@
     font-style: normal;
   }
 
+  .font-incompleeta {
+    font-family: var(--font-incompleeta);
+    font-weight: 400;
+    font-style: normal;
+  }
+
   @keyframes pulse {
     0% {
       opacity: 0.5;
@@ -316,6 +328,25 @@
   100% {
     background-position: 0% 50%;
   }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shiny-text {
+  position: relative;
+  background-size: 200% auto;
+  background-position: 0 0;
+}
+
+.shiny-text:hover {
+  animation: shimmer 2s linear infinite;
 }
 
 @keyframes slideIn {
