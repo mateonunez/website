@@ -9,7 +9,7 @@ export const personal = {
   company: 'BonusX',
 
   email: 'mateonunez95@gmail.com',
-  website: 'https://mateonunez.dev', // Corrected from CV's 'mateonunezdev' assuming a typo
+  website: 'https://mateonunez.dev',
 
   location: {
     origin: 'Colombia',
@@ -114,9 +114,8 @@ export const personal = {
   profileBadges: [
     { label: 'Code Crafter', icon: 'Code', description: 'Full-stack wizard with a chill twist' },
     { label: 'Open Source Soul', icon: 'Github', description: 'Living for community and coffee' },
-    { label: 'AI Alchemist', icon: 'Brain', description: 'Brewing smart solutions' },
+    { label: 'AI Struggler', icon: 'Brain', description: 'Struggling to get the best out of AI' },
     { label: 'Music & Code', icon: 'Music', description: 'Jamming while I code' },
-    { label: 'Global Dev', icon: 'Globe', description: 'Colombia roots, Milan vibes' },
   ],
 
   bookshelf: [
@@ -124,7 +123,7 @@ export const personal = {
     {
       label: 'Essential Math for AI',
       description: 'Building Applications with Foundation Models',
-      author: 'Chip Huyen',
+      author: 'Hala Nelson',
     },
     {
       label: 'Building LLMs for Production',
