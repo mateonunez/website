@@ -13,7 +13,7 @@ export function useGithub() {
       setGithubProfile(data);
       return data;
     },
-    refreshInterval: 60 * 1000, // 1 minute
+    refreshInterval: 10 * 60 * 1000, // 10 minute
     revalidateOnFocus: true,
     revalidateOnReconnect: true,
   });
