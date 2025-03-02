@@ -18,9 +18,9 @@ export function AnalyticsProvider({ children }: AnalyticsWrapperProps): JSX.Elem
   const gtmParams = { id: gtmId };
 
   return (
-    <GTMProvider state={gtmParams}>
+    <>
+      <GTMProvider state={gtmParams}>{children}</GTMProvider>
       <Analytics />
-      {children}
-    </GTMProvider>
+    </>
   );
 }
