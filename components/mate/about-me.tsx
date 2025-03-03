@@ -151,13 +151,13 @@ export function AboutMe() {
                       <TooltipTrigger asChild>
                         <Badge
                           variant="outline"
-                          className="bg-indigo-500/10 text-rose-700 dark:text-rose-300 border-rose-500/30 hover:bg-rose-500/20 py-1.5"
+                          className="bg-indigo-500/10 text-green-700 dark:text-green-300 border-green-500/30 hover:bg-green-500/20 py-1.5"
                         >
                           {trimText(book.label)}
                           <span className="text-xs text-muted-foreground ml-1">- {trimText(book.author, 10)}</span>
                         </Badge>
                       </TooltipTrigger>
-                      <TooltipContent className="bg-rose-500/90 text-white border-rose-500/30 max-w-[250px]">
+                      <TooltipContent className="bg-green-500/90 text-white border-green-500/30 max-w-[250px]">
                         <p className="text-xs text-muted-foreground">
                           <strong>
                             {book.label} - {book.author}
