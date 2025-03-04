@@ -15,7 +15,7 @@ function generateArticlesSitemap(): MetadataRoute.Sitemap {
       url: new URL(`/blog/${slug}`, config.baseUrl).toString(),
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.7
+      priority: 0.7,
     });
   }
 
@@ -30,32 +30,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: new URL('/', config.baseUrl).toString(),
       lastModified: new Date(),
       changeFrequency: 'daily',
-      priority: 1
+      priority: 1,
     },
     {
       url: new URL('/blog', config.baseUrl).toString(),
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.8
+      priority: 0.8,
     },
     ...articles,
     {
       url: new URL('/open-source', config.baseUrl).toString(),
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.8
+      priority: 0.8,
     },
     {
       url: new URL('/open-source/projects', config.baseUrl).toString(),
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.7
+      priority: 0.7,
     },
     {
       url: new URL('/spotify', config.baseUrl).toString(),
       lastModified: new Date(),
       changeFrequency: 'daily',
-      priority: 0.8
-    }
+      priority: 0.8,
+    },
   ];
 }
