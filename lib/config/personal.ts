@@ -9,7 +9,7 @@ export const personal = {
   company: 'BonusX',
 
   email: 'mateonunez95@gmail.com',
-  website: 'https://mateonunez.dev',
+  website: 'https://mateonunez.co',
 
   location: {
     origin: 'Colombia',
@@ -27,7 +27,7 @@ export const personal = {
 
   assets: {
     avatar: '/images/profile.jpg',
-    ogImage: 'https://mateonunez.dev/card.png',
+    ogImage: 'https://mateonunez.co/card.png',
     favicons: {
       ico: '/favicon.ico',
       apple: '/apple-touch-icon.png',
@@ -70,7 +70,7 @@ export const personal = {
   },
 
   bio: {
-    full: "Hey, I'm Mateo Nunez, a Senior Software Engineer at BonusX who's been coding dope shit for over a decade. I'm all about open-source, tweaking my site (mateonunez.dev), and sipping coffee while blasting tunes. Right now, I'm cooking an AI side project that'll drop soon—stay tuned, fam!",
+    full: "Hey, I'm Mateo Nunez, a Senior Software Engineer at BonusX who's been coding dope shit for over a decade. I'm all about open-source, tweaking my site (mateonunez.co), and sipping coffee while blasting tunes. Right now, I'm cooking an AI side project that'll drop soon—stay tuned, fam!",
     short:
       "Hey, I'm Mateo Nunez, a Senior Software Engineer at BonusX who's been coding dope shit for over a decade. I dig crafting slick web apps and jamming to Spotify while I code.",
   },
@@ -109,7 +109,7 @@ export const personal = {
 
   languagesSpoken: ['Italian', 'Spanish', 'English'],
 
-  currentWork: ['AIt', 'Refactoring mateonunez.dev', 'Keeping legacy code alive', "Chillin' with coffee and tunes"],
+  currentWork: ['AIt', 'Refactoring mateonunez.co', 'Keeping legacy code alive', "Chillin' with coffee and tunes"],
 
   profileBadges: [
     { label: 'Code Crafter', icon: 'Code', description: 'Full-stack wizard with a chill twist' },
