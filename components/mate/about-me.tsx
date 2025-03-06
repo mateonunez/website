@@ -115,7 +115,7 @@ export function AboutMe() {
                       <TooltipTrigger asChild>
                         <Badge
                           variant="outline"
-                          className="bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30 hover:bg-amber-500/20 py-1.5"
+                          className="bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30 hover:bg-amber-500/20 py-1.5 cursor-pointer"
                         >
                           <BadgeIcon className="h-3.5 w-3.5" />
                           {badge.label}
@@ -151,19 +151,19 @@ export function AboutMe() {
                       <TooltipTrigger asChild>
                         <Badge
                           variant="outline"
-                          className="bg-indigo-500/10 text-green-700 dark:text-green-300 border-green-500/30 hover:bg-green-500/20 py-1.5"
+                          className="bg-indigo-500/10 text-green-700 dark:text-green-300 border-green-500/30 hover:bg-green-500/20 py-1.5 cursor-pointer"
                         >
                           {trimText(book.label)}
                           <span className="text-xs text-muted-foreground ml-1">- {trimText(book.author, 10)}</span>
                         </Badge>
                       </TooltipTrigger>
                       <TooltipContent className="bg-green-500/90 text-white border-green-500/30 max-w-[250px]">
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs">
                           <strong>
                             {book.label} - {book.author}
                           </strong>
                           <br />
-                          <span className="text-xs text-muted-foreground">{book.description}</span>
+                          <span className="text-xs">{book.description}</span>
                         </p>
                       </TooltipContent>
                     </Tooltip>

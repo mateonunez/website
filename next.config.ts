@@ -75,6 +75,7 @@ const nextConfig: NextConfig = {
     ],
     minimumCacheTTL: 60,
   },
+  trailingSlash: true,
 
   async headers() {
     return [

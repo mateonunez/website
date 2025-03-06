@@ -1,11 +1,10 @@
-import { Suspense, memo } from 'react';
+import { Suspense } from 'react';
 import { getArticle } from '@/lib/articles/parser';
 import { ArticleLayout } from '@/components/mate/article-layout';
 import meta from '@/lib/config/metadata';
 import config from '@/lib/config';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
-import type { Article } from '@/types/article';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -36,21 +35,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-const ArticleContent = memo(({ content, frontmatter }: Article) => (
-  <main className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg">
-    <div className="container mx-auto p-6">
-      <ArticleLayout
-        title={frontmatter.title}
-        date={frontmatter.date}
-        readingTime={frontmatter.readingTime}
-        tags={frontmatter.tags}
-      >
-        {content}
-      </ArticleLayout>
-    </div>
-  </main>
-));
-
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }): Promise<JSX.Element> {
   const { slug } = await params;
   const { content, frontmatter } = await getArticle({ slug });
@@ -73,7 +57,14 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </main>
       }
     >
-      <ArticleContent content={content} frontmatter={frontmatter} />
+      <ArticleLayout
+        title={frontmatter.title}
+        date={frontmatter.date}
+        readingTime={frontmatter.readingTime}
+        tags={frontmatter.tags}
+      >
+        {content}
+      </ArticleLayout>
     </Suspense>
   );
 }

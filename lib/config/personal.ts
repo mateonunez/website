@@ -112,9 +112,9 @@ export const personal = {
   currentWork: ['AIt', 'Refactoring mateonunez.co', 'Keeping legacy code alive', "Chillin' with coffee and tunes"],
 
   profileBadges: [
-    { label: 'Code Crafter', icon: 'Code', description: 'Full-stack wizard with a chill twist' },
-    { label: 'Open Source Soul', icon: 'Github', description: 'Living for community and coffee' },
-    { label: 'AI Struggler', icon: 'Brain', description: 'Struggling to get the best out of AI' },
+    { label: 'Coder', icon: 'Code', description: "Fullstack but don't tell anyone" },
+    { label: 'OSS (Open Source Soul)', icon: 'Github', description: 'Community and coffee' },
+    { label: 'Junior AI Engineer', icon: 'Brain', description: 'Study study study' },
     { label: 'Music & Code', icon: 'Music', description: 'Jamming while I code' },
   ],
 
