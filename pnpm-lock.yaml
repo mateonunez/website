@@ -133,7 +133,7 @@ importers:
         version: 3.0.2
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@4.0.9)
+        version: 1.0.7(tailwindcss@4.0.13)
     devDependencies:
       '@biomejs/biome':
         specifier: 1.9.4
@@ -146,7 +146,7 @@ importers:
         version: 4.0.9
       '@tailwindcss/typography':
         specifier: ^0.5.16
-        version: 0.5.16(tailwindcss@4.0.9)
+        version: 0.5.16(tailwindcss@4.0.13)
       '@types/js-cookie':
         specifier: ^3.0.6
         version: 3.0.6
@@ -169,8 +169,8 @@ importers:
         specifier: ^8.5.3
         version: 8.5.3
       tailwindcss:
-        specifier: ^4.0.9
-        version: 4.0.9
+        specifier: ^4.0.13
+        version: 4.0.13
       tsx:
         specifier: ^4.19.3
         version: 4.19.3
@@ -1998,6 +1998,9 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
 
+  tailwindcss@4.0.13:
+    resolution: {integrity: sha512-gbvFrB0fOsTv/OugXWi2PtflJ4S6/ctu6Mmn3bCftmLY/6xRsQVEJPgIIpABwpZ52DpONkCA3bEj5b54MHxF2Q==}
+
   tailwindcss@4.0.9:
     resolution: {integrity: sha512-12laZu+fv1ONDRoNR9ipTOpUD7RN9essRVkX36sjxuRUInpN7hIiHN4lBd/SIFjbISvnXzp8h/hXzmU8SQQYhw==}
 
@@ -2914,13 +2917,13 @@ snapshots:
       postcss: 8.5.3
       tailwindcss: 4.0.9
 
-  '@tailwindcss/typography@0.5.16(tailwindcss@4.0.9)':
+  '@tailwindcss/typography@0.5.16(tailwindcss@4.0.13)':
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 4.0.9
+      tailwindcss: 4.0.13
 
   '@types/acorn@4.0.6':
     dependencies:
@@ -4148,9 +4151,11 @@ snapshots:
 
   tailwind-merge@3.0.2: {}
 
-  tailwindcss-animate@1.0.7(tailwindcss@4.0.9):
+  tailwindcss-animate@1.0.7(tailwindcss@4.0.13):
     dependencies:
-      tailwindcss: 4.0.9
+      tailwindcss: 4.0.13
+
+  tailwindcss@4.0.13: {}
 
   tailwindcss@4.0.9: {}
 
