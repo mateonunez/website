@@ -52,6 +52,7 @@ const securityHeaders: SecurityHeader[] = [
 ];
 
 const nextConfig: NextConfig = {
+  transpilePackages: ['next-mdx-remote'],
   reactStrictMode: true,
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   experimental: {
@@ -98,11 +99,6 @@ const mdxOptions: MDXOptions = {
       {
         showLineNumbers: true,
         ignoreMissing: true,
-        defaultLanguage: 'bash',
-        theme: {
-          dark: 'github-dark',
-          light: 'github-light',
-        },
       },
     ],
     rehypeSlug,
