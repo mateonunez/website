@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Clock, Music, Loader2 } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
-import { useSpotify } from '@/lib/hooks/use-spotify';
+import { useSpotify } from '@/hooks/use-spotify';
 import { Button } from '@/components/ui/button';
 
 const formatDuration = (ms: number): string => {

@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
-import { useSpotify } from '@/lib/hooks/use-spotify';
+import { useSpotify } from '@/hooks/use-spotify';
 import config from '@/lib/config';
 
 const PROGRESS_DELTA_THRESHOLD = 20000;

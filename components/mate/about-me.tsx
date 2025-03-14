@@ -23,7 +23,7 @@ import {
   Book,
 } from 'lucide-react';
 import { AnimatedContainer, AnimatedItem } from '@/components/ui/animated-container';
-import { useAnimations } from '@/lib/hooks/use-animations';
+import { useAnimations } from '@/hooks/use-animations';
 import { trimText } from '@/lib/utils';
 import personal from '@/lib/config/personal';
 

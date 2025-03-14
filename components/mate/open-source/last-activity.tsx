@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { GitBranch, GitCommit, GitPullRequest, Github, MessageSquare, Star, Loader2, ExternalLink } from 'lucide-react';
-import { useGithub } from '@/lib/hooks/use-github';
+import { useGithub } from '@/hooks/use-github';
 import type { NormalizedGitHubActivity } from '@/types/github';
 import { useState, memo, type ReactNode } from 'react';
 

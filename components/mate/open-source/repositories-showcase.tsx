@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Star, GitFork, Code, ExternalLink, Search, Clock, ArrowUpDown, Loader2 } from 'lucide-react';
-import { useGithub } from '@/lib/hooks/use-github';
+import { useGithub } from '@/hooks/use-github';
 import { getTimeAgo, formatDate } from '@/lib/helpers/date';
 import type { NormalizedGitHubRepository } from '@/types/github';
 

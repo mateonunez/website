@@ -7,7 +7,7 @@ import { Users, Loader2, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
-import { useSpotifyTop } from '@/lib/hooks/use-spotify-top';
+import { useSpotifyTop } from '@/hooks/use-spotify-top';
 
 export function TopArtists() {
   const [mounted, setMounted] = useState(false);

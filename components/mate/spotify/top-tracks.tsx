@@ -6,7 +6,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Music, Loader2, ExternalLink, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { useSpotifyTop } from '@/lib/hooks/use-spotify-top';
+import { useSpotifyTop } from '@/hooks/use-spotify-top';
 
 const formatDuration = (ms: number): string => {
   const minutes = Math.floor(ms / 60000);

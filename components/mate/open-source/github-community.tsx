@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Users, Heart, ExternalLink, Loader2 } from 'lucide-react';
-import { useGithub } from '@/lib/hooks/use-github';
+import { useGithub } from '@/hooks/use-github';
 import type { NormalizedGitHubFollower, NormalizedGitHubSponsor } from '@/types/github';
 import { useState } from 'react';
 
