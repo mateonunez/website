@@ -15,7 +15,8 @@
       ".pnp.cjs",
       "next-env.d.ts",
       "next.config.js",
-      "components/legacy/icons"
+      "components/legacy/icons",
+      "app/manifest.json"
     ],
     "maxSize": 31457280
   },

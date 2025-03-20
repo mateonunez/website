@@ -39,7 +39,7 @@ const webmanifest = {
   ],
 };
 
-const outputPath = path.join(process.cwd(), 'public', 'site.webmanifest');
+const outputPath = path.join(process.cwd(), 'app', 'manifest.json');
 fs.writeFileSync(outputPath, JSON.stringify(webmanifest, null, 2));
 
-console.log('Generated site.webmanifest successfully!');
+console.log('Generated manifest.json successfully!');
