@@ -113,26 +113,16 @@ export const personal = {
 
   profileBadges: [
     { label: 'Coder', icon: 'Code', description: "Fullstack but don't tell anyone" },
-    { label: 'OSS (Open Source Soul)', icon: 'Github', description: 'Community and coffee' },
+    { label: 'OSS (Open Source Soul)', icon: 'Github', description: 'Communities, thoughts and coffee' },
     { label: 'Junior AI Engineer', icon: 'Brain', description: 'Study study study' },
     { label: 'Music & Code', icon: 'Music', description: 'Jamming while I code' },
   ],
 
   bookshelf: [
     { label: 'AI Engineering', description: 'Building Applications with Foundation Models', author: 'Chip Huyen' },
-    {
-      label: 'Essential Math for AI',
-      description: 'Building Applications with Foundation Models',
-      author: 'Hala Nelson',
-    },
-    {
-      label: 'Building LLMs for Production',
-      description:
-        'Building LLMs for Production: Enhancing LLM Abilities and Reliability with Prompting, Fine-Tuning, and RAG',
-      author: 'Louis-François Bouchard',
-    },
-    { label: 'Ecce Homo', description: 'How One Becomes What One Is', author: 'Friedrich Nietzsche' },
     { label: 'Siddhartha', description: 'A Novel About the True Value of Happiness', author: 'Hermann Hesse' },
+    { label: 'Cien años de Soledad', description: 'Magical, poetic saga of the Buendía family', author: 'Gabriel García Márquez' },
+    { label: 'Infocracy', description: 'Our lifes manipulated by networks', author: 'Byung-Chul Han' },
   ],
 };
 
