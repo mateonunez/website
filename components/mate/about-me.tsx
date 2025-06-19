@@ -154,7 +154,7 @@ export function AboutMe() {
                           className="bg-indigo-500/10 text-green-700 dark:text-green-300 border-green-500/30 hover:bg-green-500/20 py-1.5 cursor-pointer"
                         >
                           {trimText(book.label)}
-                          <span className="text-xs text-muted-foreground ml-1">- {trimText(book.author, 10)}</span>
+                          <span className="text-xs text-muted-foreground ml-1">- {book.author}</span>
                         </Badge>
                       </TooltipTrigger>
                       <TooltipContent className="bg-green-500/90 text-white border-green-500/30 max-w-[250px]">

@@ -58,12 +58,12 @@ export default async function HomePage(): Promise<JSX.Element> {
             <div className="mb-6">
               <TerminalWrapper />
             </div>
-            <div className="mb-6">
-              <AboutMeWrapper />
-            </div>
             <div className="grid grid-cols-12 gap-6">
               <MainContent />
               <SidebarContent />
+            </div>
+            <div className="mb-6">
+              <AboutMeWrapper />
             </div>
             <BottomContent />
           </div>

@@ -14,7 +14,7 @@ export const personal = {
   location: {
     origin: 'Colombia',
     current: 'Milan',
-    display: 'Colombia roots, Milan vibes',
+    display: 'Colombian living in Milan',
   },
 
   social: {
@@ -42,49 +42,46 @@ export const personal = {
     name: 'Mateo Nunez - A Chill Software Engineer',
     shortName: 'Mateo Nunez',
     description:
-      "Hey, I'm Mateo Nunez, a Senior Software Engineer at BonusX, originally from Colombia and now based in Milan. I'm passionate about crafting modern web experiences with JavaScript, Next.js, Node.js, and AI, while diving deep into open-source projects on GitHub. When I'm not coding, you'll find me jamming to music on Spotify, exploring amazing places, or tackling challenges with a chill vibe—because, let's be real, I also create MIT bugs! This site is my digital playground, featuring an interactive terminal, my latest open-source contributions, and a brief glimpse into my life as a developer who loves technology, creativity, and continuous improvement.",
+      "I'm Mateo, a software engineer from Colombia now living in Milan. I build web stuff with JavaScript and Next.js, contribute to open source projects, and I'm getting into AI development. When I'm not debugging something, I'm probably listening to music or exploring Milan. This site has my projects, an interactive terminal for fun, and whatever else I feel like sharing.",
     shortDescription:
-      "Hey, I'm Mateo Nunez, a Senior Software Engineer at BonusX, originally from Colombia and now based in Milan. I'm passionate about crafting modern web experiences with JavaScript, Next.js, Node.js, and AI.",
+      "Software engineer from Colombia, now in Milan. I build web apps, contribute to open source, and I'm learning AI development.",
     keywords: [
       'mateo nunez',
       'mmateonunez',
-      'senior software engineer',
+      'software engineer',
       'open source',
       'javascript',
       'nextjs',
       'typescript',
       'react',
       'node.js',
-      'artificial intelligence',
-      'ai developer',
+      'ai development',
       'web development',
-      'software engineering',
       'github',
       'bonusx',
       'colombia',
       'milan',
-      'music',
-      'developer portfolio',
-      'interactive terminal',
+      'developer',
     ],
   },
 
   bio: {
-    full: "Hey, I'm Mateo Nunez, a Senior Software Engineer at BonusX who's been coding dope shit for over a decade. I'm all about open-source, tweaking my site (mateonunez.co), and sipping coffee while blasting tunes. Right now, I'm cooking an AI side project that'll drop soon—stay tuned, fam!",
+    full: "I'm Mateo, been writing code for about 10 years now. Currently a Senior Software Engineer at BonusX. I love working on open source stuff and tinkering with my personal site. Recently got really into AI development - working on a side project that should be ready soon. Coffee and good music make everything better.",
     short:
-      "Hey, I'm Mateo Nunez, a Senior Software Engineer at BonusX who's been coding dope shit for over a decade. I dig crafting slick web apps and jamming to Spotify while I code.",
+      'Software engineer who likes building things on the web and listening to music while coding. Currently exploring AI development.',
   },
 
   terminal: {
-    prompt: 'AIt >',
+    prompt: 'mateo >',
     about: [
-      "Hey there! I'm Mateo 👋",
+      "Hey! I'm Mateo 👋",
       '',
-      '👨‍💻 Senior Software Engineer at BonusX, originally from Colombia and now based in Milan.',
-      '💻 Passionate about crafting modern web experiences with JavaScript, Next.js, and AI.',
-      '🌟 Diving deep into open-source projects on GitHub when not creating MIT bugs!',
-      "🎵 When not coding, you'll find me jamming to music on Spotify or exploring Milan's food scene.",
-      '🚀 Always building, always learning with a chill vibe. Welcome to my digital playground!',
+      '🇨🇴 From Colombia, now living in Milan',
+      '💼 Senior Software Engineer at BonusX',
+      '💻 I build web apps, mostly with JavaScript and Next.js',
+      '🤖 Currently diving into AI development',
+      '🎵 Always have music playing while I code',
+      '📂 Check out my projects and feel free to look around!',
     ],
   },
 
@@ -97,32 +94,37 @@ export const personal = {
       'Nest.js',
       'Laravel',
       'Fastify',
-      'ReactNative',
+      'React Native',
       'Flutter',
       'LangChain',
       'LangGraph',
     ],
     cloud: ['Docker', 'Kubernetes', 'AWS', 'GCP', 'Vercel', 'Kong', 'RabbitMQ', 'MQTT', 'Nginx'],
     databases: ['PostgreSQL', 'Redis', 'MongoDB', 'QDrant', 'Pinecone'],
-    ai: ['LangChain', 'Ollama', 'RAG', 'CAG', 'Prompt Engineering', 'Fine-Tuning', 'LLMs'],
+    ai: ['LangChain', 'Ollama', 'RAG', 'Prompt Engineering', 'Fine-Tuning', 'LLMs'],
   },
 
   languagesSpoken: ['Italian', 'Spanish', 'English'],
 
-  currentWork: ['AIt', 'Refactoring mateonunez.co', 'Keeping legacy code alive', "Chillin' with coffee and tunes"],
+  currentWork: [
+    'Working on an AI project called AIt',
+    'Rebuilding my personal site',
+    'Maintaining some legacy code at work',
+    'Drinking too much coffee',
+  ],
 
   profileBadges: [
-    { label: 'Coder', icon: 'Code', description: "Fullstack but don't tell anyone" },
+    { label: 'Developer', icon: 'Code', description: "Fullstack but don't tell anyone" },
     { label: 'OSS (Open Source Soul)', icon: 'Github', description: 'Communities, thoughts and coffee' },
     { label: 'Junior AI Engineer', icon: 'Brain', description: 'Study study study' },
-    { label: 'Music & Code', icon: 'Music', description: 'Jamming while I code' },
+    { label: 'Music Lover', icon: 'Music', description: 'Jamming while I code' },
   ],
 
   bookshelf: [
-    { label: 'AI Engineering', description: 'Building Applications with Foundation Models', author: 'Chip Huyen' },
-    { label: 'Siddhartha', description: 'A Novel About the True Value of Happiness', author: 'Hermann Hesse' },
-    { label: 'Cien años de Soledad', description: 'Magical, poetic saga of the Buendía family', author: 'Gabriel García Márquez' },
-    { label: 'Infocracy', description: 'Our lifes manipulated by networks', author: 'Byung-Chul Han' },
+    { label: 'AI Engineering', description: 'Learning how to build with LLMs', author: 'Chip Huyen' },
+    { label: 'Siddhartha', description: 'Classic that I actually enjoyed', author: 'Hermann Hesse' },
+    { label: 'Cien años de Soledad', description: 'Magical realism masterpiece', author: 'Gabriel García Márquez' },
+    { label: 'Infocracy', description: 'How networks control our lives', author: 'Byung-Chul Han' },
   ],
 };
 
