@@ -62,6 +62,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         date={frontmatter.date}
         readingTime={frontmatter.readingTime}
         tags={frontmatter.tags}
+        author={frontmatter.author}
       >
         {content}
       </ArticleLayout>

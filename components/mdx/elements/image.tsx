@@ -12,7 +12,7 @@ interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 export function Image({ src, alt, className, width, height, ...props }: ImageProps) {
   if (src.startsWith('http')) {
     return (
-      <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+      <div className="relative aspect-video w-full overflow-hidden rounded-lg my-2">
         <NextImage
           src={src}
           alt={alt}
@@ -26,7 +26,7 @@ export function Image({ src, alt, className, width, height, ...props }: ImagePro
   }
 
   return (
-    <div className="relative aspect-video w-full max-w-dvw overflow-hidden rounded-lg">
+    <div className="relative aspect-video w-full max-w-dvw overflow-hidden rounded-lg my-2">
       <NextImage
         src={src}
         alt={alt}

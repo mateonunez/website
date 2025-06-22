@@ -7,7 +7,15 @@ interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
 }
 
 export function Heading({ as: Component = 'h1', className, children, ...props }: HeadingProps) {
-  const id = typeof children === 'string' ? children.toLowerCase().replace(/\s+/g, '-') : undefined;
+  const id =
+    typeof children === 'string'
+      ? children
+          .toLowerCase()
+          .replace(/\s+/g, '-')
+          .replace(/[^a-z0-9-]/g, '')
+          .replace(/-{2,}/g, '-')
+          .replace(/^-+|-+$/g, '')
+      : undefined;
 
   return (
     <Component
@@ -27,7 +35,7 @@ export function Heading({ as: Component = 'h1', className, children, ...props }:
       {...props}
     >
       {id ? (
-        <Link href={`#${id}`} className="no-underline hover:underline">
+        <Link href={`#${id}`} className="hover:underline no-underline font-bold">
           {children}
         </Link>
       ) : (
