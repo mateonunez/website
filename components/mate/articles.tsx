@@ -11,7 +11,7 @@ export async function Articles() {
         </p>
       </div>
 
-      {articles.length > 0 && (
+      {articles.length > 0 && !articles[0].frontmatter.translated && (
         <div className="featured-section mb-8">
           <ArticlePreview
             key={articles[0].frontmatter.slug}
@@ -27,18 +27,21 @@ export async function Articles() {
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-        {articles.slice(1).map((article) => (
-          <ArticlePreview
-            key={article.frontmatter.slug}
-            title={article.frontmatter.title}
-            description={article.frontmatter.description}
-            date={article.frontmatter.date}
-            slug={article.frontmatter.slug}
-            author={article.frontmatter.author}
-            image={article.frontmatter.image}
-            tags={article.frontmatter.tags}
-          />
-        ))}
+        {articles
+          .slice(1)
+          .filter((article) => !article.frontmatter.translated)
+          .map((article) => (
+            <ArticlePreview
+              key={article.frontmatter.slug}
+              title={article.frontmatter.title}
+              description={article.frontmatter.description}
+              date={article.frontmatter.date}
+              slug={article.frontmatter.slug}
+              author={article.frontmatter.author}
+              image={article.frontmatter.image}
+              tags={article.frontmatter.tags}
+            />
+          ))}
       </div>
     </div>
   );
