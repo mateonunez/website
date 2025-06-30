@@ -28,8 +28,8 @@ export async function GET() {
       <guid isPermaLink="true">${article.frontmatter.permalink}</guid>
       <pubDate>${new Date(article.frontmatter.date).toUTCString()}</pubDate>
       <author>${article.frontmatter.author.name}</author>
-      ${article.frontmatter.tags.map(tag => `<category>${tag}</category>`).join('\n      ')}
-    </item>`
+      ${article.frontmatter.tags.map((tag) => `<category>${tag}</category>`).join('\n      ')}
+    </item>`,
       )
       .join('')}
   </channel>
