@@ -64,6 +64,7 @@ export async function getArticle({ slug }: { slug: string }): Promise<Article> {
       categories: (frontmatter.categories as string[]) || [],
       image: (frontmatter.image as string) || '/card.png',
       author: (frontmatter.author as ArticleFrontmatter['author']) || defaultAuthor,
+      translated: frontmatter.translated || false,
     },
   };
 }
