@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "MDX SEO Analyzer",
+  "description": "Analyzes MDX files for SEO opportunities, suggests meta descriptions, and checks for broken internal links when saved",
+  "version": "1",
+  "when": {
+    "type": "userTriggered",
+    "patterns": [
+      "articles/*.mdx"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Analyze the saved MDX file for SEO opportunities. Please:\n\n1. Review the content structure and suggest improvements for SEO (headings hierarchy, keyword usage, content length)\n2. Generate or suggest optimized meta descriptions based on the content\n3. Check for any internal links and verify they point to valid routes within the application\n4. Identify missing alt text for images\n5. Suggest relevant keywords that could be naturally incorporated\n6. Check if the content has proper heading structure (H1, H2, H3 hierarchy)\n7. Recommend any schema markup opportunities\n\nProvide actionable feedback that the author can immediately implement to improve the content's SEO performance."
+  }
+}
