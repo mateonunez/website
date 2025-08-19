@@ -1,4 +1,4 @@
-import { memo, type InputHTMLAttributes, forwardRef } from 'react';
+import { forwardRef, type InputHTMLAttributes, memo } from 'react';
 
 interface TerminalInputProps extends InputHTMLAttributes<HTMLInputElement> {
   prompt: string;

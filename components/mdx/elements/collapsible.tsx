@@ -1,7 +1,7 @@
-import { cn } from '@/lib/utils';
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
 import { ChevronDown } from 'lucide-react';
 import type { ReactNode } from 'react';
+import { cn } from '@/lib/utils';
 
 interface CollapsibleProps {
   title: string;

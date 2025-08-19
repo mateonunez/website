@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSpotify } from '@/hooks/use-spotify';
 import config from '@/lib/config';
 

@@ -1,5 +1,5 @@
-import { Github, Twitter, LinkedinIcon, Music, Mail, Instagram } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { Github, Instagram, LinkedinIcon, Mail, Music, Twitter } from 'lucide-react';
 import personal from './personal';
 
 export interface SocialLink {

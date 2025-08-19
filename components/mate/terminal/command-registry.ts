@@ -22,7 +22,9 @@ class CommandRegistryImpl implements CommandRegistry {
 
     for (const command of commands) {
       map.set(command.name.toLowerCase().trim(), command);
-      command.aliases?.forEach((alias) => map.set(alias.toLowerCase().trim(), command));
+      command.aliases?.forEach((alias) => {
+        map.set(alias.toLowerCase().trim(), command);
+      });
     }
 
     return map;

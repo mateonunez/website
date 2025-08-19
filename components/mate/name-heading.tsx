@@ -2,17 +2,17 @@
 
 import {
   type CSSProperties,
-  memo,
-  useState,
   type HTMLAttributes,
   type MouseEvent,
+  memo,
   type TouchEvent,
+  useCallback,
   useEffect,
   useRef,
-  useCallback,
+  useState,
 } from 'react';
-import { cn } from '@/lib/utils';
 import { personal } from '@/lib/config/personal';
+import { cn } from '@/lib/utils';
 import { useSidebar } from '../ui/sidebar';
 
 const GradientHeading = memo(

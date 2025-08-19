@@ -1,14 +1,14 @@
-import { readFileSync, readdirSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
-import readingTime from 'reading-time';
-import config from '@/lib/config';
 import { compileMDX } from 'next-mdx-remote/rsc';
-import type { Article, ArticleFrontmatter } from '@/types/article';
-import remarkGfm from 'remark-gfm';
+import readingTime from 'reading-time';
 import rehypePrism from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
+import remarkGfm from 'remark-gfm';
 import mdxComponents from '@/components/mdx';
+import config from '@/lib/config';
 import personal from '@/lib/config/personal';
+import type { Article, ArticleFrontmatter } from '@/types/article';
 
 export async function getArticleSlugs(): Promise<string[]> {
   const fullPath = path.join(process.cwd(), './articles');

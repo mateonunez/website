@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
 import type { KeyboardEvent } from 'react';
+import { useCallback } from 'react';
 import type { TerminalState, TerminalStateActions } from './use-terminal-state';
 
 interface TerminalInputOptions {

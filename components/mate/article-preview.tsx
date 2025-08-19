@@ -1,13 +1,13 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
+import { CalendarDays } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
 import { dateForHumans } from '@/lib/helpers/date';
 import type { ArticleFrontmatter } from '@/types/article';
-import { CalendarDays } from 'lucide-react';
 
 type ArticlePreviewProps = Pick<
   ArticleFrontmatter,

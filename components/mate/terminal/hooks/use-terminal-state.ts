@@ -1,6 +1,6 @@
-import { useState, useCallback } from 'react';
-import type { TerminalLine } from '../types';
+import { useCallback, useState } from 'react';
 import { MAX_HISTORY } from '../constants';
+import type { TerminalLine } from '../types';
 
 export interface TerminalState {
   currentLine: number;

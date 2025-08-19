@@ -1,12 +1,12 @@
 'use client';
 
+import { BookText, Bot, Code, Code2, Home, Music } from 'lucide-react';
 import type * as React from 'react';
-import { BookText, Code2, Home, Bot, Music, Code } from 'lucide-react';
 
 import { NavMain } from '@/components/mate/nav-main';
+import { ModeToggle } from '@/components/mate/nav-mode-toggle';
 import { NavProjects } from '@/components/mate/nav-projects';
 import { NavUser } from '@/components/mate/nav-user';
-import { ModeToggle } from '@/components/mate/nav-mode-toggle';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarRail } from '@/components/ui/sidebar';
 import personal from '@/lib/config/personal';
 

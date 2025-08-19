@@ -1,9 +1,9 @@
 'use client';
 
-import { Card, CardContent } from '@/components/ui/card';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Music, Pause, Volume2 } from 'lucide-react';
 import Link from 'next/link';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Card, CardContent } from '@/components/ui/card';
 import { formatDuration } from '@/lib/helpers/date';
 
 interface CompactPlayerProps {

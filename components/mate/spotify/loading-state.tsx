@@ -1,7 +1,7 @@
 'use client';
 
-import { Card, CardContent } from '@/components/ui/card';
 import { Headphones } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 
 interface LoadingStateProps {
   variant: 'full' | 'compact';

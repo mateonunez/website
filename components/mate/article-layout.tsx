@@ -1,9 +1,9 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { MDXLayout } from '@/components/mdx/layout';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
-import type { ReactNode } from 'react';
 
 interface ArticleLayoutProps {
   title: string;
@@ -45,7 +45,7 @@ export function ArticleLayout({ date, readingTime, tags, author, children }: Art
                 </div>
               )}
               {tags && tags.length > 0 && (
-                <div className="flex flex-wrap gap-2" aria-label="Article tags">
+                <div className="flex flex-wrap gap-2">
                   {tags.map((tag) => (
                     <span
                       key={tag}

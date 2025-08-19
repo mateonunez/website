@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
-import type { TerminalStateActions } from './use-terminal-state';
-import { useCommandRunner } from './use-command-runner';
 import type { DataSources, TerminalTools } from '../command-context';
+import { useCommandRunner } from './use-command-runner';
+import type { TerminalStateActions } from './use-terminal-state';
 
 interface CommandExecutorOptions {
   dataSources: DataSources;

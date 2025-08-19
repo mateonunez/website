@@ -1,18 +1,16 @@
 import { graphql } from '@octokit/graphql';
+import personal from '@/lib/config/personal';
 import type {
-  GitHubUser,
+  GitHubActivitiesResponse,
   GitHubReadmeResponse,
   GitHubRepositoryResponse,
-  GitHubActivitiesResponse,
+  GitHubUser,
 } from '@/types/github';
-import personal from '@/lib/config/personal';
 
 class GitHubError extends Error {
   constructor(
     message: string,
-    // biome-ignore lint/nursery/useConsistentMemberAccessibility: custom error
     public status?: number,
-    // biome-ignore lint/nursery/useConsistentMemberAccessibility: custom error
     public code?: string,
   ) {
     super(message);
@@ -94,10 +92,6 @@ class GitHubClient {
       data,
       timestamp: Date.now(),
     });
-  }
-
-  private clearCache(): void {
-    this._cache.clear();
   }
 
   private async fetchWithRetry<T>(query: string, variables: Record<string, unknown>, retryCount = 0): Promise<T> {

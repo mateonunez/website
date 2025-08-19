@@ -1,8 +1,8 @@
 'use client';
 
-import { motion, type HTMLMotionProps, type Variants } from 'framer-motion';
-import { useAnimations } from '@/hooks/use-animations';
+import { type HTMLMotionProps, motion, type Variants } from 'framer-motion';
 import { forwardRef, type ReactNode } from 'react';
+import { useAnimations } from '@/hooks/use-animations';
 
 export interface AnimatedContainerProps extends Omit<HTMLMotionProps<'div'>, 'variants'> {
   children: ReactNode;

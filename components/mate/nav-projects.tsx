@@ -1,7 +1,6 @@
 'use client';
 
-import { ExternalLink, Folder, MoreHorizontal, type LucideIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { ExternalLink, Folder, type LucideIcon, MoreHorizontal } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,6 +16,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
+import { cn } from '@/lib/utils';
 
 export function NavProjects({
   projects,

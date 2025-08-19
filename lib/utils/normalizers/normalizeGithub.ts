@@ -1,15 +1,15 @@
 import type {
-  GitHubUser,
-  GitHubRepository,
-  GitHubContributionCalendar,
-  GitHubRepositoryContribution,
-  NormalizedGitHubUser,
-  NormalizedGitHubRepository,
-  GitHubSponsor,
-  NormalizedGitHubSponsor,
   GitHubActivitiesResponse,
+  GitHubContributionCalendar,
+  GitHubRepository,
+  GitHubRepositoryContribution,
+  GitHubSponsor,
+  GitHubUser,
   LastActivitiesData,
   NormalizedGitHubActivity,
+  NormalizedGitHubRepository,
+  NormalizedGitHubSponsor,
+  NormalizedGitHubUser,
 } from '@/types/github';
 
 interface NormalizedFollower {

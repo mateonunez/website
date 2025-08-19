@@ -1,6 +1,6 @@
-import { cn } from '@/lib/utils';
 import NextImage from 'next/image';
 import type { ImgHTMLAttributes } from 'react';
+import { cn } from '@/lib/utils';
 
 interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   src: string;

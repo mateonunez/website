@@ -1,11 +1,11 @@
-import { Suspense, memo } from 'react';
+import { Code } from 'lucide-react';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
-import meta from '@/lib/config/metadata';
-import { PageHeader } from '@/components/mate/page-header';
-import { Code } from 'lucide-react';
-import RepositoriesShowcaseWrapper from '@/components/mate/open-source/repositories-showcase.wrapper';
+import { memo, Suspense } from 'react';
 import { RepositoriesShowcaseSkeleton } from '@/components/mate/open-source/repositories-showcase.skeleton';
+import RepositoriesShowcaseWrapper from '@/components/mate/open-source/repositories-showcase.wrapper';
+import { PageHeader } from '@/components/mate/page-header';
+import meta from '@/lib/config/metadata';
 
 export const metadata: Metadata = {
   title: 'Open Source Projects',

@@ -1,10 +1,10 @@
 import type {
-  SpotifyTrack,
+  NormalizedCurrentlyPlaying,
+  NormalizedRecentlyPlayed,
   SpotifyArtist,
   SpotifyCurrentlyPlaying,
   SpotifyRecentlyPlayed,
-  NormalizedCurrentlyPlaying,
-  NormalizedRecentlyPlayed,
+  SpotifyTrack,
   TopArtist,
   TopTrack,
 } from '@/types/spotify';

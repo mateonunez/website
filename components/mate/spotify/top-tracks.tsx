@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Music, Loader2, ExternalLink, Clock } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Clock, ExternalLink, Loader2, Music } from 'lucide-react';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useSpotifyTop } from '@/hooks/use-spotify-top';
 
 const formatDuration = (ms: number): string => {

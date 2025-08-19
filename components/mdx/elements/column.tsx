@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils';
 import type { JSX, ReactNode } from 'react';
+import { cn } from '@/lib/utils';
 
 type ColumnWidth = 'full' | '1/2' | '1/3' | '1/4' | '2/3' | '3/4';
 
