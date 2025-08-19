@@ -1,5 +1,9 @@
 'use client';
 
+import { Slot } from '@radix-ui/react-slot';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { Code, PanelRightIcon, X } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 import {
   type ComponentProps,
   type CSSProperties,
@@ -12,22 +16,16 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { type VariantProps, cva } from 'class-variance-authority';
-import { PanelRightIcon } from 'lucide-react';
-import { usePathname } from 'next/navigation';
-import { Code, X } from 'lucide-react';
-
-import { useIsMobile } from '@/hooks/use-mobile';
-import { cn } from '@/lib/utils';
+import { PageHeader } from '@/components/mate/page-header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { PageHeader } from '@/components/mate/page-header';
+import { useIsMobile } from '@/hooks/use-mobile';
 import personal from '@/lib/config/personal';
+import { cn } from '@/lib/utils';
 
 const SIDEBAR_WIDTH = '16rem';
 const SIDEBAR_WIDTH_ICON = '3rem';
@@ -265,7 +263,8 @@ function Sidebar({
   return (
     <>
       {open && (
-        // biome-ignore lint/nursery/noStaticElementInteractions: <explanation>
+        // biome-ignore lint/a11y/noStaticElementInteractions: it's not a link
+        // biome-ignore lint/a11y/useAriaPropsSupportedByRole: it's not a link
         <div
           className="fixed inset-0 z-20 bg-black/50"
           onClick={(e) => {
@@ -651,7 +650,6 @@ function SidebarMenuBadge({ className, title, ...props }: ComponentProps<'div'> 
     <div
       data-slot="sidebar-menu-badge"
       data-sidebar="menu-badge"
-      aria-label={title}
       title={title}
       className={cn(
         'text-sidebar-foreground pointer-events-none absolute right-1 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums select-none',

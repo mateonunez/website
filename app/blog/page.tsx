@@ -1,10 +1,10 @@
-import { Suspense, memo } from 'react';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
-import meta from '@/lib/config/metadata';
+import { memo, Suspense } from 'react';
 import { ArticlePreviewSkeleton } from '@/components/mate/article-preview.skeleton';
 import { Articles } from '@/components/mate/articles';
 import { PageHeader } from '@/components/mate/page-header';
+import meta from '@/lib/config/metadata';
 
 export const metadata: Metadata = {
   title: 'Blog',

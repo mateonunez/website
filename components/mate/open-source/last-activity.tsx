@@ -1,13 +1,13 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { ExternalLink, GitBranch, GitCommit, Github, GitPullRequest, Loader2, MessageSquare, Star } from 'lucide-react';
+import { memo, type ReactNode, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { GitBranch, GitCommit, GitPullRequest, Github, MessageSquare, Star, Loader2, ExternalLink } from 'lucide-react';
 import { useGithub } from '@/hooks/use-github';
 import type { NormalizedGitHubActivity } from '@/types/github';
-import { useState, memo, type ReactNode } from 'react';
 
 const ITEMS_PER_PAGE = 5;
 const ACTIVITY_ICONS: Record<string, ReactNode> = {

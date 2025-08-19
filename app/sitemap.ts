@@ -1,7 +1,7 @@
 import fs from 'node:fs';
-import config from '@/lib/config';
 import path from 'node:path';
 import type { MetadataRoute } from 'next';
+import config from '@/lib/config';
 
 function generateArticlesSitemap(): MetadataRoute.Sitemap {
   const result: MetadataRoute.Sitemap = [];

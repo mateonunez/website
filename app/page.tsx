@@ -1,14 +1,14 @@
-import { memo, type JSX } from 'react';
-import { Toaster } from '@/components/ui/sonner';
-import TerminalWrapper from '@/components/mate/terminal/terminal.wrapper';
-import PlayerWrapper from '@/components/mate/spotify/player.wrapper';
-import RecentlyPlayedWrapper from '@/components/mate/spotify/recently-played.wrapper';
+import { type JSX, memo } from 'react';
+import AboutMeWrapper from '@/components/mate/about-me.wrapper';
 import LatestArticlesWrapper from '@/components/mate/latest-articles.wrapper';
-import { Separator } from '@/components/ui/separator';
+import NameHeadingWrapper from '@/components/mate/name-heading.wrapper';
 import GitHubCommunityWrapper from '@/components/mate/open-source/github-community.wrapper';
 import LastActivityWrapper from '@/components/mate/open-source/last-activity.wrapper';
-import AboutMeWrapper from '@/components/mate/about-me.wrapper';
-import NameHeadingWrapper from '@/components/mate/name-heading.wrapper';
+import PlayerWrapper from '@/components/mate/spotify/player.wrapper';
+import RecentlyPlayedWrapper from '@/components/mate/spotify/recently-played.wrapper';
+import TerminalWrapper from '@/components/mate/terminal/terminal.wrapper';
+import { Separator } from '@/components/ui/separator';
+import { Toaster } from '@/components/ui/sonner';
 
 const SectionTitle = memo(({ title, fontClass = '' }: { title: string; fontClass?: string }) => (
   <>

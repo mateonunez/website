@@ -5,8 +5,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "biome format && biome lint",
-    "lint:fix": "biome format --write && biome lint --write --unsafe",
+    "lint": "biome lint && biome format && biome check",
+    "lint:fix": "biome lint --write --unsafe && biome format --write && biome check --write",
     "generate:webmanifest": "tsx scripts/generate-webmanifest.ts",
     "prebuild": "npm run generate:webmanifest",
     "prepare": "husky"

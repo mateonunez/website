@@ -1,14 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { BookText, Code, Code2, Home, Menu, Music, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BookText, Code, Code2, Home, Music, Menu, X } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { useSidebar } from '@/components/ui/sidebar';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { useSidebar } from '@/components/ui/sidebar';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import personal from '@/lib/config/personal';
+import { cn } from '@/lib/utils';
 
 const navItems = [
   {

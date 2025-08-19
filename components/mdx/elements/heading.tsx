@@ -1,6 +1,6 @@
-import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import type { HTMLAttributes } from 'react';
+import { cn } from '@/lib/utils';
 
 interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';

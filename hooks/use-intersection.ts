@@ -1,4 +1,4 @@
-import { useState, useEffect, type RefObject } from 'react';
+import { type RefObject, useEffect, useState } from 'react';
 
 export default function useIntersection(ref: RefObject<HTMLElement>, rootMargin = '0px'): boolean {
   const [isIntersecting, setIntersecting] = useState(false);

@@ -1,9 +1,9 @@
 'use client';
 
-import { Card, CardContent } from '@/components/ui/card';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Music, Pause, Radio } from 'lucide-react';
 import Link from 'next/link';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Card, CardContent } from '@/components/ui/card';
 
 interface NotPlayingStateProps {
   variant: 'full' | 'compact';

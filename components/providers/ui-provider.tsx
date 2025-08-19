@@ -1,8 +1,8 @@
 'use client';
 
+import React, { type JSX, type ReactNode, useCallback, useContext, useMemo, useReducer } from 'react';
+import type { LastActivitiesData, NormalizedGitHubUser } from '@/types/github';
 import type { NormalizedCurrentlyPlaying, NormalizedRecentlyPlayed, TopArtist, TopTrack } from '@/types/spotify';
-import type { NormalizedGitHubUser, LastActivitiesData } from '@/types/github';
-import React, { useCallback, useMemo, useContext, useReducer, type ReactNode, type JSX } from 'react';
 
 interface UIState {
   isLoading: boolean;

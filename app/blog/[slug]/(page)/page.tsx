@@ -1,10 +1,10 @@
-import { Suspense } from 'react';
-import { getArticle } from '@/lib/articles/parser';
-import { ArticleLayout } from '@/components/mate/article-layout';
-import meta from '@/lib/config/metadata';
-import config from '@/lib/config';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
+import { Suspense } from 'react';
+import { ArticleLayout } from '@/components/mate/article-layout';
+import { getArticle } from '@/lib/articles/parser';
+import config from '@/lib/config';
+import meta from '@/lib/config/metadata';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;

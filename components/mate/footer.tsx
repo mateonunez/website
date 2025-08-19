@@ -1,10 +1,10 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { getFooterSocialLinks, getSocialLinkUrl } from '@/lib/config/social';
-import personal from '@/lib/config/personal';
 import Link from 'next/link';
 import type { JSX } from 'react';
+import { Button } from '@/components/ui/button';
+import personal from '@/lib/config/personal';
+import { getFooterSocialLinks, getSocialLinkUrl } from '@/lib/config/social';
 
 export function Footer(): JSX.Element {
   const footerSocialLinks = getFooterSocialLinks();

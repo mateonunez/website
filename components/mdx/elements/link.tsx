@@ -1,6 +1,6 @@
-import { cn } from '@/lib/utils';
 import NextLink from 'next/link';
 import type { AnchorHTMLAttributes } from 'react';
+import { cn } from '@/lib/utils';
 
 export function Link({ href = '', className, children, ...props }: AnchorHTMLAttributes<HTMLAnchorElement>) {
   const isExternal = href.startsWith('http') || href.startsWith('mailto:');

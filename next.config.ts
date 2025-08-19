@@ -1,6 +1,6 @@
 import type { Options as MDXOptions } from '@mdx-js/loader';
-import type { NextConfig } from 'next';
 import createMDX from '@next/mdx';
+import type { NextConfig } from 'next';
 import rehypePrism from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';

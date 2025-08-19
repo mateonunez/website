@@ -1,14 +1,14 @@
 import type { MDXComponents } from 'mdx/types';
 import type { ComponentProps } from 'react';
 import { Code } from './elements/code';
+import { Collapsible } from './elements/collapsible';
+import { Column } from './elements/column';
+import { Grid, GridItem } from './elements/grid';
 import { Heading } from './elements/heading';
 import { Image } from './elements/image';
 import { Link } from './elements/link';
-import { Grid, GridItem } from './elements/grid';
-import { Collapsible } from './elements/collapsible';
-import { MDXLayout } from './layout';
-import { Column } from './elements/column';
 import { Row } from './elements/row';
+import { MDXLayout } from './layout';
 
 const components: MDXComponents = {
   wrapper: MDXLayout,

@@ -1,15 +1,15 @@
-import { Suspense, memo } from 'react';
+import { Code, GitBranch, Github } from 'lucide-react';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
-import meta from '@/lib/config/metadata';
+import { memo, Suspense } from 'react';
+import GitHubCommunityWrapper from '@/components/mate/open-source/github-community.wrapper';
+import LastActivityWrapper from '@/components/mate/open-source/last-activity.wrapper';
+import { RepositoriesShowcaseSkeleton } from '@/components/mate/open-source/repositories-showcase.skeleton';
+import RepositoriesShowcaseWrapper from '@/components/mate/open-source/repositories-showcase.wrapper';
 import { PageHeader } from '@/components/mate/page-header';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Github, Code, GitBranch } from 'lucide-react';
-import RepositoriesShowcaseWrapper from '@/components/mate/open-source/repositories-showcase.wrapper';
-import { RepositoriesShowcaseSkeleton } from '@/components/mate/open-source/repositories-showcase.skeleton';
 import { Separator } from '@/components/ui/separator';
-import LastActivityWrapper from '@/components/mate/open-source/last-activity.wrapper';
-import GitHubCommunityWrapper from '@/components/mate/open-source/github-community.wrapper';
+import meta from '@/lib/config/metadata';
 
 export const metadata: Metadata = {
   title: 'Open Source',

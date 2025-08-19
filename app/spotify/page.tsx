@@ -1,14 +1,14 @@
-import { Suspense, memo } from 'react';
+import { Loader2, Music } from 'lucide-react';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
-import meta from '@/lib/config/metadata';
+import { memo, Suspense } from 'react';
 import { PageHeader } from '@/components/mate/page-header';
 import { RecentlyPlayed } from '@/components/mate/spotify/recently-played';
-import { Card, CardContent } from '@/components/ui/card';
-import { Loader2, Music } from 'lucide-react';
+import { SpotifyPlayer } from '@/components/mate/spotify/spotify-player';
 import { TopArtists } from '@/components/mate/spotify/top-artists';
 import { TopTracks } from '@/components/mate/spotify/top-tracks';
-import { SpotifyPlayer } from '@/components/mate/spotify/spotify-player';
+import { Card, CardContent } from '@/components/ui/card';
+import meta from '@/lib/config/metadata';
 
 export const metadata: Metadata = {
   title: 'Spotify Profile',

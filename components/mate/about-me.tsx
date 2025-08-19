@@ -1,31 +1,31 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { Button } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import {
-  User,
+  Book,
+  Brain,
+  Briefcase,
   Code,
-  Globe,
+  Coffee,
   Github,
-  Twitter,
+  Globe,
   Linkedin,
   Mail,
-  Briefcase,
-  Coffee,
   Music,
-  Brain,
-  Book,
+  Twitter,
+  User,
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { AnimatedContainer, AnimatedItem } from '@/components/ui/animated-container';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useAnimations } from '@/hooks/use-animations';
-import { trimText } from '@/lib/utils';
 import personal from '@/lib/config/personal';
+import { trimText } from '@/lib/utils';
 
 const iconMap = {
   Code,

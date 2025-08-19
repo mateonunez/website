@@ -1,15 +1,15 @@
 'use client';
 
-import { useState, memo } from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { ArrowUpDown, Clock, Code, ExternalLink, GitFork, Loader2, Search, Star } from 'lucide-react';
+import { memo, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Star, GitFork, Code, ExternalLink, Search, Clock, ArrowUpDown, Loader2 } from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useGithub } from '@/hooks/use-github';
-import { getTimeAgo, formatDate } from '@/lib/helpers/date';
+import { formatDate, getTimeAgo } from '@/lib/helpers/date';
 import type { NormalizedGitHubRepository } from '@/types/github';
 
 interface RepositoriesShowcaseProps {

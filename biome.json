@@ -1,22 +1,21 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
-  "organizeImports": {
-    "enabled": true
-  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "files": {
-    "ignore": [
-      "node_modules",
-      "dist",
-      "coverage",
-      ".next",
-      ".yarn",
-      "public",
-      ".pnp.loader.mjs",
-      ".pnp.cjs",
-      "next-env.d.ts",
-      "next.config.js",
-      "components/legacy/icons",
-      "app/manifest.json"
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/coverage",
+      "!**/.next",
+      "!**/.yarn",
+      "!**/public",
+      "!**/.pnp.loader.mjs",
+      "!**/.pnp.cjs",
+      "!**/next-env.d.ts",
+      "!**/next.config.js",
+      "!**/components/legacy/icons",
+      "!**/app/manifest.json"
     ],
     "maxSize": 31457280
   },
@@ -25,18 +24,11 @@
     "rules": {
       "recommended": true,
       "nursery": {
-        "all": true,
-        "useComponentExportOnlyModules": "off",
-        "noCommonJs": "off",
         "useSortedClasses": "off",
-        "noProcessEnv": "off",
-        "useConsistentCurlyBraces": "off",
-        "useImportRestrictions": "off",
         "useExplicitType": "off",
         "noSecrets": "off"
       },
       "correctness": {
-        "all": true,
         "useExhaustiveDependencies": "off",
         "noUndeclaredDependencies": "off",
         "noNodejsModules": "off",
@@ -44,11 +36,16 @@
       },
       "suspicious": {
         "noArrayIndexKey": "off",
-        "noExplicitAny": "off"
+        "noExplicitAny": "off",
+        "noUnknownAtRules": "off"
       },
       "style": {
         "noDefaultExport": "off",
-        "noNonNullAssertion": "off"
+        "noNonNullAssertion": "off",
+        "useComponentExportOnlyModules": "off",
+        "noCommonJs": "off",
+        "noProcessEnv": "off",
+        "useConsistentCurlyBraces": "off"
       },
       "complexity": {
         "noForEach": "off",
@@ -58,7 +55,7 @@
         "useKeyWithClickEvents": "off"
       }
     },
-    "ignore": [".next/", "node_modules/", "./**/*.json", "**/*.config.js", "**/*.config.mjs"]
+    "includes": ["**", "!**/.next/", "!**/node_modules/", "!**/*.json", "!**/*.config.js", "!**/*.config.mjs"]
   },
   "formatter": {
     "enabled": true,
@@ -66,7 +63,7 @@
     "indentStyle": "space",
     "indentWidth": 2,
     "lineWidth": 120,
-    "ignore": [".next/", "node_modules/", "public/"]
+    "includes": ["**", "!**/.next/", "!**/node_modules/", "!**/public/"]
   },
   "javascript": {
     "formatter": {

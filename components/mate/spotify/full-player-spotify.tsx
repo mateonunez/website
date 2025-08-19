@@ -1,12 +1,12 @@
 'use client';
 
-import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Music, Clock } from 'lucide-react';
-import { Progress } from '@/components/ui/progress';
+import { Clock, Music } from 'lucide-react';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
 import { formatDuration } from '@/lib/helpers/date';
+import { cn } from '@/lib/utils';
 
 interface FullPlayerProps {
   currentlyPlaying: any;

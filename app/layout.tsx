@@ -1,17 +1,17 @@
-import type * as React from 'react';
 import type { Metadata } from 'next';
-import { Inter, Hanken_Grotesk, Prompt } from 'next/font/google';
+import { Hanken_Grotesk, Inter, Prompt } from 'next/font/google';
+import type * as React from 'react';
 import './../styles/global.css';
 
-import { ThemeProvider } from '@/components/providers/theme-provider';
-import { UIProvider } from '@/components/providers/ui-provider';
-import { AnalyticsProvider } from '@/components/providers/analytics-provider';
-import meta from '@/lib/config/metadata';
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/mate/app-sidebar';
-import { cn } from '@/lib/utils';
 import { Footer } from '@/components/mate/footer';
 import { TopNavbar } from '@/components/mate/top-navbar';
+import { AnalyticsProvider } from '@/components/providers/analytics-provider';
+import { ThemeProvider } from '@/components/providers/theme-provider';
+import { UIProvider } from '@/components/providers/ui-provider';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import meta from '@/lib/config/metadata';
+import { cn } from '@/lib/utils';
 
 const inter = Inter({
   subsets: ['latin'],

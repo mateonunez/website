@@ -9,9 +9,7 @@ import type {
 class SpotifyError extends Error {
   constructor(
     message: string,
-    // biome-ignore lint/nursery/useConsistentMemberAccessibility: custom error
     public status?: number,
-    // biome-ignore lint/nursery/useConsistentMemberAccessibility: custom error
     public code?: string,
   ) {
     super(message);
@@ -73,10 +71,6 @@ class SpotifyClient {
       data,
       timestamp: Date.now(),
     });
-  }
-
-  private clearCache(): void {
-    this._cache.clear();
   }
 
   private async getAccessToken(): Promise<string> {
@@ -175,7 +169,7 @@ class SpotifyClient {
   async getRecentlyPlayed(limit = 20): Promise<SpotifyRecentlyPlayed | undefined> {
     const params = new URLSearchParams({
       limit: limit.toString(),
-      before: new Date().getTime().toString(),
+      before: Date.now().toString(),
     });
 
     return this.fetchSpotify<SpotifyRecentlyPlayed>('/me/player/recently-played', params);

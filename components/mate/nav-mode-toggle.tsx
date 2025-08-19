@@ -1,18 +1,17 @@
 'use client';
 
-import { Moon, Sun, Check } from 'lucide-react';
+import { Check, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { useEffect, useState, useCallback } from 'react';
-
+import type { JSX } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { themeCookie } from '@/lib/utils/cookies/theme.cookie';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
-import type { JSX } from 'react';
+import { themeCookie } from '@/lib/utils/cookies/theme.cookie';
 
 export function ModeToggle(): JSX.Element {
   const { setTheme, theme } = useTheme();

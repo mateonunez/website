@@ -1,7 +1,7 @@
 'use client';
 
-import { useUI } from '@/components/providers/ui-provider';
 import useSWR from 'swr';
+import { useUI } from '@/components/providers/ui-provider';
 
 export function useGithub() {
   const { setGithubProfile, githubProfile, setLastActivities, lastActivities } = useUI();

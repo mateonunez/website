@@ -1,8 +1,8 @@
-import { fetchLatestArticles } from '@/lib/articles/fetcher';
-import { ArticlePreview } from '@/components/mate/article-preview';
-import { Button } from '@/components/ui/button';
-import { AnimatedContainer, AnimatedItem } from '@/components/ui/animated-container';
 import Link from 'next/link';
+import { ArticlePreview } from '@/components/mate/article-preview';
+import { AnimatedContainer, AnimatedItem } from '@/components/ui/animated-container';
+import { Button } from '@/components/ui/button';
+import { fetchLatestArticles } from '@/lib/articles/fetcher';
 
 export async function LatestArticlesContainer() {
   const articles = await fetchLatestArticles(2);

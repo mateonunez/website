@@ -1,16 +1,16 @@
 'use client';
 
-import { type JSX, useEffect, useRef, useCallback, useMemo, memo } from 'react';
-import { cn } from '@/lib/utils';
-import { Line } from './line';
-import { DEFAULT_HEIGHT, DEFAULT_MESSAGES, DEFAULT_PROMPT, SLEEP_DURATION, getTypingDuration } from './constants';
-import { useSpotify } from '@/hooks/use-spotify';
+import { type JSX, memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import { useGithub } from '@/hooks/use-github';
+import { useSpotify } from '@/hooks/use-spotify';
 import { useSpotifyTop } from '@/hooks/use-spotify-top';
+import { cn } from '@/lib/utils';
 import { CommandContextProvider, type DataSources } from './command-context';
-import { useTerminalState } from './hooks/use-terminal-state';
+import { DEFAULT_HEIGHT, DEFAULT_MESSAGES, DEFAULT_PROMPT, getTypingDuration, SLEEP_DURATION } from './constants';
 import { useCommandExecutor } from './hooks/use-command-executor';
 import { useTerminalInput } from './hooks/use-terminal-input';
+import { useTerminalState } from './hooks/use-terminal-state';
+import { Line } from './line';
 import { TerminalInput } from './terminal-input';
 import type { TerminalProps } from './types';
 
@@ -123,7 +123,7 @@ export function Terminal({
     <CommandContextProvider dataSources={dataSources} tools={tools}>
       <div className={cn('rounded-md border bg-card text-card-foreground shadow', className)}>
         <TerminalHeader />
-        {/* biome-ignore lint/nursery/noStaticElementInteractions: terminal */}
+        {/* biome-ignore lint/a11y/noStaticElementInteractions: terminal */}
         <div
           ref={terminalRef}
           style={{ height }}
