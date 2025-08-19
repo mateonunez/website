@@ -12,9 +12,20 @@ import { CalendarDays } from 'lucide-react';
 type ArticlePreviewProps = Pick<
   ArticleFrontmatter,
   'author' | 'date' | 'title' | 'description' | 'image' | 'slug' | 'tags'
->;
+> & {
+  priority?: boolean;
+};
 
-export function ArticlePreview({ author, date, title, description, image, slug, tags }: ArticlePreviewProps) {
+export function ArticlePreview({
+  author,
+  date,
+  title,
+  description,
+  image,
+  slug,
+  tags,
+  priority = false,
+}: ArticlePreviewProps) {
   return (
     <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300 hover:shadow-md rounded-t-xl rounded-b-xl">
       <Link href={`/blog/${slug}`} className="block">
@@ -25,7 +36,8 @@ export function ArticlePreview({ author, date, title, description, image, slug, 
             alt={title}
             fill
             className="object-cover transition-transform duration-500 hover:scale-105"
-            priority
+            priority={priority}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
           <div className="absolute inset-x-0 bottom-0 z-20 p-4 md:p-6">
             <CardTitle className="line-clamp-2 text-lg md:text-xl text-white">{title}</CardTitle>

@@ -18,6 +18,7 @@ export async function LatestArticlesContainer() {
             image={article.frontmatter.image}
             slug={article.frontmatter.slug}
             tags={article.frontmatter.tags}
+            priority={index === 0}
           />
         </AnimatedItem>
       ))}

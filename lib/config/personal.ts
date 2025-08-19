@@ -14,7 +14,7 @@ export const personal = {
   location: {
     origin: 'Colombia',
     current: 'Milan',
-    display: 'Colombian living in Milan',
+    display: 'Colombian in Milan',
   },
 
   social: {
@@ -39,12 +39,11 @@ export const personal = {
   },
 
   site: {
-    name: 'Mateo Nunez - A Chill Software Engineer',
+    name: 'Mateo Nunez — A Chill Software Engineer',
     shortName: 'Mateo Nunez',
     description:
-      "I'm Mateo, a software engineer from Colombia now living in Milan. I build web stuff with JavaScript and Next.js, contribute to open source projects, and I'm getting into AI development. When I'm not debugging something, I'm probably listening to music or exploring Milan. This site has my projects, an interactive terminal for fun, and whatever else I feel like sharing.",
-    shortDescription:
-      "Software engineer from Colombia, now in Milan. I build web apps, contribute to open source, and I'm learning AI development.",
+      'Colombian engineer in Milan. I design and ship web & AI systems (TypeScript/Next.js). Currently building AIt, a digital alter ego from my own data. This site is a lab: projects, notes, an interactive terminal, and whatever survives scrutiny.',
+    shortDescription: 'Engineer in Milan. I build web & AI systems; shipping AIt, my digital alter ego.',
     keywords: [
       'mateo nunez',
       'mmateonunez',
@@ -62,26 +61,28 @@ export const personal = {
       'colombia',
       'milan',
       'developer',
+      'AIt',
+      'digital alter ego',
+      'ethics and technology',
     ],
   },
 
   bio: {
-    full: "I'm Mateo, been writing code for about 10 years now. Currently a Senior Software Engineer at BonusX. I love working on open source stuff and tinkering with my personal site. Recently got really into AI development - working on a side project that should be ready soon. Coffee and good music make everything better.",
-    short:
-      'Software engineer who likes building things on the web and listening to music while coding. Currently exploring AI development.',
+    full: 'Senior Software Engineer @ BonusX. ~10 years shipping. I build systems that behave, contribute to OSS, and I’m currently engineering AIt, a personal, data-driven alter ego. Coffee and good music, always; fluff, never.',
+    short: 'Software engineer building web & AI systems. Shipping AIt. Music on; nonsense off.',
   },
 
   terminal: {
     prompt: 'mateo >',
     about: [
-      "Hey! I'm Mateo 👋",
+      "Hey, I'm Mateo.",
       '',
-      '🇨🇴 From Colombia, now living in Milan',
-      '💼 Senior Software Engineer at BonusX',
-      '💻 I build web apps, mostly with JavaScript and Next.js',
-      '🤖 Currently diving into AI development',
-      '🎵 Always have music playing while I code',
-      '📂 Check out my projects and feel free to look around!',
+      '🇨🇴 Colombia → Milan',
+      '💼 Senior Software Engineer @ BonusX',
+      '💻 Web & AI systems (TypeScript/Next.js)',
+      '🤖 Building AIt — a digital alter ego',
+      '🎵 Code needs a soundtrack',
+      '📂 Projects and experiments live here. Explore.',
     ],
   },
 
@@ -91,7 +92,7 @@ export const personal = {
       'Next.js',
       'Nuxt.js',
       'Astro',
-      'Nest.js',
+      'NestJS',
       'Laravel',
       'Fastify',
       'React Native',
@@ -100,31 +101,35 @@ export const personal = {
       'LangGraph',
     ],
     cloud: ['Docker', 'Kubernetes', 'AWS', 'GCP', 'Vercel', 'Kong', 'RabbitMQ', 'MQTT', 'Nginx'],
-    databases: ['PostgreSQL', 'Redis', 'MongoDB', 'QDrant', 'Pinecone'],
+    databases: ['PostgreSQL', 'Redis', 'MongoDB', 'Qdrant', 'Pinecone'],
     ai: ['LangChain', 'Ollama', 'RAG', 'Prompt Engineering', 'Fine-Tuning', 'LLMs'],
   },
 
   languagesSpoken: ['Italian', 'Spanish', 'English'],
 
   currentWork: [
-    'Working on an AI project called AIt',
-    'Rebuilding my personal site',
-    'Maintaining some legacy code at work',
-    'Drinking too much coffee',
+    'Building AIt (personal AI alter ego)',
+    'Rebuilding this site',
+    'Keeping critical legacy alive',
+    'Caffeine budget: unsustainable',
   ],
 
   profileBadges: [
-    { label: 'Developer', icon: 'Code', description: "Fullstack but don't tell anyone" },
-    { label: 'OSS (Open Source Soul)', icon: 'Github', description: 'Communities, thoughts and coffee' },
-    { label: 'Junior AI Engineer', icon: 'Brain', description: 'Study study study' },
-    { label: 'Music Lover', icon: 'Music', description: 'Jamming while I code' },
+    { label: 'Developer', icon: 'Code', description: 'Full-stack when it serves the problem' },
+    { label: 'OSS (Open Source Soul)', icon: 'Github', description: 'Open source by default. Coffee helps.' },
+    { label: 'AI Engineer', icon: 'Brain', description: 'Applied AI, zero mysticism' },
+    { label: 'Music Lover', icon: 'Music', description: 'Code has a soundtrack' },
   ],
 
   bookshelf: [
-    { label: 'AI Engineering', description: 'Learning how to build with LLMs', author: 'Chip Huyen' },
-    { label: 'Siddhartha', description: 'Classic that I actually enjoyed', author: 'Hermann Hesse' },
-    { label: 'Cien años de Soledad', description: 'Magical realism masterpiece', author: 'Gabriel García Márquez' },
-    { label: 'Infocracy', description: 'How networks control our lives', author: 'Byung-Chul Han' },
+    { label: 'AI Engineering', description: 'A pragmatic playbook for production LLMs', author: 'Chip Huyen' },
+    { label: 'Siddhartha', description: 'A clean cut toward stillness', author: 'Hermann Hesse' },
+    {
+      label: 'Cien años de Soledad',
+      description: 'Myth, memory, and the weight of lineage',
+      author: 'Gabriel García Márquez',
+    },
+    { label: 'Infocracy', description: 'Information power and soft control, tightly argued', author: 'Byung-Chul Han' },
   ],
 };
 

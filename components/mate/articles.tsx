@@ -22,6 +22,7 @@ export async function Articles() {
             author={articles[0].frontmatter.author}
             image={articles[0].frontmatter.image}
             tags={articles[0].frontmatter.tags}
+            priority
           />
         </div>
       )}
