@@ -132,10 +132,10 @@ export function AboutMe() {
               <div className="mb-5 w-full">
                 <h3 className="text-sm font-medium flex items-center gap-2 mb-2">
                   <Music className="h-3.5 w-3.5 text-amber-500" />
-                  Music Vibes
+                  Soundtrack
                 </h3>
                 <p className="text-xs text-muted-foreground">
-                  Catch my latest jams down in the "I've been playing" section.
+                  What I’m looping lately, signal over noise. See “I’ve been playing” below.
                 </p>
               </div>
 
@@ -144,7 +144,7 @@ export function AboutMe() {
                   <Book className="h-3.5 w-3.5 text-amber-500" />
                   Bookshelf
                 </h3>
-                <p className="text-xs text-muted-foreground">I'm a bookworm. Here are some of my favorite books.</p>
+                <p className="text-xs text-muted-foreground">Books that sharpen the blade. No filler.</p>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {bookshelf.map((book, index) => (
                     <Tooltip key={index}>
@@ -196,7 +196,7 @@ export function AboutMe() {
                 className="w-full mt-6 bg-amber-500/5 border-amber-500/20 text-amber-700 dark:text-amber-300 hover:bg-amber-500/10"
                 onClick={() => window.open(`mailto:${author.email}`, '_blank')}
               >
-                Keep in touch
+                Get in touch
               </Button>
             </AnimatedItem>
 
@@ -216,7 +216,7 @@ export function AboutMe() {
               <AnimatedItem className="mb-6">
                 <h3 className="text-base font-semibold flex items-center gap-2 mb-3">
                   <Code className="h-4 w-4 text-amber-500" />
-                  My Stack
+                  Stack, by choice
                 </h3>
                 <div className="space-y-4">
                   {Object.entries(skills).map(([category, items]) => (
@@ -243,11 +243,12 @@ export function AboutMe() {
               <AnimatedItem>
                 <h3 className="text-base font-semibold flex items-center gap-2 mb-3">
                   <Globe className="h-4 w-4 text-amber-500" />
-                  What I'm Cooking
+                  In the Lab
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Right now, I'm messing with an AI side project (open-source soon), tweaking my site, and keeping some
-                  old code alive. All while sipping coffee and vibing to Spotify.
+                  Shipping AIt, a digital alter ego built from my own data. Open-sourcing pieces soon. Tightening this
+                  site. Keeping critical legacy alive. Coffee in hand, Spotify humming. If it doesn’t hold up in
+                  production, it doesn’t make the cut.
                 </p>
                 <div className="flex flex-wrap gap-2 mt-3">
                   {currentWork.map((work, index) => (

@@ -4,6 +4,7 @@
 @font-face {
   font-family: "Incompleeta";
   src: url("/fonts/IncompleetaRegular.woff2") format("woff2");
+  font-display: swap;
 }
 
 @plugin '@tailwindcss/typography';

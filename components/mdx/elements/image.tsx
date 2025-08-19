@@ -7,9 +7,11 @@ interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   alt: string;
   width?: number;
   height?: number;
+  sizes?: string;
+  priority?: boolean;
 }
 
-export function Image({ src, alt, className, width, height, ...props }: ImageProps) {
+export function Image({ src, alt, className, width, height, sizes, priority = false, ...props }: ImageProps) {
   if (src.startsWith('http')) {
     return (
       <div className="relative aspect-video w-full overflow-hidden rounded-lg my-2">
@@ -19,6 +21,9 @@ export function Image({ src, alt, className, width, height, ...props }: ImagePro
           width={width || 1200}
           height={height || 630}
           className={cn('object-cover', className)}
+          sizes={sizes || '(max-width: 640px) 100vw, (max-width: 1024px) 90vw, (max-width: 1280px) 80vw, 1200px'}
+          loading={priority ? 'eager' : 'lazy'}
+          priority={priority}
           {...props}
         />
       </div>
@@ -33,6 +38,9 @@ export function Image({ src, alt, className, width, height, ...props }: ImagePro
         width={width || 1200}
         height={height || 630}
         className={cn('object-cover', className)}
+        sizes={sizes || '(max-width: 640px) 100vw, (max-width: 1024px) 90vw, (max-width: 1280px) 80vw, 1200px'}
+        loading={priority ? 'eager' : 'lazy'}
+        priority={priority}
         {...props}
       />
     </div>
