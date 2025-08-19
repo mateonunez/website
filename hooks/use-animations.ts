@@ -14,7 +14,7 @@ export const fadeInUpVariants: Variants = {
     y: 0,
     opacity: 1,
     transition: {
-      type: 'spring',
+      type: 'spring' as 'spring',
       stiffness: 400,
       damping: 10,
     },
@@ -35,7 +35,7 @@ export const staggerItemVariants: Variants = {
     y: 0,
     opacity: 1,
     transition: {
-      type: 'spring',
+      type: 'spring' as 'spring',
       stiffness: 400,
       damping: 10,
     },
@@ -48,7 +48,7 @@ export const scaleUpVariants: Variants = {
     scale: 1,
     opacity: 1,
     transition: {
-      type: 'spring',
+      type: 'spring' as 'spring',
       stiffness: 400,
       damping: 10,
     },
@@ -58,7 +58,7 @@ export const scaleUpVariants: Variants = {
 // Standard hover animations
 export const hoverScaleVariants = {
   scale: 1.05,
-  transition: { type: 'spring', stiffness: 400, damping: 10 },
+  transition: { type: 'spring' as 'spring', stiffness: 400, damping: 10 },
 };
 
 // useAnimations hook to provide standardized animations
@@ -73,8 +73,8 @@ export const useAnimations = () => {
       scale: hoverScaleVariants,
     },
     transition: {
-      spring: { type: 'spring', stiffness: 400, damping: 10 },
-      smooth: { duration: 0.3, ease: 'easeInOut' },
+      spring: { type: 'spring' as 'spring', stiffness: 400, damping: 10 },
+      smooth: { duration: 0.3, ease: 'easeInOut' as 'easeInOut' },
     },
   };
 };

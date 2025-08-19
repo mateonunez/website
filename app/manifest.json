@@ -4,9 +4,9 @@
   "display": "standalone",
   "scope": ".",
   "start_url": "/",
-  "name": "Mateo Nunez - A Chill Software Engineer",
+  "name": "Mateo Nunez — A Chill Software Engineer",
   "short_name": "Mateo Nunez",
-  "description": "Software engineer from Colombia, now in Milan. I build web apps, contribute to open source, and I'm learning AI development.",
+  "description": "Engineer in Milan. I build web & AI systems; shipping AIt, my digital alter ego.",
   "icons": [
     {
       "src": "/icon-192x192.png",
