@@ -38,7 +38,7 @@ export async function getRelatedArticles(currentArticle: ArticleFrontmatter): Pr
     .filter((article) => article.frontmatter.slug !== currentArticle.slug)
     .filter((article) => article.frontmatter.tags.some((tag) => currentArticle.tags.includes(tag)));
 
-  return related.slice(0, 3);
+  return related.slice(0, config.article.relatedArticles);
 }
 
 export function getRawArticle(slug: string): string {
