@@ -1,11 +1,9 @@
-import type { BlogPosting, BreadcrumbList, Person, WebSite, WithContext } from 'schema-dts';
+import type { BlogPosting, BreadcrumbList, Person, Thing, WebSite, WithContext } from 'schema-dts';
 import config from '@/lib/config';
 import personal from '@/lib/config/personal';
 import type { ArticleFrontmatter } from '@/types/article';
 
-type Schema = Record<string, unknown>;
-
-export function createJSONLD<T extends Schema>(schema: WithContext<T>): string {
+export function createJSONLD<T extends Thing>(schema: WithContext<T>): string {
   return JSON.stringify(schema, null, 2);
 }
 
@@ -46,7 +44,7 @@ export function getWebSiteSchema(): WithContext<WebSite> {
     potentialAction: {
       '@type': 'SearchAction',
       target: `${url}/search?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
+      query: 'search_term_string',
     },
   };
 }
