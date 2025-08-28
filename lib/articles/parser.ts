@@ -32,6 +32,15 @@ export async function getLastArticle(): Promise<Article> {
   return lastArticle;
 }
 
+export async function getRelatedArticles(currentArticle: ArticleFrontmatter): Promise<Article[]> {
+  const allArticles = await getAllArticles();
+  const related = allArticles
+    .filter((article) => article.frontmatter.slug !== currentArticle.slug)
+    .filter((article) => article.frontmatter.tags.some((tag) => currentArticle.tags.includes(tag)));
+
+  return related.slice(0, config.article.relatedArticles);
+}
+
 export function getRawArticle(slug: string): string {
   const fullPath = path.join(process.cwd(), './articles', `${slug}.mdx`);
   const articleRaw = readFileSync(fullPath, 'utf8');

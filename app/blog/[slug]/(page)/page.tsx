@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import type { JSX } from 'react';
 import { Suspense } from 'react';
 import { ArticleLayout } from '@/components/mate/article-layout';
-import { getArticle } from '@/lib/articles/parser';
+import { getArticle, getRelatedArticles } from '@/lib/articles/parser';
 import config from '@/lib/config';
 import meta from '@/lib/config/metadata';
+import { createJSONLD, getBlogPostingSchema } from '@/lib/seo/json-ld';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -38,6 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }): Promise<JSX.Element> {
   const { slug } = await params;
   const { content, frontmatter } = await getArticle({ slug });
+  const relatedArticles = await getRelatedArticles(frontmatter);
 
   return (
     <Suspense
@@ -57,12 +59,20 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </main>
       }
     >
+      {/** biome-ignore lint/correctness/useUniqueElementIds: This is a static page and the ID is unique. */}
+      <script
+        type="application/ld+json"
+        id="blog-posting-schema"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: This is a trusted source.
+        dangerouslySetInnerHTML={{ __html: createJSONLD(getBlogPostingSchema(frontmatter)) }}
+      />
       <ArticleLayout
         title={frontmatter.title}
         date={frontmatter.date}
         readingTime={frontmatter.readingTime}
         tags={frontmatter.tags}
         author={frontmatter.author}
+        relatedArticles={relatedArticles}
       >
         {content}
       </ArticleLayout>
