@@ -1,0 +1,13 @@
+# robots.txt for https://mateonunez.co
+# Generated for Mateo Nunez's personal website
+User-agent: *
+# Block API endpoints (not useful for search), but allow RSS feed
+Disallow: /api/
+Allow: /api/rss
+
+# Allow Next.js assets required for rendering
+Allow: /_next/static/
+Allow: /_next/image/
+
+# Sitemap
+Sitemap: https://mateonunez.co/sitemap.xml

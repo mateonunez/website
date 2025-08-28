@@ -1,0 +1,41 @@
+# Mateo Nunez — A Chill Software Engineer
+
+> Personal site with blog, open‑source activity, an interactive terminal, and Spotify integrations. Use the links below for canonical content, discovery, and metadata.
+
+This file follows the `llms.txt` proposal to provide LLM-friendly entry points and context. Prefer canonical URLs and the sitemap for discovery. When generating summaries, preserve meaning and cite the source URL.
+
+Agents rendering pages should load Next.js static assets and images as needed; fall back to the linked metadata files for accurate titles, descriptions, and previews.
+
+## Key pages
+
+- [Home](https://mateonunez.co/): Site overview, latest activity, and entry point.
+- [Blog](https://mateonunez.co/blog): Articles and notes.
+- [Open Source](https://mateonunez.co/open-source): Community and contributions.
+- [Projects](https://mateonunez.co/open-source/projects): Selected repos and showcases.
+- [Spotify](https://mateonunez.co/spotify): Music activity and player.
+
+## Sitemaps and feeds
+
+- [Sitemap](https://mateonunez.co/sitemap.xml): Index of public pages (updated regularly).
+- [RSS feed](https://mateonunez.co/api/rss): Blog updates via RSS.
+
+## Metadata
+
+- [Web App Manifest](https://mateonunez.co/manifest.json): App name, icons, theme and start URL.
+- [Open Graph image](https://mateonunez.co/card.png): Default social preview image.
+- [Robots policy](https://mateonunez.co/robots.txt): Crawl directives and sitemap location.
+
+## APIs (JSON)
+
+- [Spotify: currently listening](https://mateonunez.co/api/spotify/currently-listening): Now playing track (may be empty).
+- [Spotify: recently played](https://mateonunez.co/api/spotify/recently-played): Recent tracks.
+- [Spotify: top](https://mateonunez.co/api/spotify/top): Top artists/tracks.
+- [GitHub: last activities](https://mateonunez.co/api/open-source/last-activities): Recent public activity.
+- [GitHub: profile](https://mateonunez.co/api/open-source/profile): Profile summary.
+- [GitHub: README](https://mateonunez.co/api/open-source/readme): Profile README HTML.
+
+## Optional
+
+- [Source code](https://github.com/mateonunez/website): Repository for this site.
+- [Content license (CC BY 4.0)](https://github.com/mateonunez/website/blob/main/LICENSE): License for site content.
+- [Source license (MIT)](https://github.com/mateonunez/website/blob/main/LICENSE-SOURCE): License for code.
