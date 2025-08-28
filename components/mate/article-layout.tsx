@@ -1,9 +1,11 @@
 'use client';
 
+import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { MDXLayout } from '@/components/mdx/layout';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
+import type { Article } from '@/types/article';
 
 interface ArticleLayoutProps {
   title: string;
@@ -14,10 +16,11 @@ interface ArticleLayoutProps {
     name: string;
     image: string;
   };
+  relatedArticles?: Article[];
   children: ReactNode;
 }
 
-export function ArticleLayout({ date, readingTime, tags, author, children }: ArticleLayoutProps) {
+export function ArticleLayout({ date, readingTime, tags, author, relatedArticles, children }: ArticleLayoutProps) {
   return (
     <main className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg">
       <div className="container mx-auto p-6">
@@ -105,6 +108,27 @@ export function ArticleLayout({ date, readingTime, tags, author, children }: Art
                       {author.name}
                     </h3>
                   </div>
+                </div>
+              </div>
+            </>
+          )}
+
+          {relatedArticles && relatedArticles.length > 0 && (
+            <>
+              <Separator className="my-6 opacity-70" />
+              <div className="space-y-4">
+                <h3 className="text-2xl font-bold">Related Articles</h3>
+                <div className="grid gap-4 md:grid-cols-3">
+                  {relatedArticles.map((article) => (
+                    <Link
+                      key={article.frontmatter.slug}
+                      href={`/blog/${article.frontmatter.slug}`}
+                      className="flex flex-col gap-2 rounded-lg border p-4 hover:bg-muted/50"
+                    >
+                      <h4 className="font-bold">{article.frontmatter.title}</h4>
+                      <p className="text-sm text-muted-foreground">{article.frontmatter.description}</p>
+                    </Link>
+                  ))}
                 </div>
               </div>
             </>

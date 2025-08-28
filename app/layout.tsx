@@ -11,6 +11,7 @@ import { ThemeProvider } from '@/components/providers/theme-provider';
 import { UIProvider } from '@/components/providers/ui-provider';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import meta from '@/lib/config/metadata';
+import { createJSONLD, getPersonSchema, getWebSiteSchema } from '@/lib/seo/json-ld';
 import { cn } from '@/lib/utils';
 
 const inter = Inter({
@@ -58,6 +59,20 @@ export default function RootLayout({
               </UIProvider>
             </SidebarProvider>
           </AnalyticsProvider>
+          {/** biome-ignore lint/correctness/useUniqueElementIds: This is a static page and the ID is unique. */}
+          <script
+            type="application/ld+json"
+            id="person-schema"
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: This is a trusted source.
+            dangerouslySetInnerHTML={{ __html: createJSONLD(getPersonSchema()) }}
+          />
+          {/** biome-ignore lint/correctness/useUniqueElementIds: This is a static page and the ID is unique. */}
+          <script
+            type="application/ld+json"
+            id="website-schema"
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: This is a trusted source.
+            dangerouslySetInnerHTML={{ __html: createJSONLD(getWebSiteSchema()) }}
+          />
         </ThemeProvider>
       </body>
     </html>
