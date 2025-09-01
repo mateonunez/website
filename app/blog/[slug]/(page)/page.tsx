@@ -13,14 +13,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const baseUrl = new URL(config.baseUrl);
   const imagePath = frontmatter.image.startsWith('/') ? frontmatter.image : `/${frontmatter.image}`;
   const imageUrl = new URL(imagePath, baseUrl).toString();
+  const canonicalUrl = new URL(`/blog/${slug}`, baseUrl).toString();
 
   return {
     ...meta,
     title: frontmatter.title,
     description: frontmatter.description,
     keywords: frontmatter.tags,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       ...meta.openGraph,
+      url: canonicalUrl,
       title: frontmatter.title,
       description: frontmatter.description,
       type: 'article',
@@ -32,6 +37,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         modifiedTime: frontmatter.date,
       },
       images: [{ url: imageUrl, alt: frontmatter.title }],
+    },
+    twitter: {
+      ...meta.twitter,
+      title: frontmatter.title,
+      description: frontmatter.description,
+      images: [imageUrl],
     },
   };
 }

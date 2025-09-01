@@ -9,8 +9,21 @@ export function createJSONLD<T extends Thing>(schema: WithContext<T>): string {
 
 export function getBlogPostingSchema(frontmatter: ArticleFrontmatter): WithContext<BlogPosting> {
   const { title, description, date, author, tags } = frontmatter;
-  const url = `${config.baseUrl}/blog/${frontmatter.slug}`;
-  const imageUrl = `${config.baseUrl}${frontmatter.image}`;
+  const baseUrl = new URL(config.baseUrl);
+  const url = new URL(`/blog/${frontmatter.slug}`, baseUrl).toString();
+
+  const rawImage = (frontmatter.image || '').trim();
+  let imageUrl: string;
+  if (rawImage) {
+    if (/^https?:\/\//i.test(rawImage)) {
+      imageUrl = rawImage;
+    } else {
+      const normalizedPath = rawImage.startsWith('/') ? rawImage : `/${rawImage}`;
+      imageUrl = new URL(normalizedPath, baseUrl).toString();
+    }
+  } else {
+    imageUrl = new URL(personal.assets.ogImage, baseUrl).toString();
+  }
 
   return {
     '@context': 'https://schema.org',
