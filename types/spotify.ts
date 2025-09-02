@@ -135,3 +135,64 @@ export interface TopData {
   artists: TopArtist[];
   tracks: TopTrack[];
 }
+
+export interface SpotifyUser {
+  id: string;
+  display_name: string;
+  external_urls: {
+    spotify: string;
+  };
+  followers?: {
+    total: number;
+  };
+  images?: SpotifyImage[];
+  country?: string;
+  product?: string;
+  email?: string;
+  type?: string;
+  uri?: string;
+}
+
+export interface NormalizedSpotifyProfile {
+  id: string;
+  name: string;
+  avatar: string | null;
+  followers: number;
+  url: string;
+  country?: string;
+}
+
+export interface SpotifyPlaylistOwner {
+  display_name?: string;
+  external_urls?: { spotify: string };
+  id: string;
+}
+
+export interface SpotifyPlaylist {
+  id: string;
+  name: string;
+  description?: string;
+  images?: SpotifyImage[];
+  external_urls: { spotify: string };
+  tracks: { total: number };
+  owner: SpotifyPlaylistOwner;
+  public?: boolean;
+}
+
+export interface SpotifyPlaylists {
+  items: SpotifyPlaylist[];
+  limit: number;
+  offset: number;
+  total: number;
+}
+
+export interface NormalizedPlaylist {
+  id: string;
+  name: string;
+  cover: string | null;
+  url: string;
+  tracks: number;
+  owner: string;
+  description?: string;
+  public?: boolean;
+}

@@ -1,0 +1,69 @@
+import { NextResponse } from 'next/server';
+import personal from '@/lib/config/personal';
+import { getUserPublicPlaylists } from '@/lib/spotify';
+import { normalizePlaylist } from '@/lib/utils/normalizers';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 86400; // 24 hours
+
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }): Promise<NextResponse> {
+  try {
+    const { id } = await params;
+    const { searchParams } = new URL(request.url);
+    const perPage = Number(searchParams.get('limit') ?? '20');
+    const offsetParam = Number(searchParams.get('offset') ?? '0');
+    const aggregate = (searchParams.get('aggregate') ?? 'false') === 'true';
+    const maxPages = Number(searchParams.get('pages') ?? '15');
+
+    if (!aggregate) {
+      const pageResp = await getUserPublicPlaylists(id, perPage, offsetParam);
+      if (!pageResp) {
+        return NextResponse.json({ error: 'Spotify not available' }, { status: 503 });
+      }
+
+      const filtered = pageResp.items.filter(
+        (playlist) => playlist.public !== false && playlist.owner.id === personal.social.spotify,
+      );
+
+      return NextResponse.json(
+        {
+          items: filtered.map(normalizePlaylist),
+          total: pageResp.total,
+          limit: perPage,
+          offset: offsetParam,
+        },
+        {
+          status: 200,
+          headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=172800' },
+        },
+      );
+    }
+
+    const aggregated: any[] = [];
+    let totalFromApi = 0;
+    for (let page = 0; page < maxPages; page++) {
+      const offset = page * perPage;
+      const pageResp = await getUserPublicPlaylists(id, perPage, offset);
+      if (!pageResp) break;
+      if (page === 0) totalFromApi = pageResp.total;
+      const filtered = pageResp.items.filter(
+        (playlist) => playlist.public !== false && playlist.owner.id === personal.social.spotify,
+      );
+      aggregated.push(...filtered);
+      if (pageResp.items.length < perPage || aggregated.length >= totalFromApi) break;
+    }
+
+    return NextResponse.json(
+      {
+        items: aggregated.map(normalizePlaylist),
+        total: aggregated.length,
+        limit: perPage,
+        pages: maxPages,
+      },
+      { status: 200, headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=172800' } },
+    );
+  } catch (error) {
+    console.error('Error fetching user public playlists:', error);
+    return NextResponse.json({ error: 'Spotify not available' }, { status: 503 });
+  }
+}

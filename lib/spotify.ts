@@ -1,9 +1,11 @@
 import type {
   SpotifyAccessToken,
   SpotifyCurrentlyPlaying,
+  SpotifyPlaylists,
   SpotifyRecentlyPlayed,
   SpotifyTopArtists,
   SpotifyTopTracks,
+  SpotifyUser,
 } from '@/types/spotify';
 
 class SpotifyError extends Error {
@@ -125,7 +127,12 @@ class SpotifyClient {
     }
   }
 
-  private async fetchSpotify<T>(endpoint: string, params?: URLSearchParams, skipCache = false): Promise<T> {
+  private async fetchSpotify<T>(
+    endpoint: string,
+    params?: URLSearchParams,
+    skipCache = false,
+    requestInit?: RequestInit,
+  ): Promise<T> {
     const cacheKey = this.getCacheKey(endpoint, params);
 
     if (!skipCache) {
@@ -142,7 +149,7 @@ class SpotifyClient {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-      cache: 'no-cache',
+      ...requestInit,
     });
 
     const data = (await response.json()) as T;
@@ -157,13 +164,20 @@ class SpotifyClient {
   async getCurrentlyListening(): Promise<SpotifyCurrentlyPlaying | undefined> {
     try {
       // Skip cache for currently playing as it's real-time data
-      return await this.fetchSpotify<SpotifyCurrentlyPlaying>('/me/player/currently-playing', undefined, true);
+      return await this.fetchSpotify<SpotifyCurrentlyPlaying>('/me/player/currently-playing', undefined, true, {
+        cache: 'no-store',
+      });
     } catch (error) {
       if (error instanceof SpotifyError && error.status === 204) {
         return undefined;
       }
       throw error;
     }
+  }
+
+  async getUserProfile(): Promise<SpotifyUser | undefined> {
+    const data = await this.fetchSpotify<SpotifyUser>('/me');
+    return data;
   }
 
   async getRecentlyPlayed(limit = 20): Promise<SpotifyRecentlyPlayed | undefined> {
@@ -198,6 +212,34 @@ class SpotifyClient {
 
     return this.fetchSpotify<SpotifyTopTracks>('/me/top/tracks', params);
   }
+
+  async getUserPlaylists(limit = 20, offset = 0): Promise<SpotifyPlaylists | undefined> {
+    const params = new URLSearchParams({
+      limit: limit.toString(),
+      offset: offset.toString(),
+    });
+
+    return this.fetchSpotify<SpotifyPlaylists>('/me/playlists', params);
+  }
+
+  async getUserPublicPlaylists(
+    userId: string,
+    limit = 20,
+    offset = 0,
+    requestInit?: RequestInit,
+  ): Promise<SpotifyPlaylists | undefined> {
+    const params = new URLSearchParams({
+      limit: limit.toString(),
+      offset: offset.toString(),
+    });
+
+    return this.fetchSpotify<SpotifyPlaylists>(
+      `/users/${encodeURIComponent(userId)}/playlists`,
+      params,
+      false,
+      requestInit,
+    );
+  }
 }
 
 const spotifyClient = new SpotifyClient({
@@ -211,3 +253,7 @@ export const getCurrentlyListening = () => spotifyClient.getCurrentlyListening()
 export const getRecentlyPlayed = () => spotifyClient.getRecentlyPlayed();
 export const getTopArtists = () => spotifyClient.getTopArtists();
 export const getTopTracks = () => spotifyClient.getTopTracks();
+export const getUserProfile = () => spotifyClient.getUserProfile();
+export const getUserPlaylists = () => spotifyClient.getUserPlaylists();
+export const getUserPublicPlaylists = (userId: string, limit = 20, offset = 0) =>
+  spotifyClient.getUserPublicPlaylists(userId, limit, offset);

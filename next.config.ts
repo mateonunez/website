@@ -73,6 +73,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: '**.githubassets.com',
       },
+      {
+        protocol: 'https',
+        hostname: '**.spotifycdn.com',
+      },
     ],
     minimumCacheTTL: 60,
   },

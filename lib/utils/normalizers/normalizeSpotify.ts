@@ -1,10 +1,14 @@
 import type {
   NormalizedCurrentlyPlaying,
+  NormalizedPlaylist,
   NormalizedRecentlyPlayed,
+  NormalizedSpotifyProfile,
   SpotifyArtist,
   SpotifyCurrentlyPlaying,
+  SpotifyPlaylist,
   SpotifyRecentlyPlayed,
   SpotifyTrack,
+  SpotifyUser,
   TopArtist,
   TopTrack,
 } from '@/types/spotify';
@@ -54,4 +58,24 @@ export const normalizeTracks = (data: SpotifyTrack): TopTrack => ({
   duration: data.duration_ms,
   popularity: data.popularity,
   preview_url: data.preview_url,
+});
+
+export const normalizeProfile = (user: SpotifyUser): NormalizedSpotifyProfile => ({
+  id: user.id,
+  name: user.display_name || 'Spotify User',
+  avatar: user.images && user.images.length > 0 ? user.images[0].url : null,
+  followers: user.followers?.total || 0,
+  url: user.external_urls?.spotify,
+  country: user.country,
+});
+
+export const normalizePlaylist = (playlist: SpotifyPlaylist): NormalizedPlaylist => ({
+  id: playlist.id,
+  name: playlist.name,
+  cover: playlist.images && playlist.images.length > 0 ? playlist.images[0].url : null,
+  url: playlist.external_urls.spotify,
+  tracks: playlist.tracks?.total || 0,
+  owner: playlist.owner?.display_name || playlist.owner?.id,
+  description: playlist.description,
+  public: playlist.public,
 });

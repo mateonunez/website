@@ -23,6 +23,7 @@ export const personal = {
     linkedin: 'mateo-nunez',
     instagram: 'mmateonunez',
     spotify: 'ltstcqtg2k6q3a17xzdbmcd8q',
+    spotifyMnemonic: 'mateonunez',
   },
 
   assets: {

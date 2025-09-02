@@ -5,6 +5,7 @@ import NameHeadingWrapper from '@/components/mate/name-heading.wrapper';
 import GitHubCommunityWrapper from '@/components/mate/open-source/github-community.wrapper';
 import LastActivityWrapper from '@/components/mate/open-source/last-activity.wrapper';
 import PlayerWrapper from '@/components/mate/spotify/player.wrapper';
+import { PlaylistsCarousel } from '@/components/mate/spotify/playlists-carousel';
 import RecentlyPlayedWrapper from '@/components/mate/spotify/recently-played.wrapper';
 import TerminalWrapper from '@/components/mate/terminal/terminal.wrapper';
 import { Separator } from '@/components/ui/separator';
@@ -58,12 +59,16 @@ export default async function HomePage(): Promise<JSX.Element> {
             <div className="mb-6">
               <TerminalWrapper />
             </div>
+            <div className="mb-6">
+              <AboutMeWrapper />
+            </div>
             <div className="grid grid-cols-12 gap-6">
               <MainContent />
               <SidebarContent />
             </div>
             <div className="mb-6">
-              <AboutMeWrapper />
+              <SectionTitle title="Personally selected" />
+              <PlaylistsCarousel />
             </div>
             <BottomContent />
           </div>

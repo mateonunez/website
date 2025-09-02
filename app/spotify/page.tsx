@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import type { JSX } from 'react';
 import { memo, Suspense } from 'react';
 import { PageHeader } from '@/components/mate/page-header';
+import { PlaylistsCarousel } from '@/components/mate/spotify/playlists-carousel';
+import { SpotifyProfileCard } from '@/components/mate/spotify/profile-card';
 import { RecentlyPlayed } from '@/components/mate/spotify/recently-played';
 import { SpotifyPlayer } from '@/components/mate/spotify/spotify-player';
 import { TopArtists } from '@/components/mate/spotify/top-artists';
@@ -75,10 +77,12 @@ export default function SpotifyPage(): JSX.Element {
   return (
     <>
       <Header />
-      <main className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg">
+      <main className="flex-1 overflow-x-hidden overflow-y-auto mx-auto lg:max-w-screen-lg">
         <div className="container mx-auto p-6">
           <div className="space-y-8">
+            <SpotifyProfileCard />
             <CurrentlyListening />
+            <PlaylistsCarousel />
             <TopItems />
             <RecentlyPlayed />
           </div>
