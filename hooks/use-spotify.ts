@@ -2,6 +2,7 @@
 
 import useSWR from 'swr';
 import { useUI } from '@/components/providers/ui-provider';
+import type { NormalizedSpotifyProfile } from '@/types/spotify';
 
 export function useSpotify() {
   const { setSpotifyListening, setSpotifyRecentlyPlayed, listening, recentlyPlayed } = useUI();
@@ -30,12 +31,19 @@ export function useSpotify() {
     revalidateOnReconnect: true,
   });
 
+  const {
+    data: profile,
+    error: profileError,
+    isLoading: profileLoading,
+  } = useSWR<NormalizedSpotifyProfile>('/api/spotify/profile');
+
   return {
     data: {
       currentlyPlaying: listening,
       recentlyPlayed: recentlyPlayed,
+      profile,
     },
-    isLoading: currentLoading || recentLoading,
-    isError: currentError || recentError,
+    isLoading: currentLoading || recentLoading || profileLoading,
+    isError: currentError || recentError || profileError,
   };
 }
