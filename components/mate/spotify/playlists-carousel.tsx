@@ -9,7 +9,11 @@ import { useSpotifyUserPlaylists } from '@/hooks/use-spotify-user-playlists';
 import personal from '@/lib/config/personal';
 import { PlaylistsCarouselSkeleton } from './playlists-carousel.skeleton';
 
-export function PlaylistsCarousel() {
+type PlaylistsCarouselProps = {
+  showHeader?: boolean;
+};
+
+export function PlaylistsCarousel({ showHeader = true }: PlaylistsCarouselProps) {
   const userId = personal.social.spotify;
   const { data: playlists, isLoading } = useSpotifyUserPlaylists(userId, 20, 0, true);
 
@@ -19,10 +23,12 @@ export function PlaylistsCarousel() {
 
   return (
     <div className="relative">
-      <div className="mb-3 flex items-center justify-between">
-        <h2 className="text-base sm:text-lg font-hanken">Playlists</h2>
-        <div className="text-xs text-muted-foreground">{playlists.length} total</div>
-      </div>
+      {showHeader && (
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="text-base sm:text-lg font-hanken">Playlists</h2>
+          <div className="text-xs text-muted-foreground">{playlists.length} total</div>
+        </div>
+      )}
       <div className="relative">
         <Carousel opts={{ align: 'start', loop: false }} className="w-full">
           <CarouselContent className="-ml-2 md:-ml-4">

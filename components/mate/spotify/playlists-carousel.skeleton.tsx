@@ -3,15 +3,21 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
-export function PlaylistsCarouselSkeleton() {
+type SkeletonProps = {
+  showHeader?: boolean;
+};
+
+export function PlaylistsCarouselSkeleton({ showHeader = true }: SkeletonProps) {
   const placeholders = Array.from({ length: 8 });
 
   return (
     <div className="relative">
-      <div className="mb-3 flex items-center justify-between">
-        <div className="h-4 w-24 bg-muted rounded animate-pulse" />
-        <div className="h-3 w-16 bg-muted rounded animate-pulse" />
-      </div>
+      {showHeader && (
+        <div className="mb-3 flex items-center justify-between">
+          <div className="h-4 w-24 bg-muted rounded animate-pulse" />
+          <div className="h-3 w-16 bg-muted rounded animate-pulse" />
+        </div>
+      )}
       <div className="relative">
         <Carousel opts={{ align: 'start', loop: false }} className="w-full">
           <CarouselContent className="-ml-2 md:-ml-4">
