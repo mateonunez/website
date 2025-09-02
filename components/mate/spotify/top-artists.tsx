@@ -50,45 +50,54 @@ export function TopArtists() {
         <CardDescription className="text-xs">My most played artists in the last month</CardDescription>
       </CardHeader>
       <CardContent className="p-3 sm:p-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          {artists.map((artist) => (
-            <Card
-              key={artist.id}
-              className="overflow-hidden border border-border/50 group hover:border-amber-500/30 transition-all"
-            >
-              <CardContent className="p-3 sm:p-4 flex items-center gap-3">
-                <Avatar className="h-12 w-12 sm:h-14 sm:w-14 rounded-md">
-                  <AvatarImage src={artist.image} alt={artist.name} className="object-cover" />
-                  <AvatarFallback className="rounded-md">{artist.name.substring(0, 2)}</AvatarFallback>
-                </Avatar>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between">
-                    <h3 className="font-medium truncate" title={artist.name}>
-                      {artist.name}
-                    </h3>
-                    <Link
-                      href={artist.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="ml-2 text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      <ExternalLink className="h-3.5 w-3.5" />
-                    </Link>
-                  </div>
-                  <div className="mt-1 text-xs text-muted-foreground">
-                    <div className="flex flex-wrap gap-1 mt-1">
-                      {Array.isArray(artist.genres) &&
-                        artist.genres.slice(0, 3).map((genre, index) => (
-                          <Badge key={index} variant="secondary" className="text-xs">
-                            {genre}
-                          </Badge>
-                        ))}
+        <div className="space-y-3">
+          {artists.map((artist) => {
+            const genres: string[] = Array.isArray(artist.genres) ? artist.genres : [];
+            const visibleGenres = genres.slice(0, 2);
+            const remainingGenresCount = Math.max(genres.length - visibleGenres.length, 0);
+            return (
+              <Card
+                key={artist.id}
+                className="overflow-hidden border border-border/50 group hover:border-amber-500/30 transition-all"
+              >
+                <CardContent className="p-3 sm:p-4 flex items-center gap-3">
+                  <Avatar className="h-10 w-10 sm:h-12 sm:w-12 rounded-md">
+                    <AvatarImage src={artist.image} alt={artist.name} className="object-cover" />
+                    <AvatarFallback className="rounded-md">{artist.name.substring(0, 2)}</AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between">
+                      <div className="min-w-0">
+                        <h3 className="font-medium truncate" title={artist.name}>
+                          {artist.name}
+                        </h3>
+                        <div className="mt-1 flex items-center gap-1">
+                          {visibleGenres.map((genre, index) => (
+                            <Badge key={index} variant="secondary" className="text-xs whitespace-nowrap">
+                              {genre}
+                            </Badge>
+                          ))}
+                          {remainingGenresCount > 0 && (
+                            <Badge variant="outline" className="text-xs whitespace-nowrap">
+                              +{remainingGenresCount}
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+                      <Link
+                        href={artist.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="ml-2 text-muted-foreground hover:text-foreground transition-colors flex-shrink-0"
+                      >
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </Link>
                     </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         <div className="mt-4 flex justify-center">
