@@ -10,9 +10,9 @@ type PlaylistsResponse = {
   offset: number;
 };
 
-export function useSpotifyUserPlaylists(userId: string, limit = 20, offset = 0) {
+export function useSpotifyUserPlaylists(userId: string, limit = 20, offset = 0, aggregate = true) {
   const key = userId
-    ? `/api/spotify/users/${encodeURIComponent(userId)}/playlists?limit=${limit}&offset=${offset}`
+    ? `/api/spotify/users/${encodeURIComponent(userId)}/playlists?limit=${limit}&offset=${offset}&aggregate=${aggregate}`
     : null;
 
   const fetcher = async (url: string) => {
@@ -24,7 +24,8 @@ export function useSpotifyUserPlaylists(userId: string, limit = 20, offset = 0) 
   const { data, error, isLoading } = useSWR<PlaylistsResponse>(key, fetcher, {
     revalidateOnFocus: true,
     revalidateOnReconnect: true,
-    dedupingInterval: 5 * 60 * 1000,
+    dedupingInterval: 10 * 60 * 1000,
+    keepPreviousData: true,
   });
 
   return {

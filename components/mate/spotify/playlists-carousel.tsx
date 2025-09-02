@@ -7,21 +7,13 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { useSpotifyUserPlaylists } from '@/hooks/use-spotify-user-playlists';
 import personal from '@/lib/config/personal';
+import { PlaylistsCarouselSkeleton } from './playlists-carousel.skeleton';
 
 export function PlaylistsCarousel() {
   const userId = personal.social.spotify;
-  console.log({ userId });
-  const { data: playlists, isLoading } = useSpotifyUserPlaylists(userId);
+  const { data: playlists, isLoading } = useSpotifyUserPlaylists(userId, 20, 0, true);
 
-  console.log({ playlists });
-
-  if (isLoading) {
-    return (
-      <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/50">
-        <CardContent className="p-6 h-[220px] animate-pulse" />
-      </Card>
-    );
-  }
+  if (isLoading) return <PlaylistsCarouselSkeleton />;
 
   if (!playlists.length) return null;
 

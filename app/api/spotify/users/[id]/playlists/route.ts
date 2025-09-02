@@ -11,29 +11,46 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     const { id } = await params;
     const { searchParams } = new URL(request.url);
     const perPage = Number(searchParams.get('limit') ?? '20');
+    const offsetParam = Number(searchParams.get('offset') ?? '0');
+    const aggregate = (searchParams.get('aggregate') ?? 'false') === 'true';
     const maxPages = Number(searchParams.get('pages') ?? '15');
 
-    const aggregated: any[] = [];
-    let totalFromApi = 0;
-
-    for (let page = 0; page < maxPages; page++) {
-      const offset = page * perPage;
-      const pageResp = await getUserPublicPlaylists(id, perPage, offset);
+    if (!aggregate) {
+      const pageResp = await getUserPublicPlaylists(id, perPage, offsetParam);
       if (!pageResp) {
-        break;
-      }
-      if (page === 0) {
-        totalFromApi = pageResp.total;
+        return NextResponse.json({ error: 'Spotify not available' }, { status: 503 });
       }
 
       const filtered = pageResp.items.filter(
         (playlist) => playlist.public !== false && playlist.owner.id === personal.social.spotify,
       );
-      aggregated.push(...filtered);
 
-      if (pageResp.items.length < perPage || aggregated.length >= totalFromApi) {
-        break;
-      }
+      return NextResponse.json(
+        {
+          items: filtered.map(normalizePlaylist),
+          total: pageResp.total,
+          limit: perPage,
+          offset: offsetParam,
+        },
+        {
+          status: 200,
+          headers: { 'Cache-Control': 'public, s-maxage=600, stale-while-revalidate=86400' },
+        },
+      );
+    }
+
+    const aggregated: any[] = [];
+    let totalFromApi = 0;
+    for (let page = 0; page < maxPages; page++) {
+      const offset = page * perPage;
+      const pageResp = await getUserPublicPlaylists(id, perPage, offset);
+      if (!pageResp) break;
+      if (page === 0) totalFromApi = pageResp.total;
+      const filtered = pageResp.items.filter(
+        (playlist) => playlist.public !== false && playlist.owner.id === personal.social.spotify,
+      );
+      aggregated.push(...filtered);
+      if (pageResp.items.length < perPage || aggregated.length >= totalFromApi) break;
     }
 
     return NextResponse.json(
@@ -43,7 +60,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
         limit: perPage,
         pages: maxPages,
       },
-      { status: 200 },
+      { status: 200, headers: { 'Cache-Control': 'public, s-maxage=600, stale-while-revalidate=86400' } },
     );
   } catch (error) {
     console.error('Error fetching user public playlists:', error);

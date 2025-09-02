@@ -127,7 +127,12 @@ class SpotifyClient {
     }
   }
 
-  private async fetchSpotify<T>(endpoint: string, params?: URLSearchParams, skipCache = false): Promise<T> {
+  private async fetchSpotify<T>(
+    endpoint: string,
+    params?: URLSearchParams,
+    skipCache = false,
+    requestInit?: RequestInit,
+  ): Promise<T> {
     const cacheKey = this.getCacheKey(endpoint, params);
 
     if (!skipCache) {
@@ -144,7 +149,7 @@ class SpotifyClient {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-      cache: 'no-cache',
+      ...requestInit,
     });
 
     const data = (await response.json()) as T;
@@ -159,7 +164,9 @@ class SpotifyClient {
   async getCurrentlyListening(): Promise<SpotifyCurrentlyPlaying | undefined> {
     try {
       // Skip cache for currently playing as it's real-time data
-      return await this.fetchSpotify<SpotifyCurrentlyPlaying>('/me/player/currently-playing', undefined, true);
+      return await this.fetchSpotify<SpotifyCurrentlyPlaying>('/me/player/currently-playing', undefined, true, {
+        cache: 'no-store',
+      });
     } catch (error) {
       if (error instanceof SpotifyError && error.status === 204) {
         return undefined;
@@ -215,13 +222,23 @@ class SpotifyClient {
     return this.fetchSpotify<SpotifyPlaylists>('/me/playlists', params);
   }
 
-  async getUserPublicPlaylists(userId: string, limit = 20, offset = 0): Promise<SpotifyPlaylists | undefined> {
+  async getUserPublicPlaylists(
+    userId: string,
+    limit = 20,
+    offset = 0,
+    requestInit?: RequestInit,
+  ): Promise<SpotifyPlaylists | undefined> {
     const params = new URLSearchParams({
       limit: limit.toString(),
       offset: offset.toString(),
     });
 
-    return this.fetchSpotify<SpotifyPlaylists>(`/users/${encodeURIComponent(userId)}/playlists`, params);
+    return this.fetchSpotify<SpotifyPlaylists>(
+      `/users/${encodeURIComponent(userId)}/playlists`,
+      params,
+      false,
+      requestInit,
+    );
   }
 }
 
