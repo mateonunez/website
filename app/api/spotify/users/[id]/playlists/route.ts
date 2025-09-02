@@ -4,7 +4,7 @@ import { getUserPublicPlaylists } from '@/lib/spotify';
 import { normalizePlaylist } from '@/lib/utils/normalizers';
 
 export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 86400; // 24 hours
 
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }): Promise<NextResponse> {
   try {
@@ -34,7 +34,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
         },
         {
           status: 200,
-          headers: { 'Cache-Control': 'public, s-maxage=600, stale-while-revalidate=86400' },
+          headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=172800' },
         },
       );
     }
@@ -60,7 +60,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
         limit: perPage,
         pages: maxPages,
       },
-      { status: 200, headers: { 'Cache-Control': 'public, s-maxage=600, stale-while-revalidate=86400' } },
+      { status: 200, headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=172800' } },
     );
   } catch (error) {
     console.error('Error fetching user public playlists:', error);
