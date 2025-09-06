@@ -27,6 +27,7 @@ export function Terminal({
 
   const [hasVisitedBefore, setHasVisitedBefore] = useState<boolean>(false);
   const [skipAnimations, setSkipAnimations] = useState<boolean>(false);
+  const hasInitializedFromCookie = useRef<boolean>(false);
 
   const [state, actions] = useTerminalState(initialMessages);
   const { currentLine, typingLine, completedLines, isComplete, userInput } = state;
@@ -63,8 +64,11 @@ export function Terminal({
 
   const handleUserInput = useTerminalInput({ state, actions, executeCommand, getMatchingCommands });
 
-  // Check for existing cookie on mount
+  // Check for existing cookie on mount - only run once
   useEffect(() => {
+    // Prevent multiple initializations
+    if (hasInitializedFromCookie.current) return;
+
     const hasVisited = terminalCookie.hasVisitedRecently();
     setHasVisitedBefore(hasVisited);
     setSkipAnimations(hasVisited);
@@ -75,8 +79,9 @@ export function Terminal({
       actions.addCompletedLines(completedMessages);
       actions.setCurrentLine(initialMessages.length);
       actions.setIsComplete(true);
+      hasInitializedFromCookie.current = true;
     }
-  }, [initialMessages, actions]);
+  }, []); // Empty dependency array - only run on mount
 
   // Set cookie when terminal completes for the first time (not skipped)
   useEffect(() => {
