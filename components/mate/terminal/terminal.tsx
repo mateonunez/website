@@ -1,10 +1,11 @@
 'use client';
 
-import { type JSX, memo, useCallback, useEffect, useMemo, useRef } from 'react';
+import { type JSX, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useGithub } from '@/hooks/use-github';
 import { useSpotify } from '@/hooks/use-spotify';
 import { useSpotifyTop } from '@/hooks/use-spotify-top';
 import { cn } from '@/lib/utils';
+import { hasTerminalBeenVisited, setTerminalVisitedCookie } from '@/lib/utils/cookies';
 import { CommandContextProvider, type DataSources } from './command-context';
 import { DEFAULT_HEIGHT, DEFAULT_MESSAGES, DEFAULT_PROMPT, getTypingDuration, SLEEP_DURATION } from './constants';
 import { useCommandExecutor } from './hooks/use-command-executor';
@@ -23,6 +24,9 @@ export function Terminal({
   const { data: spotifyData } = useSpotify();
   const { data: githubData } = useGithub();
   const { data: spotifyTopData } = useSpotifyTop();
+
+  const [hasVisitedBefore, setHasVisitedBefore] = useState<boolean>(false);
+  const [skipAnimations, setSkipAnimations] = useState<boolean>(false);
 
   const [state, actions] = useTerminalState(initialMessages);
   const { currentLine, typingLine, completedLines, isComplete, userInput } = state;
@@ -59,8 +63,30 @@ export function Terminal({
 
   const handleUserInput = useTerminalInput({ state, actions, executeCommand, getMatchingCommands });
 
+  // Check for existing cookie on mount
   useEffect(() => {
-    if (isComplete) return;
+    const hasVisited = hasTerminalBeenVisited();
+    setHasVisitedBefore(hasVisited);
+    setSkipAnimations(hasVisited);
+
+    if (hasVisited) {
+      // Skip animations and make terminal ready immediately
+      const completedMessages = initialMessages.map((text) => ({ text, showPrompt: false }));
+      actions.addCompletedLines(completedMessages);
+      actions.setCurrentLine(initialMessages.length);
+      actions.setIsComplete(true);
+    }
+  }, [initialMessages, actions]);
+
+  // Set cookie when terminal completes for the first time (not skipped)
+  useEffect(() => {
+    if (isComplete && !hasVisitedBefore && !skipAnimations) {
+      setTerminalVisitedCookie();
+    }
+  }, [isComplete, hasVisitedBefore, skipAnimations]);
+
+  useEffect(() => {
+    if (isComplete || skipAnimations) return;
 
     const currentText = initialMessages[currentLine];
     let index = typingLine.currentIndex;
@@ -94,7 +120,7 @@ export function Terminal({
     }, SLEEP_DURATION);
 
     return () => clearTimeout(timer);
-  }, [currentLine, initialMessages, actions, isComplete, typingLine.currentIndex]);
+  }, [currentLine, initialMessages, actions, isComplete, typingLine.currentIndex, skipAnimations]);
 
   const scrollToBottom = useCallback(() => {
     if (terminalRef.current) {
@@ -103,7 +129,7 @@ export function Terminal({
   }, []);
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
+    let timeoutId: ReturnType<typeof setTimeout>;
     const debouncedScroll = () => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(scrollToBottom, 100);
@@ -133,7 +159,7 @@ export function Terminal({
           {completedLines.map((line, index) => (
             <MemoizedLine key={index} text={line.text} noPrompt={!line.showPrompt} noCaret prompt={prompt} />
           ))}
-          {!isComplete && typingLine.currentIndex > 0 && (
+          {!isComplete && !skipAnimations && typingLine.currentIndex > 0 && (
             <MemoizedLine text={typingLine.text} isTyping prompt={prompt} />
           )}
           {isComplete && (
