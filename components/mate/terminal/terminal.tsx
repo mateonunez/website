@@ -5,7 +5,7 @@ import { useGithub } from '@/hooks/use-github';
 import { useSpotify } from '@/hooks/use-spotify';
 import { useSpotifyTop } from '@/hooks/use-spotify-top';
 import { cn } from '@/lib/utils';
-import { hasTerminalBeenVisited, setTerminalVisitedCookie } from '@/lib/utils/cookies';
+import { terminalCookie } from '@/lib/utils/cookies/terminal.cookie';
 import { CommandContextProvider, type DataSources } from './command-context';
 import { DEFAULT_HEIGHT, DEFAULT_MESSAGES, DEFAULT_PROMPT, getTypingDuration, SLEEP_DURATION } from './constants';
 import { useCommandExecutor } from './hooks/use-command-executor';
@@ -65,7 +65,7 @@ export function Terminal({
 
   // Check for existing cookie on mount
   useEffect(() => {
-    const hasVisited = hasTerminalBeenVisited();
+    const hasVisited = terminalCookie.hasVisitedRecently();
     setHasVisitedBefore(hasVisited);
     setSkipAnimations(hasVisited);
 
@@ -81,7 +81,7 @@ export function Terminal({
   // Set cookie when terminal completes for the first time (not skipped)
   useEffect(() => {
     if (isComplete && !hasVisitedBefore && !skipAnimations) {
-      setTerminalVisitedCookie();
+      terminalCookie.set();
     }
   }, [isComplete, hasVisitedBefore, skipAnimations]);
 
