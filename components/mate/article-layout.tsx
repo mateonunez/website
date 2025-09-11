@@ -4,6 +4,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { MDXLayout } from '@/components/mdx/layout';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import type { Article } from '@/types/article';
 
@@ -47,18 +48,27 @@ export function ArticleLayout({ date, readingTime, tags, author, relatedArticles
                   )}
                 </div>
               )}
-              {tags && tags.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
+              {tags &&
+                tags.length > 0 &&
+                (() => {
+                  const MAX_VISIBLE_TAGS = 5;
+                  const visibleTags = tags.slice(0, MAX_VISIBLE_TAGS);
+                  const remainingTagsCount = tags.length - visibleTags.length;
+                  return (
+                    <div className="flex flex-wrap gap-2">
+                      {visibleTags.map((tag) => (
+                        <Badge key={tag} variant="secondary" className="font-mono text-xs">
+                          {tag}
+                        </Badge>
+                      ))}
+                      {remainingTagsCount > 0 && (
+                        <Badge key="tags-overflow" variant="secondary" className="font-mono text-xs">
+                          +{remainingTagsCount}
+                        </Badge>
+                      )}
+                    </div>
+                  );
+                })()}
             </div>
           )}
 

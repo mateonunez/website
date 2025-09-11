@@ -26,6 +26,9 @@ export function ArticlePreview({
   tags,
   priority = false,
 }: ArticlePreviewProps) {
+  const MAX_VISIBLE_TAGS = 5;
+  const visibleTags = (tags ?? []).slice(0, MAX_VISIBLE_TAGS);
+  const remainingTagsCount = (tags?.length ?? 0) - visibleTags.length;
   return (
     <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300 hover:shadow-md rounded-t-xl rounded-b-xl">
       <Link href={`/blog/${slug}`} className="block">
@@ -64,11 +67,16 @@ export function ArticlePreview({
 
         {tags && tags.length > 0 && (
           <div className="flex flex-wrap gap-2">
-            {tags.map((tag) => (
+            {visibleTags.map((tag) => (
               <Badge key={tag} variant="secondary" className="font-mono text-xs">
                 {tag}
               </Badge>
             ))}
+            {remainingTagsCount > 0 && (
+              <Badge key="tags-overflow" variant="secondary" className="font-mono text-xs">
+                +{remainingTagsCount}
+              </Badge>
+            )}
           </div>
         )}
       </CardContent>
