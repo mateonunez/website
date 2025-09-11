@@ -184,8 +184,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       zod:
-        specifier: ^4.1.4
-        version: 4.1.4
+        specifier: ^4.1.8
+        version: 4.1.8
 
 packages:
 
@@ -2233,8 +2233,8 @@ packages:
     engines: {node: '>= 14'}
     hasBin: true
 
-  zod@4.1.4:
-    resolution: {integrity: sha512-2YqJuWkU6IIK9qcE4k1lLLhyZ6zFw7XVRdQGpV97jEIZwTrscUw+DY31Xczd8nwaoksyJUIxCojZXwckJovWxA==}
+  zod@4.1.8:
+    resolution: {integrity: sha512-5R1P+WwQqmmMIEACyzSvo4JXHY5WiAFHRMg+zBZKgKS+Q1viRa0C1hmUKtHltoIFKtIdki3pRxkmpP74jnNYHQ==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -4506,6 +4506,6 @@ snapshots:
 
   yaml@2.7.0: {}
 
-  zod@4.1.4: {}
+  zod@4.1.8: {}
 
   zwitch@2.0.4: {}
