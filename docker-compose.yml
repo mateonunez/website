@@ -1,19 +1,31 @@
-version: "3.8"
-
 services:
   mateonunez_frontend_nextjs:
     container_name: mateonunez_frontend_nextjs
     build:
       context: .
       dockerfile: ./.docker/Dockerfile
-    working_dir: /usr/src/mateonunez/website
+      target: dev
+    working_dir: /app
     restart: on-failure
     ports:
       - 3000:3000
     volumes:
-      - /usr/src/mateonunez/website/node_modules
-      - /usr/src/mateonunez/website/.next
-      - .:/usr/src/mateonunez/website
+      - /app/node_modules
+      - /app/.next
+      - .:/app
+    develop:
+      watch:
+        - action: sync
+          path: ./
+          target: /app
+          ignore:
+            - node_modules/
+            - .next/
+            - .git/
+        - action: rebuild
+          path: ./package.json
+        - action: rebuild
+          path: ./pnpm-lock.yaml
     networks:
       - mun_network
 

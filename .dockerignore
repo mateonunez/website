@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+.vscode
+.idea
+coverage
+.pnpm-store
+npm-debug.log*
+yarn-error.log*
+*.log
+.env*
+.DS_Store
+Thumbs.db
