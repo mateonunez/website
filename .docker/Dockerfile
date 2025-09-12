@@ -1,35 +1,43 @@
-FROM node:16-alpine
+FROM node:24-alpine AS base
 
-ENV PORT 3000
+ENV PNPM_HOME=/pnpm
+ENV PATH=$PNPM_HOME:$PATH
+RUN corepack enable
 
-RUN mkdir -p /usr/src/mateonunez/website
-WORKDIR /usr/src/mateonunez/website
+WORKDIR /app
 
-COPY package.json .
-COPY package-lock.json .
+# --- Deps stage: install only prod deps with pnpm for caching ---
+FROM base AS deps
+COPY package.json pnpm-lock.yaml ./
+RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store pnpm install --frozen-lockfile
 
-RUN npm install
+# --- Builder stage: build the Next.js app ---
+FROM deps AS builder
+COPY . .
+RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store pnpm run build
 
-COPY articles articles
-COPY assets assets
-COPY components components
-COPY lib lib
-COPY pages pages
-COPY public public
-COPY styles styles
+# --- Runtime stage: minimal image using Next standalone output ---
+FROM node:24-alpine AS runner
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV NEXT_TELEMETRY_DISABLED=1
+WORKDIR /app
+USER node
 
-COPY .env.local .env.local
-COPY jsconfig.json .
-COPY next-sitemap.js .
-COPY next.config.js .
-COPY postcss.config.js .
-COPY tailwind.config.js .
+# Copy only the standalone server, static assets and required files
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
 
-# Development
+# If your app reads MDX files at runtime, include them; otherwise omit
+COPY --from=builder /app/articles ./articles
+
 EXPOSE 3000
-CMD npm run dev
+CMD ["node", "server.js"]
 
-# Build
-# RUN npm run build
-# EXPOSE 3000
-# CMD npm start
+# --- Dev stage: hot-reload development server ---
+FROM deps AS dev
+WORKDIR /app
+COPY . .
+EXPOSE 3000
+CMD ["pnpm", "dev"]
