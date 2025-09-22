@@ -27,7 +27,7 @@ export const personal = {
   },
 
   assets: {
-    avatar: '/images/profile.jpg',
+    avatar: '/images/profile.png',
     ogImage: 'https://mateonunez.co/card.png',
     favicons: {
       ico: '/favicon.ico',
