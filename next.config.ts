@@ -9,12 +9,12 @@ const contentSecurityPolicy = `
   default-src 'self' https://*.googletagmanager.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.vercel-insights.com https://vercel.live https://mateonunez.co/;
   base-uri 'self';
   block-all-mixed-content;
-  connect-src 'self' https://*.googletagmanager.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.vercel-insights.com https://vercel.live https://mateonunez.co/;
+  connect-src 'self' https://*.googletagmanager.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.vercel-insights.com https://vercel.live https://mateonunez.co/ https://*.doubleclick.net;
   font-src 'self' https://fonts.gstatic.com https://*.vercel.com https://vercel.live;
   frame-ancestors 'self';
   img-src 'self' data: https://i.scdn.co https://avatars.githubusercontent.com https://*.googletagmanager.com https://*.google-analytics.com https://*.vercel.com https://*.vercel-insights.com https://vercel.live https://*.google.com https://*.google.it https://*.githubassets.com https://*.githubusercontent.com https://*.github.com https://*.gstatic.com;
   object-src 'none';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.googletagmanager.com https://*.google-analytics.com https://*.vercel-insights.com https://vercel.live https://*.vercel-scripts.com;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.googletagmanager.com https://*.google-analytics.com https://*.vercel-insights.com https://vercel.live https://*.vercel-scripts.com https://*.doubleclick.net;
   script-src-attr 'none';
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com
 `;
@@ -54,13 +54,18 @@ const securityHeaders: SecurityHeader[] = [
 const nextConfig: NextConfig = {
   transpilePackages: ['next-mdx-remote'],
   reactStrictMode: true,
+  compress: true,
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   experimental: {
     mdxRs: true,
+    inlineCss: true,
+    optimizePackageImports: ['lucide-react', 'date-fns', 'framer-motion'],
+    reactCompiler: true,
   },
   output: 'standalone',
   images: {
     formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 86400,
     remotePatterns: [
       {
         protocol: 'https',
@@ -79,7 +84,6 @@ const nextConfig: NextConfig = {
         hostname: '**.spotifycdn.com',
       },
     ],
-    minimumCacheTTL: 60,
   },
   trailingSlash: true,
 

@@ -1,8 +1,9 @@
 'use client';
 
-import { GTMProvider } from '@elgorditosalsero/react-gtm-hook';
 import { Analytics } from '@vercel/analytics/react';
+import Script from 'next/script';
 import type { JSX, ReactNode } from 'react';
+import { useId } from 'react';
 
 interface AnalyticsWrapperProps {
   children: ReactNode;
@@ -11,15 +12,30 @@ interface AnalyticsWrapperProps {
 const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
 
 export function AnalyticsProvider({ children }: AnalyticsWrapperProps): JSX.Element {
-  if (!gtmId) {
-    return <>{children}</>;
-  }
-
-  const gtmParams = { id: gtmId };
-
+  const gtmScriptId = useId();
   return (
     <>
-      <GTMProvider state={gtmParams}>{children}</GTMProvider>
+      {gtmId && (
+        <>
+          <Script id={`gtm-init-${gtmScriptId}`} strategy="afterInteractive">
+            {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${gtmId}');`}
+          </Script>
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+              height="0"
+              width="0"
+              title="Google Tag Manager"
+              style={{ display: 'none', visibility: 'hidden' }}
+            />
+          </noscript>
+        </>
+      )}
+      {children}
       <Analytics />
     </>
   );

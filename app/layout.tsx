@@ -42,6 +42,10 @@ export default function RootLayout({
 }>): React.JSX.Element {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://i.scdn.co" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://avatars.githubusercontent.com" crossOrigin="anonymous" />
+      </head>
       <body className={cn(inter.variable, hankenGrotesk.variable, prompt.variable, 'font-sans', 'antialiased')}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <AnalyticsProvider>
