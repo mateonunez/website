@@ -23,7 +23,7 @@ export function useCommandRunner({ dataSources, tools }: CommandRunnerOptions) {
       if (!command) {
         return {
           success: false,
-          output: 'Unknown command. Type "help" for available commands.',
+          output: 'Unknown command. Type "help".',
         };
       }
 
@@ -34,7 +34,7 @@ export function useCommandRunner({ dataSources, tools }: CommandRunnerOptions) {
         console.error('Error executing command:', error);
         return {
           success: false,
-          output: 'An error occurred while executing the command.',
+          output: 'Command error.',
         };
       }
     },

@@ -2,13 +2,13 @@ import type { Command, CommandGroup } from '../types/commands';
 
 export const formatCommand = (cmd: Command): string => {
   const nameAndAliases = cmd.aliases?.length ? `${cmd.name} (${cmd.aliases.join(', ')})` : cmd.name;
-  const paddedName = nameAndAliases.padEnd(25);
-  return `  ${paddedName} ${cmd.description}`;
+  const paddedName = nameAndAliases.padEnd(20);
+  return `  ${paddedName} - ${cmd.description}`;
 };
 
 export const formatCommandGroup = (group: CommandGroup): string => {
   const commands = group.commands.map(formatCommand).join('\n');
-  return `\n=== ${group.name} Commands ===\n${commands}`;
+  return `\n${group.name}\n${commands}`;
 };
 
 export const formatDuration = (ms: number): string => {

@@ -7,6 +7,6 @@ export const DEFAULT_PROMPT = personal.terminal.prompt;
 
 export const ABOUT_MESSAGES = personal.terminal.about as readonly string[];
 
-export const DEFAULT_MESSAGES = ['Welcome to my terminal.', '', "Type 'help' to see available commands.", ''] as const;
+export const DEFAULT_MESSAGES = ['Welcome.', "Type 'help' for commands."] as const;
 
 export const getTypingDuration = (): number => 80 + 80 * (Math.random() - 0.5);
