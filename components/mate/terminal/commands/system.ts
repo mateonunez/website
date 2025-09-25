@@ -4,20 +4,16 @@ import { formatCommandGroup } from '../utils/formatting';
 
 export const helpCommand: Command = {
   name: 'help',
-  description: 'Display available commands and usage information',
+  description: 'List commands',
   handler: () => {
-    return [
-      'Here are the available commands:\n',
-      ...registry.groups.map(formatCommandGroup),
-      '\n\n💡 Tip: Type a command and press Enter to execute it, or press Tab to autocomplete.',
-    ].join('\n');
+    return ['Commands (Tab autocompletes):', ...registry.groups.map(formatCommandGroup)].join('\n');
   },
   aliases: ['h', '?', 'commands', 'info'],
 };
 
 export const clearCommand: Command = {
   name: 'clear',
-  description: 'Clear the terminal output screen',
+  description: 'Clear screen',
   handler: ({ tools }) => {
     tools.clearLines();
     return '';

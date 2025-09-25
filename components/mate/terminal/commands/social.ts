@@ -3,13 +3,13 @@ import { formatDuration } from '../utils/formatting';
 
 export const githubCommunityCommand: Command = {
   name: 'github-community',
-  description: 'View my GitHub community stats and sponsors',
+  description: 'GitHub sponsors & followers',
   handler: ({ dataSources }) => {
     const { data: githubData } = dataSources.github;
-    if (!githubData) return 'No GitHub data available at the moment.';
+    if (!githubData) return 'No GitHub data.';
 
     const { profile } = githubData;
-    if (!profile) return 'No GitHub profile data available at the moment.';
+    if (!profile) return 'No GitHub profile data.';
 
     const { sponsors, followers, url } = profile;
     const sponsorCount = sponsors.length;
@@ -20,14 +20,11 @@ export const githubCommunityCommand: Command = {
       .join('\n');
 
     return [
-      '─────────────────────────────',
-      '🌟 GitHub Community Stats',
-      '─────────────────────────────',
-      `Sponsors (${sponsorCount}):`,
+      'GitHub Community',
+      `Sponsors (${sponsorCount})`,
       sponsorsList,
       `Followers: ${followerCount}+`,
-      `View more at: ${url}`,
-      '─────────────────────────────',
+      `More: ${url}`,
     ].join('\n');
   },
   aliases: ['community', 'gh', 'github', 'sponsors'],
@@ -35,27 +32,27 @@ export const githubCommunityCommand: Command = {
 
 export const nowPlayingCommand: Command = {
   name: 'now-playing',
-  description: 'Show currently playing music on Spotify',
+  description: 'Current track',
   handler: ({ dataSources }) => {
     const { data: spotifyData } = dataSources.spotify;
-    if (!spotifyData || !spotifyData.currentlyPlaying) return 'No music data available at the moment.';
+    if (!spotifyData || !spotifyData.currentlyPlaying) return 'No current track.';
 
     const nowPlaying = spotifyData.currentlyPlaying;
     if (nowPlaying.isPlaying) {
-      return `🎧 Now playing: "${nowPlaying.title}" by ${nowPlaying.artist} from "${nowPlaying.album}"\nListen here: ${nowPlaying.url}`;
+      return `🎧 ${nowPlaying.title} — ${nowPlaying.artist} (${nowPlaying.album})\n${nowPlaying.url}`;
     }
 
-    return '🔇 Not currently playing any music.';
+    return '🔇 Nothing playing.';
   },
   aliases: ['music', 'spotify', 'np', 'playing'],
 };
 
 export const recentTracksCommand: Command = {
   name: 'recent-tracks',
-  description: 'Show my recently played Spotify tracks',
+  description: 'Last 5 tracks',
   handler: ({ dataSources }) => {
     const { data: spotifyData } = dataSources.spotify;
-    if (!spotifyData?.recentlyPlayed) return 'No recently played music data available.';
+    if (!spotifyData?.recentlyPlayed) return 'No recent tracks.';
 
     const tracks = spotifyData.recentlyPlayed.slice(0, 5);
     const formattedTracks = tracks.map((item) => {
@@ -64,18 +61,18 @@ export const recentTracksCommand: Command = {
       return `🎵 ${item.title} - 👤 ${item.artist} - ⏱️ ${duration} - 🕒 ${playedAt} - 🔗 ${item.url}`;
     });
 
-    return ['=== Recently Played Tracks ===', ...formattedTracks, 'ℹ️ Showing last 5 tracks'].join('\n');
+    return ['Recent Tracks', ...formattedTracks].join('\n');
   },
   aliases: ['recently-played', 'rp', 'history'],
 };
 
 export const spotifyTopCommand: Command = {
   name: 'spotify-top',
-  description: 'Show my top Spotify tracks and artists',
+  description: 'Top tracks & artists',
   handler: ({ dataSources }) => {
     const { data: spotifyData } = dataSources.spotify;
     if (!spotifyData || !spotifyData.topTracks || !spotifyData.topArtists) {
-      return 'No Spotify top data available at the moment.';
+      return 'No top data.';
     }
 
     const { topTracks, topArtists } = spotifyData;
@@ -84,55 +81,47 @@ export const spotifyTopCommand: Command = {
     const tracksSection =
       topTracks.length > 0
         ? [
-            '🎵 Top Tracks:',
+            '🎵 Tracks:',
             ...topTracks
               .slice(0, 5)
               .map(
                 (track, index) =>
-                  `  ${index + 1}. ${track.title} - ${track.artist}${track.url ? ` - 🔗 ${track.url}` : ''}`,
+                  `  ${index + 1}. ${track.title} — ${track.artist}${track.url ? ` - ${track.url}` : ''}`,
               ),
           ]
-        : ['No top tracks data available.'];
+        : ['No tracks.'];
 
     // Format top artists
     const artistsSection =
       topArtists.length > 0
         ? [
-            '👤 Top Artists:',
+            '👤 Artists:',
             ...topArtists
               .slice(0, 5)
               .map(
                 (artist, index) =>
-                  `  ${index + 1}. ${artist.name}${artist.genres ? ` (${artist.genres.slice(0, 2).join(', ')})` : ''}${artist.url ? ` - 🔗 ${artist.url}` : ''}`,
+                  `  ${index + 1}. ${artist.name}${artist.genres ? ` (${artist.genres.slice(0, 2).join(', ')})` : ''}${artist.url ? ` - ${artist.url}` : ''}`,
               ),
           ]
-        : ['No top artists data available.'];
+        : ['No artists.'];
 
-    return [
-      '─────────────────────────────',
-      '🎸 My Spotify Favorites',
-      '─────────────────────────────',
-      ...tracksSection,
-      '',
-      ...artistsSection,
-      '─────────────────────────────',
-    ].join('\n');
+    return ['Spotify Top', ...tracksSection, '', ...artistsSection].join('\n');
   },
   aliases: ['top-spotify', 'top', 'favorites', 'best'],
 };
 
 export const githubActivityCommand: Command = {
   name: 'github-activity',
-  description: 'View my recent GitHub activity',
+  description: 'Recent GitHub activity',
   handler: ({ dataSources }) => {
     const { data: githubData } = dataSources.github;
-    if (!githubData) return 'No GitHub data available at the moment.';
+    if (!githubData) return 'No GitHub data.';
 
     const { activities } = githubData;
-    if (!activities) return 'No GitHub activity data available at the moment.';
+    if (!activities) return 'No activity.';
 
     const { activities: activityList } = activities;
-    if (!activityList || activityList.length === 0) return 'No recent GitHub activities found.';
+    if (!activityList || activityList.length === 0) return 'No recent activity.';
 
     const recentActivities = activityList.slice(0, 5); // Show only 5 most recent
 
@@ -159,14 +148,7 @@ export const githubActivityCommand: Command = {
       })
       .join('\n');
 
-    return [
-      '─────────────────────────────',
-      '🚀 Recent GitHub Activity',
-      '─────────────────────────────',
-      activitiesList || 'No recent activity',
-      'View more on GitHub',
-      '─────────────────────────────',
-    ].join('\n');
+    return ['GitHub Activity', activitiesList || 'No recent activity'].join('\n');
   },
   aliases: ['last-activity', 'activity', 'recent', 'contributions'],
 };

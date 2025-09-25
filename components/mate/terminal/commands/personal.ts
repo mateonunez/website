@@ -3,7 +3,7 @@ import type { Command } from '../types/commands';
 
 export const profileCommand: Command = {
   name: 'profile',
-  description: 'Display information about me and my background',
+  description: 'Who I am',
   handler: () => [...ABOUT_MESSAGES].join('\n'),
   aliases: ['whoami', 'about', 'bio', 'me', 'info'],
 };
