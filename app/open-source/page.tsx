@@ -2,6 +2,7 @@ import { Code, GitBranch, Github } from 'lucide-react';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
 import { memo, Suspense } from 'react';
+import { Main } from '@/components/mate/main';
 import GitHubCommunityWrapper from '@/components/mate/open-source/github-community.wrapper';
 import LastActivityWrapper from '@/components/mate/open-source/last-activity.wrapper';
 import { RepositoriesShowcaseSkeleton } from '@/components/mate/open-source/repositories-showcase.skeleton';
@@ -85,24 +86,22 @@ export default function OpenSourcePage(): JSX.Element {
   return (
     <>
       <Header />
-      <main className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg">
-        <div className="container mx-auto p-6">
-          <div className="space-y-8">
-            <OpenSourceIntro />
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              <div className="lg:col-span-8 space-y-8">
-                <FeaturedRepositories />
-              </div>
-              <div className="lg:col-span-4 space-y-8">
-                <GitHubCommunity />
-              </div>
-              <div className="lg:col-span-12 space-y-8">
-                <GitHubActivity />
-              </div>
+      <Main>
+        <div className="space-y-8">
+          <OpenSourceIntro />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div className="lg:col-span-8 space-y-8">
+              <FeaturedRepositories />
+            </div>
+            <div className="lg:col-span-4 space-y-8">
+              <GitHubCommunity />
+            </div>
+            <div className="lg:col-span-12 space-y-8">
+              <GitHubActivity />
             </div>
           </div>
         </div>
-      </main>
+      </Main>
     </>
   );
 }

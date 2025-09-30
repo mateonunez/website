@@ -3,6 +3,7 @@ import type { JSX } from 'react';
 import { memo, Suspense } from 'react';
 import { ArticlePreviewSkeleton } from '@/components/mate/article-preview.skeleton';
 import { Articles } from '@/components/mate/articles';
+import { Main } from '@/components/mate/main';
 import { PageHeader } from '@/components/mate/page-header';
 import meta from '@/lib/config/metadata';
 
@@ -45,11 +46,9 @@ export default function BlogPage(): JSX.Element {
   return (
     <>
       <Header />
-      <main className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg">
-        <div className="container mx-auto p-6">
-          <ArticlesContent />
-        </div>
-      </main>
+      <Main>
+        <ArticlesContent />
+      </Main>
     </>
   );
 }

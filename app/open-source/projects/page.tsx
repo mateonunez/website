@@ -2,6 +2,7 @@ import { Code } from 'lucide-react';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
 import { memo, Suspense } from 'react';
+import { Main } from '@/components/mate/main';
 import { RepositoriesShowcaseSkeleton } from '@/components/mate/open-source/repositories-showcase.skeleton';
 import RepositoriesShowcaseWrapper from '@/components/mate/open-source/repositories-showcase.wrapper';
 import { PageHeader } from '@/components/mate/page-header';
@@ -47,17 +48,15 @@ export default function ProjectsPage(): JSX.Element {
   return (
     <>
       <Header />
-      <main className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg">
-        <div className="container mx-auto p-6">
-          <div className="space-y-8">
-            <div className="grid grid-cols-1 gap-6">
-              <div className="space-y-8">
-                <AllRepositories />
-              </div>
+      <Main>
+        <div className="space-y-8">
+          <div className="grid grid-cols-1 gap-6">
+            <div className="space-y-8">
+              <AllRepositories />
             </div>
           </div>
         </div>
-      </main>
+      </Main>
     </>
   );
 }

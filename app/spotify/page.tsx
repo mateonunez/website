@@ -2,6 +2,7 @@ import { Loader2, Music } from 'lucide-react';
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
 import { memo, Suspense } from 'react';
+import { Main } from '@/components/mate/main';
 import { PageHeader } from '@/components/mate/page-header';
 import { PlaylistsCarousel } from '@/components/mate/spotify/playlists-carousel';
 import { SpotifyProfileCard } from '@/components/mate/spotify/profile-card';
@@ -77,17 +78,15 @@ export default function SpotifyPage(): JSX.Element {
   return (
     <>
       <Header />
-      <main className="flex-1 overflow-x-hidden overflow-y-auto mx-auto lg:max-w-screen-lg">
-        <div className="container mx-auto p-6">
-          <div className="space-y-8">
-            <SpotifyProfileCard />
-            <CurrentlyListening />
-            <PlaylistsCarousel />
-            <TopItems />
-            <RecentlyPlayed />
-          </div>
+      <Main className="overflow-x-hidden overflow-y-auto">
+        <div className="space-y-8">
+          <SpotifyProfileCard />
+          <CurrentlyListening />
+          <PlaylistsCarousel />
+          <TopItems />
+          <RecentlyPlayed />
         </div>
-      </main>
+      </Main>
     </>
   );
 }

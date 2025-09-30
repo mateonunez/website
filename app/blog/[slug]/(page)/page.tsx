@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type { JSX } from 'react';
 import { Suspense } from 'react';
 import { ArticleLayout } from '@/components/mate/article-layout';
+import { Main } from '@/components/mate/main';
 import { getArticle, getRelatedArticles } from '@/lib/articles/parser';
 import config from '@/lib/config';
 import meta from '@/lib/config/metadata';
@@ -55,19 +56,17 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   return (
     <Suspense
       fallback={
-        <main className="flex-1 overflow-auto mx-auto lg:max-w-screen-lg">
-          <div className="container mx-auto p-6">
-            <div className="animate-pulse space-y-4">
-              <div className="h-8 bg-gray-200 rounded w-3/4" />
-              <div className="h-4 bg-gray-200 rounded w-1/4" />
-              <div className="space-y-3">
-                <div className="h-4 bg-gray-200 rounded" />
-                <div className="h-4 bg-gray-200 rounded" />
-                <div className="h-4 bg-gray-200 rounded w-5/6" />
-              </div>
+        <Main>
+          <div className="animate-pulse space-y-4">
+            <div className="h-8 bg-gray-200 rounded w-3/4" />
+            <div className="h-4 bg-gray-200 rounded w-1/4" />
+            <div className="space-y-3">
+              <div className="h-4 bg-gray-200 rounded" />
+              <div className="h-4 bg-gray-200 rounded" />
+              <div className="h-4 bg-gray-200 rounded w-5/6" />
             </div>
           </div>
-        </main>
+        </Main>
       }
     >
       {/** biome-ignore lint/correctness/useUniqueElementIds: This is a static page and the ID is unique. */}
