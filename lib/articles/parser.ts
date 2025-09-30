@@ -2,7 +2,6 @@ import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import readingTime from 'reading-time';
-import rehypePrism from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 import mdxComponents from '@/components/mdx';
@@ -86,7 +85,7 @@ export async function compile(articleRaw: string) {
       parseFrontmatter: true,
       mdxOptions: {
         remarkPlugins: [remarkGfm],
-        rehypePlugins: [[rehypePrism, { showLineNumbers: true }], rehypeSlug],
+        rehypePlugins: [[rehypeSlug]],
       },
     },
   });

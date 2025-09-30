@@ -152,7 +152,16 @@ class SpotifyClient {
       ...requestInit,
     });
 
-    const data = (await response.json()) as T;
+    if (response.status === 204) {
+      throw new SpotifyError('No content', 204);
+    }
+
+    const text = await response.text();
+    if (!text) {
+      throw new SpotifyError('Empty response', response.status);
+    }
+
+    const data = JSON.parse(text) as T;
 
     if (!skipCache) {
       this.setCache(cacheKey, data);
