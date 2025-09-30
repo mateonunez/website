@@ -3,10 +3,11 @@ import type { JSX } from 'react';
 import { Suspense } from 'react';
 import { ArticleLayout } from '@/components/mate/article-layout';
 import { Main } from '@/components/mate/main';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { getArticle, getRelatedArticles } from '@/lib/articles/parser';
 import config from '@/lib/config';
 import meta from '@/lib/config/metadata';
-import { createJSONLD, getBlogPostingSchema } from '@/lib/seo/json-ld';
+import { getBlogPostingSchema } from '@/lib/seo/json-ld';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -69,13 +70,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </Main>
       }
     >
-      {/** biome-ignore lint/correctness/useUniqueElementIds: This is a static page and the ID is unique. */}
-      <script
-        type="application/ld+json"
-        id="blog-posting-schema"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: This is a trusted source.
-        dangerouslySetInnerHTML={{ __html: createJSONLD(getBlogPostingSchema(frontmatter)) }}
-      />
+      <JsonLdScript data={getBlogPostingSchema(frontmatter)} />
       <ArticleLayout
         title={frontmatter.title}
         date={frontmatter.date}

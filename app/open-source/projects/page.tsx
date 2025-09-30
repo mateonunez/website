@@ -6,6 +6,7 @@ import { Main } from '@/components/mate/main';
 import { RepositoriesShowcaseSkeleton } from '@/components/mate/open-source/repositories-showcase.skeleton';
 import RepositoriesShowcaseWrapper from '@/components/mate/open-source/repositories-showcase.wrapper';
 import { PageHeader } from '@/components/mate/page-header';
+import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema';
 import meta from '@/lib/config/metadata';
 
 export const metadata: Metadata = {
@@ -47,6 +48,12 @@ const AllRepositories = memo(() => (
 export default function ProjectsPage(): JSX.Element {
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: 'Open Source', href: '/open-source' },
+          { name: 'Projects', href: '/open-source/projects' },
+        ]}
+      />
       <Header />
       <Main>
         <div className="space-y-8">
