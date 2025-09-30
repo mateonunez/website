@@ -8,6 +8,7 @@ import LastActivityWrapper from '@/components/mate/open-source/last-activity.wra
 import { RepositoriesShowcaseSkeleton } from '@/components/mate/open-source/repositories-showcase.skeleton';
 import RepositoriesShowcaseWrapper from '@/components/mate/open-source/repositories-showcase.wrapper';
 import { PageHeader } from '@/components/mate/page-header';
+import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import meta from '@/lib/config/metadata';
@@ -85,6 +86,7 @@ const GitHubCommunity = memo(() => (
 export default function OpenSourcePage(): JSX.Element {
   return (
     <>
+      <BreadcrumbSchema items={[{ name: 'Open Source', href: '/open-source' }]} />
       <Header />
       <Main>
         <div className="space-y-8">

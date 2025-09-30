@@ -10,6 +10,7 @@ import { RecentlyPlayed } from '@/components/mate/spotify/recently-played';
 import { SpotifyPlayer } from '@/components/mate/spotify/spotify-player';
 import { TopArtists } from '@/components/mate/spotify/top-artists';
 import { TopTracks } from '@/components/mate/spotify/top-tracks';
+import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema';
 import { Card, CardContent } from '@/components/ui/card';
 import meta from '@/lib/config/metadata';
 
@@ -77,6 +78,7 @@ const CurrentlyListening = memo(() => (
 export default function SpotifyPage(): JSX.Element {
   return (
     <>
+      <BreadcrumbSchema items={[{ name: 'Spotify', href: '/spotify' }]} />
       <Header />
       <Main className="overflow-x-hidden overflow-y-auto">
         <div className="space-y-8">

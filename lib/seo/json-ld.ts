@@ -3,8 +3,12 @@ import config from '@/lib/config';
 import personal from '@/lib/config/personal';
 import type { ArticleFrontmatter } from '@/types/article';
 
+/**
+ * @deprecated Use the JsonLdScript component instead for better type safety and React integration.
+ * This function is kept for backward compatibility with existing implementations.
+ */
 export function createJSONLD<T extends Thing>(schema: WithContext<T>): string {
-  return JSON.stringify(schema, null, 2);
+  return JSON.stringify(schema);
 }
 
 export function getBlogPostingSchema(frontmatter: ArticleFrontmatter): WithContext<BlogPosting> {

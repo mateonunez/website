@@ -8,6 +8,7 @@ import PlayerWrapper from '@/components/mate/spotify/player.wrapper';
 import { PlaylistsCarousel } from '@/components/mate/spotify/playlists-carousel';
 import RecentlyPlayedWrapper from '@/components/mate/spotify/recently-played.wrapper';
 import TerminalWrapper from '@/components/mate/terminal/terminal.wrapper';
+import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema';
 import { Separator } from '@/components/ui/separator';
 import { Toaster } from '@/components/ui/sonner';
 
@@ -48,6 +49,7 @@ const BottomContent = memo(() => (
 export default async function HomePage(): Promise<JSX.Element> {
   return (
     <>
+      <BreadcrumbSchema items={[{ name: 'Home', href: '/' }]} />
       <div className="flex-none">
         <PlayerWrapper />
         <NameHeadingWrapper />

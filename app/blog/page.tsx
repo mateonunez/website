@@ -5,6 +5,7 @@ import { ArticlePreviewSkeleton } from '@/components/mate/article-preview.skelet
 import { Articles } from '@/components/mate/articles';
 import { Main } from '@/components/mate/main';
 import { PageHeader } from '@/components/mate/page-header';
+import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema';
 import meta from '@/lib/config/metadata';
 
 export const metadata: Metadata = {
@@ -45,6 +46,7 @@ const ArticlesContent = memo(() => (
 export default function BlogPage(): JSX.Element {
   return (
     <>
+      <BreadcrumbSchema items={[{ name: 'Blog', href: '/blog' }]} />
       <Header />
       <Main>
         <ArticlesContent />
