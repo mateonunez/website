@@ -1,9 +1,13 @@
 import type { Options as MDXOptions } from '@mdx-js/loader';
+import bundleAnalyzer from '@next/bundle-analyzer';
 import createMDX from '@next/mdx';
 import type { NextConfig } from 'next';
-import rehypePrism from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 const contentSecurityPolicy = `
   default-src 'self' https://*.googletagmanager.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.vercel-insights.com https://vercel.live https://mateonunez.co/;
@@ -60,7 +64,6 @@ const nextConfig: NextConfig = {
     mdxRs: true,
     inlineCss: true,
     optimizePackageImports: ['lucide-react', 'date-fns', 'framer-motion'],
-    reactCompiler: true,
   },
   output: 'standalone',
   images: {
@@ -93,6 +96,33 @@ const nextConfig: NextConfig = {
         source: '/(.*)',
         headers: securityHeaders,
       },
+      {
+        source: '/images/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/fonts/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
     ];
   },
   eslint: {
@@ -102,16 +132,7 @@ const nextConfig: NextConfig = {
 
 const mdxOptions: MDXOptions = {
   remarkPlugins: [remarkGfm],
-  rehypePlugins: [
-    [
-      rehypePrism,
-      {
-        showLineNumbers: true,
-        ignoreMissing: true,
-      },
-    ],
-    rehypeSlug,
-  ],
+  rehypePlugins: [rehypeSlug],
   format: 'mdx',
 };
 
@@ -120,4 +141,4 @@ const withMDX = createMDX({
   options: mdxOptions,
 });
 
-export default withMDX(nextConfig);
+export default withBundleAnalyzer(withMDX(nextConfig));
