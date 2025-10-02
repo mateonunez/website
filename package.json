@@ -67,7 +67,7 @@
     "schema-dts": "^1.1.5",
     "tailwindcss": "^4.1.13",
     "tailwindcss-animate": "^1.0.7",
-    "tsx": "^4.20.5",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   },
   "author": "mateonunez",
