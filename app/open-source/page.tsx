@@ -14,9 +14,18 @@ import { Separator } from '@/components/ui/separator';
 import meta from '@/lib/config/metadata';
 
 export const metadata: Metadata = {
-  title: 'Open Source',
-  description: `Open source projects, contributions and activity by ${meta.author.name}. ${meta.description}`,
-  keywords: [...meta.keywords, 'open source', 'github', 'projects', 'contributions'],
+  title: 'Open Source Projects & Contributions',
+  description: `What open source projects does ${meta.author.name} work on? Explore TypeScript/JavaScript libraries, Node.js tools, AI projects, and community contributions. Find featured repositories, recent activity, and ways to collaborate.`,
+  keywords: [
+    ...meta.keywords,
+    'open source',
+    'github',
+    'projects',
+    'contributions',
+    'npm packages',
+    'typescript libraries',
+    'node.js tools',
+  ],
 };
 
 const Header = memo(() => (

@@ -9,9 +9,18 @@ import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema';
 import meta from '@/lib/config/metadata';
 
 export const metadata: Metadata = {
-  title: 'Blog',
-  description: `Articles written with ❤️ by ${meta.author.name} and the Community. ${meta.description}`,
-  keywords: [...meta.keywords, 'blog', 'articles'],
+  title: 'Blog - Technical Articles & Tutorials',
+  description: `Where can I find ${meta.author.name}'s blog posts? Read technical articles about Node.js testing, TypeScript, Next.js, AI engineering, and modern web development. Learn best practices, migration guides, and developer insights.`,
+  keywords: [
+    ...meta.keywords,
+    'blog',
+    'articles',
+    'tutorials',
+    'node test runner',
+    'testing',
+    'technical writing',
+    'how to',
+  ],
 };
 
 const Header = memo(() => (

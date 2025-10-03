@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { ArticleSeriesNav } from '@/components/mate/article-series-nav';
 import { Main } from '@/components/mate/main';
 import { MDXLayout } from '@/components/mdx/layout';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import type { ArticleSeries } from '@/lib/config/article-series';
 import type { Article } from '@/types/article';
 
 interface ArticleLayoutProps {
@@ -17,13 +19,33 @@ interface ArticleLayoutProps {
     image: string;
   };
   relatedArticles?: Article[];
+  series?: {
+    seriesData: ArticleSeries;
+    currentOrder: number;
+  };
   children: ReactNode;
 }
 
-export function ArticleLayout({ date, readingTime, tags, author, relatedArticles, children }: ArticleLayoutProps) {
+export function ArticleLayout({
+  date,
+  readingTime,
+  tags,
+  author,
+  relatedArticles,
+  series,
+  children,
+}: ArticleLayoutProps) {
   return (
     <Main>
       <div className="space-y-6 sm:space-y-8">
+        {series && (
+          <ArticleSeriesNav
+            seriesName={series.seriesData.name}
+            currentOrder={series.currentOrder}
+            articles={series.seriesData.articles}
+          />
+        )}
+
         {(date || readingTime || tags) && (
           <div className="flex flex-col gap-4">
             {(date || readingTime) && (
