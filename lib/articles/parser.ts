@@ -56,7 +56,7 @@ export async function getArticle({ slug }: { slug: string }): Promise<Article> {
   const defaultAuthor = {
     name: personal.name,
     url: `https://github.com/${personal.social.github}`,
-    image: `https://github.com/${personal.social.github}.png`,
+    image: new URL(personal.assets.avatar, personal.website).toString(),
   };
 
   return {
