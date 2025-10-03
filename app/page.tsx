@@ -9,8 +9,10 @@ import { PlaylistsCarousel } from '@/components/mate/spotify/playlists-carousel'
 import RecentlyPlayedWrapper from '@/components/mate/spotify/recently-played.wrapper';
 import TerminalWrapper from '@/components/mate/terminal/terminal.wrapper';
 import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema';
+import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Separator } from '@/components/ui/separator';
 import { Toaster } from '@/components/ui/sonner';
+import { getProfilePageSchema } from '@/lib/seo/json-ld';
 
 const SectionTitle = memo(({ title, fontClass = '' }: { title: string; fontClass?: string }) => (
   <>
@@ -50,6 +52,7 @@ export default async function HomePage(): Promise<JSX.Element> {
   return (
     <>
       <BreadcrumbSchema items={[{ name: 'Home', href: '/' }]} />
+      <JsonLdScript data={getProfilePageSchema()} />
       <div className="flex-none">
         <PlayerWrapper />
         <NameHeadingWrapper />

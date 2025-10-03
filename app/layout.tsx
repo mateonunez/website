@@ -12,7 +12,7 @@ import { UIProvider } from '@/components/providers/ui-provider';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import meta from '@/lib/config/metadata';
-import { getPersonSchema, getWebSiteSchema } from '@/lib/seo/json-ld';
+import { getOrganizationSchema, getPersonSchema, getWebSiteSchema } from '@/lib/seo/json-ld';
 import { cn } from '@/lib/utils';
 
 const inter = Inter({
@@ -80,6 +80,7 @@ export default function RootLayout({
           </AnalyticsProvider>
           <JsonLdScript data={getPersonSchema()} />
           <JsonLdScript data={getWebSiteSchema()} />
+          <JsonLdScript data={getOrganizationSchema()} />
         </ThemeProvider>
       </body>
     </html>

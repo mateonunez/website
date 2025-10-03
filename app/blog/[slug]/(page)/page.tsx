@@ -6,6 +6,7 @@ import { Main } from '@/components/mate/main';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { getArticle, getRelatedArticles } from '@/lib/articles/parser';
 import config from '@/lib/config';
+import { getArticleSeries, getSeriesOrder } from '@/lib/config/article-series';
 import meta from '@/lib/config/metadata';
 import { getBlogPostingSchema } from '@/lib/seo/json-ld';
 
@@ -54,6 +55,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const { content, frontmatter } = await getArticle({ slug });
   const relatedArticles = await getRelatedArticles(frontmatter);
 
+  const seriesData = getArticleSeries(slug);
+  const seriesOrder = getSeriesOrder(slug);
+  const series = seriesData && seriesOrder ? { seriesData, currentOrder: seriesOrder } : undefined;
+
   return (
     <Suspense
       fallback={
@@ -78,6 +83,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         tags={frontmatter.tags}
         author={frontmatter.author}
         relatedArticles={relatedArticles}
+        series={series}
       >
         {content}
       </ArticleLayout>

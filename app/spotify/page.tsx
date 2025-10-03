@@ -15,9 +15,19 @@ import { Card, CardContent } from '@/components/ui/card';
 import meta from '@/lib/config/metadata';
 
 export const metadata: Metadata = {
-  title: 'Spotify Profile',
-  description: `Discover ${meta.author.name}'s music taste. Check out what I'm currently listening to and my top artists and tracks. ${meta.description}`,
-  keywords: [...meta.keywords, 'spotify', 'music', 'playlist', 'artists', 'tracks'],
+  title: 'Spotify Profile - Music & Playlists',
+  description: `What music does ${meta.author.name} listen to while coding? Discover curated playlists for developers, current listening activity, top artists and tracks. Code needs a soundtrack - find yours here.`,
+  keywords: [
+    ...meta.keywords,
+    'spotify',
+    'music',
+    'playlist',
+    'artists',
+    'tracks',
+    'coding music',
+    'developer playlists',
+    'programming soundtrack',
+  ],
 };
 
 const Header = memo(() => (

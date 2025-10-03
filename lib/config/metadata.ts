@@ -12,7 +12,7 @@ const author = {
 
 const siteName = personal.site.name;
 const defaultTitle = siteName;
-const defaultDescription = personal.site.description;
+const defaultDescription = `Who is ${personal.name}? A ${personal.jobTitle} at ${personal.company}, building web & AI systems with TypeScript/Next.js. Discover open source projects, technical blog posts, and a digital playground featuring an interactive terminal, music integration, and real-time GitHub activity. ${personal.location.display}.`;
 
 const assets = {
   ogImage: personal.assets.ogImage,

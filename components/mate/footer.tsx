@@ -38,7 +38,7 @@ export function Footer(): JSX.Element {
                   className="h-9 w-9 rounded-md hover:bg-muted"
                   asChild
                 >
-                  <Link href={link.href} target="_blank" rel="noreferrer" aria-label={`Visit ${link.name}`}>
+                  <Link href={link.href} target="_blank" rel="me noreferrer" aria-label={`Visit ${link.name}`}>
                     <Icon className="h-4 w-4" />
                     <span className="sr-only">{link.name}</span>
                   </Link>
