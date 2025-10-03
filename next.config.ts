@@ -60,11 +60,11 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-  reactCompiler: true,
   experimental: {
     mdxRs: true,
     inlineCss: true,
     optimizePackageImports: ['lucide-react', 'date-fns', 'framer-motion'],
+    reactCompiler: true,
   },
   output: 'standalone',
   images: {
