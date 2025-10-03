@@ -56,7 +56,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const relatedArticles = await getRelatedArticles(frontmatter);
 
   const seriesData = getArticleSeries(slug);
-  const seriesOrder = getSeriesOrder(slug);
+  const seriesOrder = getSeriesOrder(slug, seriesData);
   const series = seriesData && seriesOrder ? { seriesData, currentOrder: seriesOrder } : undefined;
 
   return (

@@ -36,10 +36,10 @@ export function getArticleSeries(slug: string): ArticleSeries | null {
   return null;
 }
 
-export function getSeriesOrder(slug: string): number | null {
-  const series = getArticleSeries(slug);
-  if (!series) return null;
+export function getSeriesOrder(slug: string, series?: ArticleSeries | null): number | null {
+  const targetSeries = series ?? getArticleSeries(slug);
+  if (!targetSeries) return null;
 
-  const article = series.articles.find((article) => article.slug === slug);
+  const article = targetSeries.articles.find((article) => article.slug === slug);
   return article?.order ?? null;
 }
