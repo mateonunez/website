@@ -16,7 +16,7 @@ import { getProfilePageSchema } from '@/lib/seo/json-ld';
 
 const SectionTitle = memo(({ title, fontClass = '' }: { title: string; fontClass?: string }) => (
   <>
-    <h2 className={`text-xl font-semibold ${fontClass}`}>{title}</h2>
+    <h1 className={`text-xl font-semibold ${fontClass}`}>{title}</h1>
     <Separator className="my-4" />
   </>
 ));
