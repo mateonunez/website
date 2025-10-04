@@ -1,11 +1,13 @@
-import { CalendarDays } from 'lucide-react';
+import { ArrowRight, CalendarDays } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
 import { dateForHumans } from '@/lib/helpers/date';
 import type { ArticleFrontmatter } from '@/types/article';
+import { AnimatedItem } from '../ui/animated-container';
 
 type ArticlePreviewProps = Pick<
   ArticleFrontmatter,
@@ -77,6 +79,16 @@ export function ArticlePreview({
             )}
           </div>
         )}
+
+        <AnimatedItem delay={0.3}>
+          <div className="flex justify-center">
+            <Button variant="outline" asChild>
+              <Link href={`/blog/${slug}`}>
+                Read Full Article <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+          </div>
+        </AnimatedItem>
       </CardContent>
     </Card>
   );
