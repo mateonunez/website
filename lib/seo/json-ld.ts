@@ -52,6 +52,11 @@ export function getBlogPostingSchema(frontmatter: ArticleFrontmatter): WithConte
       name: author.name,
       url: author.url,
     },
+    publisher: {
+      '@type': 'Person',
+      name: personal.name,
+      url: personal.website,
+    },
     image: imageUrl,
     keywords: tags.join(', '),
     url,

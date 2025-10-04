@@ -5,15 +5,17 @@ import config from '@/lib/config';
 
 function generateArticlesSitemap(): MetadataRoute.Sitemap {
   const result: MetadataRoute.Sitemap = [];
-  const articleSlugs = fs
-    .readdirSync(path.join(process.cwd(), './articles'))
-    .filter((file) => /\.mdx?$/.test(file))
-    .map((file) => file.replace(/\.mdx?$/, ''));
+  const articlesDir = path.join(process.cwd(), './articles');
+  const articleFiles = fs.readdirSync(articlesDir).filter((file) => /\.mdx?$/.test(file));
 
-  for (const slug of articleSlugs) {
+  for (const file of articleFiles) {
+    const slug = file.replace(/\.mdx?$/, '');
+    const filePath = path.join(articlesDir, file);
+    const stats = fs.statSync(filePath);
+
     result.push({
       url: new URL(`/blog/${slug}`, config.baseUrl).toString(),
-      lastModified: new Date(),
+      lastModified: stats.mtime,
       changeFrequency: 'weekly',
       priority: 0.7,
     });
