@@ -60,7 +60,7 @@
     "@types/js-cookie": "^3.0.6",
     "@types/mdx": "^2.0.13",
     "@types/node": "^24.6.2",
-    "@types/react": "^19.2.0",
+    "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.0",
     "husky": "^9.1.7",
     "postcss": "^8.5.6",
