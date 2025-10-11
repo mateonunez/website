@@ -7,10 +7,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ShareButton } from '@/components/ui/share-button';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useGithub } from '@/hooks/use-github';
 import { formatDate, getTimeAgo } from '@/lib/helpers/date';
 import type { NormalizedGitHubRepository } from '@/types/github';
+import type { ShareableRepository } from '@/types/sharing';
 
 interface RepositoriesShowcaseProps {
   featured?: boolean;
@@ -24,7 +26,7 @@ const RepositoryCard = memo(({ repository }: { repository: NormalizedGitHubRepos
   const timeAgo = getTimeAgo(new Date(repository.pushedAt));
 
   return (
-    <Card className="flex flex-col h-full w-full transition-all duration-300 hover:shadow-md hover:border-amber-500/30 hover:bg-amber-500/5">
+    <Card className="flex flex-col h-full w-full card-hover-lift hover:border-amber-500/30 hover:bg-amber-500/5">
       <CardHeader className="p-3 sm:p-4 pb-2">
         <div className="flex justify-between items-start gap-2">
           <div className="min-w-0 flex-1">
@@ -32,16 +34,38 @@ const RepositoryCard = memo(({ repository }: { repository: NormalizedGitHubRepos
               {repository.name}
             </CardTitle>
           </div>
-          <Button variant="ghost" size="icon" className="h-7 w-7 shrink-0" asChild>
-            <a
-              href={repository.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`View ${repository.name} on GitHub`}
-            >
-              <ExternalLink className="h-3.5 w-3.5" />
-            </a>
-          </Button>
+          <div className="flex items-center gap-1 shrink-0">
+            <ShareButton
+              content={
+                {
+                  type: 'repository',
+                  url: repository.url,
+                  title: repository.name,
+                  description: repository.description || undefined,
+                  tags: repository.language ? [repository.language] : undefined,
+                  stars: repository.stars,
+                  forks: repository.forks,
+                  language: repository.language || undefined,
+                  githubUrl: repository.url,
+                } as ShareableRepository
+              }
+              variant="ghost"
+              size="icon"
+              className="h-7 w-7"
+              showTooltip
+              tooltipText="Share repository"
+            />
+            <Button variant="ghost" size="icon" className="h-7 w-7" asChild>
+              <a
+                href={repository.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View ${repository.name} on GitHub`}
+              >
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </Button>
+          </div>
         </div>
         <div className="min-h-[2.5rem] mt-1">
           {repository.description && (

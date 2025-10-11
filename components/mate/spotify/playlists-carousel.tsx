@@ -5,8 +5,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { ShareButton } from '@/components/ui/share-button';
 import { useSpotifyUserPlaylists } from '@/hooks/use-spotify-user-playlists';
 import personal from '@/lib/config/personal';
+import type { ShareablePlaylist } from '@/types/sharing';
 import { PlaylistsCarouselSkeleton } from './playlists-carousel.skeleton';
 
 type PlaylistsCarouselProps = {
@@ -37,10 +39,10 @@ export function PlaylistsCarousel({ showHeader = true }: PlaylistsCarouselProps)
                 key={pl.id}
                 className="pl-2 md:pl-4 basis-2/3 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
               >
-                <Link href={pl.url} target="_blank" rel="noopener noreferrer">
-                  <Card className="overflow-hidden group border border-border/50 hover:border-amber-500/30 transition-all">
-                    <CardContent className="p-0">
-                      <div className="relative aspect-[3/4] w-full overflow-hidden">
+                <Card className="overflow-hidden group border border-border/50 hover:border-amber-500/30 card-hover-lift">
+                  <CardContent className="p-0">
+                    <div className="relative aspect-[3/4] w-full overflow-hidden">
+                      <Link href={pl.url} target="_blank" rel="noopener noreferrer" className="block h-full w-full">
                         {pl.cover ? (
                           <Image
                             src={pl.cover}
@@ -57,14 +59,43 @@ export function PlaylistsCarousel({ showHeader = true }: PlaylistsCarouselProps)
                           <div className="text-white text-sm font-medium truncate">{pl.name}</div>
                           <div className="text-white/80 text-xs truncate">{pl.owner}</div>
                         </div>
+                      </Link>
+                    </div>
+                    <div className="p-3 flex items-center justify-between text-xs text-muted-foreground">
+                      <span>{pl.tracks} tracks</span>
+                      <div className="flex items-center gap-2">
+                        <ShareButton
+                          content={
+                            {
+                              type: 'playlist',
+                              url: pl.url,
+                              title: pl.name,
+                              description: pl.description,
+                              image: pl.cover || undefined,
+                              owner: pl.owner,
+                              trackCount: pl.tracks,
+                              spotifyUrl: pl.url,
+                            } as ShareablePlaylist
+                          }
+                          variant="ghost"
+                          size="icon"
+                          className="h-7 w-7 hover:text-amber-500"
+                          showTooltip
+                          tooltipText="Share playlist"
+                        />
+                        <a
+                          href={pl.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-amber-500 transition-colors"
+                          aria-label="Open on Spotify"
+                        >
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
                       </div>
-                      <div className="p-3 flex items-center justify-between text-xs text-muted-foreground">
-                        <span>{pl.tracks} tracks</span>
-                        <ExternalLink className="h-3.5 w-3.5" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
+                    </div>
+                  </CardContent>
+                </Card>
               </CarouselItem>
             ))}
           </CarouselContent>

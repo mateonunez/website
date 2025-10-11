@@ -6,6 +6,7 @@ import type {
   Organization,
   Person,
   ProfilePage,
+  SoftwareSourceCode,
   Thing,
   WebSite,
   WithContext,
@@ -219,5 +220,30 @@ export function getFAQPageSchema(faqs: { question: string; answer: string }[]): 
         text: faq.answer,
       },
     })),
+  };
+}
+
+export function getSoftwareSourceCodeSchema(
+  repositoryName: string,
+  repositoryUrl: string,
+  description?: string,
+  programmingLanguage?: string,
+  codeRepository?: string,
+): WithContext<SoftwareSourceCode> {
+  const { website, name } = personal;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareSourceCode',
+    name: repositoryName,
+    description: description || `Open source project by ${name}`,
+    url: repositoryUrl,
+    codeRepository: codeRepository || repositoryUrl,
+    author: {
+      '@type': 'Person',
+      name,
+      '@id': `${website}/#person`,
+    },
+    ...(programmingLanguage && { programmingLanguage }),
   };
 }
