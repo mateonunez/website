@@ -1,14 +1,6 @@
 'use client';
 
-import {
-  ExternalLinkIcon,
-  FacebookIcon,
-  LinkedinIcon,
-  MessageCircleMoreIcon,
-  SendIcon,
-  Share2,
-  XIcon,
-} from 'lucide-react';
+import { FacebookIcon, Link2Icon, LinkedinIcon, MessageCircleMoreIcon, SendIcon, Share2, XIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
 import {
@@ -34,15 +26,6 @@ interface ShareButtonProps {
   children?: ReactNode;
   align?: 'start' | 'center' | 'end';
 }
-
-const platformIcons: Record<string, any> = {
-  twitter: XIcon,
-  linkedin: LinkedinIcon,
-  facebook: FacebookIcon,
-  reddit: ExternalLinkIcon,
-  whatsapp: MessageCircleMoreIcon,
-  telegram: SendIcon,
-};
 
 const platformLabels: Record<string, string> = {
   twitter: 'Share on X',
@@ -103,53 +86,41 @@ export function ShareButton({
         )}
 
         <DropdownMenuItem onClick={() => share('copy')} className="cursor-pointer flex items-center">
-          <span className="mr-2 text-base leading-none shrink-0 flex items-center justify-center w-4">🔗</span>
+          <Link2Icon className="mr-2 h-4 w-4 shrink-0" />
           <span>{platformLabels.copy}</span>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
         <DropdownMenuItem onClick={() => share('twitter')} className="cursor-pointer flex items-center">
-          <span className="mr-2 text-base font-bold leading-none shrink-0 flex items-center justify-center w-4">
-            {platformIcons.twitter}
-          </span>
+          <XIcon className="mr-2 h-4 w-4 shrink-0" />
           <span>{platformLabels.twitter}</span>
         </DropdownMenuItem>
 
         <DropdownMenuItem onClick={() => share('linkedin')} className="cursor-pointer flex items-center">
-          <span className="mr-2 text-base font-bold leading-none shrink-0 flex items-center justify-center w-4">
-            {platformIcons.linkedin}
-          </span>
+          <LinkedinIcon className="mr-2 h-4 w-4 shrink-0" />
           <span>{platformLabels.linkedin}</span>
         </DropdownMenuItem>
 
         <DropdownMenuItem onClick={() => share('facebook')} className="cursor-pointer flex items-center">
-          <span className="mr-2 text-base font-bold leading-none shrink-0 flex items-center justify-center w-4">
-            {platformIcons.facebook}
-          </span>
+          <FacebookIcon className="mr-2 h-4 w-4 shrink-0" />
           <span>{platformLabels.facebook}</span>
         </DropdownMenuItem>
 
         <DropdownMenuItem onClick={() => share('reddit')} className="cursor-pointer flex items-center">
-          <span className="mr-2 text-base leading-none shrink-0 flex items-center justify-center w-4">
-            {platformIcons.reddit}
-          </span>
+          <Share2 className="mr-2 h-4 w-4 shrink-0" />
           <span>{platformLabels.reddit}</span>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
         <DropdownMenuItem onClick={() => share('whatsapp')} className="cursor-pointer flex items-center">
-          <span className="mr-2 text-base leading-none shrink-0 flex items-center justify-center w-4">
-            {platformIcons.whatsapp}
-          </span>
+          <MessageCircleMoreIcon className="mr-2 h-4 w-4 shrink-0" />
           <span>{platformLabels.whatsapp}</span>
         </DropdownMenuItem>
 
         <DropdownMenuItem onClick={() => share('telegram')} className="cursor-pointer flex items-center">
-          <span className="mr-2 text-base leading-none shrink-0 flex items-center justify-center w-4">
-            {platformIcons.telegram}
-          </span>
+          <SendIcon className="mr-2 h-4 w-4 shrink-0" />
           <span>{platformLabels.telegram}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
