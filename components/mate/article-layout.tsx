@@ -6,11 +6,15 @@ import { MDXLayout } from '@/components/mdx/layout';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { ShareButton } from '@/components/ui/share-button';
 import type { ArticleSeries } from '@/lib/config/article-series';
+import { buildCanonicalUrl } from '@/lib/utils/sharing/url-builder';
 import type { Article } from '@/types/article';
+import type { ShareableArticle } from '@/types/sharing';
 
 interface ArticleLayoutProps {
   title: string;
+  slug?: string;
   date?: string;
   readingTime?: number;
   tags?: string[];
@@ -18,6 +22,8 @@ interface ArticleLayoutProps {
     name: string;
     image: string;
   };
+  description?: string;
+  image?: string;
   relatedArticles?: Article[];
   series?: {
     seriesData: ArticleSeries;
@@ -27,10 +33,14 @@ interface ArticleLayoutProps {
 }
 
 export function ArticleLayout({
+  title,
+  slug,
   date,
   readingTime,
   tags,
   author,
+  description,
+  image,
   relatedArticles,
   series,
   children,
@@ -46,25 +56,48 @@ export function ArticleLayout({
           />
         )}
 
-        {(date || readingTime || tags) && (
+        {(date || readingTime || tags || slug) && (
           <div className="flex flex-col gap-4">
-            {(date || readingTime) && (
-              <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                {date && (
-                  <time dateTime={date}>
-                    {new Date(date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </time>
-                )}
-                {date && readingTime && <span aria-hidden="true">•</span>}
-                {readingTime && (
-                  <span>
-                    <span className="sr-only">Estimated reading time:</span>
-                    {readingTime} min read
-                  </span>
+            {(date || readingTime || slug) && (
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                  {date && (
+                    <time dateTime={date}>
+                      {new Date(date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </time>
+                  )}
+                  {date && readingTime && <span aria-hidden="true">•</span>}
+                  {readingTime && (
+                    <span>
+                      <span className="sr-only">Estimated reading time:</span>
+                      {readingTime} min read
+                    </span>
+                  )}
+                </div>
+                {slug && (
+                  <ShareButton
+                    content={
+                      {
+                        type: 'article',
+                        url: buildCanonicalUrl('article', slug),
+                        title,
+                        description,
+                        image,
+                        tags,
+                        author: author?.name || 'Mateo Nunez',
+                        date: date || '',
+                        readingTime,
+                      } as ShareableArticle
+                    }
+                    variant="outline"
+                    size="sm"
+                    showLabel
+                    showTooltip={false}
+                  />
                 )}
               </div>
             )}

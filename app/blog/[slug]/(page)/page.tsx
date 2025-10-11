@@ -32,15 +32,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: frontmatter.title,
       description: frontmatter.description,
       type: 'article',
-      // @ts-expect-error - article is not typed on OpenGraph
-      article: {
-        authors: [frontmatter.author.name],
-        tags: frontmatter.tags,
-        publishedTime: frontmatter.date,
-        modifiedTime: frontmatter.date,
-      },
       images: [{ url: imageUrl, alt: frontmatter.title }],
-    },
+      locale: 'en_US',
+      siteName: meta.openGraph?.siteName,
+      publishedTime: frontmatter.date,
+      modifiedTime: frontmatter.date,
+      authors: [frontmatter.author.name],
+      tags: frontmatter.tags,
+    } as any,
     twitter: {
       ...meta.twitter,
       card: 'summary_large_image',
@@ -82,10 +81,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <JsonLdScript data={getBlogPostingSchema(frontmatter)} />
       <ArticleLayout
         title={frontmatter.title}
+        slug={frontmatter.slug}
         date={frontmatter.date}
         readingTime={frontmatter.readingTime}
         tags={frontmatter.tags}
         author={frontmatter.author}
+        description={frontmatter.description}
+        image={frontmatter.image}
         relatedArticles={relatedArticles}
         series={series}
       >

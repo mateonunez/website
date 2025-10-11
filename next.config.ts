@@ -57,6 +57,7 @@ const securityHeaders: SecurityHeader[] = [
 
 const nextConfig: NextConfig = {
   transpilePackages: ['next-mdx-remote'],
+  trailingSlash: true,
   reactStrictMode: true,
   compress: true,
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],

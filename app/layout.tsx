@@ -11,6 +11,7 @@ import { ThemeProvider } from '@/components/providers/theme-provider';
 import { UIProvider } from '@/components/providers/ui-provider';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import { Toaster } from '@/components/ui/sonner';
 import meta from '@/lib/config/metadata';
 import { getOrganizationSchema, getPersonSchema, getWebSiteSchema } from '@/lib/seo/json-ld';
 import { cn } from '@/lib/utils';
@@ -81,6 +82,8 @@ export default function RootLayout({
           <JsonLdScript data={getPersonSchema()} />
           <JsonLdScript data={getWebSiteSchema()} />
           <JsonLdScript data={getOrganizationSchema()} />
+
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
