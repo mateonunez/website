@@ -16,6 +16,7 @@ const defaultDescription = `Who is ${personal.name}? A ${personal.jobTitle} at $
 
 const assets = {
   ogImage: personal.assets.ogImage,
+  logo: personal.assets.logo,
   favicons: personal.assets.favicons,
   manifest: personal.assets.manifest,
 };
@@ -38,7 +39,8 @@ const socialImage = {
   url: assets.ogImage,
   width: 1200,
   height: 630,
-  alt: `Preview of ${personal.name}'s Digital Playground`,
+  alt: `${personal.name} - ${personal.jobTitle} at ${personal.company}. ${personal.location.display}. Building web & AI systems with TypeScript/Next.js.`,
+  type: 'image/png',
 };
 
 const metadata = {
@@ -71,6 +73,11 @@ const metadata = {
     siteName,
     images: [socialImage],
     locale: 'en_US',
+    logo: assets.logo,
+  },
+
+  other: {
+    'og:logo': assets.logo,
   },
 
   icons: {
@@ -93,10 +100,14 @@ const metadata = {
 
   twitter: {
     card: 'summary_large_image',
+    site: author.twitter,
+    creator: author.twitter,
     title: defaultTitle,
     description: defaultDescription,
-    creator: author.twitter,
-    images: [assets.ogImage],
+    images: {
+      url: assets.ogImage,
+      alt: `${personal.name} - ${personal.jobTitle} at ${personal.company}`,
+    },
   },
 };
 

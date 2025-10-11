@@ -17,6 +17,22 @@ interface ImageParams {
   params: Promise<{ slug: string }>;
 }
 
+export async function generateImageMetadata({ params }: ImageParams) {
+  const { slug } = await params;
+  const { frontmatter } = await getArticle({ slug });
+
+  return [
+    {
+      id: 'opengraph',
+      alt: `${frontmatter.title} - ${frontmatter.description}`,
+      contentType: 'image/png',
+      size,
+    },
+  ];
+}
+
+export const alt = 'Blog Article Cover Image';
+
 export default async function Image({ params }: ImageParams) {
   const { slug } = await params;
   const { frontmatter } = await getArticle({ slug });

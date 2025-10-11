@@ -5,13 +5,18 @@ import personal from '@/lib/config/personal';
 
 export const runtime = 'nodejs';
 
-export const alt = `${personal.name} - ${personal.jobTitle}`;
+export const alt = `${personal.name} - ${personal.jobTitle} at ${personal.company}. ${personal.location.display}. Building web & AI systems with TypeScript/Next.js.`;
 export const size = {
   width: 1200,
   height: 630,
 };
 
 export const contentType = 'image/png';
+
+export const metadata = {
+  title: alt,
+  description: personal.site.description,
+};
 
 export default async function Image() {
   const imagePath = path.join(process.cwd(), 'public', personal.assets.avatar);
@@ -25,6 +30,7 @@ export default async function Image() {
         height: '100%',
         display: 'flex',
         position: 'relative',
+        overflow: 'hidden',
       }}
     >
       {/** biome-ignore lint/performance/noImgElement: Required for next/og ImageResponse */}
@@ -32,9 +38,11 @@ export default async function Image() {
         src={base64Image}
         alt={alt}
         style={{
+          position: 'absolute',
+          top: '-15%',
+          left: '50%',
+          transform: 'translateX(-50%)',
           width: '100%',
-          height: '100%',
-          objectFit: 'cover',
         }}
       />
       <div
