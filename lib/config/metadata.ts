@@ -16,6 +16,7 @@ const defaultDescription = `Who is ${personal.name}? A ${personal.jobTitle} at $
 
 const assets = {
   ogImage: personal.assets.ogImage,
+  logo: personal.assets.logo,
   favicons: personal.assets.favicons,
   manifest: personal.assets.manifest,
 };
@@ -72,6 +73,11 @@ const metadata = {
     siteName,
     images: [socialImage],
     locale: 'en_US',
+    logo: assets.logo,
+  },
+
+  other: {
+    'og:logo': assets.logo,
   },
 
   icons: {

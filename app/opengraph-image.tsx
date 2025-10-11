@@ -30,6 +30,7 @@ export default async function Image() {
         height: '100%',
         display: 'flex',
         position: 'relative',
+        overflow: 'hidden',
       }}
     >
       {/** biome-ignore lint/performance/noImgElement: Required for next/og ImageResponse */}
@@ -37,9 +38,11 @@ export default async function Image() {
         src={base64Image}
         alt={alt}
         style={{
+          position: 'absolute',
+          top: '-15%',
+          left: '50%',
+          transform: 'translateX(-50%)',
           width: '100%',
-          height: '100%',
-          objectFit: 'cover',
         }}
       />
       <div

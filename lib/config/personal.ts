@@ -28,6 +28,7 @@ export const personal = {
 
   assets: {
     avatar: '/images/profile.png',
+    logo: '/logo.png',
     ogImage: '/card.png',
     favicons: {
       ico: '/favicon.ico',
