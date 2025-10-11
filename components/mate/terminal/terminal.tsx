@@ -4,6 +4,7 @@ import { type JSX, memo, useCallback, useEffect, useMemo, useRef, useState } fro
 import { useGithub } from '@/hooks/use-github';
 import { useSpotify } from '@/hooks/use-spotify';
 import { useSpotifyTop } from '@/hooks/use-spotify-top';
+import { trackTerminal } from '@/lib/analytics';
 import { cn } from '@/lib/utils';
 import { terminalCookie } from '@/lib/utils/cookies/terminal.cookie';
 import { CommandContextProvider, type DataSources } from './command-context';
@@ -28,6 +29,8 @@ export function Terminal({
   const [hasVisitedBefore, setHasVisitedBefore] = useState<boolean>(false);
   const [skipAnimations, setSkipAnimations] = useState<boolean>(false);
   const hasInitializedFromCookie = useRef<boolean>(false);
+  const sessionStartTime = useRef<number>(Date.now());
+  const commandCount = useRef<number>(0);
 
   const [state, actions] = useTerminalState(initialMessages);
   const { currentLine, typingLine, completedLines, isComplete, userInput } = state;
@@ -56,17 +59,23 @@ export function Terminal({
 
   const tools = useMemo(() => ({ clearLines: actions.clearCompletedLines }), [actions]);
 
-  const { executeCommand, getMatchingCommands } = useCommandExecutor({
+  const { executeCommand: baseExecuteCommand, getMatchingCommands } = useCommandExecutor({
     dataSources,
     tools,
     actions: { addCompletedLines: actions.addCompletedLines, addToHistory: actions.addToHistory },
   });
 
+  const executeCommand = useCallback(
+    async (input: string) => {
+      commandCount.current += 1;
+      await baseExecuteCommand(input);
+    },
+    [baseExecuteCommand],
+  );
+
   const handleUserInput = useTerminalInput({ state, actions, executeCommand, getMatchingCommands });
 
-  // Check for existing cookie on mount - only run once
   useEffect(() => {
-    // Prevent multiple initializations
     if (hasInitializedFromCookie.current) return;
 
     const hasVisited = terminalCookie.hasVisitedRecently();
@@ -74,21 +83,32 @@ export function Terminal({
     setSkipAnimations(hasVisited);
 
     if (hasVisited) {
-      // Skip animations and make terminal ready immediately
       const completedMessages = initialMessages.map((text) => ({ text, showPrompt: false }));
       actions.addCompletedLines(completedMessages);
       actions.setCurrentLine(initialMessages.length);
       actions.setIsComplete(true);
       hasInitializedFromCookie.current = true;
     }
-  }, []); // Empty dependency array - only run on mount
+  }, []);
 
-  // Set cookie when terminal completes for the first time (not skipped)
   useEffect(() => {
     if (isComplete && !hasVisitedBefore && !skipAnimations) {
       terminalCookie.set();
     }
   }, [isComplete, hasVisitedBefore, skipAnimations]);
+
+  useEffect(() => {
+    if (isComplete) {
+      trackTerminal.sessionStarted();
+    }
+
+    return () => {
+      if (isComplete) {
+        const duration = Date.now() - sessionStartTime.current;
+        trackTerminal.sessionEnded(commandCount.current, duration);
+      }
+    };
+  }, [isComplete]);
 
   useEffect(() => {
     if (isComplete || skipAnimations) return;

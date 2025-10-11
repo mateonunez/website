@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from 'react';
 import { toast } from 'sonner';
+import { trackShare } from '@/lib/analytics';
 import {
   buildShareUrl,
   copyToClipboard,
@@ -82,23 +83,31 @@ export function useShare({ content, showToast = true, onSuccess, onError }: UseS
 
     try {
       const absoluteUrl = ensureAbsoluteUrl(content.url);
+
+      trackShare.initiated('copy', content.type, content.title, absoluteUrl);
+
       const result = await copyToClipboard(absoluteUrl);
 
       if (result.success) {
+        trackShare.copyLink(content.type, content.title, absoluteUrl);
         handleSuccess('copy');
       } else {
+        trackShare.failed('copy', content.type, content.title, absoluteUrl);
         handleError(result.error || 'Failed to copy link');
       }
     } catch (error) {
+      trackShare.failed('copy', content.type, content.title, content.url);
       handleError(error instanceof Error ? error.message : 'Failed to copy link');
     } finally {
       setIsSharing(false);
     }
-  }, [content.url, handleSuccess, handleError]);
+  }, [content, handleSuccess, handleError]);
 
   const share = useCallback(
     async (platform: SharePlatform) => {
       setIsSharing(true);
+
+      trackShare.initiated(platform, content.type, content.title, content.url);
 
       try {
         const options = buildShareOptions(platform);
@@ -108,8 +117,10 @@ export function useShare({ content, showToast = true, onSuccess, onError }: UseS
           case 'native': {
             result = await shareNative(options);
             if (result.success) {
+              trackShare.success(platform, content.type, content.title, content.url);
               handleSuccess('native');
             } else if (result.error !== 'Share cancelled') {
+              trackShare.failed(platform, content.type, content.title, content.url);
               handleError(result.error || 'Failed to share');
             }
             break;
@@ -131,26 +142,31 @@ export function useShare({ content, showToast = true, onSuccess, onError }: UseS
             if (shareUrl) {
               result = openShareWindow(shareUrl, platform);
               if (result.success) {
+                trackShare.success(platform, content.type, content.title, content.url);
                 handleSuccess(platform);
               } else {
+                trackShare.failed(platform, content.type, content.title, content.url);
                 handleError(result.error || `Failed to open ${platform}`);
               }
             } else {
+              trackShare.failed(platform, content.type, content.title, content.url);
               handleError(`Failed to build ${platform} share URL`);
             }
             break;
           }
 
           default:
+            trackShare.failed(platform, content.type, content.title, content.url);
             handleError('Unsupported share platform');
         }
       } catch (error) {
+        trackShare.failed(platform, content.type, content.title, content.url);
         handleError(error instanceof Error ? error.message : 'Failed to share');
       } finally {
         setIsSharing(false);
       }
     },
-    [buildShareOptions, copyLink, handleSuccess, handleError],
+    [buildShareOptions, copyLink, handleSuccess, handleError, content],
   );
 
   return {

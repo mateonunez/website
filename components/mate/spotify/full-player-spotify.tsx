@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { ShareButton } from '@/components/ui/share-button';
+import { trackContent, trackExternalLink } from '@/lib/analytics';
 import { formatDuration } from '@/lib/helpers/date';
 import { cn } from '@/lib/utils';
 import type { ShareableTrack } from '@/types/sharing';
@@ -67,6 +68,10 @@ export function FullPlayer({ currentlyPlaying, progress, simulatedTime }: FullPl
                 'font-medium sm:text-lg block hover:underline truncate',
                 currentlyPlaying.title.length > 30 ? 'text-base' : '',
               )}
+              onClick={() => {
+                trackContent.nowPlayingViewed(currentlyPlaying.title);
+                trackExternalLink.clicked(currentlyPlaying.url, 'spotify', `track_${currentlyPlaying.title}`);
+              }}
             >
               {currentlyPlaying.title}
             </Link>

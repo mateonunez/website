@@ -7,6 +7,7 @@ import { AppSidebar } from '@/components/mate/app-sidebar';
 import { Footer } from '@/components/mate/footer';
 import { TopNavbar } from '@/components/mate/top-navbar';
 import { AnalyticsProvider } from '@/components/providers/analytics-provider';
+import { AnalyticsTracker } from '@/components/providers/analytics-tracker';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { UIProvider } from '@/components/providers/ui-provider';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
@@ -65,6 +66,7 @@ export default function RootLayout({
         ) : null}
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <AnalyticsProvider>
+            <AnalyticsTracker />
             <SidebarProvider>
               <AppSidebar />
 
