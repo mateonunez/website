@@ -5,8 +5,10 @@ import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
+import { ShareButton } from '@/components/ui/share-button';
 import { formatDuration } from '@/lib/helpers/date';
 import { cn } from '@/lib/utils';
+import type { ShareableTrack } from '@/types/sharing';
 
 interface FullPlayerProps {
   currentlyPlaying: any;
@@ -18,11 +20,31 @@ export function FullPlayer({ currentlyPlaying, progress, simulatedTime }: FullPl
   return (
     <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/50 overflow-hidden">
       <CardHeader className="p-3 sm:p-4 pb-0">
-        <CardTitle className="text-base sm:text-lg flex items-center gap-2 font-hanken">
+        <CardTitle className="text-base sm:text-lg flex items-center justify-between gap-2 font-hanken">
           <div className="flex items-center gap-2">
             <Music className="h-5 w-5 text-amber-500" />
             <span>Now Playing</span>
           </div>
+          <ShareButton
+            content={
+              {
+                type: 'track',
+                url: currentlyPlaying.url,
+                title: currentlyPlaying.title,
+                description: `${currentlyPlaying.artist} • ${currentlyPlaying.album}`,
+                image: currentlyPlaying.thumbnail,
+                artist: currentlyPlaying.artist,
+                album: currentlyPlaying.album,
+                spotifyUrl: currentlyPlaying.url,
+                duration: currentlyPlaying.duration,
+              } as ShareableTrack
+            }
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8"
+            showTooltip
+            tooltipText="Share what I'm listening to"
+          />
         </CardTitle>
       </CardHeader>
       <CardContent className="p-0">

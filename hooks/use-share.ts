@@ -54,6 +54,8 @@ export function useShare({ content, showToast = true, onSuccess, onError }: UseS
           linkedin: 'Opening LinkedIn...',
           facebook: 'Opening Facebook...',
           reddit: 'Opening Reddit...',
+          whatsapp: 'Opening WhatsApp...',
+          telegram: 'Opening Telegram...',
           native: 'Shared successfully!',
           copy: 'Link copied to clipboard!',
         };
@@ -121,7 +123,9 @@ export function useShare({ content, showToast = true, onSuccess, onError }: UseS
           case 'twitter':
           case 'linkedin':
           case 'facebook':
-          case 'reddit': {
+          case 'reddit':
+          case 'whatsapp':
+          case 'telegram': {
             const shareUrl = buildShareUrl(platform, options);
 
             if (shareUrl) {

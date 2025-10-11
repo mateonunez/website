@@ -1,10 +1,12 @@
 'use client';
 
-import { Music, Pause, Volume2 } from 'lucide-react';
+import { Music } from 'lucide-react';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
+import { ShareButton } from '@/components/ui/share-button';
 import { formatDuration } from '@/lib/helpers/date';
+import type { ShareableTrack } from '@/types/sharing';
 
 interface CompactPlayerProps {
   currentlyPlaying: any;
@@ -47,8 +49,26 @@ export function CompactPlayer({ currentlyPlaying, progress, simulatedTime, url }
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Pause className="h-3 w-3" />
-                  <Volume2 className="h-3 w-3 text-muted-foreground" />
+                  <ShareButton
+                    content={
+                      {
+                        type: 'track',
+                        url: currentlyPlaying.url || url,
+                        title: currentlyPlaying.title,
+                        description: `${currentlyPlaying.artist} • ${currentlyPlaying.album}`,
+                        image: currentlyPlaying.thumbnail,
+                        artist: currentlyPlaying.artist,
+                        album: currentlyPlaying.album,
+                        spotifyUrl: currentlyPlaying.url || url,
+                        duration: currentlyPlaying.duration,
+                      } as ShareableTrack
+                    }
+                    variant="ghost"
+                    size="icon"
+                    className="h-5 w-5"
+                    showTooltip
+                    tooltipText="Share track"
+                  />
                 </div>
                 <div className="flex items-center gap-1.5">
                   <div className="space-x-1 text-xs tabular-nums text-muted-foreground">
@@ -60,6 +80,8 @@ export function CompactPlayer({ currentlyPlaying, progress, simulatedTime, url }
               </div>
             </div>
           </div>
+
+          <div className="shrink-0"></div>
         </div>
 
         <div className="absolute top-0 left-0 right-0">

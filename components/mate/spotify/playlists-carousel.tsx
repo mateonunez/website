@@ -60,33 +60,39 @@ export function PlaylistsCarousel({ showHeader = true }: PlaylistsCarouselProps)
                           <div className="text-white/80 text-xs truncate">{pl.owner}</div>
                         </div>
                       </Link>
-                      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
-                        <div className="backdrop-blur-md bg-black/30 rounded-lg">
-                          <ShareButton
-                            content={
-                              {
-                                type: 'playlist',
-                                url: pl.url,
-                                title: pl.name,
-                                description: pl.description,
-                                image: pl.cover || undefined,
-                                owner: pl.owner,
-                                trackCount: pl.tracks,
-                                spotifyUrl: pl.url,
-                              } as ShareablePlaylist
-                            }
-                            variant="ghost"
-                            size="icon"
-                            className="h-8 w-8 text-white hover:text-amber-500 hover:bg-white/20"
-                            showTooltip
-                            tooltipText="Share playlist"
-                          />
-                        </div>
-                      </div>
                     </div>
                     <div className="p-3 flex items-center justify-between text-xs text-muted-foreground">
                       <span>{pl.tracks} tracks</span>
-                      <ExternalLink className="h-3.5 w-3.5" />
+                      <div className="flex items-center gap-2">
+                        <ShareButton
+                          content={
+                            {
+                              type: 'playlist',
+                              url: pl.url,
+                              title: pl.name,
+                              description: pl.description,
+                              image: pl.cover || undefined,
+                              owner: pl.owner,
+                              trackCount: pl.tracks,
+                              spotifyUrl: pl.url,
+                            } as ShareablePlaylist
+                          }
+                          variant="ghost"
+                          size="icon"
+                          className="h-7 w-7 hover:text-amber-500"
+                          showTooltip
+                          tooltipText="Share playlist"
+                        />
+                        <a
+                          href={pl.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-amber-500 transition-colors"
+                          aria-label="Open on Spotify"
+                        >
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>

@@ -1,4 +1,12 @@
-export type SharePlatform = 'twitter' | 'linkedin' | 'facebook' | 'reddit' | 'native' | 'copy';
+export type SharePlatform =
+  | 'twitter'
+  | 'linkedin'
+  | 'facebook'
+  | 'reddit'
+  | 'whatsapp'
+  | 'telegram'
+  | 'native'
+  | 'copy';
 
 export interface ShareOptions {
   url: string;
@@ -15,7 +23,7 @@ export interface ShareResult {
   error?: string;
 }
 
-export type ShareableContentType = 'article' | 'playlist' | 'repository' | 'generic';
+export type ShareableContentType = 'article' | 'playlist' | 'repository' | 'track' | 'generic';
 
 export interface ShareableContent {
   type: ShareableContentType;
@@ -48,6 +56,14 @@ export interface ShareableRepository extends ShareableContent {
   forks: number;
   language?: string;
   githubUrl: string;
+}
+
+export interface ShareableTrack extends ShareableContent {
+  type: 'track';
+  artist: string;
+  album: string;
+  spotifyUrl: string;
+  duration?: number;
 }
 
 export interface ShareConfig {

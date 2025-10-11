@@ -3,6 +3,7 @@ import type {
   ShareableContent,
   ShareablePlaylist,
   ShareableRepository,
+  ShareableTrack,
   SharePlatform,
 } from '@/types/sharing';
 
@@ -72,6 +73,23 @@ export function generateRepositoryShareText(repository: ShareableRepository, pla
   }
 }
 
+export function generateTrackShareText(track: ShareableTrack, platform: SharePlatform): string {
+  const { title, artist, album } = track;
+
+  switch (platform) {
+    case 'twitter':
+      return `🎵 Now listening to:\n\n"${title}" by ${artist}\n\nFrom the album: ${album}`;
+    case 'linkedin':
+      return `Currently enjoying "${title}" by ${artist} from the album "${album}"`;
+    case 'facebook':
+      return `Listening to "${title}" by ${artist}`;
+    case 'reddit':
+      return `${title} - ${artist}`;
+    default:
+      return `${title} by ${artist}`;
+  }
+}
+
 export function generateShareText(content: ShareableContent, platform: SharePlatform = 'native'): string {
   switch (content.type) {
     case 'article':
@@ -80,6 +98,8 @@ export function generateShareText(content: ShareableContent, platform: SharePlat
       return generatePlaylistShareText(content as ShareablePlaylist, platform);
     case 'repository':
       return generateRepositoryShareText(content as ShareableRepository, platform);
+    case 'track':
+      return generateTrackShareText(content as ShareableTrack, platform);
     default:
       return content.description ? `${content.title} - ${content.description}` : content.title;
   }

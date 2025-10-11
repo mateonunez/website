@@ -5,8 +5,11 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
+import { ShareButton } from '@/components/ui/share-button';
 import { dateForHumans } from '@/lib/helpers/date';
+import { buildCanonicalUrl } from '@/lib/utils/sharing/url-builder';
 import type { ArticleFrontmatter } from '@/types/article';
+import type { ShareableArticle } from '@/types/sharing';
 import { AnimatedItem } from '../ui/animated-container';
 
 type ArticlePreviewProps = Pick<
@@ -30,7 +33,7 @@ export function ArticlePreview({
   const visibleTags = (tags ?? []).slice(0, MAX_VISIBLE_TAGS);
   const remainingTagsCount = (tags?.length ?? 0) - visibleTags.length;
   return (
-    <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300 hover:shadow-md rounded-t-xl rounded-b-xl">
+    <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 card-hover-lift hover:border-amber-500/30 rounded-t-xl rounded-b-xl">
       <Link href={`/blog/${slug}`} className="block">
         <div className="relative h-[200px] md:h-[260px] w-full overflow-hidden rounded-t-xl">
           <div className="absolute inset-0 z-10 bg-gradient-to-t from-gray-900/80 to-gray-900/20" />
@@ -81,12 +84,30 @@ export function ArticlePreview({
         )}
 
         <AnimatedItem delay={0.3}>
-          <div className="flex justify-center">
+          <div className="flex justify-center items-center gap-2">
             <Button variant="outline" asChild>
               <Link href={`/blog/${slug}`}>
                 Read Full Article <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
+            <ShareButton
+              content={
+                {
+                  type: 'article',
+                  url: buildCanonicalUrl('article', slug),
+                  title,
+                  description,
+                  image,
+                  tags,
+                  author: author.name,
+                  date,
+                } as ShareableArticle
+              }
+              variant="outline"
+              size="icon"
+              showTooltip
+              tooltipText="Share article"
+            />
           </div>
         </AnimatedItem>
       </CardContent>

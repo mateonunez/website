@@ -47,6 +47,20 @@ export function buildRedditShareUrl(options: ShareOptions): string {
   return `https://reddit.com/submit?${params.toString()}`;
 }
 
+export function buildWhatsAppShareUrl(options: ShareOptions): string {
+  const text = options.description
+    ? `${options.title}\n\n${options.description}\n\n${options.url}`
+    : `${options.title}\n\n${options.url}`;
+  return `https://wa.me/?text=${encodeURIComponent(text)}`;
+}
+
+export function buildTelegramShareUrl(options: ShareOptions): string {
+  const params = new URLSearchParams();
+  params.append('url', options.url);
+  params.append('text', options.description ? `${options.title}\n\n${options.description}` : options.title);
+  return `https://t.me/share/url?${params.toString()}`;
+}
+
 export function buildShareUrl(platform: SharePlatform, options: ShareOptions): string | null {
   switch (platform) {
     case 'twitter':
@@ -57,6 +71,10 @@ export function buildShareUrl(platform: SharePlatform, options: ShareOptions): s
       return buildFacebookShareUrl(options);
     case 'reddit':
       return buildRedditShareUrl(options);
+    case 'whatsapp':
+      return buildWhatsAppShareUrl(options);
+    case 'telegram':
+      return buildTelegramShareUrl(options);
     default:
       return null;
   }

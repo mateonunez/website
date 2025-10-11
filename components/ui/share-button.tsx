@@ -32,6 +32,8 @@ const platformIcons: Record<string, string> = {
   linkedin: 'in',
   facebook: 'f',
   reddit: '↗',
+  whatsapp: '💬',
+  telegram: '✈️',
 };
 
 const platformLabels: Record<string, string> = {
@@ -39,6 +41,8 @@ const platformLabels: Record<string, string> = {
   linkedin: 'Share on LinkedIn',
   facebook: 'Share on Facebook',
   reddit: 'Share on Reddit',
+  whatsapp: 'Share on WhatsApp',
+  telegram: 'Share on Telegram',
   copy: 'Copy link',
   native: 'Share...',
 };
@@ -63,8 +67,8 @@ export function ShareButton({
           variant={variant}
           size={size}
           className={cn(
-            'transition-all duration-200',
-            'hover:scale-105 hover:shadow-md',
+            'transition-transform duration-200',
+            'hover:scale-105',
             isSharing && 'opacity-50 cursor-not-allowed',
             className,
           )}
@@ -82,39 +86,63 @@ export function ShareButton({
       <DropdownMenuContent align={align} className="w-48">
         {canUseNativeShare && (
           <>
-            <DropdownMenuItem onClick={() => share('native')} className="cursor-pointer">
-              <Share2 className="mr-2 h-4 w-4" />
+            <DropdownMenuItem onClick={() => share('native')} className="cursor-pointer flex items-center">
+              <Share2 className="mr-2 h-4 w-4 shrink-0" />
               <span>{platformLabels.native}</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
           </>
         )}
 
-        <DropdownMenuItem onClick={() => share('copy')} className="cursor-pointer">
-          <span className="mr-2 text-base">🔗</span>
+        <DropdownMenuItem onClick={() => share('copy')} className="cursor-pointer flex items-center">
+          <span className="mr-2 text-base leading-none shrink-0 flex items-center justify-center w-4">🔗</span>
           <span>{platformLabels.copy}</span>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem onClick={() => share('twitter')} className="cursor-pointer">
-          <span className="mr-2 text-base font-bold">{platformIcons.twitter}</span>
+        <DropdownMenuItem onClick={() => share('twitter')} className="cursor-pointer flex items-center">
+          <span className="mr-2 text-base font-bold leading-none shrink-0 flex items-center justify-center w-4">
+            {platformIcons.twitter}
+          </span>
           <span>{platformLabels.twitter}</span>
         </DropdownMenuItem>
 
-        <DropdownMenuItem onClick={() => share('linkedin')} className="cursor-pointer">
-          <span className="mr-2 text-base font-bold">{platformIcons.linkedin}</span>
+        <DropdownMenuItem onClick={() => share('linkedin')} className="cursor-pointer flex items-center">
+          <span className="mr-2 text-base font-bold leading-none shrink-0 flex items-center justify-center w-4">
+            {platformIcons.linkedin}
+          </span>
           <span>{platformLabels.linkedin}</span>
         </DropdownMenuItem>
 
-        <DropdownMenuItem onClick={() => share('facebook')} className="cursor-pointer">
-          <span className="mr-2 text-base font-bold">{platformIcons.facebook}</span>
+        <DropdownMenuItem onClick={() => share('facebook')} className="cursor-pointer flex items-center">
+          <span className="mr-2 text-base font-bold leading-none shrink-0 flex items-center justify-center w-4">
+            {platformIcons.facebook}
+          </span>
           <span>{platformLabels.facebook}</span>
         </DropdownMenuItem>
 
-        <DropdownMenuItem onClick={() => share('reddit')} className="cursor-pointer">
-          <span className="mr-2 text-base">{platformIcons.reddit}</span>
+        <DropdownMenuItem onClick={() => share('reddit')} className="cursor-pointer flex items-center">
+          <span className="mr-2 text-base leading-none shrink-0 flex items-center justify-center w-4">
+            {platformIcons.reddit}
+          </span>
           <span>{platformLabels.reddit}</span>
+        </DropdownMenuItem>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem onClick={() => share('whatsapp')} className="cursor-pointer flex items-center">
+          <span className="mr-2 text-base leading-none shrink-0 flex items-center justify-center w-4">
+            {platformIcons.whatsapp}
+          </span>
+          <span>{platformLabels.whatsapp}</span>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem onClick={() => share('telegram')} className="cursor-pointer flex items-center">
+          <span className="mr-2 text-base leading-none shrink-0 flex items-center justify-center w-4">
+            {platformIcons.telegram}
+          </span>
+          <span>{platformLabels.telegram}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
