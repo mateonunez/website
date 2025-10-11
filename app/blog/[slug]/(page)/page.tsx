@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { JSX } from 'react';
 import { Suspense } from 'react';
+import { ArticleAnalytics } from '@/components/mate/article-analytics';
 import { ArticleLayout } from '@/components/mate/article-layout';
 import { Main } from '@/components/mate/main';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
@@ -79,6 +80,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       }
     >
       <JsonLdScript data={getBlogPostingSchema(frontmatter)} />
+      <ArticleAnalytics title={frontmatter.title} />
       <ArticleLayout
         title={frontmatter.title}
         slug={frontmatter.slug}

@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ShareButton } from '@/components/ui/share-button';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useGithub } from '@/hooks/use-github';
+import { trackContent, trackExternalLink } from '@/lib/analytics';
 import { formatDate, getTimeAgo } from '@/lib/helpers/date';
 import type { NormalizedGitHubRepository } from '@/types/github';
 import type { ShareableRepository } from '@/types/sharing';
@@ -61,6 +62,10 @@ const RepositoryCard = memo(({ repository }: { repository: NormalizedGitHubRepos
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${repository.name} on GitHub`}
+                onClick={() => {
+                  trackContent.repositoryViewed(repository.name);
+                  trackExternalLink.clicked(repository.url, 'github', `repository_${repository.name}`);
+                }}
               >
                 <ExternalLink className="h-3.5 w-3.5" />
               </a>

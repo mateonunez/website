@@ -1,6 +1,14 @@
 'use client';
 
-import { Share2 } from 'lucide-react';
+import {
+  ExternalLinkIcon,
+  FacebookIcon,
+  LinkedinIcon,
+  MessageCircleMoreIcon,
+  SendIcon,
+  Share2,
+  XIcon,
+} from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
 import {
@@ -27,13 +35,13 @@ interface ShareButtonProps {
   align?: 'start' | 'center' | 'end';
 }
 
-const platformIcons: Record<string, string> = {
-  twitter: '𝕏',
-  linkedin: 'in',
-  facebook: 'f',
-  reddit: '↗',
-  whatsapp: '💬',
-  telegram: '✈️',
+const platformIcons: Record<string, any> = {
+  twitter: XIcon,
+  linkedin: LinkedinIcon,
+  facebook: FacebookIcon,
+  reddit: ExternalLinkIcon,
+  whatsapp: MessageCircleMoreIcon,
+  telegram: SendIcon,
 };
 
 const platformLabels: Record<string, string> = {

@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { ShareButton } from '@/components/ui/share-button';
 import { useSpotifyUserPlaylists } from '@/hooks/use-spotify-user-playlists';
+import { trackContent, trackExternalLink } from '@/lib/analytics';
 import personal from '@/lib/config/personal';
 import type { ShareablePlaylist } from '@/types/sharing';
 import { PlaylistsCarouselSkeleton } from './playlists-carousel.skeleton';
@@ -42,7 +43,16 @@ export function PlaylistsCarousel({ showHeader = true }: PlaylistsCarouselProps)
                 <Card className="overflow-hidden group border border-border/50 hover:border-amber-500/30 card-hover-lift">
                   <CardContent className="p-0">
                     <div className="relative aspect-[3/4] w-full overflow-hidden">
-                      <Link href={pl.url} target="_blank" rel="noopener noreferrer" className="block h-full w-full">
+                      <Link
+                        href={pl.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block h-full w-full"
+                        onClick={() => {
+                          trackContent.playlistViewed(pl.name);
+                          trackExternalLink.clicked(pl.url, 'spotify', `playlist_${pl.name}`);
+                        }}
+                      >
                         {pl.cover ? (
                           <Image
                             src={pl.cover}

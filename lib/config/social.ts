@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import { Github, Instagram, LinkedinIcon, Mail, Music, Twitter } from 'lucide-react';
+import { Github, Instagram, LinkedinIcon, Mail, Music, XIcon } from 'lucide-react';
 import personal from './personal';
 
 export interface SocialLink {
@@ -9,7 +9,7 @@ export interface SocialLink {
   showInFooter?: boolean;
 }
 
-export type SocialLinkName = 'Email' | 'GitHub' | 'Twitter' | 'LinkedIn' | 'Instagram' | 'Spotify';
+export type SocialLinkName = 'Email' | 'GitHub' | 'X' | 'LinkedIn' | 'Instagram' | 'Spotify';
 
 export const socialLinks: SocialLink[] = [
   {
@@ -25,9 +25,9 @@ export const socialLinks: SocialLink[] = [
     showInFooter: true,
   },
   {
-    name: 'Twitter',
-    href: `https://twitter.com/${personal.social.twitter}`,
-    icon: Twitter,
+    name: 'X',
+    href: `https://x.com/${personal.social.twitter}`,
+    icon: XIcon,
     showInFooter: true,
   },
   {

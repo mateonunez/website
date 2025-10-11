@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
 import { ShareButton } from '@/components/ui/share-button';
+import { trackContent, trackExternalLink } from '@/lib/analytics';
 import { formatDuration } from '@/lib/helpers/date';
 import type { ShareableTrack } from '@/types/sharing';
 
@@ -20,7 +21,15 @@ export function CompactPlayer({ currentlyPlaying, progress, simulatedTime, url }
     <Card className="relative overflow-hidden bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-0 rounded-none max-w-dvw">
       <CardContent className="p-4">
         <div className="flex items-center space-x-4">
-          <Link href={url} target="_blank" className="block shrink-0 group relative">
+          <Link
+            href={url}
+            target="_blank"
+            className="block shrink-0 group relative"
+            onClick={() => {
+              trackContent.nowPlayingViewed(currentlyPlaying.title);
+              trackExternalLink.clicked(url, 'spotify', `track_${currentlyPlaying.title}`);
+            }}
+          >
             <Avatar className="h-16 w-16 rounded-md">
               <AvatarImage
                 src={currentlyPlaying.thumbnail}
@@ -38,6 +47,10 @@ export function CompactPlayer({ currentlyPlaying, progress, simulatedTime, url }
               href={url}
               target="_blank"
               className="inline-block overflow-hidden text-ellipsis whitespace-nowrap hover:underline"
+              onClick={() => {
+                trackContent.nowPlayingViewed(currentlyPlaying.title);
+                trackExternalLink.clicked(url, 'spotify', `track_${currentlyPlaying.title}`);
+              }}
             >
               <span className="text-sm font-medium leading-none">{currentlyPlaying.title}</span>
             </Link>
