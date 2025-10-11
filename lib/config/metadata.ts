@@ -38,7 +38,8 @@ const socialImage = {
   url: assets.ogImage,
   width: 1200,
   height: 630,
-  alt: `Preview of ${personal.name}'s Digital Playground`,
+  alt: `${personal.name} - ${personal.jobTitle} at ${personal.company}. ${personal.location.display}. Building web & AI systems with TypeScript/Next.js.`,
+  type: 'image/png',
 };
 
 const metadata = {
@@ -93,10 +94,14 @@ const metadata = {
 
   twitter: {
     card: 'summary_large_image',
+    site: author.twitter,
+    creator: author.twitter,
     title: defaultTitle,
     description: defaultDescription,
-    creator: author.twitter,
-    images: [assets.ogImage],
+    images: {
+      url: assets.ogImage,
+      alt: `${personal.name} - ${personal.jobTitle} at ${personal.company}`,
+    },
   },
 };
 
