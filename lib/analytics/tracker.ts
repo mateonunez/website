@@ -72,12 +72,12 @@ class AnalyticsTracker {
   }
 
   private _pushToGTM(event: AnalyticsEvent, metadata: EventMetadata): void {
-    if (typeof window === 'undefined' || !window.dataLayer) return;
+    if (typeof window === 'undefined') return;
+    (window as any).dataLayer = (window as any).dataLayer || [];
 
-    window.dataLayer.push({
-      event: 'custom_event',
+    (window as any).dataLayer.push({
+      event: event.action,
       event_category: event.category,
-      event_action: event.action,
       event_label: event.label,
       ...event,
       ...metadata,
