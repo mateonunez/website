@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { ImageResponse } from 'next/og';
-import { getArticle } from '@/lib/articles/parser';
+import { getArticle, getArticleSlugs } from '@/lib/articles/parser';
 import personal from '@/lib/config/personal';
 
 export const runtime = 'nodejs';
@@ -17,21 +17,10 @@ interface ImageParams {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateImageMetadata({ params }: ImageParams) {
-  const { slug } = await params;
-  const { frontmatter } = await getArticle({ slug });
-
-  return [
-    {
-      id: 'opengraph',
-      alt: `${frontmatter.title} - ${frontmatter.description}`,
-      contentType: 'image/png',
-      size,
-    },
-  ];
+export async function generateStaticParams() {
+  const slugs = await getArticleSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
-
-export const alt = 'Blog Article Cover Image';
 
 export default async function Image({ params }: ImageParams) {
   const { slug } = await params;
