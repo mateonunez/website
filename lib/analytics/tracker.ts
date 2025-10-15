@@ -23,11 +23,10 @@ class AnalyticsTracker {
     const metadata = this._getMetadata();
 
     if (process.env.NODE_ENV === 'development') {
-      console.log('[Analytics] Event tracked:', { event, metadata });
+      console.debug('[Analytics] Event tracked:', { event, metadata });
     }
 
     this._pushToGTM(event, metadata);
-    this._trackToVercel(event);
   }
 
   public trackPageView(page: string, title?: string): void {
@@ -73,27 +72,15 @@ class AnalyticsTracker {
 
   private _pushToGTM(event: AnalyticsEvent, metadata: EventMetadata): void {
     if (typeof window === 'undefined') return;
-    (window as any).dataLayer = (window as any).dataLayer || [];
+    window.dataLayer = window.dataLayer || [];
 
-    (window as any).dataLayer.push({
+    window.dataLayer.push({
       event: event.action,
       event_category: event.category,
       event_label: event.label,
       ...event,
       ...metadata,
     });
-  }
-
-  private _trackToVercel(event: AnalyticsEvent): void {
-    if (typeof window === 'undefined') return;
-
-    try {
-      if (process.env.NODE_ENV === 'development') {
-        console.log('[Analytics] Vercel:', event);
-      }
-    } catch (error) {
-      console.error('[Analytics] Vercel error:', error);
-    }
   }
 }
 

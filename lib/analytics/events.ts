@@ -36,11 +36,20 @@ export interface TerminalEvent {
 
 export interface ContentEvent {
   category: 'content';
-  action: 'article_viewed' | 'article_completed' | 'playlist_viewed' | 'repository_viewed' | 'now_playing_viewed';
+  action:
+    | 'article_viewed'
+    | 'article_scrolled'
+    | 'article_completed'
+    | 'playlist_viewed'
+    | 'repository_viewed'
+    | 'now_playing_viewed'
+    | 'time_on_page';
   label: string;
   content_title?: string;
   reading_time?: number;
   scroll_depth?: number;
+  page_name?: string;
+  duration?: number;
 }
 
 export interface NavigationEvent {
