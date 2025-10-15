@@ -30,18 +30,21 @@ export function useScrollDepthTracking(title: string, isArticle: boolean = false
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercent = (scrollTop / docHeight) * 100;
 
-      if (scrollPercent >= 25 && !hasTracked25.current) {
-        hasTracked25.current = true;
-        trackContent.articleViewed(title, 25);
-      } else if (scrollPercent >= 50 && !hasTracked50.current) {
-        hasTracked50.current = true;
-        trackContent.articleViewed(title, 50);
-      } else if (scrollPercent >= 75 && !hasTracked75.current) {
-        hasTracked75.current = true;
-        trackContent.articleViewed(title, 75);
-      } else if (scrollPercent >= 95 && !hasTracked100.current) {
+      if (scrollPercent >= 95 && !hasTracked100.current) {
         hasTracked100.current = true;
         trackContent.articleCompleted(title, 100);
+      }
+      if (scrollPercent >= 75 && !hasTracked75.current) {
+        hasTracked75.current = true;
+        trackContent.articleScrolled(title, 75);
+      }
+      if (scrollPercent >= 50 && !hasTracked50.current) {
+        hasTracked50.current = true;
+        trackContent.articleScrolled(title, 50);
+      }
+      if (scrollPercent >= 25 && !hasTracked25.current) {
+        hasTracked25.current = true;
+        trackContent.articleScrolled(title, 25);
       }
     };
 
@@ -59,7 +62,7 @@ export function useTimeOnPage(pageName: string) {
     return () => {
       const timeSpent = Date.now() - startTime.current;
       if (timeSpent > 3000) {
-        trackPageView(pageName, `Time spent: ${Math.round(timeSpent / 1000)}s`);
+        trackContent.timeOnPage(pageName, Math.round(timeSpent / 1000));
       }
     };
   }, [pageName]);

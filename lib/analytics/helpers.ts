@@ -119,6 +119,17 @@ export const trackContent = {
     analytics.track(event);
   },
 
+  articleScrolled: (title: string, scrollDepth: number) => {
+    const event: ContentEvent = {
+      category: 'content',
+      action: 'article_scrolled',
+      label: `article_scrolled_${title}_${scrollDepth}`,
+      content_title: title,
+      scroll_depth: scrollDepth,
+    };
+    analytics.track(event);
+  },
+
   articleCompleted: (title: string, scrollDepth: number) => {
     const event: ContentEvent = {
       category: 'content',
@@ -126,6 +137,17 @@ export const trackContent = {
       label: `article_completed_${title}`,
       content_title: title,
       scroll_depth: scrollDepth,
+    };
+    analytics.track(event);
+  },
+
+  timeOnPage: (pageName: string, duration: number) => {
+    const event: ContentEvent = {
+      category: 'content',
+      action: 'time_on_page',
+      label: `time_on_page_${pageName}`,
+      page_name: pageName,
+      duration,
     };
     analytics.track(event);
   },
