@@ -1,7 +1,12 @@
 import type { ReactNode } from 'react';
 import { PageHeader } from '@/components/mate/page-header';
 import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema';
-import { getArticle } from '@/lib/articles/parser';
+import { getArticle, getArticleSlugs } from '@/lib/articles/parser';
+
+export async function generateStaticParams() {
+  const slugs = await getArticleSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
 
 export default async function ArticleLayout({
   children,

@@ -5,11 +5,16 @@ import { ArticleAnalytics } from '@/components/mate/article-analytics';
 import { ArticleLayout } from '@/components/mate/article-layout';
 import { Main } from '@/components/mate/main';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
-import { getArticle, getRelatedArticles } from '@/lib/articles/parser';
+import { getArticle, getArticleSlugs, getRelatedArticles } from '@/lib/articles/parser';
 import config from '@/lib/config';
 import { getArticleSeries, getSeriesOrder } from '@/lib/config/article-series';
 import meta from '@/lib/config/metadata';
 import { getBlogPostingSchema } from '@/lib/seo/json-ld';
+
+export async function generateStaticParams() {
+  const slugs = await getArticleSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
