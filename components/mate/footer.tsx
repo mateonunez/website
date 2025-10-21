@@ -21,6 +21,8 @@ export function Footer(): JSX.Element {
                 target="_blank"
                 rel="noreferrer"
                 className="font-medium underline underline-offset-4 transition-colors hover:text-primary"
+                aria-label="View source code on GitHub"
+                title="View source code on GitHub"
               >
                 here
               </Link>
