@@ -2,7 +2,7 @@
   "name": "@mateonunez/website",
   "version": "1.5.0",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "build:analyze": "ANALYZE=true next build",
     "start": "next start",
@@ -13,7 +13,6 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@mdx-js/react": "^3.1.1",
     "@octokit/graphql": "^9.0.2",
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-collapsible": "^1.1.12",
@@ -32,46 +31,43 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
-    "framer-motion": "^12.23.22",
+    "framer-motion": "^12.23.24",
     "js-cookie": "^3.0.5",
-    "lucide-react": "^0.544.0",
-    "next": "^15.5.4",
+    "lucide-react": "^0.546.0",
+    "next": "16.0.0",
     "next-mdx-remote": "^5.0.0",
     "next-themes": "^0.4.6",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
     "reading-time": "^1.5.0",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.1",
-    "remove-markdown": "^0.6.2",
     "sharp": "^0.34.4",
     "sonner": "^2.0.7",
     "swr": "^2.3.6",
     "tailwind-merge": "^3.3.1",
-    "zod": "^4.1.11"
+    "zod": "^4.1.12"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.2.5",
-    "@mdx-js/loader": "^3.1.1",
-    "@next/bundle-analyzer": "^15.5.4",
-    "@next/mdx": "^15.5.4",
-    "@tailwindcss/postcss": "^4.1.14",
+    "@biomejs/biome": "^2.2.6",
+    "@next/bundle-analyzer": "16.0.0",
+    "@tailwindcss/postcss": "^4.1.15",
     "@tailwindcss/typography": "^0.5.19",
     "@types/js-cookie": "^3.0.6",
     "@types/mdx": "^2.0.13",
-    "@types/node": "^24.6.2",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
+    "@types/node": "^24.9.1",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
     "husky": "^9.1.7",
     "postcss": "^8.5.6",
     "schema-dts": "^1.1.5",
-    "tailwindcss": "^4.1.14",
+    "tailwindcss": "^4.1.15",
     "tailwindcss-animate": "^1.0.7",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   },
   "author": "mateonunez",
-  "packageManager": "pnpm@10.18.0+sha512.e804f889f1cecc40d572db084eec3e4881739f8dec69c0ff10d2d1beff9a4e309383ba27b5b750059d7f4c149535b6cd0d2cb1ed3aeb739239a4284a68f40cfa",
+  "packageManager": "pnpm@10.18.3+sha512.bbd16e6d7286fd7e01f6b3c0b3c932cda2965c06a908328f74663f10a9aea51f1129eea615134bf992831b009eabe167ecb7008b597f40ff9bc75946aadfb08d",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@biomejs/biome",
@@ -80,6 +76,10 @@
     ],
     "ignoredBuiltDependencies": [
       "@tailwindcss/oxide"
-    ]
+    ],
+    "overrides": {
+      "@types/react": "19.2.2",
+      "@types/react-dom": "19.2.1"
+    }
   }
 }

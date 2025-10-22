@@ -1,9 +1,5 @@
-import type { Options as MDXOptions } from '@mdx-js/loader';
 import bundleAnalyzer from '@next/bundle-analyzer';
-import createMDX from '@next/mdx';
 import type { NextConfig } from 'next';
-import rehypeSlug from 'rehype-slug';
-import remarkGfm from 'remark-gfm';
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
@@ -60,11 +56,27 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  reactCompiler: true,
   experimental: {
-    mdxRs: true,
     inlineCss: true,
     optimizePackageImports: ['lucide-react', 'date-fns', 'framer-motion'],
-    reactCompiler: true,
+    cacheLife: {
+      default: {
+        stale: 60,
+        revalidate: 300,
+        expire: 3600,
+      },
+      articles: {
+        stale: 300,
+        revalidate: 900,
+        expire: 86400,
+      },
+      dynamic: {
+        stale: 0,
+        revalidate: 60,
+        expire: 300,
+      },
+    },
   },
   output: 'standalone',
   images: {
@@ -125,20 +137,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
 };
 
-const mdxOptions: MDXOptions = {
-  remarkPlugins: [remarkGfm],
-  rehypePlugins: [rehypeSlug],
-  format: 'mdx',
-};
-
-const withMDX = createMDX({
-  extension: /\.mdx?$/,
-  options: mdxOptions,
-});
-
-export default withBundleAnalyzer(withMDX(nextConfig));
+export default withBundleAnalyzer(nextConfig);
