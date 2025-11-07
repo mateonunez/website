@@ -5,6 +5,7 @@ import './../styles/global.css';
 
 import { AppSidebar } from '@/components/mate/app-sidebar';
 import { Footer } from '@/components/mate/footer';
+import { GithubStarBanner } from '@/components/mate/github-star-banner';
 import { TopNavbar } from '@/components/mate/top-navbar';
 import { AnalyticsProvider } from '@/components/providers/analytics-provider';
 import { AnalyticsTracker } from '@/components/providers/analytics-tracker';
@@ -73,6 +74,7 @@ export default function RootLayout({
               <UIProvider>
                 <SidebarInset className="flex flex-col">
                   <TopNavbar />
+                  <GithubStarBanner />
 
                   <main className="flex-1">{children}</main>
 
