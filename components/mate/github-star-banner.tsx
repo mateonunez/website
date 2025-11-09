@@ -50,10 +50,9 @@ export function GithubStarBanner(): JSX.Element | null {
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            <Button size="sm" variant="default" asChild className="gap-1.5 whitespace-nowrap">
+            <Button size="sm" variant="default" asChild className="whitespace-nowrap">
               <Link href={repoUrl} target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub">
                 <Star className="h-3.5 w-3.5 shrink-0" />
-                <span>Star</span>
               </Link>
             </Button>
 
