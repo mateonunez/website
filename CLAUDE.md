@@ -18,17 +18,18 @@ corepack enable
 ## Common Commands
 
 ### Development
-- `pnpm dev` - Start development server at http://localhost:3000
+- `pnpm dev` - Start development server at http://localhost:3000 (uses Turbopack)
 - `pnpm build` - Production build
 - `pnpm build:analyze` - Build with bundle analyzer (sets ANALYZE=true)
 - `pnpm start` - Start production server
 
 ### Code Quality
-- `pnpm lint` - Run Biome linter, formatter, and checks
-- `pnpm lint:fix` - Auto-fix linting issues with Biome (includes --unsafe flag)
+- `pnpm lint` - Run Biome linter, formatter, and checks (runs all three: lint + format + check)
+- `pnpm lint:fix` - Auto-fix linting issues with Biome (includes --unsafe flag, runs all three with --write)
 
 ### Other
 - `pnpm generate:webmanifest` - Generate web manifest (runs automatically in prebuild)
+- `pnpm prepare` - Sets up Husky git hooks (runs automatically after install)
 
 ## Environment Variables
 
@@ -82,9 +83,11 @@ Copy `.env.local.example` to `.env.local` and configure:
 
 **Styling**: Uses Tailwind CSS v4 with custom configuration. The `tailwind-merge` utility (via `clsx`) is used for conditional classes. Components use `class-variance-authority` for variant-based styling.
 
-**Data Fetching**: Uses SWR for client-side data fetching (especially for Spotify data). Server components fetch data directly in route handlers.
+**Data Fetching**: Uses SWR for client-side data fetching (especially for Spotify data with polling intervals - 20s for currently-listening, 10min for recently-played). Server components fetch data directly. Article fetching functions use React's `cache()` wrapper for deduplication.
 
-**SEO**: Trailing slashes are enabled. The site includes structured data, OpenGraph tags, and sitemap generation (see `app/sitemap.ts`).
+**State Management**: Uses a custom `UIProvider` context (in `components/providers/ui-provider.tsx`) to manage shared UI state like Spotify listening status. Cookie-based state persistence is handled via utilities in `lib/utils/cookies/` (theme, terminal visited state, GitHub star banner dismissal).
+
+**SEO**: Trailing slashes are enabled. The site includes structured data (Person, Organization, WebSite schemas), OpenGraph tags, and sitemap generation (see `app/sitemap.ts`). BreadcrumbSchema component generates breadcrumb JSON-LD.
 
 ## Code Style
 
@@ -94,13 +97,25 @@ This project uses **Biome** (not ESLint/Prettier):
 - Semicolons required
 - 120 character line width
 - Never use `npm run lint` or similar - use `pnpm lint` or `pnpm lint:fix`
+- Import organization is automated (organizeImports: "on")
+- Several rules are disabled: exhaustive dependencies, array index keys, noExplicitAny, noProcessEnv
+- Use `biome-ignore` comments when necessary (see examples in carousel.tsx and terminal.tsx for a11y exceptions)
 
 ## Important Notes
 
-- **React Compiler is enabled**: Be aware that React 19 compiler is active (`experimental.reactCompiler: true`)
+- **React Compiler is enabled**: Be aware that React 19 compiler is active (`reactCompiler: true` in next.config.ts)
+- **Cache configuration**: Custom `cacheLife` profiles defined for different content types (default, articles, dynamic) with varying stale/revalidate/expire times
+- **Performance optimizations**:
+  - Package imports optimized for lucide-react, date-fns, framer-motion
+  - Inline CSS enabled (`experimental.inlineCss`)
+  - Dynamic imports used for heavy components (Terminal, PlaylistsCarousel)
 - **MDX configuration**: MDX files use `remarkGfm` and `rehypeSlug` plugins (configured in both next.config.ts and article parser)
-- **Security headers**: Strict CSP and security headers are configured in next.config.ts
-- **Image optimization**: Next.js image optimization is configured for Spotify CDN and GitHub assets
+- **Security headers**: Strict CSP and security headers are configured in next.config.ts (X-XSS-Protection, X-Content-Type-Options, HSTS, etc.)
+- **Image optimization**:
+  - Next.js image optimization configured for Spotify CDN and GitHub assets
+  - AVIF and WebP formats enabled
+  - 24-hour minimum cache TTL
+  - Long cache headers on static assets (1 year immutable)
 - **Standalone output**: The build outputs a standalone bundle for containerization
 - **TypeScript strict mode is disabled**: Be mindful when adding new code
 - **Husky git hooks**: Pre-commit hooks are configured (see `.husky/`)

@@ -38,6 +38,14 @@ export function Terminal({
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Extract primitive dependencies for better memoization
+  const spotifyPlayingId = spotifyData?.currentlyPlaying?.id;
+  const spotifyRecentlyPlayedCount = spotifyData?.recentlyPlayed?.length;
+  const spotifyTopTracksCount = spotifyTopData?.tracks?.length;
+  const spotifyTopArtistsCount = spotifyTopData?.artists?.length;
+  const githubLogin = githubData?.profile?.login;
+  const githubActivitiesCount = githubData?.activities?.activities?.length;
+
   const dataSources = useMemo<DataSources>(
     () => ({
       spotify: {
@@ -54,7 +62,17 @@ export function Terminal({
         data: githubData,
       },
     }),
-    [spotifyData, githubData, spotifyTopData],
+    [
+      spotifyPlayingId,
+      spotifyRecentlyPlayedCount,
+      spotifyTopTracksCount,
+      spotifyTopArtistsCount,
+      githubLogin,
+      githubActivitiesCount,
+      spotifyData,
+      githubData,
+      spotifyTopData,
+    ],
   );
 
   const tools = useMemo(() => ({ clearLines: actions.clearCompletedLines }), [actions]);
@@ -170,6 +188,17 @@ export function Terminal({
     }
   }, [isComplete]);
 
+  const handleTerminalKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (isComplete && inputRef.current && (e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault();
+        inputRef.current.focus();
+        inputRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    },
+    [isComplete],
+  );
+
   return (
     <CommandContextProvider dataSources={dataSources} tools={tools}>
       <div className={cn('rounded-md border bg-card text-card-foreground shadow', className)}>
@@ -180,6 +209,10 @@ export function Terminal({
           style={{ height }}
           className="space-y-2 overflow-y-auto overflow-x-hidden p-4 font-mono text-sm bg-black text-neutral-50 rounded-b-xl whitespace-pre-wrap"
           onClick={handleTerminalClick}
+          onKeyDown={handleTerminalKeyDown}
+          role="log"
+          aria-live="polite"
+          aria-label="Terminal output"
         >
           {completedLines.map((line, index) => (
             <MemoizedLine key={index} text={line.text} noPrompt={!line.showPrompt} noCaret prompt={prompt} />

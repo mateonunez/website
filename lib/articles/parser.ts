@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { compileMDX } from 'next-mdx-remote/rsc';
+import { cache } from 'react';
 import readingTime from 'reading-time';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
@@ -9,14 +10,14 @@ import config from '@/lib/config';
 import personal from '@/lib/config/personal';
 import type { Article, ArticleFrontmatter } from '@/types/article';
 
-export async function getArticleSlugs(): Promise<string[]> {
+export const getArticleSlugs = cache(async (): Promise<string[]> => {
   const fullPath = path.join(process.cwd(), './articles');
   const articles = readdirSync(fullPath);
   const slugs = articles.filter((file) => /\.mdx?$/.test(file)).map((file) => file.replace(/\.mdx?$/, ''));
   return slugs;
-}
+});
 
-export async function getAllArticles(): Promise<Article[]> {
+export const getAllArticles = cache(async (): Promise<Article[]> => {
   const slugs = await getArticleSlugs();
   const articles: Article[] = [];
   for (const slug of slugs) {
@@ -24,21 +25,21 @@ export async function getAllArticles(): Promise<Article[]> {
     articles.push(article);
   }
   return articles.sort((a, b) => (a.frontmatter.date > b.frontmatter.date ? -1 : 1));
-}
+});
 
-export async function getLastArticle(): Promise<Article> {
+export const getLastArticle = cache(async (): Promise<Article> => {
   const [lastArticle] = await getAllArticles();
   return lastArticle;
-}
+});
 
-export async function getRelatedArticles(currentArticle: ArticleFrontmatter): Promise<Article[]> {
+export const getRelatedArticles = cache(async (currentArticle: ArticleFrontmatter): Promise<Article[]> => {
   const allArticles = await getAllArticles();
   const related = allArticles
     .filter((article) => article.frontmatter.slug !== currentArticle.slug)
     .filter((article) => article.frontmatter.tags.some((tag) => currentArticle.tags.includes(tag)));
 
   return related.slice(0, config.article.relatedArticles);
-}
+});
 
 export function getRawArticle(slug: string): string {
   const fullPath = path.join(process.cwd(), './articles', `${slug}.mdx`);
@@ -46,7 +47,7 @@ export function getRawArticle(slug: string): string {
   return articleRaw;
 }
 
-export async function getArticle({ slug }: { slug: string }): Promise<Article> {
+export const getArticle = cache(async ({ slug }: { slug: string }): Promise<Article> => {
   const rawArticle = getRawArticle(slug);
   const { content, frontmatter } = await compile(rawArticle);
 
@@ -75,7 +76,7 @@ export async function getArticle({ slug }: { slug: string }): Promise<Article> {
       translated: frontmatter.translated || false,
     },
   };
-}
+});
 
 export async function compile(articleRaw: string) {
   const { content, frontmatter } = await compileMDX({

@@ -47,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>): React.JSX.Element {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning style={{ colorScheme: 'light dark' }}>
       <head>
         <link rel="preconnect" href="https://i.scdn.co" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://avatars.githubusercontent.com" crossOrigin="anonymous" />

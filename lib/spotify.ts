@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import type {
   SpotifyAccessToken,
   SpotifyCurrentlyPlaying,
@@ -257,12 +258,13 @@ const spotifyClient = new SpotifyClient({
   refreshToken: process.env.SPOTIFY_REFRESH_TOKEN as string,
 });
 
-// TODO: refactor this
-export const getCurrentlyListening = () => spotifyClient.getCurrentlyListening();
-export const getRecentlyPlayed = () => spotifyClient.getRecentlyPlayed();
-export const getTopArtists = () => spotifyClient.getTopArtists();
-export const getTopTracks = () => spotifyClient.getTopTracks();
-export const getUserProfile = () => spotifyClient.getUserProfile();
-export const getUserPlaylists = () => spotifyClient.getUserPlaylists();
-export const getUserPublicPlaylists = (userId: string, limit = 20, offset = 0) =>
-  spotifyClient.getUserPublicPlaylists(userId, limit, offset);
+// Server-side cache wrappers for request deduplication
+export const getCurrentlyListening = cache(() => spotifyClient.getCurrentlyListening());
+export const getRecentlyPlayed = cache(() => spotifyClient.getRecentlyPlayed());
+export const getTopArtists = cache(() => spotifyClient.getTopArtists());
+export const getTopTracks = cache(() => spotifyClient.getTopTracks());
+export const getUserProfile = cache(() => spotifyClient.getUserProfile());
+export const getUserPlaylists = cache(() => spotifyClient.getUserPlaylists());
+export const getUserPublicPlaylists = cache((userId: string, limit = 20, offset = 0) =>
+  spotifyClient.getUserPublicPlaylists(userId, limit, offset),
+);

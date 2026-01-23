@@ -3,6 +3,12 @@ import { ArticlePreview } from './article-preview';
 
 export async function Articles() {
   const articles = await getAllArticles();
+
+  // Filter non-translated articles once (server-side, so useMemo not needed)
+  const nonTranslatedArticles = articles.filter((article) => !article.frontmatter.translated);
+  const featuredArticle = nonTranslatedArticles[0];
+  const remainingArticles = nonTranslatedArticles.slice(1);
+
   return (
     <div>
       <div className="mb-6 text-center">
@@ -11,38 +17,35 @@ export async function Articles() {
         </p>
       </div>
 
-      {articles.length > 0 && !articles[0].frontmatter.translated && (
+      {featuredArticle && (
         <div className="featured-section mb-8">
           <ArticlePreview
-            key={articles[0].frontmatter.slug}
-            title={articles[0].frontmatter.title}
-            description={articles[0].frontmatter.description}
-            date={articles[0].frontmatter.date}
-            slug={articles[0].frontmatter.slug}
-            author={articles[0].frontmatter.author}
-            image={articles[0].frontmatter.image}
-            tags={articles[0].frontmatter.tags}
+            key={featuredArticle.frontmatter.slug}
+            title={featuredArticle.frontmatter.title}
+            description={featuredArticle.frontmatter.description}
+            date={featuredArticle.frontmatter.date}
+            slug={featuredArticle.frontmatter.slug}
+            author={featuredArticle.frontmatter.author}
+            image={featuredArticle.frontmatter.image}
+            tags={featuredArticle.frontmatter.tags}
             priority
           />
         </div>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-        {articles
-          .slice(1)
-          .filter((article) => !article.frontmatter.translated)
-          .map((article) => (
-            <ArticlePreview
-              key={article.frontmatter.slug}
-              title={article.frontmatter.title}
-              description={article.frontmatter.description}
-              date={article.frontmatter.date}
-              slug={article.frontmatter.slug}
-              author={article.frontmatter.author}
-              image={article.frontmatter.image}
-              tags={article.frontmatter.tags}
-            />
-          ))}
+        {remainingArticles.map((article) => (
+          <ArticlePreview
+            key={article.frontmatter.slug}
+            title={article.frontmatter.title}
+            description={article.frontmatter.description}
+            date={article.frontmatter.date}
+            slug={article.frontmatter.slug}
+            author={article.frontmatter.author}
+            image={article.frontmatter.image}
+            tags={article.frontmatter.tags}
+          />
+        ))}
       </div>
     </div>
   );
