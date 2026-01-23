@@ -57,7 +57,7 @@ const nextConfig: NextConfig = {
   compress: true,
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   reactCompiler: {
-    compilationMode: 'infer'
+    compilationMode: 'infer',
   },
   cacheLife: {
     default: {

@@ -7,7 +7,7 @@
   font-display: swap;
 }
 
-@plugin '@tailwindcss/typography';
+@plugin "@tailwindcss/typography";
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));

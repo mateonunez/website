@@ -203,7 +203,6 @@ export function Terminal({
     <CommandContextProvider dataSources={dataSources} tools={tools}>
       <div className={cn('rounded-md border bg-card text-card-foreground shadow', className)}>
         <TerminalHeader />
-        {/* biome-ignore lint/a11y/noStaticElementInteractions: terminal */}
         <div
           ref={terminalRef}
           style={{ height }}
