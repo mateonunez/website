@@ -1,4 +1,5 @@
 import { graphql } from '@octokit/graphql';
+import { cache } from 'react';
 import personal from '@/lib/config/personal';
 import type {
   GitHubActivitiesResponse,
@@ -403,8 +404,8 @@ const githubClient = new GitHubClient({
   username: personal.social.github,
 });
 
-// TODO: refactor this
-export const getProfile = () => githubClient.getProfile();
-export const getReadme = () => githubClient.getReadme();
-export const getRepository = (repository: string) => githubClient.getRepository(repository);
-export const getLastActivities = () => githubClient.getLastActivities();
+// Server-side cache wrappers for request deduplication
+export const getProfile = cache(() => githubClient.getProfile());
+export const getReadme = cache(() => githubClient.getReadme());
+export const getRepository = cache((repository: string) => githubClient.getRepository(repository));
+export const getLastActivities = cache(() => githubClient.getLastActivities());

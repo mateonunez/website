@@ -1,10 +1,10 @@
 import { Loader2, Music } from 'lucide-react';
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import type { JSX } from 'react';
 import { memo, Suspense } from 'react';
 import { Main } from '@/components/mate/main';
 import { PageHeader } from '@/components/mate/page-header';
-import { PlaylistsCarousel } from '@/components/mate/spotify/playlists-carousel';
 import { SpotifyProfileCard } from '@/components/mate/spotify/profile-card';
 import { RecentlyPlayed } from '@/components/mate/spotify/recently-played';
 import { SpotifyPlayer } from '@/components/mate/spotify/spotify-player';
@@ -13,6 +13,23 @@ import { TopTracks } from '@/components/mate/spotify/top-tracks';
 import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema';
 import { Card, CardContent } from '@/components/ui/card';
 import meta from '@/lib/config/metadata';
+
+// Dynamic import for heavy carousel component
+const PlaylistsCarousel = dynamic(
+  () => import('@/components/mate/spotify/playlists-carousel').then((mod) => ({ default: mod.PlaylistsCarousel })),
+  {
+    loading: () => (
+      <div className="space-y-4">
+        <div className="h-6 w-32 bg-muted animate-pulse rounded" />
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="aspect-[3/4] bg-muted animate-pulse rounded-lg" />
+          ))}
+        </div>
+      </div>
+    ),
+  },
+);
 
 export const metadata: Metadata = {
   title: 'Spotify Profile - Music & Playlists',

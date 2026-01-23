@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.2.6/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.11/schema.json",
   "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "files": {
     "includes": [
@@ -25,8 +25,7 @@
       "recommended": true,
       "nursery": {
         "useSortedClasses": "off",
-        "useExplicitType": "off",
-        "noSecrets": "off"
+        "useExplicitType": "off"
       },
       "correctness": {
         "useExhaustiveDependencies": "off",
@@ -53,6 +52,9 @@
       },
       "a11y": {
         "useKeyWithClickEvents": "off"
+      },
+      "security": {
+        "noSecrets": "off"
       }
     },
     "includes": ["**", "!**/.next/", "!**/node_modules/", "!**/*.json", "!**/*.config.js", "!**/*.config.mjs"]
@@ -75,6 +77,13 @@
   "json": {
     "parser": {
       "allowComments": true
+    }
+  },
+  "css": {
+    "parser": {
+      "cssModules": false,
+      "allowWrongLineComments": false,
+      "tailwindDirectives": true
     }
   }
 }

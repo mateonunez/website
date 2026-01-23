@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { type JSX, memo } from 'react';
 import AboutMeWrapper from '@/components/mate/about-me.wrapper';
 import LatestArticlesWrapper from '@/components/mate/latest-articles.wrapper';
@@ -5,14 +6,45 @@ import NameHeadingWrapper from '@/components/mate/name-heading.wrapper';
 import GitHubCommunityWrapper from '@/components/mate/open-source/github-community.wrapper';
 import LastActivityWrapper from '@/components/mate/open-source/last-activity.wrapper';
 import PlayerWrapper from '@/components/mate/spotify/player.wrapper';
-import { PlaylistsCarousel } from '@/components/mate/spotify/playlists-carousel';
 import RecentlyPlayedWrapper from '@/components/mate/spotify/recently-played.wrapper';
-import TerminalWrapper from '@/components/mate/terminal/terminal.wrapper';
 import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Separator } from '@/components/ui/separator';
 import { Toaster } from '@/components/ui/sonner';
 import { getProfilePageSchema } from '@/lib/seo/json-ld';
+
+// Dynamic imports for heavy components
+const TerminalWrapper = dynamic(() => import('@/components/mate/terminal/terminal.wrapper'), {
+  loading: () => (
+    <div className="rounded-md border bg-card text-card-foreground shadow animate-pulse">
+      <div className="flex items-center justify-between border-b px-4 py-2">
+        <div className="flex items-center gap-2">
+          <div className="h-3 w-3 rounded-full bg-red-500" />
+          <div className="h-3 w-3 rounded-full bg-yellow-500" />
+          <div className="h-3 w-3 rounded-full bg-green-500" />
+        </div>
+        <div className="text-sm text-muted-foreground">Terminal</div>
+      </div>
+      <div className="h-[400px] bg-black rounded-b-xl" />
+    </div>
+  ),
+});
+
+const PlaylistsCarousel = dynamic(
+  () => import('@/components/mate/spotify/playlists-carousel').then((mod) => ({ default: mod.PlaylistsCarousel })),
+  {
+    loading: () => (
+      <div className="space-y-4">
+        <div className="h-6 w-32 bg-muted animate-pulse rounded" />
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="aspect-[3/4] bg-muted animate-pulse rounded-lg" />
+          ))}
+        </div>
+      </div>
+    ),
+  },
+);
 
 const SectionTitle = memo(({ title, fontClass = '' }: { title: string; fontClass?: string }) => (
   <>

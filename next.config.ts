@@ -56,27 +56,29 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-  reactCompiler: true,
+  reactCompiler: {
+    compilationMode: 'infer',
+  },
+  cacheLife: {
+    default: {
+      stale: 60,
+      revalidate: 300,
+      expire: 3600,
+    },
+    articles: {
+      stale: 300,
+      revalidate: 900,
+      expire: 86400,
+    },
+    dynamic: {
+      stale: 0,
+      revalidate: 60,
+      expire: 300,
+    },
+  },
   experimental: {
     inlineCss: true,
     optimizePackageImports: ['lucide-react', 'date-fns', 'framer-motion'],
-    cacheLife: {
-      default: {
-        stale: 60,
-        revalidate: 300,
-        expire: 3600,
-      },
-      articles: {
-        stale: 300,
-        revalidate: 900,
-        expire: 86400,
-      },
-      dynamic: {
-        stale: 0,
-        revalidate: 60,
-        expire: 300,
-      },
-    },
   },
   output: 'standalone',
   images: {
