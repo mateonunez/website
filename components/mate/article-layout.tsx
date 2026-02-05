@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { ArticleComments } from '@/components/mate/article-comments';
 import { ArticleSeriesNav } from '@/components/mate/article-series-nav';
 import { Main } from '@/components/mate/main';
 import { MDXLayout } from '@/components/mdx/layout';
@@ -196,6 +197,8 @@ export function ArticleLayout({
             </div>
           </>
         )}
+
+        {slug && <ArticleComments slug={slug} />}
       </div>
     </Main>
   );
