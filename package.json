@@ -13,6 +13,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@giscus/react": "^3.1.0",
     "@octokit/graphql": "^9.0.3",
     "@radix-ui/react-avatar": "^1.1.11",
     "@radix-ui/react-collapsible": "^1.1.12",

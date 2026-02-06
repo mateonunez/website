@@ -65,7 +65,7 @@ export function BlogBreadcrumb({
         {listItems.map((item, index) => {
           const isLast = index === listItems.length - 1;
           return (
-            <React.Fragment key={item.label}>
+            <React.Fragment key={index}>
               <li className="flex items-center">
                 {!isLast && item.href ? (
                   <Link
