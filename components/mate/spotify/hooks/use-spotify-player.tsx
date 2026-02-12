@@ -12,7 +12,7 @@ export function useSpotifyPlayer() {
   const [currentSongId, setCurrentSongId] = useState<string | null>(null);
   const lastUpdateTimeRef = useRef<number>(Date.now());
 
-  const { data: spotifyData, isLoading } = useSpotify();
+  const { data: spotifyData, isLoading, isError } = useSpotify();
   const currentlyPlaying = spotifyData?.currentlyPlaying;
 
   useEffect(() => {
@@ -73,6 +73,7 @@ export function useSpotifyPlayer() {
   return {
     mounted,
     isLoading,
+    isError,
     currentlyPlaying,
     progress,
     simulatedTime,

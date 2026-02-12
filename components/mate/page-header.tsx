@@ -14,6 +14,7 @@ export interface PageHeaderProps {
   breadcrumbItems?: Array<{ label: string; href?: string }>;
   className?: string;
   children?: ReactNode;
+  asHeading?: boolean;
 }
 
 const subtitleEasterEgg = 'Just chilling and coding ☕️';
@@ -25,7 +26,15 @@ const sectionIcons = {
   spotify: Music,
 };
 
-export function PageHeader({ title, subtitle, icon, breadcrumbItems, className, children }: PageHeaderProps) {
+export function PageHeader({
+  title,
+  subtitle,
+  icon,
+  breadcrumbItems,
+  className,
+  children,
+  asHeading = false,
+}: PageHeaderProps) {
   const [tempSubtitle, setTempSubtitle] = useState(subtitle);
 
   const handleHover = () => setTempSubtitle(subtitleEasterEgg);
@@ -64,12 +73,19 @@ export function PageHeader({ title, subtitle, icon, breadcrumbItems, className, 
         <div className="flex items-center justify-between w-full px-4 md:px-8">
           <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 max-w-[calc(100%-3rem)]">
             <AnimatedItem delay={0.1}>
-              <Link href="/" className="flex items-center gap-2">
-                {displayIcon}
-                <span className="text-xl font-bold font-prompt transition-colors hover:text-primary truncate">
-                  {title}
-                </span>
-              </Link>
+              {asHeading ? (
+                <h1 className="flex items-center gap-2">
+                  {displayIcon}
+                  <span className="text-xl font-bold font-prompt truncate">{title}</span>
+                </h1>
+              ) : (
+                <Link href="/" className="flex items-center gap-2">
+                  {displayIcon}
+                  <span className="text-xl font-bold font-prompt transition-colors hover:text-primary truncate">
+                    {title}
+                  </span>
+                </Link>
+              )}
             </AnimatedItem>
             {tempSubtitle && (
               <AnimatedItem delay={0.2} className="hidden sm:block">

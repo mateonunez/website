@@ -1,7 +1,7 @@
 'use client';
 
 import { formatDistanceToNow } from 'date-fns';
-import { Clock, Loader2, Music } from 'lucide-react';
+import { AlertCircle, Clock, Loader2, Music } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -20,7 +20,7 @@ const ITEMS_PER_PAGE = 5;
 export function RecentlyPlayed() {
   const [mounted, setMounted] = useState(false);
   const [visibleItems, setVisibleItems] = useState(ITEMS_PER_PAGE);
-  const { data: spotifyData, isLoading } = useSpotify();
+  const { data: spotifyData, isLoading, isError } = useSpotify();
 
   useEffect(() => {
     setMounted(true);
@@ -31,6 +31,17 @@ export function RecentlyPlayed() {
   };
 
   if (!mounted) return null;
+
+  if (isError) {
+    return (
+      <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/50">
+        <CardContent className="flex items-center justify-center gap-2 p-8 text-sm text-muted-foreground">
+          <AlertCircle className="h-4 w-4" />
+          Unable to load recently played tracks
+        </CardContent>
+      </Card>
+    );
+  }
 
   if (isLoading) {
     return (
@@ -66,7 +77,7 @@ export function RecentlyPlayed() {
           Last {spotifyData.recentlyPlayed.length} tracks I've listened to on Spotify
         </CardDescription>
       </CardHeader>
-      <CardContent className="p-2 sm:p-4">
+      <CardContent className="p-2 sm:p-4" aria-live="polite" aria-atomic="false">
         <div className="block sm:hidden space-y-2 sm:space-y-3">
           {displayedItems.map((item, index) => (
             <Card key={`${item.id}-${index}`} className="border border-border/50">

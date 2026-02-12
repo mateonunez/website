@@ -28,6 +28,7 @@ export default async function ArticleLayout({
       <BreadcrumbSchema items={breadcrumbItems} />
       <PageHeader
         title={frontmatter.title}
+        asHeading
         breadcrumbItems={[
           { label: 'Home', href: '/' },
           ...breadcrumbItems.map((item) => ({ label: item.name, href: item.href })),

@@ -217,7 +217,7 @@ export function LastActivity() {
           Contributing to {repositories.length} repositories with {activityList.length} activities
         </CardDescription>
       </CardHeader>
-      <CardContent className="p-0">
+      <CardContent className="p-0" aria-live="polite" aria-atomic="false">
         <Tabs defaultValue="all" className="w-full" onValueChange={setActiveTab}>
           <div className="overflow-x-auto overflow-y-hidden">
             <TabsList className="w-full flex justify-start bg-muted/30 p-1.5 tabs-scrollbar">

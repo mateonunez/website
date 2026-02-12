@@ -51,6 +51,7 @@ const Header = memo(() => (
   <PageHeader
     title="My Spotify Profile"
     subtitle="Discover my music taste and listening habits"
+    asHeading
     icon={<Music />}
     breadcrumbItems={[
       {

@@ -4,7 +4,6 @@ import Giscus from '@giscus/react';
 import { useTheme } from 'next-themes';
 import { memo, useMemo } from 'react';
 import { Separator } from '@/components/ui/separator';
-import personal from '@/lib/config/personal';
 
 interface ArticleCommentsProps {
   slug: string;

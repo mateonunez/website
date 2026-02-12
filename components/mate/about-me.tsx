@@ -15,7 +15,6 @@ import {
   Twitter,
   User,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
 import { AnimatedContainer, AnimatedItem } from '@/components/ui/animated-container';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -61,14 +60,7 @@ const profileBadges = personal.profileBadges.map((badge) => ({
 }));
 
 export function AboutMe() {
-  const [mounted, setMounted] = useState(false);
   const animations = useAnimations();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
 
   const summarizedBio = personal.bio.short;
 

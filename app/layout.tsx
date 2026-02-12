@@ -51,6 +51,7 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://i.scdn.co" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://avatars.githubusercontent.com" crossOrigin="anonymous" />
+        <link rel="alternate" type="application/rss+xml" title="Mateo Nunez's Blog" href="/api/rss" />
       </head>
       <body className={cn(inter.variable, hankenGrotesk.variable, prompt.variable, 'font-sans', 'antialiased')}>
         {/* GTM noscript fallback: required immediately after opening body */}
@@ -73,10 +74,18 @@ export default function RootLayout({
 
               <UIProvider>
                 <SidebarInset className="flex flex-col">
+                  <a
+                    href="#main-content"
+                    className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground focus:text-sm focus:font-medium focus:shadow-lg"
+                  >
+                    Skip to main content
+                  </a>
                   <TopNavbar />
                   <GithubStarBanner />
 
-                  <main className="flex-1">{children}</main>
+                  <main id="main-content" className="flex-1">
+                    {children}
+                  </main>
 
                   <Footer />
                 </SidebarInset>

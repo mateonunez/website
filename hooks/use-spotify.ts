@@ -10,6 +10,9 @@ export function useSpotify() {
   const { error: currentError, isLoading: currentLoading } = useSWR('/api/spotify/currently-listening', {
     fetcher: async (url: string) => {
       const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error('Failed to fetch currently listening');
+      }
       const data = await res.json();
       setSpotifyListening(data);
       return data;
@@ -22,6 +25,9 @@ export function useSpotify() {
   const { error: recentError, isLoading: recentLoading } = useSWR('/api/spotify/recently-played', {
     fetcher: async (url: string) => {
       const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error('Failed to fetch recently played');
+      }
       const data = await res.json();
       setSpotifyRecentlyPlayed(data);
       return data;

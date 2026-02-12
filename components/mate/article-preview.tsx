@@ -33,9 +33,9 @@ export function ArticlePreview({
   const visibleTags = (tags ?? []).slice(0, MAX_VISIBLE_TAGS);
   const remainingTagsCount = (tags?.length ?? 0) - visibleTags.length;
   return (
-    <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 card-hover-lift hover:border-amber-500/30 rounded-t-xl rounded-b-xl">
+    <Card className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 card-hover-lift hover:border-amber-500/30 overflow-hidden">
       <Link href={`/blog/${slug}`} className="block">
-        <div className="relative h-[200px] md:h-[260px] w-full overflow-hidden rounded-t-xl">
+        <div className="relative h-[200px] md:h-[260px] w-full overflow-hidden">
           <div className="absolute inset-0 z-10 bg-gradient-to-t from-gray-900/80 to-gray-900/20" />
           <Image
             src={image}

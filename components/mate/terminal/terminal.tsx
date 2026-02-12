@@ -86,9 +86,14 @@ export function Terminal({
   const executeCommand = useCallback(
     async (input: string) => {
       commandCount.current += 1;
-      await baseExecuteCommand(input);
+      try {
+        await baseExecuteCommand(input);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'An unexpected error occurred';
+        actions.addCompletedLines([{ text: `Error: ${message}`, showPrompt: false }]);
+      }
     },
-    [baseExecuteCommand],
+    [baseExecuteCommand, actions],
   );
 
   const handleUserInput = useTerminalInput({ state, actions, executeCommand, getMatchingCommands });

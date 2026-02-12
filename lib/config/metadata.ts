@@ -56,7 +56,7 @@ const metadata = {
   creator: author.name,
   publisher: author.name,
 
-  'color-scheme': 'dark',
+  'color-scheme': 'light dark',
 
   metadataBase: new URL(config.baseUrl),
   alternates: {

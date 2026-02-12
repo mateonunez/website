@@ -32,6 +32,7 @@ const Header = memo(() => (
   <PageHeader
     title="Open Source"
     subtitle="Projects, contributions and activity"
+    asHeading
     icon={<Github className="h-6 w-6 text-amber-500" />}
     breadcrumbItems={[
       {
