@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: frontmatter.title,
       description: frontmatter.description,
       type: 'article',
-      images: [{ url: imageUrl, alt: frontmatter.title }],
+      images: [{ url: imageUrl, alt: frontmatter.title, width: 1200, height: 630 }],
       locale: 'en_US',
       siteName: meta.openGraph?.siteName,
       publishedTime: frontmatter.date,
