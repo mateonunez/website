@@ -120,6 +120,86 @@ This project uses **Biome** (not ESLint/Prettier):
 - **TypeScript strict mode is disabled**: Be mindful when adding new code
 - **Husky git hooks**: Pre-commit hooks are configured (see `.husky/`)
 
+## Git & Commit Conventions
+
+This project follows **Conventional Commits** with atomic, focused commits:
+
+### Commit Format
+```
+<type>(<scope>): <short description>
+
+<optional body with details>
+
+Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+```
+
+### Types
+- `feat:` — New feature or capability (e.g., error boundaries, loading states)
+- `fix:` — Bug fix or correction (e.g., heading hierarchy, error propagation)
+- `fix(a11y):` — Accessibility fix
+- `fix(seo):` — SEO/metadata fix
+- `refactor:` — Code restructuring without behavior change
+- `chore:` — Maintenance tasks (dependencies, config, gitignore)
+
+### Scopes
+Common scopes: `a11y`, `seo`, `spotify`, `blog`, `ui`, `dependencies`, `agents`
+
+### Atomic Commits
+Group changes by **concern**, not by file. Each commit should be:
+- **Self-contained**: one logical change per commit
+- **Buildable**: the project should lint/build after each commit
+- **Reviewable**: a reviewer can understand the "why" from the message
+
+Example grouping:
+- All accessibility changes in one commit (skip link + aria-live + focus-visible + reduced-motion)
+- All error boundary files in one commit (even across routes)
+- SEO fixes grouped together (heading hierarchy + OG images + RSS link)
+- Component cleanups grouped separately from feature changes
+
+### Branch Naming
+Use `<type>/<short-description>` format: `fix/website-analysis-improvements`, `feat/add-search`, `chore/bump-dependencies`
+
+## Accessibility Standards
+
+This project follows WCAG 2.1 AA guidelines:
+
+- **Skip navigation**: Root layout includes a skip-to-main-content link targeting `#main-content`
+- **Heading hierarchy**: Each page must have exactly one `<h1>`. Use the `asHeading` prop on `PageHeader` for page-level headers; use `<h2>` and below for sections
+- **Focus management**: Use `focus-visible` (not `focus`) for keyboard-only outline styles in global CSS
+- **Reduced motion**: Global `prefers-reduced-motion: reduce` media query disables animations. Framer Motion is wrapped with `<MotionConfig reducedMotion="user">` in the theme provider
+- **Live regions**: Dynamic content (Spotify player, recently-played tracks, open-source activity) uses `aria-live="polite"` for screen reader announcements
+- **Screen reader text**: Use `sr-only` class for visually hidden but accessible content (e.g., track announcements in Spotify player)
+
+## Error Handling Patterns
+
+### Route-Level Error Boundaries
+Every route segment should have:
+- `error.tsx` — Client component with retry button and home link. Uses existing UI components (`Button`, `Link`). Shows `error.digest` when available.
+- `loading.tsx` — Server component with skeleton placeholders using `animate-pulse` and `bg-primary/10`. Match the layout shape of the actual page content.
+
+The root also has:
+- `global-error.tsx` — Fallback when root layout itself fails. Uses inline styles only (no component imports, since the layout may be broken). Must render its own `<html>` and `<body>`.
+- `not-found.tsx` — Custom 404 with navigation options (home, back, browse articles).
+
+### API/Data Fetching Errors
+- SWR fetchers must throw on non-ok responses (`if (!res.ok) throw new Error(...)`)
+- Propagate `isError` from hooks to components
+- Display user-friendly error states (icon + message) instead of silently failing
+- Use `AlertCircle` icon from lucide-react for error indicators
+
+## UI & Styling Patterns
+
+### CSS Design Tokens
+Sidebar and component variables in `styles/global.css` should reference design token variables (e.g., `var(--primary)`, `var(--border)`) rather than hardcoded HSL values. This ensures consistency across light/dark modes.
+
+### Light Mode Contrast
+Use `amber-600` (not `amber-500`) for primary color in light mode to meet contrast requirements. Dark mode keeps `amber-400`.
+
+### SSR Considerations
+- Avoid unnecessary `mounted` state guards and `ssr: false` on dynamic imports when the component can safely render server-side
+- Only use `ssr: false` when the component genuinely depends on browser-only APIs (e.g., `window`, `localStorage` on first render)
+- Prefer showing a loading skeleton via `loading: () => <Skeleton />` on dynamic imports
+
 ## Testing
 
 This project does not currently have a test suite configured.
