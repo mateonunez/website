@@ -27,6 +27,7 @@ const Header = memo(() => (
   <PageHeader
     title="Articles"
     subtitle="Articles written with ❤️ by me and the Community."
+    asHeading
     breadcrumbItems={[
       {
         label: 'Blog',

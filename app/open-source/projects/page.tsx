@@ -19,6 +19,7 @@ const Header = memo(() => (
   <PageHeader
     title="Projects"
     subtitle="Libraries, tools, and applications I've created"
+    asHeading
     icon={<Code className="h-6 w-6 text-amber-500" />}
     breadcrumbItems={[
       {

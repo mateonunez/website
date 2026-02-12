@@ -10,7 +10,6 @@ import RecentlyPlayedWrapper from '@/components/mate/spotify/recently-played.wra
 import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Separator } from '@/components/ui/separator';
-import { Toaster } from '@/components/ui/sonner';
 import { getProfilePageSchema } from '@/lib/seo/json-ld';
 
 // Dynamic imports for heavy components
@@ -48,7 +47,7 @@ const PlaylistsCarousel = dynamic(
 
 const SectionTitle = memo(({ title, fontClass = '' }: { title: string; fontClass?: string }) => (
   <>
-    <h1 className={`text-xl font-semibold ${fontClass}`}>{title}</h1>
+    <h2 className={`text-xl font-semibold ${fontClass}`}>{title}</h2>
     <Separator className="my-4" />
   </>
 ));
@@ -91,7 +90,6 @@ export default async function HomePage(): Promise<JSX.Element> {
       </div>
       <div className="flex-1 overflow-auto mx-auto max-w-7xl">
         <div className="container mx-auto p-4 md:p-6">
-          <Toaster />
           <div className="space-y-6">
             <div className="mb-6">
               <TerminalWrapper />
