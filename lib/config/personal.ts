@@ -8,7 +8,7 @@ export const personal = {
   jobTitle: 'Senior Software Engineer',
   company: 'BonusX',
 
-  email: 'mateonunez95@gmail.com',
+  email: 'me@mateonunez.co',
   website: 'https://mateonunez.co',
 
   location: {
