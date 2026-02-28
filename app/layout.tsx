@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { Hanken_Grotesk, Inter, Prompt } from 'next/font/google';
 import type * as React from 'react';
 import './../styles/global.css';
 
-import { AppSidebar } from '@/components/mate/app-sidebar';
 import { Footer } from '@/components/mate/footer';
-import { GithubStarBanner } from '@/components/mate/github-star-banner';
 import { TopNavbar } from '@/components/mate/top-navbar';
 import { AnalyticsProvider } from '@/components/providers/analytics-provider';
 import { AnalyticsTracker } from '@/components/providers/analytics-tracker';
@@ -13,10 +12,21 @@ import { ThemeProvider } from '@/components/providers/theme-provider';
 import { UIProvider } from '@/components/providers/ui-provider';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
-import { Toaster } from '@/components/ui/sonner';
 import meta from '@/lib/config/metadata';
 import { getOrganizationSchema, getPersonSchema, getWebSiteSchema } from '@/lib/seo/json-ld';
 import { cn } from '@/lib/utils';
+
+const MotionProvider = dynamic(() =>
+  import('@/components/providers/motion-provider').then((mod) => mod.MotionProvider),
+);
+
+const AppSidebar = dynamic(() => import('@/components/mate/app-sidebar').then((mod) => mod.AppSidebar));
+
+const GithubStarBanner = dynamic(() =>
+  import('@/components/mate/github-star-banner').then((mod) => mod.GithubStarBanner),
+);
+
+const Toaster = dynamic(() => import('@/components/ui/sonner').then((mod) => mod.Toaster));
 
 const inter = Inter({
   subsets: ['latin'],
@@ -67,36 +77,38 @@ export default function RootLayout({
           </noscript>
         ) : null}
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <AnalyticsProvider>
-            <AnalyticsTracker />
-            <SidebarProvider>
-              <AppSidebar />
+          <MotionProvider>
+            <AnalyticsProvider>
+              <AnalyticsTracker />
+              <SidebarProvider>
+                <AppSidebar />
 
-              <UIProvider>
-                <SidebarInset className="flex flex-col">
-                  <a
-                    href="#main-content"
-                    className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground focus:text-sm focus:font-medium focus:shadow-lg"
-                  >
-                    Skip to main content
-                  </a>
-                  <TopNavbar />
-                  <GithubStarBanner />
+                <UIProvider>
+                  <SidebarInset className="flex flex-col">
+                    <a
+                      href="#main-content"
+                      className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground focus:text-sm focus:font-medium focus:shadow-lg"
+                    >
+                      Skip to main content
+                    </a>
+                    <TopNavbar />
+                    <GithubStarBanner />
 
-                  <main id="main-content" className="flex-1">
-                    {children}
-                  </main>
+                    <main id="main-content" className="flex-1">
+                      {children}
+                    </main>
 
-                  <Footer />
-                </SidebarInset>
-              </UIProvider>
-            </SidebarProvider>
-          </AnalyticsProvider>
-          <JsonLdScript data={getPersonSchema()} />
-          <JsonLdScript data={getWebSiteSchema()} />
-          <JsonLdScript data={getOrganizationSchema()} />
+                    <Footer />
+                  </SidebarInset>
+                </UIProvider>
+              </SidebarProvider>
+            </AnalyticsProvider>
+            <JsonLdScript data={getPersonSchema()} />
+            <JsonLdScript data={getWebSiteSchema()} />
+            <JsonLdScript data={getOrganizationSchema()} />
 
-          <Toaster />
+            <Toaster />
+          </MotionProvider>
         </ThemeProvider>
       </body>
     </html>
