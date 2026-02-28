@@ -1,0 +1,126 @@
+name: release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Version bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      pre_release:
+        description: 'Mark as pre-release'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up PNPM
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Compute New Version
+        id: version
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          NEW_VERSION=$(npx --yes semver@7 "$CURRENT_VERSION" -i "${{ inputs.version_type }}")
+          echo "current=${CURRENT_VERSION}" >> "$GITHUB_OUTPUT"
+          echo "new=${NEW_VERSION}" >> "$GITHUB_OUTPUT"
+          echo "tag=v${NEW_VERSION}" >> "$GITHUB_OUTPUT"
+
+      - name: Bump package.json Version
+        run: pnpm version ${{ steps.version.outputs.new }} --no-git-tag-version
+
+      - name: Generate Changelog
+        id: changelog
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+
+          if [ -n "$LAST_TAG" ]; then
+            gh api repos/${{ github.repository }}/releases/generate-notes \
+              -f tag_name="${{ steps.version.outputs.tag }}" \
+              -f previous_tag_name="$LAST_TAG" \
+              --jq '.body' > RELEASE_NOTES.md
+          else
+            gh api repos/${{ github.repository }}/releases/generate-notes \
+              -f tag_name="${{ steps.version.outputs.tag }}" \
+              --jq '.body' > RELEASE_NOTES.md
+          fi
+
+      - name: Run Linter
+        run: pnpm run lint
+
+      - name: Build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm run build
+
+      - name: Package Build Artifact
+        run: |
+          tar -czf ${{ steps.version.outputs.tag }}.tar.gz \
+            .next/standalone \
+            .next/static \
+            public
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ steps.version.outputs.tag }}
+          path: ${{ steps.version.outputs.tag }}.tar.gz
+          retention-days: 30
+
+      - name: Commit Version Bump
+        run: |
+          git add package.json
+          git commit -m "chore(release): bump version to ${{ steps.version.outputs.tag }}"
+
+      - name: Create Annotated Tag
+        run: |
+          git tag -a "${{ steps.version.outputs.tag }}" \
+            -m "Release ${{ steps.version.outputs.tag }}"
+
+      - name: Push to Main
+        run: git push origin HEAD --follow-tags
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: ${{ steps.version.outputs.tag }}
+          body_path: RELEASE_NOTES.md
+          prerelease: ${{ inputs.pre_release }}
+          files: ${{ steps.version.outputs.tag }}.tar.gz
