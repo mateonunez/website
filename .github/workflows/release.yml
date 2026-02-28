@@ -55,7 +55,7 @@ jobs:
         id: version
         run: |
           CURRENT_VERSION=$(node -p "require('./package.json').version")
-          NEW_VERSION=$(npx --yes semver@7 "$CURRENT_VERSION" -i "${{ inputs.version_type }}")
+          NEW_VERSION=$(pnpm exec tsx scripts/bump-version.ts "$CURRENT_VERSION" "${{ inputs.version_type }}")
           echo "current=${CURRENT_VERSION}" >> "$GITHUB_OUTPUT"
           echo "new=${NEW_VERSION}" >> "$GITHUB_OUTPUT"
           echo "tag=v${NEW_VERSION}" >> "$GITHUB_OUTPUT"
