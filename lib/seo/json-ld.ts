@@ -161,7 +161,7 @@ export function getOrganizationSchema(): WithContext<Organization> {
     '@type': 'Organization',
     '@id': `${website}/#organization`,
     name: company,
-    url: 'https://bonusx.it',
+    url: 'https://whatwapp.com',
   };
 }
 

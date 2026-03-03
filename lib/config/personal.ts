@@ -3,10 +3,10 @@ export const personal = {
   fullName: 'Mateo Nunez',
   shortName: 'Mateo',
 
-  title: 'Senior Software Engineer @ BonusX',
+  title: 'Senior Software Engineer @ Whatwapp',
   alternativeTitle: 'A Chill Software Engineer',
   jobTitle: 'Senior Software Engineer',
-  company: 'BonusX',
+  company: 'Whatwapp',
 
   email: 'me@mateonunez.co',
   website: 'https://mateonunez.co',
@@ -59,7 +59,7 @@ export const personal = {
       'ai development',
       'web development',
       'github',
-      'bonusx',
+      'whatwapp',
       'colombia',
       'milan',
       'developer',
@@ -70,7 +70,7 @@ export const personal = {
   },
 
   bio: {
-    full: 'Senior Software Engineer @ BonusX. ~10 years shipping. I build systems that behave, contribute to OSS, and I’m currently engineering AIt, a personal, data-driven alter ego. Coffee and good music, always; fluff, never.',
+    full: 'Senior Software Engineer @ Whatwapp. ~11 years shipping. I build systems that behave, contribute to OSS, and I’m currently engineering AIt, a personal, data-driven alter ego. Coffee and good music, always; fluff, never.',
     short: 'Software engineer building web & AI systems. Shipping AIt. Music on; nonsense off.',
   },
 
@@ -80,7 +80,7 @@ export const personal = {
       "Hey, I'm Mateo.",
       '',
       '🇨🇴 Colombia → Milan',
-      '💼 Senior Software Engineer @ BonusX',
+      '💼 Senior Software Engineer @ Whatwapp',
       '💻 Web & AI systems (TypeScript/Next.js)',
       '🤖 Building AIt — a digital alter ego',
       '🎵 Code needs a soundtrack',
