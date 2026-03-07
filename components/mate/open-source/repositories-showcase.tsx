@@ -214,7 +214,7 @@ export function RepositoriesShowcase({ featured = false, limit = featured ? 6 : 
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="search"
-                  placeholder="Search repositories..."
+                  placeholder="Search repositories…"
                   className="pl-9 h-9 w-full"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
