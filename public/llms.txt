@@ -1,4 +1,4 @@
-# Mateo Nunez — A Chill Software Engineer
+# Mateo Nunez — Software Engineer & AI Engineer
 
 > Personal site with blog, open‑source activity, an interactive terminal, and Spotify integrations. Use the links below for canonical content, discovery, and metadata.
 

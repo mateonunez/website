@@ -4,7 +4,7 @@ export const personal = {
   shortName: 'Mateo',
 
   title: 'Senior Software Engineer @ Whatwapp',
-  alternativeTitle: 'A Chill Software Engineer',
+  alternativeTitle: 'Software Engineer & AI Engineer',
   jobTitle: 'Senior Software Engineer',
   company: 'Whatwapp',
 
@@ -41,7 +41,7 @@ export const personal = {
   },
 
   site: {
-    name: 'Mateo Nunez — A Chill Software Engineer',
+    name: 'Mateo Nunez — Software Engineer & AI Engineer',
     shortName: 'Mateo Nunez',
     description:
       'Colombian engineer in Milan. I design and ship web & AI systems (TypeScript/Next.js). Currently building AIt, a digital alter ego from my own data. This site is a lab: projects, notes, an interactive terminal, and whatever survives scrutiny.',
