@@ -1,6 +1,6 @@
 {
   "name": "@mateonunez/website",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build",
