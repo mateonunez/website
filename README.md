@@ -23,6 +23,16 @@ Open [http://localhost:3000/](http://localhost:3000/). Pages will live-refresh w
 
 > Note: remember to set your environment variables in a `.env.local` file.
 
+## Skills
+
+Claude and Copilot skills live in `.agents/skills/` and are synced as symlinks into `.claude/skills/` and `.github/prompts/`. They are excluded from git.
+
+Sync runs automatically on `pnpm install`. To sync manually:
+
+```
+pnpm sync:skills
+```
+
 ## License
 
 Site content is licensed under the [CC-BY-4.0](LICENSE), which means that you can copy, redistribute, remix, transform, and build upon the content for any purpose as long as you give appropriate credit.

@@ -104,6 +104,10 @@ Reference these guidelines when:
 - `advanced-event-handler-refs` - Store event handlers in refs
 - `advanced-use-latest` - useLatest for stable callback refs
 
+### Security (CRITICAL)
+
+- `server-auth-actions` - Authenticate Server Actions like API routes
+
 ## How to Use
 
 Read individual rule files for detailed explanations and code examples:
