@@ -9,8 +9,9 @@
     "lint": "biome lint && biome format && biome check",
     "lint:fix": "biome lint --write --unsafe && biome format --write && biome check --write",
     "generate:webmanifest": "tsx scripts/generate-webmanifest.ts",
+    "sync:skills": "tsx scripts/sync-skills.ts",
     "prebuild": "npm run generate:webmanifest",
-    "prepare": "husky"
+    "prepare": "husky && tsx scripts/sync-skills.ts"
   },
   "dependencies": {
     "@giscus/react": "^3.1.0",
