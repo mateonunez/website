@@ -14,33 +14,33 @@ Guidance for the blog (MDX) feature on this site.
 
 ## Frontmatter and schema
 
-- Types: [types/article.ts](../../types/article.ts) — `Article`, `ArticleFrontmatter`, `ArticleAuthor`.
+- Types: [types/article.ts](../../../types/article.ts) — `Article`, `ArticleFrontmatter`, `ArticleAuthor`.
 - Required frontmatter: `title`, `description`, `date`, `tags` (array), `image`. Optional: `categories`, `author`, `translated`.
 - Reading time is computed in the parser via `reading-time` from raw file content; stored as `frontmatter.readingTime` (minutes, ceiling).
 
 ## Parser and data (server)
 
-- **Parser**: [lib/articles/parser.ts](../../lib/articles/parser.ts).
+- **Parser**: [lib/articles/parser.ts](../../../lib/articles/parser.ts).
 - All async getters are wrapped in `cache()` from React for per-request deduplication.
 - Key functions:
   - `getArticleSlugs()` — list of slugs from `articles/` (`.mdx`/`.md`).
   - `getArticle({ slug })` — full article (content + frontmatter). Uses `getRawArticle` + `compile()` (next-mdx-remote/rsc with remark-gfm, rehype-slug).
   - `getAllArticles()` — all articles (calls `getArticle` per slug), sorted by date desc.
-  - `getRelatedArticles(currentArticle)` — articles sharing tags with `currentArticle`, capped by `config.article.relatedArticles` (see [lib/config/index.ts](../../lib/config/index.ts)).
+  - `getRelatedArticles(currentArticle)` — articles sharing tags with `currentArticle`, capped by `config.article.relatedArticles` (see [lib/config/index.ts](../../../lib/config/index.ts)).
   - `getLastArticle()` — first from `getAllArticles()`.
-- `getArticle` uses [lib/config/personal](../../lib/config/personal) for default author when not in frontmatter.
-- Base URL and related-article count: [lib/config/index.ts](../../lib/config/index.ts) (`config.baseUrl`, `config.article.relatedArticles`).
+- `getArticle` uses [lib/config/personal](../../../lib/config/personal) for default author when not in frontmatter.
+- Base URL and related-article count: [lib/config/index.ts](../../../lib/config/index.ts) (`config.baseUrl`, `config.article.relatedArticles`).
 
 ## Article series
 
-- Config: [lib/config/article-series.ts](../../lib/config/article-series.ts) — `articleSeries` map, `getArticleSeries(slug)`, `getSeriesOrder(slug, series?)`.
+- Config: [lib/config/article-series.ts](../../../lib/config/article-series.ts) — `articleSeries` map, `getArticleSeries(slug)`, `getSeriesOrder(slug, series?)`.
 - Series define ordered lists of articles (title, slug, order). Used on the article page for series nav.
 
 ## MDX components
 
-- Registry: [components/mdx/index.tsx](../../components/mdx/index.tsx). Exports default `MDXComponents` (wrapper, headings, `a`, `img`, `pre`/`code`, Grid, Collapsible, etc.).
-- Custom elements: [components/mdx/elements/](../../components/mdx/elements/) (Heading, Link, Image, Code, Grid, Collapsible, etc.).
-- Layout wrapper: [components/mdx/layout.tsx](../../components/mdx/layout.tsx).
+- Registry: [components/mdx/index.tsx](../../../components/mdx/index.tsx). Exports default `MDXComponents` (wrapper, headings, `a`, `img`, `pre`/`code`, Grid, Collapsible, etc.).
+- Custom elements: [components/mdx/elements/](../../../components/mdx/elements/) (Heading, Link, Image, Code, Grid, Collapsible, etc.).
+- Layout wrapper: [components/mdx/layout.tsx](../../../components/mdx/layout.tsx).
 
 ## Blog routes and boundaries
 
