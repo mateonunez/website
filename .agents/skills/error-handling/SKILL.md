@@ -9,7 +9,7 @@ Guidance for error boundaries, loading skeletons, and API error conventions in t
 
 ## Route-level error boundaries
 
-Every route segment should have both `error.tsx` and `loading.tsx`.
+By default, each route segment should have both `error.tsx` and `loading.tsx` where it makes sense.
 
 ### error.tsx
 
@@ -18,7 +18,7 @@ Every route segment should have both `error.tsx` and `loading.tsx`.
 - Show a user-friendly message, an optional `error.digest` (Error ID), a **Try again** button (`onClick={reset}`), and a **Go home** link.
 - Use existing UI components: `Button` from `@/components/ui/button`, `Link` from `next/link`.
 - Icons: `RefreshCw` (retry) and `Home` (home link) from `lucide-react`.
-- Reference implementation: [app/error.tsx](../../app/error.tsx), [app/blog/error.tsx](../../app/blog/error.tsx), [app/open-source/error.tsx](../../app/open-source/error.tsx).
+- Reference implementation: [app/error.tsx](../../../app/error.tsx), [app/blog/error.tsx](../../../app/blog/error.tsx), [app/open-source/error.tsx](../../../app/open-source/error.tsx).
 
 ```tsx
 'use client';
@@ -46,7 +46,7 @@ export default function MyError({ error, reset }: { error: Error & { digest?: st
 
 - Server component (no `'use client'`).
 - Use `animate-pulse` and `bg-primary/10` for skeleton shapes that match the actual page layout.
-- Reference implementation: [app/blog/loading.tsx](../../app/blog/loading.tsx), [app/open-source/loading.tsx](../../app/open-source/loading.tsx).
+- Reference implementation: [app/blog/loading.tsx](../../../app/blog/loading.tsx), [app/open-source/loading.tsx](../../../app/open-source/loading.tsx).
 
 ```tsx
 export default function MyLoading() {
@@ -61,8 +61,8 @@ export default function MyLoading() {
 
 ## Root-level error files
 
-- **[app/global-error.tsx](../../app/global-error.tsx)** — catches failures in the root layout itself. Must render its own `<html>` and `<body>`. Use **inline styles only** — no component imports (the layout may be broken). `'use client'` required.
-- **[app/not-found.tsx](../../app/not-found.tsx)** — custom 404 page. `'use client'` (uses `useRouter`). Shows navigation options: Go home, Go back (`router.back()`), Browse articles. Uses `Button` + `Link`.
+- **[app/global-error.tsx](../../../app/global-error.tsx)** — catches failures in the root layout itself. Must render its own `<html>` and `<body>`. Use **inline styles only** — no component imports (the layout may be broken). `'use client'` required.
+- **[app/not-found.tsx](../../../app/not-found.tsx)** — custom 404 page. `'use client'` (uses `useRouter`). Shows navigation options: Go home, Go back (`router.back()`), Browse articles. Uses `Button` + `Link`.
 
 ## SWR / client-side error conventions
 
@@ -85,14 +85,14 @@ export default function MyLoading() {
 
 | File | Purpose |
 |---|---|
-| [app/error.tsx](../../app/error.tsx) | Root route error boundary |
-| [app/global-error.tsx](../../app/global-error.tsx) | Root layout fallback (inline styles, own html/body) |
-| [app/not-found.tsx](../../app/not-found.tsx) | Custom 404 |
-| [app/blog/error.tsx](../../app/blog/error.tsx) | Blog list error |
-| [app/blog/loading.tsx](../../app/blog/loading.tsx) | Blog list skeleton |
-| [app/blog/[slug]/loading.tsx](../../app/blog/[slug]/loading.tsx) | Article page skeleton |
-| [app/open-source/error.tsx](../../app/open-source/error.tsx) | Open source error |
-| [app/open-source/loading.tsx](../../app/open-source/loading.tsx) | Open source skeleton |
+| [app/error.tsx](../../../app/error.tsx) | Root route error boundary |
+| [app/global-error.tsx](../../../app/global-error.tsx) | Root layout fallback (inline styles, own html/body) |
+| [app/not-found.tsx](../../../app/not-found.tsx) | Custom 404 |
+| [app/blog/error.tsx](../../../app/blog/error.tsx) | Blog list error |
+| [app/blog/loading.tsx](../../../app/blog/loading.tsx) | Blog list skeleton |
+| [app/blog/[slug]/loading.tsx](../../../app/blog/[slug]/loading.tsx) | Article page skeleton |
+| [app/open-source/error.tsx](../../../app/open-source/error.tsx) | Open source error |
+| [app/open-source/loading.tsx](../../../app/open-source/loading.tsx) | Open source skeleton |
 
 ## Adding error/loading to a new route
 

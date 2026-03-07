@@ -44,20 +44,20 @@ Guidance for the blog (MDX) feature on this site.
 
 ## Blog routes and boundaries
 
-- List: [app/blog/page.tsx](../../app/blog/page.tsx) — uses Suspense and article list components.
-- Article: [app/blog/[slug]/(page)/page.tsx](../../app/blog/[slug]/(page)/page.tsx) — async page; fetches `getArticle`, `getRelatedArticles`; uses Suspense; passes data to `ArticleLayout`.
+- List: [app/blog/page.tsx](../../../app/blog/page.tsx) — uses Suspense and article list components.
+- Article: [app/blog/[slug]/(page)/page.tsx](../../../app/blog/[slug]/(page)/page.tsx) — async page; fetches `getArticle`, `getRelatedArticles`; uses Suspense; passes data to `ArticleLayout`.
 - Metadata: `generateMetadata` in the same page uses `getArticle({ slug })` for title, description, OG, canonical.
-- Layout: [app/blog/[slug]/(page)/layout.tsx](../../app/blog/[slug]/(page)/layout.tsx) — article layout wrapper.
-- Error/loading: [app/blog/error.tsx](../../app/blog/error.tsx), [app/blog/loading.tsx](../../app/blog/loading.tsx), [app/blog/[slug]/loading.tsx](../../app/blog/[slug]/loading.tsx).
+- Layout: [app/blog/[slug]/(page)/layout.tsx](../../../app/blog/[slug]/(page)/layout.tsx) — article layout wrapper.
+- Error/loading: [app/blog/error.tsx](../../../app/blog/error.tsx), [app/blog/loading.tsx](../../../app/blog/loading.tsx), [app/blog/[slug]/loading.tsx](../../../app/blog/[slug]/loading.tsx).
 - Each route segment should have `error.tsx` and `loading.tsx` per project conventions.
-- **Article layout**: [components/mate/article-layout.tsx](../../components/mate/article-layout.tsx) — wraps MDX content; includes title, metadata, series nav, and wires in `article-analytics` and `article-comments`.
-- **Article preview**: [components/mate/article-preview.tsx](../../components/mate/article-preview.tsx) + [article-preview.skeleton.tsx](../../components/mate/article-preview.skeleton.tsx) — used in the blog list and related articles sections.
-- **Article analytics/comments**: [components/mate/article-analytics.tsx](../../components/mate/article-analytics.tsx), [components/mate/article-comments.tsx](../../components/mate/article-comments.tsx) — rendered inside `ArticleLayout`; do not wire these manually in the page.
+- **Article layout**: [components/mate/article-layout.tsx](../../../components/mate/article-layout.tsx) — wraps MDX content; includes title, metadata, series nav, and wires in `article-analytics` and `article-comments`.
+- **Article preview**: [components/mate/article-preview.tsx](../../../components/mate/article-preview.tsx) + [article-preview.skeleton.tsx](../../../components/mate/article-preview.skeleton.tsx) — used in the blog list and related articles sections.
+- **Article analytics/comments**: [components/mate/article-analytics.tsx](../../../components/mate/article-analytics.tsx), [components/mate/article-comments.tsx](../../../components/mate/article-comments.tsx) — rendered inside `ArticleLayout`; do not wire these manually in the page.
 
 ## Adding a new article
 
 1. Add `articles/your-slug.mdx` with required frontmatter and body.
-2. Optional: add to a series in [lib/config/article-series.ts](../../lib/config/article-series.ts).
+2. Optional: add to a series in [lib/config/article-series.ts](../../../lib/config/article-series.ts).
 3. Run build or dev; `generateStaticParams` will include the new slug.
 
 ## Important notes

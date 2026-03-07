@@ -25,7 +25,7 @@ Open [http://localhost:3000/](http://localhost:3000/). Pages will live-refresh w
 
 ## Skills
 
-Claude and Copilot skills live in `.agents/skills/` and are synced as symlinks into `.claude/skills/` and `.github/prompts/`. They are excluded from git.
+Claude and Copilot skills live in `.agents/skills/` (tracked in git). They are synced as symlinks into `.claude/skills/` and `.github/prompts/`, and only these synced directories are excluded from git.
 
 Sync runs automatically on `pnpm install`. To sync manually:
 

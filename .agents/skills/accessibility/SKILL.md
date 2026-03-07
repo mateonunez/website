@@ -9,7 +9,7 @@ Guidance for accessibility on this site. All pages must meet WCAG 2.1 AA standar
 
 ## Skip navigation
 
-- The root layout [app/layout.tsx](../../app/layout.tsx) includes a skip link as the first focusable element inside `<SidebarInset>`:
+- The root layout [app/layout.tsx](../../../app/layout.tsx) includes a skip link as the first focusable element inside `<SidebarInset>`:
   ```tsx
   <a
     href="#main-content"
@@ -24,20 +24,20 @@ Guidance for accessibility on this site. All pages must meet WCAG 2.1 AA standar
 ## Heading hierarchy
 
 - Each page must have **exactly one `<h1>`**.
-- Use the `asHeading` prop on `PageHeader` ([components/mate/page-header.tsx](../../components/mate/page-header.tsx)) to render the page-level `<h1>`. Do **not** add a separate `<h1>` elsewhere on the same page.
+- Use the `asHeading` prop on `PageHeader` ([components/mate/page-header.tsx](../../../components/mate/page-header.tsx)) to render the page-level `<h1>`. Do **not** add a separate `<h1>` elsewhere on the same page.
 - Sections within a page use `<h2>`, subsections use `<h3>`, etc. Never skip levels.
 - In MDX articles, the title from frontmatter renders as `<h1>`; use `##` and `###` for sections inside the article body.
 
 ## Focus management
 
-- Use `focus-visible` (not `focus`) for keyboard-only outline styles in [styles/global.css](../../styles/global.css). This prevents the focus ring from showing on mouse clicks.
+- Use `focus-visible` (not `focus`) for keyboard-only outline styles in [styles/global.css](../../../styles/global.css). This prevents the focus ring from showing on mouse clicks.
 - Do not suppress focus outlines — keyboard users depend on them.
-- For custom interactive regions (e.g., Terminal), use `biome-ignore lint/a11y/...` only when there is a documented reason; always maintain keyboard navigation and screen reader behavior. See [components/mate/terminal/terminal.tsx](../../components/mate/terminal/terminal.tsx) and [components/ui/carousel.tsx](../../components/ui/carousel.tsx) for examples.
+- For custom interactive regions (e.g., Terminal), use `biome-ignore lint/a11y/...` only when there is a documented reason; always maintain keyboard navigation and screen reader behavior. See [components/mate/terminal/terminal.tsx](../../../components/mate/terminal/terminal.tsx) and [components/ui/carousel.tsx](../../../components/ui/carousel.tsx) for examples.
 
 ## Reduced motion
 
-- Global CSS in [styles/global.css](../../styles/global.css) includes `@media (prefers-reduced-motion: reduce)` — CSS animations are disabled at the system level automatically.
-- Framer Motion is wrapped with `<MotionConfig reducedMotion="user">` in [components/providers/motion-provider.tsx](../../components/providers/motion-provider.tsx) — all `motion.*` components respect the OS reduced-motion preference automatically.
+- Global CSS in [styles/global.css](../../../styles/global.css) includes `@media (prefers-reduced-motion: reduce)` — CSS animations are disabled at the system level automatically.
+- Framer Motion is wrapped with `<MotionConfig reducedMotion="user">` in [components/providers/motion-provider.tsx](../../../components/providers/motion-provider.tsx) — all `motion.*` components respect the OS reduced-motion preference automatically.
 - Do **not** add manual `useReducedMotion` checks when using Framer Motion components inside `MotionProvider` — it is already handled.
 
 ## Live regions for dynamic content
