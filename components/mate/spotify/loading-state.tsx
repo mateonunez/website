@@ -14,7 +14,7 @@ export function LoadingState({ variant }: LoadingStateProps) {
         <CardContent className="flex items-center justify-center p-8 min-h-[140px]">
           <div className="flex flex-col items-center gap-2">
             <Headphones className="h-10 w-10 text-amber-500" />
-            <span className="text-sm text-muted-foreground animate-pulse">Loading music status...</span>
+            <span className="text-sm text-muted-foreground animate-pulse">Loading music status…</span>
           </div>
         </CardContent>
       </Card>
@@ -25,7 +25,7 @@ export function LoadingState({ variant }: LoadingStateProps) {
       <CardContent className="p-4">
         <div className="flex">
           <Headphones className="h-6 w-6 text-amber-500" />
-          <span className="ml-2 text-sm text-muted-foreground">Loading...</span>
+          <span className="ml-2 text-sm text-muted-foreground">Loading…</span>
         </div>
       </CardContent>
     </Card>

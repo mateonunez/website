@@ -97,7 +97,7 @@ export function RecentlyPlayed() {
                       className="font-medium truncate block hover:underline"
                       title={item.title}
                     >
-                      {item.title.length > 20 ? `${item.title.slice(0, 20)}...` : item.title}
+                      {item.title.length > 20 ? `${item.title.slice(0, 20)}…` : item.title}
                     </a>
                     <div className="mt-1 space-y-1">
                       <div className="text-xs sm:text-sm text-muted-foreground truncate">{item.artist}</div>
@@ -146,7 +146,7 @@ export function RecentlyPlayed() {
                       className="font-medium truncate block hover:underline"
                       title={item.title}
                     >
-                      {item.title.length > 20 ? `${item.title.slice(0, 20)}...` : item.title}
+                      {item.title.length > 20 ? `${item.title.slice(0, 20)}…` : item.title}
                     </a>
                   </TableCell>
                   <TableCell className="hidden sm:table-cell p-2 max-w-[150px] truncate">{item.artist}</TableCell>

@@ -35,7 +35,7 @@ const platformLabels: Record<string, string> = {
   whatsapp: 'Share on WhatsApp',
   telegram: 'Share on Telegram',
   copy: 'Copy link',
-  native: 'Share...',
+  native: 'Share…',
 };
 
 export function ShareButton({

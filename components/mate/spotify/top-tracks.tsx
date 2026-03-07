@@ -78,7 +78,7 @@ export function TopTracks() {
                         className="font-medium truncate block hover:underline"
                         title={track.title}
                       >
-                        {track.title.length > 28 ? `${track.title.slice(0, 28)}...` : track.title}
+                        {track.title.length > 28 ? `${track.title.slice(0, 28)}…` : track.title}
                       </a>
                       <p className="text-xs text-muted-foreground truncate">{track.artist}</p>
                     </div>

@@ -11,6 +11,36 @@ import { getArticleSeries, getSeriesOrder } from '@/lib/config/article-series';
 import meta from '@/lib/config/metadata';
 import { getBlogPostingSchema } from '@/lib/seo/json-ld';
 
+async function ArticleContent({ slug }: { slug: string }): Promise<JSX.Element> {
+  const { content, frontmatter } = await getArticle({ slug });
+  const relatedArticles = await getRelatedArticles(frontmatter);
+
+  const seriesData = getArticleSeries(slug);
+  const seriesOrder = getSeriesOrder(slug, seriesData);
+  const series = seriesData && seriesOrder ? { seriesData, currentOrder: seriesOrder } : undefined;
+
+  return (
+    <>
+      <JsonLdScript data={getBlogPostingSchema(frontmatter)} />
+      <ArticleAnalytics title={frontmatter.title} />
+      <ArticleLayout
+        title={frontmatter.title}
+        slug={frontmatter.slug}
+        date={frontmatter.date}
+        readingTime={frontmatter.readingTime}
+        tags={frontmatter.tags}
+        author={frontmatter.author}
+        description={frontmatter.description}
+        image={frontmatter.image}
+        relatedArticles={relatedArticles}
+        series={series}
+      >
+        {content}
+      </ArticleLayout>
+    </>
+  );
+}
+
 export async function generateStaticParams() {
   const slugs = await getArticleSlugs();
   return slugs.map((slug) => ({ slug }));
@@ -59,47 +89,26 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+const ArticleSkeleton = () => (
+  <Main>
+    <div className="animate-pulse space-y-4">
+      <div className="h-8 bg-gray-200 rounded w-3/4" />
+      <div className="h-4 bg-gray-200 rounded w-1/4" />
+      <div className="space-y-3">
+        <div className="h-4 bg-gray-200 rounded" />
+        <div className="h-4 bg-gray-200 rounded" />
+        <div className="h-4 bg-gray-200 rounded w-5/6" />
+      </div>
+    </div>
+  </Main>
+);
+
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }): Promise<JSX.Element> {
   const { slug } = await params;
-  const { content, frontmatter } = await getArticle({ slug });
-  const relatedArticles = await getRelatedArticles(frontmatter);
-
-  const seriesData = getArticleSeries(slug);
-  const seriesOrder = getSeriesOrder(slug, seriesData);
-  const series = seriesData && seriesOrder ? { seriesData, currentOrder: seriesOrder } : undefined;
 
   return (
-    <Suspense
-      fallback={
-        <Main>
-          <div className="animate-pulse space-y-4">
-            <div className="h-8 bg-gray-200 rounded w-3/4" />
-            <div className="h-4 bg-gray-200 rounded w-1/4" />
-            <div className="space-y-3">
-              <div className="h-4 bg-gray-200 rounded" />
-              <div className="h-4 bg-gray-200 rounded" />
-              <div className="h-4 bg-gray-200 rounded w-5/6" />
-            </div>
-          </div>
-        </Main>
-      }
-    >
-      <JsonLdScript data={getBlogPostingSchema(frontmatter)} />
-      <ArticleAnalytics title={frontmatter.title} />
-      <ArticleLayout
-        title={frontmatter.title}
-        slug={frontmatter.slug}
-        date={frontmatter.date}
-        readingTime={frontmatter.readingTime}
-        tags={frontmatter.tags}
-        author={frontmatter.author}
-        description={frontmatter.description}
-        image={frontmatter.image}
-        relatedArticles={relatedArticles}
-        series={series}
-      >
-        {content}
-      </ArticleLayout>
+    <Suspense fallback={<ArticleSkeleton />}>
+      <ArticleContent slug={slug} />
     </Suspense>
   );
 }
