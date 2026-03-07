@@ -80,12 +80,14 @@ console.log(`\nSyncing ${skillDirs.length} skill(s)...\n`);
 for (const name of skillDirs) {
   // Claude: directory symlink → .agents/skills/<name>
   const claudeLink = path.join(CLAUDE_SKILLS, name);
-  const claudeTarget = path.join('..', '..', '.agents', 'skills', name);
+  const claudeTargetAbs = path.join(SKILLS_SRC, name);
+  const claudeTarget = path.relative(path.dirname(claudeLink), claudeTargetAbs);
   upsertSymlink(claudeLink, claudeTarget, `.claude/skills/${name}`);
 
   // Copilot: file symlink → .agents/skills/<name>/SKILL.md
   const copilotLink = path.join(COPILOT_PROMPTS, `${name}.prompt.md`);
-  const copilotTarget = path.join('..', '..', '.agents', 'skills', name, 'SKILL.md');
+  const copilotTargetAbs = path.join(SKILLS_SRC, name, 'SKILL.md');
+  const copilotTarget = path.relative(path.dirname(copilotLink), copilotTargetAbs);
   upsertSymlink(copilotLink, copilotTarget, `.github/prompts/${name}.prompt.md`);
 }
 
