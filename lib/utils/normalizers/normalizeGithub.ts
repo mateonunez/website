@@ -310,12 +310,12 @@ export function normalizeGitHubActivities(data: GitHubActivitiesResponse['viewer
 }
 
 export {
-  normalizeGitHubProfile,
+  normalizeActivity,
+  normalizeContributions,
   normalizeFollower,
   normalizeFollowers,
+  normalizeGitHubProfile,
   normalizeRepositories,
-  normalizeContributions,
-  normalizeWeekContributions,
-  normalizeActivity,
   normalizeSponsor,
+  normalizeWeekContributions,
 };
