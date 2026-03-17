@@ -10,4 +10,4 @@ const initials = (str: string): string =>
     ?.filter((_, i, array) => i === 0 || i === array.length - 1)
     .join('') || '';
 
-export { kebapCase, initials };
+export { initials, kebapCase };
