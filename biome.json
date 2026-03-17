@@ -15,7 +15,9 @@
       "!**/next-env.d.ts",
       "!**/next.config.js",
       "!**/components/legacy/icons",
-      "!**/app/manifest.json"
+      "!**/app/manifest.json",
+      "!**/.agents",
+      "!**/.github/prompts"
     ],
     "maxSize": 31457280
   },
