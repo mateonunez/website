@@ -215,6 +215,7 @@ export function Terminal({
 
   const handleTerminalKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.target instanceof HTMLInputElement) return;
       if (isComplete && inputRef.current && (e.key === 'Enter' || e.key === ' ')) {
         e.preventDefault();
         inputRef.current.focus();
