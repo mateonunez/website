@@ -10,6 +10,7 @@ export interface TerminalState {
   userInput: string;
   commandHistory: string[];
   historyIndex: number;
+  streamingText: string | null;
 }
 
 export interface TerminalStateActions {
@@ -22,6 +23,8 @@ export interface TerminalStateActions {
   setUserInput: (input: string) => void;
   addToHistory: (command: string) => void;
   updateHistoryIndex: (index: number) => void;
+  setStreamingText: (text: string | null) => void;
+  appendStreamingText: (chunk: string) => void;
 }
 
 export function useTerminalState(_initialMessages: string[]): [TerminalState, TerminalStateActions] {
@@ -32,6 +35,7 @@ export function useTerminalState(_initialMessages: string[]): [TerminalState, Te
   const [userInput, setUserInput] = useState<string>('');
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
+  const [streamingText, setStreamingText] = useState<string | null>(null);
 
   const addCompletedLine = useCallback((line: TerminalLine) => {
     setCompletedLines((prev) => [...prev, line].slice(-100));
@@ -50,6 +54,10 @@ export function useTerminalState(_initialMessages: string[]): [TerminalState, Te
     setHistoryIndex(-1);
   }, []);
 
+  const appendStreamingText = useCallback((chunk: string) => {
+    setStreamingText((prev) => (prev === null ? chunk : prev + chunk));
+  }, []);
+
   return [
     {
       currentLine,
@@ -59,6 +67,7 @@ export function useTerminalState(_initialMessages: string[]): [TerminalState, Te
       userInput,
       commandHistory,
       historyIndex,
+      streamingText,
     },
     {
       setCurrentLine,
@@ -70,6 +79,8 @@ export function useTerminalState(_initialMessages: string[]): [TerminalState, Te
       setUserInput,
       addToHistory,
       updateHistoryIndex: setHistoryIndex,
+      setStreamingText,
+      appendStreamingText,
     },
   ];
 }

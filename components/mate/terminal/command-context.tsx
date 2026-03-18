@@ -30,6 +30,8 @@ export type DataSources = {
 
 export interface TerminalTools {
   clearLines: () => void;
+  appendStreamingText: (chunk: string) => void;
+  finalizeStream: () => void;
 }
 
 export interface CommandContextType {
@@ -42,7 +44,7 @@ const CommandContext = createContext<CommandContextType>({
     spotify: { data: null },
     github: { data: null },
   } as DataSources,
-  tools: { clearLines: () => {} },
+  tools: { clearLines: () => {}, appendStreamingText: () => {}, finalizeStream: () => {} },
 });
 
 export const useCommandContext = () => useContext(CommandContext);
