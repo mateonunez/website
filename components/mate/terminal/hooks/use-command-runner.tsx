@@ -2,9 +2,10 @@ import { useCallback, useMemo } from 'react';
 import type { DataSources, TerminalTools } from '../command-context';
 import { commandRegistry } from '../commands/index';
 
-type CommandResult = {
+export type CommandResult = {
   success: boolean;
   output: string;
+  streamed?: boolean;
 };
 
 interface CommandRunnerOptions {
@@ -17,8 +18,13 @@ export function useCommandRunner({ dataSources, tools }: CommandRunnerOptions) {
 
   const runCommand = useCallback(
     async (input: string): Promise<CommandResult> => {
-      const trimmedInput = input.trim().toLowerCase();
-      const command = commandMap.get(trimmedInput);
+      const trimmedInput = input.trim();
+      const spaceIndex = trimmedInput.indexOf(' ');
+      const commandName =
+        spaceIndex === -1 ? trimmedInput.toLowerCase() : trimmedInput.slice(0, spaceIndex).toLowerCase();
+      const args = spaceIndex === -1 ? undefined : trimmedInput.slice(spaceIndex + 1).trim() || undefined;
+
+      const command = commandMap.get(commandName);
 
       if (!command) {
         return {
@@ -28,8 +34,13 @@ export function useCommandRunner({ dataSources, tools }: CommandRunnerOptions) {
       }
 
       try {
-        const output = await command.handler({ dataSources, tools });
-        return { success: true, output };
+        const result = await command.handler({ dataSources, tools, args });
+
+        if (typeof result === 'object' && result.type === 'streamed') {
+          return { success: true, output: '', streamed: true };
+        }
+
+        return { success: true, output: result as string };
       } catch (error) {
         console.error('Error executing command:', error);
         return {

@@ -1,8 +1,8 @@
 import type { Command, CommandGroup } from '../types/commands';
 
 export const formatCommand = (cmd: Command): string => {
-  const nameAndAliases = cmd.aliases?.length ? `${cmd.name} (${cmd.aliases.join(', ')})` : cmd.name;
-  const paddedName = nameAndAliases.padEnd(20);
+  const label = cmd.usage || (cmd.aliases?.length ? `${cmd.name} (${cmd.aliases.join(', ')})` : cmd.name);
+  const paddedName = label.padEnd(28);
   return `  ${paddedName} - ${cmd.description}`;
 };
 

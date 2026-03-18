@@ -20,11 +20,15 @@ export function useCommandExecutor({ dataSources, tools, actions }: CommandExecu
       const commandName = input.trim().split(' ')[0];
       trackTerminal.commandExecuted(commandName, result.success !== false);
 
-      const newLines = [
-        { text: input, showPrompt: true },
-        ...result.output.split('\n').map((text) => ({ text, showPrompt: false })),
-      ];
-      actions.addCompletedLines(newLines);
+      if (result.streamed) {
+        actions.addCompletedLines([{ text: input, showPrompt: true }]);
+      } else {
+        const newLines = [
+          { text: input, showPrompt: true },
+          ...result.output.split('\n').map((text) => ({ text, showPrompt: false })),
+        ];
+        actions.addCompletedLines(newLines);
+      }
       actions.addToHistory(input);
     },
     [runCommand, actions],

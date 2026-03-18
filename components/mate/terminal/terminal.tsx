@@ -33,7 +33,7 @@ export function Terminal({
   const commandCount = useRef<number>(0);
 
   const [state, actions] = useTerminalState(initialMessages);
-  const { currentLine, typingLine, completedLines, isComplete, userInput } = state;
+  const { currentLine, typingLine, completedLines, isComplete, userInput, streamingText } = state;
 
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -75,7 +75,27 @@ export function Terminal({
     ],
   );
 
-  const tools = useMemo(() => ({ clearLines: actions.clearCompletedLines }), [actions]);
+  const isStreaming = streamingText !== null;
+  const streamingTextRef = useRef<string | null>(null);
+  streamingTextRef.current = streamingText;
+
+  const finalizeStream = useCallback(() => {
+    const text = streamingTextRef.current;
+    if (text !== null) {
+      const lines = text.split('\n').map((t) => ({ text: t, showPrompt: false }));
+      actions.addCompletedLines(lines);
+    }
+    actions.setStreamingText(null);
+  }, [actions]);
+
+  const tools = useMemo(
+    () => ({
+      clearLines: actions.clearCompletedLines,
+      appendStreamingText: actions.appendStreamingText,
+      finalizeStream,
+    }),
+    [actions, finalizeStream],
+  );
 
   const { executeCommand: baseExecuteCommand, getMatchingCommands } = useCommandExecutor({
     dataSources,
@@ -184,7 +204,7 @@ export function Terminal({
     };
     debouncedScroll();
     return () => clearTimeout(timeoutId);
-  }, [completedLines, typingLine, scrollToBottom]);
+  }, [completedLines, typingLine, streamingText, scrollToBottom]);
 
   const handleTerminalClick = useCallback(() => {
     if (isComplete && inputRef.current) {
@@ -224,7 +244,8 @@ export function Terminal({
           {!isComplete && !skipAnimations && typingLine.currentIndex > 0 && (
             <MemoizedLine text={typingLine.text} isTyping prompt={prompt} />
           )}
-          {isComplete && (
+          {isStreaming && <StreamingOutput text={streamingText} />}
+          {isComplete && !isStreaming && (
             <TerminalInput
               ref={inputRef}
               value={userInput}
@@ -238,6 +259,17 @@ export function Terminal({
     </CommandContextProvider>
   );
 }
+
+const StreamingOutput = memo(function StreamingOutput({ text }: { text: string }) {
+  return (
+    <div className="transition-colors">
+      <p className="transition-colors">
+        <span className="text-white">{text}</span>
+        <span className="animate-pulse text-amber-500">▊</span>
+      </p>
+    </div>
+  );
+});
 
 const MemoizedLine = memo(Line);
 const TerminalHeader = memo(function TerminalHeader() {

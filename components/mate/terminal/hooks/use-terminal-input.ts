@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import type { TerminalState, TerminalStateActions } from './use-terminal-state';
 
 interface TerminalInputOptions {
-  state: Pick<TerminalState, 'userInput' | 'commandHistory' | 'historyIndex'>;
+  state: Pick<TerminalState, 'userInput' | 'commandHistory' | 'historyIndex' | 'streamingText'>;
   actions: Pick<TerminalStateActions, 'setUserInput' | 'updateHistoryIndex' | 'addCompletedLines'>;
   executeCommand: (input: string) => Promise<void>;
   getMatchingCommands: (input: string) => string[];
@@ -12,7 +12,9 @@ interface TerminalInputOptions {
 export function useTerminalInput({ state, actions, executeCommand, getMatchingCommands }: TerminalInputOptions) {
   const handleUserInput = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
-      const { userInput, commandHistory, historyIndex } = state;
+      const { userInput, commandHistory, historyIndex, streamingText } = state;
+
+      if (streamingText !== null) return;
 
       switch (e.key) {
         case 'Enter':
