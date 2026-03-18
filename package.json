@@ -14,6 +14,7 @@
     "prepare": "husky && tsx scripts/sync-skills.ts"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.58",
     "@giscus/react": "^3.1.0",
     "@octokit/graphql": "^9.0.3",
     "@radix-ui/react-avatar": "^1.1.11",
@@ -28,6 +29,7 @@
     "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@vercel/analytics": "^2.0.1",
+    "ai": "^6.0.116",
     "babel-plugin-react-compiler": "1.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
