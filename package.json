@@ -54,7 +54,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.4.7",
     "@next/bundle-analyzer": "16.2.0",
-    "@tailwindcss/postcss": "^4.2.1",
+    "@tailwindcss/postcss": "^4.2.2",
     "@tailwindcss/typography": "^0.5.19",
     "@types/js-cookie": "^3.0.6",
     "@types/mdx": "^2.0.13",
