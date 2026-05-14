@@ -35,7 +35,7 @@ export const nowPlayingCommand: Command = {
   description: 'Current track',
   handler: ({ dataSources }) => {
     const { data: spotifyData } = dataSources.spotify;
-    if (!spotifyData || !spotifyData.currentlyPlaying) return 'No current track.';
+    if (!spotifyData?.currentlyPlaying) return 'No current track.';
 
     const nowPlaying = spotifyData.currentlyPlaying;
     if (nowPlaying.isPlaying) {
@@ -71,7 +71,7 @@ export const spotifyTopCommand: Command = {
   description: 'Top tracks & artists',
   handler: ({ dataSources }) => {
     const { data: spotifyData } = dataSources.spotify;
-    if (!spotifyData || !spotifyData.topTracks || !spotifyData.topArtists) {
+    if (!spotifyData?.topTracks || !spotifyData.topArtists) {
       return 'No top data.';
     }
 

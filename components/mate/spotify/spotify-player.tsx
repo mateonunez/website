@@ -31,7 +31,7 @@ export function SpotifyPlayer({ variant = 'full' }: SpotifyPlayerProps) {
     );
   }
 
-  if (!currentlyPlaying || !currentlyPlaying.isPlaying) {
+  if (!currentlyPlaying?.isPlaying) {
     return (
       <>
         <div aria-live="polite" aria-atomic="true" className="sr-only">
