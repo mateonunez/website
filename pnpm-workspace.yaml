@@ -1,3 +1,10 @@
-allowBuilds:
-  esbuild: set this to true or false
-  sharp: set this to true or false
+packages:
+  - "."
+
+onlyBuiltDependencies:
+  - "@biomejs/biome"
+  - esbuild
+  - sharp
+
+ignoredBuiltDependencies:
+  - "@tailwindcss/oxide"

@@ -1,6 +1,9 @@
 {
   "name": "@mateonunez/website",
   "version": "1.8.2",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build",
