@@ -80,6 +80,7 @@ const nextConfig: NextConfig = {
   experimental: {
     inlineCss: true,
     optimizePackageImports: ['lucide-react', 'date-fns', 'framer-motion'],
+    useTypeScriptCli: true,
   },
   output: 'standalone',
   images: {

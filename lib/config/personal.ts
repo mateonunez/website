@@ -127,9 +127,9 @@ export const personal = {
     { label: 'AI Engineering', description: 'A pragmatic playbook for production LLMs', author: 'Chip Huyen' },
     { label: 'Siddhartha', description: 'A clean cut toward stillness', author: 'Hermann Hesse' },
     {
-      label: 'Cien años de Soledad',
-      description: 'Myth, memory, and the weight of lineage',
-      author: 'Gabriel García Márquez',
+      label: 'Ficciones',
+      description: 'A labyrinth of infinite possibilities, a mirror of the mind',
+      author: 'Jorge Luis Borges',
     },
     { label: 'Infocracy', description: 'Information power and soft control, tightly argued', author: 'Byung-Chul Han' },
   ],

@@ -2,7 +2,7 @@
   "name": "@mateonunez/website",
   "version": "1.8.2",
   "engines": {
-    "node": "22.x"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "next dev --webpack",
@@ -19,73 +19,59 @@
   "dependencies": {
     "@giscus/react": "^3.1.0",
     "@octokit/graphql": "^9.0.3",
-    "@radix-ui/react-avatar": "^1.1.11",
-    "@radix-ui/react-collapsible": "^1.1.12",
-    "@radix-ui/react-dialog": "^1.1.15",
-    "@radix-ui/react-dropdown-menu": "^2.1.16",
-    "@radix-ui/react-progress": "^1.1.8",
-    "@radix-ui/react-scroll-area": "^1.2.10",
-    "@radix-ui/react-select": "^2.2.6",
-    "@radix-ui/react-separator": "^1.1.8",
-    "@radix-ui/react-slot": "^1.2.4",
-    "@radix-ui/react-tabs": "^1.1.13",
-    "@radix-ui/react-tooltip": "^1.2.8",
+    "@radix-ui/react-avatar": "^1.2.6",
+    "@radix-ui/react-collapsible": "^1.1.20",
+    "@radix-ui/react-dialog": "^1.1.23",
+    "@radix-ui/react-dropdown-menu": "^2.1.24",
+    "@radix-ui/react-progress": "^1.1.16",
+    "@radix-ui/react-scroll-area": "^1.2.18",
+    "@radix-ui/react-select": "^2.3.7",
+    "@radix-ui/react-separator": "^1.1.15",
+    "@radix-ui/react-slot": "^1.3.3",
+    "@radix-ui/react-tabs": "^1.1.21",
+    "@radix-ui/react-tooltip": "^1.2.16",
     "@vercel/analytics": "^2.0.1",
     "babel-plugin-react-compiler": "1.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "date-fns": "^4.1.0",
+    "date-fns": "^4.4.0",
     "embla-carousel-react": "^8.6.0",
-    "framer-motion": "^12.40.0",
-    "js-cookie": "^3.0.7",
+    "framer-motion": "^12.43.0",
+    "js-cookie": "^3.0.8",
     "lucide-react": "^0.577.0",
-    "next": "16.2.6",
+    "next": "16.2.12",
     "next-mdx-remote": "^6.0.0",
     "next-themes": "^0.4.6",
-    "react": "19.2.6",
+    "react": "19.2.8",
     "react-compiler-runtime": "^1.0.0",
-    "react-dom": "19.2.6",
+    "react-dom": "19.2.8",
     "reading-time": "^1.5.0",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.1",
-    "sharp": "^0.34.5",
+    "sharp": "^0.35.3",
     "sonner": "^2.0.7",
-    "swr": "^2.4.1",
+    "swr": "^2.4.2",
     "tailwind-merge": "^3.6.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.15",
-    "@next/bundle-analyzer": "16.2.6",
-    "@tailwindcss/postcss": "^4.3.0",
-    "@tailwindcss/typography": "^0.5.19",
+    "@biomejs/biome": "^2.5.6",
+    "@next/bundle-analyzer": "16.2.12",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@tailwindcss/typography": "^0.5.20",
     "@types/js-cookie": "^3.0.6",
-    "@types/mdx": "^2.0.13",
-    "@types/node": "^25.9.0",
-    "@types/react": "19.2.14",
+    "@types/mdx": "^2.0.14",
+    "@types/node": "^26.1.2",
+    "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
     "husky": "^9.1.7",
-    "postcss": "^8.5.14",
+    "postcss": "^8.5.24",
     "schema-dts": "^2.0.0",
-    "tailwindcss": "^4.3.0",
+    "tailwindcss": "^4.3.3",
     "tailwindcss-animate": "^1.0.7",
-    "tsx": "^4.22.2",
-    "typescript": "^6.0.3"
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2"
   },
   "author": "mateonunez",
-  "packageManager": "pnpm@10.33.4+sha512.1c67b3b359b2d408119ba1ed289f34b8fc3c6873412bec6fd264fbdc82489e510fcbecb9ce9d22dae7f3b76269d8441046014bdca53b9979cd7a561ad631b800",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@biomejs/biome",
-      "esbuild",
-      "sharp"
-    ],
-    "ignoredBuiltDependencies": [
-      "@tailwindcss/oxide"
-    ],
-    "overrides": {
-      "@types/react": "19.2.14",
-      "@types/react-dom": "19.2.3"
-    }
-  }
+  "packageManager": "pnpm@11.17.0+sha512.cca3cea332ad254bb84145f966d19f4879615210346fc92c79a047f23a0d7b3cca3c3792f0076ba1f1831d277efbcf0a9119b31a9a60eca7fb3d6231f331ef72"
 }
