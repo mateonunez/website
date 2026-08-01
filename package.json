@@ -1,6 +1,6 @@
 {
   "name": "@mateonunez/website",
-  "version": "1.8.2",
+  "version": "1.9.0",
   "engines": {
     "node": "24.x"
   },
