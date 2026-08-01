@@ -72,6 +72,7 @@ export const getArticle = cache(async ({ slug }: { slug: string }): Promise<Arti
       tags: (frontmatter.tags as string[]) || [],
       categories: (frontmatter.categories as string[]) || [],
       image: (frontmatter.image as string) || '/card.png',
+      inLanguage: (frontmatter.schema as { inLanguage?: string } | undefined)?.inLanguage,
       author: (frontmatter.author as ArticleFrontmatter['author']) || defaultAuthor,
       translated: frontmatter.translated || false,
     },

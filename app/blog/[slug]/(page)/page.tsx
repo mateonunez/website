@@ -10,6 +10,7 @@ import config from '@/lib/config';
 import { getArticleSeries, getSeriesOrder } from '@/lib/config/article-series';
 import meta from '@/lib/config/metadata';
 import { getBlogPostingSchema } from '@/lib/seo/json-ld';
+import { getOgImageMeta, toOgLocale } from '@/lib/seo/og-image';
 
 async function ArticleContent({ slug }: { slug: string }): Promise<JSX.Element> {
   const { content, frontmatter } = await getArticle({ slug });
@@ -53,6 +54,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const imagePath = frontmatter.image.startsWith('/') ? frontmatter.image : `/${frontmatter.image}`;
   const imageUrl = new URL(imagePath, baseUrl).toString();
   const canonicalUrl = new URL(`/blog/${slug}`, baseUrl).toString();
+  const ogImage = (await getOgImageMeta(imagePath)) ?? { width: 1200, height: 630, type: 'image/png' };
 
   return {
     ...meta,
@@ -68,8 +70,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: frontmatter.title,
       description: frontmatter.description,
       type: 'article',
-      images: [{ url: imageUrl, alt: frontmatter.title, width: 1200, height: 630 }],
-      locale: 'en_US',
+      images: [{ url: imageUrl, alt: frontmatter.title, ...ogImage }],
+      locale: toOgLocale(frontmatter.inLanguage),
       siteName: meta.openGraph?.siteName,
       publishedTime: frontmatter.date,
       modifiedTime: frontmatter.date,

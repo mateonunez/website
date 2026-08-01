@@ -16,6 +16,7 @@ export interface ArticleFrontmatter {
   tags: string[];
   categories: string[];
   image: string;
+  inLanguage?: string;
   author: ArticleAuthor;
   [key: string]: unknown;
 }
