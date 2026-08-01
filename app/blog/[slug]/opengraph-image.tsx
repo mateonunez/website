@@ -3,6 +3,7 @@ import path from 'node:path';
 import { ImageResponse } from 'next/og';
 import { getArticle, getArticleSlugs } from '@/lib/articles/parser';
 import personal from '@/lib/config/personal';
+import { getImageMime } from '@/lib/seo/og-image';
 
 export const runtime = 'nodejs';
 
@@ -30,7 +31,7 @@ export default async function Image({ params }: ImageParams) {
   if (image.startsWith('/')) {
     const imagePath = path.join(process.cwd(), 'public', image);
     const imageBuffer = readFileSync(imagePath);
-    const base64Image = `data:image/png;base64,${imageBuffer.toString('base64')}`;
+    const base64Image = `data:${getImageMime(image)};base64,${imageBuffer.toString('base64')}`;
 
     return new ImageResponse(
       <div
