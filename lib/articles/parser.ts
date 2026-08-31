@@ -24,7 +24,9 @@ export const getAllArticles = cache(async (): Promise<Article[]> => {
     const article = await getArticle({ slug });
     articles.push(article);
   }
-  return articles.sort((a, b) => (a.frontmatter.date > b.frontmatter.date ? -1 : 1));
+  return articles
+    .filter((article) => !article.frontmatter.unlisted)
+    .sort((a, b) => (a.frontmatter.date > b.frontmatter.date ? -1 : 1));
 });
 
 export const getLastArticle = cache(async (): Promise<Article> => {
@@ -75,6 +77,7 @@ export const getArticle = cache(async ({ slug }: { slug: string }): Promise<Arti
       inLanguage: (frontmatter.schema as { inLanguage?: string } | undefined)?.inLanguage,
       author: (frontmatter.author as ArticleFrontmatter['author']) || defaultAuthor,
       translated: frontmatter.translated || false,
+      unlisted: frontmatter.unlisted === true,
     },
   };
 });
