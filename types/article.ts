@@ -18,6 +18,7 @@ export interface ArticleFrontmatter {
   image: string;
   inLanguage?: string;
   author: ArticleAuthor;
+  unlisted?: boolean;
   [key: string]: unknown;
 }
 
