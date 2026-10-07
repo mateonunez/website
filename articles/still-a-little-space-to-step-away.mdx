@@ -1,0 +1,48 @@
+---
+title: 'Still: a little space to step away'
+date: 2026-10-07T12:00:00.000Z
+description: 'Meet Still, an open-source native Mac privacy curtain with keep-awake, configurable widgets and two official themes. Try the experimental preview.'
+tags:
+  - macos
+  - swiftui
+  - open source
+  - still
+image: '/images/articles/still-a-little-space-to-step-away/cover.jpg'
+schema:
+  inLanguage: en
+author:
+  name: Mateo
+  image: '/images/profile.jpeg'
+---
+
+<Image src="/images/articles/still-a-little-space-to-step-away/cover.jpg" width="1536" height="1024" alt="A burgundy glass ribbon resting on a softly curved ivory porcelain surface" />
+
+*Conceptual campaign art created with AI. This is not a screenshot of Still.*
+
+Hello stranger!
+
+Sometimes I want to step away from my Mac while it keeps working. A build is running, music is playing, or an agent is doing its thing. I wanted a calmer screen for that moment.
+
+That's why I built Still.
+
+Still covers the desktop with a screen you can compose: a clock, a few useful widgets, and space to breathe. Porcelain brings warm surfaces and burgundy accents. Glass takes a different direction, with restrained native materials. Both have light and dark appearances.
+
+<Image src="/images/articles/still-a-little-space-to-step-away/native-editor.jpg" width="1280" height="800" alt="Still native editor in Glass dark with a clock and a local time widget" />
+
+*Offscreen SwiftUI/AppKit view export using a scratch configuration. This shows appearance, not recorded interactions or live integrations.*
+
+The app is native SwiftUI and AppKit. While the curtain is active, Still requests that the Mac and display stay awake. It releases that request when you return or the session is suspended. Explicit system sleep is still available.
+
+You can arrange the screen with Grid or Free layout. Ten built-in plugins cover agent information, system metrics, clocks, weather, calendar, timers, task/build/deploy status and Spotify. Each source needs its own configuration and permissions where applicable.
+
+The Agents plugin combines Codex and Claude quota with optional advisory activity. It does not display conversations or make approval decisions. Spotify reads the local app when macOS permits it. Missing or stale data stays visible as such.
+
+There is an important boundary: Still is a visual privacy curtain, not the macOS security lock. It preserves system-owned Touch ID and the Mac-password dialog. Desktop gestures can still expose underlying windows in the development candidate. Use the system lock when you need to secure your session.
+
+The source is public under MIT, and `0.1.0-preview.2` is available as a universal Mac archive. This preview is ad-hoc signed and not notarized. Apple Silicon runtime checks and Intel cross-compilation are different kinds of evidence; broader compatibility and clean installations still need testing.
+
+If that experimental scope works for you, [read the installation notes and try the preview](https://meet-still.app/download). Please report the version, macOS version, architecture and steps to reproduce any issue.
+
+If you'd rather explore the implementation, [the source is on GitHub](https://github.com/mateonunez/still), with a [plugin guide and SDK](https://meet-still.app/developers). The catalog describes the built-in collection; community publishing and automatic updates are future work.
+
+Still is early. I want to improve it with real feedback from the people who use it.
