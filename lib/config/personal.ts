@@ -37,7 +37,7 @@ export const personal = {
       favicon32: '/favicon-32x32.png',
       favicon192: '/favicon-192x192.png',
     },
-    manifest: '/site.webmanifest',
+    manifest: '/manifest.json',
   },
 
   site: {

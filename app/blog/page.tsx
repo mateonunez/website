@@ -7,8 +7,9 @@ import { Main } from '@/components/mate/main';
 import { PageHeader } from '@/components/mate/page-header';
 import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema';
 import meta from '@/lib/config/metadata';
+import { getPageMetadata } from '@/lib/seo/share-metadata';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata('/blog', {
   title: 'Blog - Technical Articles & Tutorials',
   description: `Where can I find ${meta.author.name}'s blog posts? Read technical articles about Node.js testing, TypeScript, Next.js, AI engineering, and modern web development. Learn best practices, migration guides, and developer insights.`,
   keywords: [
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
     'technical writing',
     'how to',
   ],
-};
+});
 
 const Header = memo(() => (
   <PageHeader

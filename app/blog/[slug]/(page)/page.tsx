@@ -42,6 +42,9 @@ async function ArticleContent({ slug }: { slug: string }): Promise<JSX.Element> 
   );
 }
 
+// Unknown slugs 404 instead of throwing on a missing MDX file.
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const slugs = await getArticleSlugs();
   return slugs.map((slug) => ({ slug }));
@@ -74,7 +77,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       locale: toOgLocale(frontmatter.inLanguage),
       siteName: meta.openGraph?.siteName,
       publishedTime: frontmatter.date,
-      modifiedTime: frontmatter.date,
+      modifiedTime: frontmatter.updated ?? frontmatter.date,
       authors: [frontmatter.author.name],
       tags: frontmatter.tags,
     } as any,

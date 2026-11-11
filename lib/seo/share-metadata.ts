@@ -1,7 +1,19 @@
 import type { Metadata } from 'next';
 import config from '@/lib/config';
+import meta from '@/lib/config/metadata';
 import personal from '@/lib/config/personal';
 import type { ShareableArticle, ShareablePlaylist, ShareableRepository } from '@/types/sharing';
+
+/** Gives a static page its own canonical URL and share card instead of inheriting the home page's. */
+export function getPageMetadata(path: string, page: Metadata & { title: string; description: string }): Metadata {
+  const { title, description } = page;
+  return {
+    ...page,
+    alternates: { canonical: path },
+    openGraph: { ...meta.openGraph, type: 'website', url: path, title, description },
+    twitter: { ...meta.twitter, card: 'summary_large_image', title, description },
+  };
+}
 
 export function getArticleShareMetadata(article: ShareableArticle): Partial<Metadata> {
   const baseUrl = config.baseUrl.endsWith('/') ? config.baseUrl.slice(0, -1) : config.baseUrl;

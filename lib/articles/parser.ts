@@ -53,7 +53,7 @@ export const getArticle = cache(async ({ slug }: { slug: string }): Promise<Arti
   const rawArticle = getRawArticle(slug);
   const { content, frontmatter } = await compile(rawArticle);
 
-  const permalink = new URL(`/articles/${slug}`, config.baseUrl).toString();
+  const permalink = new URL(`/blog/${slug}`, config.baseUrl).toString();
   const timeToRead = readingTime(rawArticle);
 
   const defaultAuthor = {
@@ -68,6 +68,7 @@ export const getArticle = cache(async ({ slug }: { slug: string }): Promise<Arti
       title: frontmatter.title as string,
       description: frontmatter.description as string,
       date: frontmatter.date ? new Date(frontmatter.date as string).toISOString() : new Date().toISOString(),
+      updated: frontmatter.updated ? new Date(frontmatter.updated as string).toISOString() : undefined,
       slug,
       permalink,
       readingTime: Math.ceil(timeToRead.minutes),

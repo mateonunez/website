@@ -24,7 +24,7 @@ export function createJSONLD<T extends Thing>(schema: WithContext<T>): string {
 }
 
 export function getBlogPostingSchema(frontmatter: ArticleFrontmatter): WithContext<BlogPosting> {
-  const { title, description, date, author, tags } = frontmatter;
+  const { title, description, date, updated, author, tags, inLanguage } = frontmatter;
   const baseUrl = new URL(config.baseUrl);
   const url = new URL(`/blog/${frontmatter.slug}`, baseUrl).toString();
 
@@ -47,7 +47,7 @@ export function getBlogPostingSchema(frontmatter: ArticleFrontmatter): WithConte
     headline: title,
     description,
     datePublished: date,
-    dateModified: date,
+    dateModified: updated ?? date,
     author: {
       '@type': 'Person',
       name: author.name,
@@ -65,7 +65,7 @@ export function getBlogPostingSchema(frontmatter: ArticleFrontmatter): WithConte
       '@type': 'WebPage',
       '@id': url,
     },
-    inLanguage: 'en-US',
+    inLanguage: inLanguage ?? 'en-US',
   };
 }
 
@@ -81,11 +81,6 @@ export function getWebSiteSchema(): WithContext<WebSite> {
     author: {
       '@type': 'Person',
       '@id': `${url}/#person`,
-    },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${url}/search?q={search_term_string}`,
-      query: 'search_term_string',
     },
   };
 }

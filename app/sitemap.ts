@@ -1,31 +1,16 @@
-import fs from 'node:fs';
-import path from 'node:path';
 import type { MetadataRoute } from 'next';
+import { getAllArticles } from '@/lib/articles/parser';
 import config from '@/lib/config';
 
-function generateArticlesSitemap(): MetadataRoute.Sitemap {
-  const result: MetadataRoute.Sitemap = [];
-  const articlesDir = path.join(process.cwd(), './articles');
-  const articleFiles = fs.readdirSync(articlesDir).filter((file) => /\.mdx?$/.test(file));
-
-  for (const file of articleFiles) {
-    const slug = file.replace(/\.mdx?$/, '');
-    const filePath = path.join(articlesDir, file);
-    const stats = fs.statSync(filePath);
-
-    result.push({
-      url: new URL(`/blog/${slug}`, config.baseUrl).toString(),
-      lastModified: stats.mtime,
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    });
-  }
-
-  return result;
-}
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  const articles = generateArticlesSitemap();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Listed articles only, dated from their frontmatter; unlisted ones stay out like they do from RSS.
+  const listed = await getAllArticles();
+  const articles: MetadataRoute.Sitemap = listed.map(({ frontmatter }) => ({
+    url: new URL(`/blog/${frontmatter.slug}`, config.baseUrl).toString(),
+    lastModified: frontmatter.updated ?? frontmatter.date,
+    changeFrequency: 'weekly',
+    priority: 0.7,
+  }));
 
   return [
     {
@@ -36,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: new URL('/blog', config.baseUrl).toString(),
-      lastModified: new Date(),
+      lastModified: listed[0]?.frontmatter.date,
       changeFrequency: 'weekly',
       priority: 0.8,
     },

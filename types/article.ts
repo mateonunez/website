@@ -10,6 +10,7 @@ export interface ArticleFrontmatter {
   title: string;
   description: string;
   date: string;
+  updated?: string;
   slug: string;
   permalink: string;
   readingTime: number;

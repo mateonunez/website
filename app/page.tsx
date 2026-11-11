@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { type JSX, memo } from 'react';
 import AboutMeWrapper from '@/components/mate/about-me.wrapper';
@@ -11,6 +12,8 @@ import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema';
 import { JsonLdScript } from '@/components/seo/json-ld-script';
 import { Separator } from '@/components/ui/separator';
 import { getProfilePageSchema } from '@/lib/seo/json-ld';
+
+export const metadata: Metadata = { alternates: { canonical: '/' } };
 
 // Dynamic imports for heavy components
 const TerminalWrapper = dynamic(() => import('@/components/mate/terminal/terminal.wrapper'), {
