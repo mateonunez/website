@@ -8,12 +8,13 @@ import RepositoriesShowcaseWrapper from '@/components/mate/open-source/repositor
 import { PageHeader } from '@/components/mate/page-header';
 import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema';
 import meta from '@/lib/config/metadata';
+import { getPageMetadata } from '@/lib/seo/share-metadata';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata('/open-source/projects', {
   title: 'Open Source Projects',
   description: `Explore open source projects created and maintained by ${meta.author.name}. From libraries to tools and applications.`,
   keywords: [...meta.keywords, 'open source', 'github', 'projects', 'repositories', 'code'],
-};
+});
 
 const Header = memo(() => (
   <PageHeader

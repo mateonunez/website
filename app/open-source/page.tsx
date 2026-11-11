@@ -12,8 +12,9 @@ import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import meta from '@/lib/config/metadata';
+import { getPageMetadata } from '@/lib/seo/share-metadata';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata('/open-source', {
   title: 'Open Source Projects & Contributions',
   description: `What open source projects does ${meta.author.name} work on? Explore TypeScript/JavaScript libraries, Node.js tools, AI projects, and community contributions. Find featured repositories, recent activity, and ways to collaborate.`,
   keywords: [
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     'typescript libraries',
     'node.js tools',
   ],
-};
+});
 
 const Header = memo(() => (
   <PageHeader

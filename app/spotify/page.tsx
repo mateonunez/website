@@ -13,6 +13,7 @@ import { TopTracks } from '@/components/mate/spotify/top-tracks';
 import { BreadcrumbSchema } from '@/components/seo/breadcrumb-schema';
 import { Card, CardContent } from '@/components/ui/card';
 import meta from '@/lib/config/metadata';
+import { getPageMetadata } from '@/lib/seo/share-metadata';
 
 // Dynamic import for heavy carousel component
 const PlaylistsCarousel = dynamic(
@@ -31,7 +32,7 @@ const PlaylistsCarousel = dynamic(
   },
 );
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata('/spotify', {
   title: 'Spotify Profile - Music & Playlists',
   description: `What music does ${meta.author.name} listen to while coding? Discover curated playlists for developers, current listening activity, top artists and tracks. Code needs a soundtrack - find yours here.`,
   keywords: [
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
     'developer playlists',
     'programming soundtrack',
   ],
-};
+});
 
 const Header = memo(() => (
   <PageHeader
