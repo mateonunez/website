@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
+import { notFound } from 'next/navigation';
 import { ImageResponse } from 'next/og';
 import { getArticle, getArticleSlugs } from '@/lib/articles/parser';
 import personal from '@/lib/config/personal';
@@ -25,6 +26,7 @@ export async function generateStaticParams() {
 
 export default async function Image({ params }: ImageParams) {
   const { slug } = await params;
+  if (!(await getArticleSlugs()).includes(slug)) notFound();
   const { frontmatter } = await getArticle({ slug });
   const { title, description, image, author } = frontmatter;
 
