@@ -12,10 +12,8 @@ export async function GET(): Promise<NextResponse> {
       return NextResponse.json({ error: 'Spotify not available' }, { status: 503 });
     }
 
-    return NextResponse.json({
-      items: playlists.items.map(normalizePlaylist),
-      total: playlists.total,
-    });
+    const items = playlists.items.filter((playlist) => playlist.public === true).map(normalizePlaylist);
+    return NextResponse.json({ items, total: items.length });
   } catch (error) {
     console.error('Error fetching spotify playlists:', error);
     return NextResponse.json({ error: 'Spotify not available' }, { status: 503 });
