@@ -34,6 +34,8 @@ interface CacheEntry<T> {
   timestamp: number;
 }
 
+const MAX_CACHE_ENTRIES = 100;
+
 class SpotifyClient {
   private readonly _basicEncoded: string;
   private readonly _tokenEndpoint = 'https://accounts.spotify.com/api/token';
@@ -70,10 +72,16 @@ class SpotifyClient {
   }
 
   private setCache<T>(key: string, data: T): void {
-    this._cache.set(key, {
-      data,
-      timestamp: Date.now(),
-    });
+    const now = Date.now();
+    for (const [cachedKey, entry] of this._cache) {
+      if (now - entry.timestamp >= this._cacheTTL) this._cache.delete(cachedKey);
+    }
+    this._cache.delete(key);
+    if (this._cache.size >= MAX_CACHE_ENTRIES) {
+      const oldestKey = this._cache.keys().next().value;
+      if (oldestKey !== undefined) this._cache.delete(oldestKey);
+    }
+    this._cache.set(key, { data, timestamp: now });
   }
 
   private async getAccessToken(): Promise<string> {
@@ -193,7 +201,6 @@ class SpotifyClient {
   async getRecentlyPlayed(limit = 20): Promise<SpotifyRecentlyPlayed | undefined> {
     const params = new URLSearchParams({
       limit: limit.toString(),
-      before: Date.now().toString(),
     });
 
     return this.fetchSpotify<SpotifyRecentlyPlayed>('/me/player/recently-played', params);
